@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#f3efe5" />
+  <link rel="icon" href="data:," />
+  <title>Breathwork App Market Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f3efe5;
+      --paper-2:#ebe4d5;
+      --ink:#17211d;
+      --muted:#59645f;
+      --green:#1d614f;
+      --green-2:#c9ddd2;
+      --rust:#b75232;
+      --rust-2:#f0cbbc;
+      --gold:#d9a52f;
+      --line:rgba(23,33,29,.16);
+      --white:#fffdf8;
+      --shadow:0 18px 48px rgba(33,43,38,.09);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;line-height:1.55}
+    a{color:inherit}
+    a:hover{color:var(--rust)}
+    button{font:inherit}
+    .page{width:min(1180px,calc(100% - 40px));margin:0 auto}
+    .hero{padding:68px 0 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:48px;align-items:end}
+    .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:0 0 14px}
+    h1,h2,h3{font-family:"Newsreader",serif;line-height:1.06;margin:0}
+    h1{font-size:clamp(3.2rem,7.5vw,7.2rem);letter-spacing:-.05em;max-width:900px}
+    h2{font-size:clamp(2.25rem,4.7vw,4.7rem);letter-spacing:-.035em}
+    h3{font-size:1.45rem;letter-spacing:-.015em}
+    .hero-copy{font-size:clamp(1.08rem,1.8vw,1.35rem);color:#31403a;max-width:720px;margin:26px 0 0}
+    .verdict{background:var(--ink);color:#fff;padding:28px;border-radius:8px 8px 42px 8px;box-shadow:var(--shadow)}
+    .verdict strong{display:block;font-family:"Newsreader",serif;font-size:2.25rem;line-height:1;margin:8px 0 15px}
+    .verdict p{margin:0;color:#d8e0dc}
+    .verdict .signal{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#cae6d9}
+    .signal i{width:9px;height:9px;border-radius:50%;background:#61c394;box-shadow:0 0 0 5px rgba(97,195,148,.15)}
+    .jump{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;padding:13px 0;margin-bottom:82px}
+    .jump a{text-decoration:none;font-size:.88rem;font-weight:600;padding:8px 12px;border-radius:99px;color:#34413b}
+    .jump a:hover{background:var(--ink);color:white}
+    section{scroll-margin-top:24px;margin:0 0 104px}
+    .section-head{display:grid;grid-template-columns:180px 1fr;gap:26px;align-items:start;margin-bottom:34px}
+    .num{font-family:"Newsreader",serif;font-size:1.1rem;color:var(--rust);border-top:2px solid var(--rust);padding-top:7px;width:max-content;min-width:88px}
+    .section-head p{max-width:720px;color:var(--muted);font-size:1.04rem;margin:14px 0 0}
+    .market-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px;align-items:stretch}
+    .metric{background:var(--white);padding:26px;border-top:5px solid var(--green);min-height:240px;display:flex;flex-direction:column;justify-content:space-between}
+    .metric.primary{background:var(--green);color:white;border-color:var(--gold);border-radius:6px 6px 44px 6px}
+    .metric .label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .metric.primary .label,.metric.primary .note{color:#d6e7df}
+    .metric .big{font-family:"Newsreader",serif;font-size:clamp(2.35rem,4vw,4.5rem);line-height:.96;letter-spacing:-.04em;margin:22px 0 14px}
+    .metric .big small{display:block;font:600 .88rem "DM Sans",sans-serif;letter-spacing:0;margin-top:10px}
+    .metric .note{font-size:.87rem;color:var(--muted);margin:0}
+    .metric a{font-weight:700;text-decoration-thickness:1px;text-underline-offset:3px}
+    .caveat{margin-top:16px;background:rgba(217,165,47,.14);border-left:4px solid var(--gold);padding:15px 18px;font-size:.9rem;color:#4e4738}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+    .filter{border:1px solid var(--line);background:transparent;color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer;font-weight:600}
+    .filter[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .competitor-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .competitor{background:var(--white);padding:22px;display:grid;grid-template-columns:1fr auto;gap:16px;border-top:1px solid var(--line)}
+    .competitor[hidden]{display:none}
+    .competitor h3{font-family:"DM Sans",sans-serif;font-size:1.06rem;font-weight:700;margin-bottom:7px}
+    .competitor p{margin:0;color:var(--muted);font-size:.91rem}
+    .price{font-weight:700;margin-top:12px!important;color:var(--ink)!important}
+    .tag{align-self:start;font-size:.72rem;font-weight:700;white-space:nowrap;padding:6px 9px;border-radius:3px}
+    .tag.free{background:var(--green-2);color:#164a3c}
+    .tag.partial{background:#f4dda5;color:#6a4b05}
+    .tag.paid{background:var(--rust-2);color:#762c17}
+    .takeaway{margin-top:20px;background:var(--ink);color:white;padding:28px 30px;display:grid;grid-template-columns:170px 1fr;gap:25px;border-radius:6px 34px 6px 6px}
+    .takeaway b{font-family:"Newsreader",serif;font-size:1.6rem}
+    .takeaway p{margin:0;color:#d8e0dc}
+    .signals{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .signal-card{background:var(--white);padding:24px;min-height:205px}
+    .signal-card:nth-child(1){grid-column:span 7;border-radius:6px 30px 6px 6px}
+    .signal-card:nth-child(2){grid-column:span 5}
+    .signal-card:nth-child(3){grid-column:span 4}
+    .signal-card:nth-child(4){grid-column:span 4}
+    .signal-card:nth-child(5){grid-column:span 4}
+    .signal-card .index{font:600 1rem "Newsreader",serif;color:var(--rust)}
+    .signal-card h3{margin:34px 0 10px}
+    .signal-card p{margin:0;color:var(--muted);font-size:.92rem}
+    .signal-card strong{color:var(--ink)}
+    .balance{margin-top:15px;padding:22px 24px;border:1px solid var(--line);display:grid;grid-template-columns:160px 1fr;gap:18px}
+    .balance h3{font-family:"DM Sans",sans-serif;font-size:.92rem;text-transform:uppercase;letter-spacing:.08em;color:var(--rust)}
+    .balance ul{margin:0;padding-left:20px;color:#3f4b46}
+    .balance li+li{margin-top:7px}
+    .moat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .moat{padding:24px 0 28px;border-top:3px solid var(--ink)}
+    .moat:nth-child(2),.moat:nth-child(5){border-color:var(--green)}
+    .moat:nth-child(3),.moat:nth-child(6){border-color:var(--rust)}
+    .moat .n{font-family:"Newsreader",serif;color:var(--rust);font-size:1.25rem}
+    .moat h3{margin:24px 0 9px}
+    .moat p{margin:0;color:var(--muted);font-size:.92rem}
+    .strategy{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:36px;align-items:start}
+    .recommendation{background:var(--rust);color:white;padding:34px;border-radius:6px 6px 48px 6px;position:sticky;top:20px}
+    .recommendation h3{font-size:2rem;margin-bottom:14px}
+    .recommendation p{color:#ffe6dc;margin:0}
+    .recommendation .principle{border-top:1px solid rgba(255,255,255,.3);padding-top:18px;margin-top:22px;font-weight:700}
+    .models{display:grid;gap:10px}
+    .model{background:var(--white);padding:22px;display:grid;grid-template-columns:130px 1fr;gap:20px}
+    .viability{font-size:.76rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--green)}
+    .viability.medium{color:#8b650c}.viability.later{color:var(--rust)}
+    .model h3{font-family:"DM Sans",sans-serif;font-size:1.02rem;margin:5px 0 0}
+    .model p{margin:0;color:var(--muted);font-size:.91rem}
+    .model p+p{margin-top:8px}
+    .roadmap{background:var(--ink);color:white;padding:36px;overflow:hidden}
+    .roadmap h3{font-size:2rem;margin-bottom:28px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(255,255,255,.25)}
+    .step{padding:24px 26px 5px 0;position:relative}
+    .step:not(:last-child){border-right:1px solid rgba(255,255,255,.18);margin-right:25px}
+    .step b{display:block;color:#91d2b4;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+    .step strong{display:block;font-family:"Newsreader",serif;font-size:1.5rem;margin-bottom:8px}
+    .step p{margin:0;color:#cdd7d2;font-size:.9rem}
+    .questions{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .question-box{padding:25px;border:1px solid var(--line)}
+    .question-box h3{font-family:"DM Sans",sans-serif;font-size:1rem;margin-bottom:12px}
+    .question-box ul{margin:0;padding-left:18px;color:var(--muted)}
+    .question-box li+li{margin-top:8px}
+    .sources{border-top:1px solid var(--line);padding:36px 0 70px}
+    .sources summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
+    .sources summary::-webkit-details-marker{display:none}
+    .sources summary::after{content:"+";font-size:1.5rem;color:var(--rust)}
+    .sources details[open] summary::after{content:"–"}
+    .source-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 30px;margin-top:24px}
+    .source-grid a{font-size:.86rem;color:#35413c;text-underline-offset:3px;overflow-wrap:anywhere}
+    .method{margin-top:25px;color:var(--muted);font-size:.84rem;max-width:850px}
+    .source-link{font-size:.76rem;white-space:nowrap;color:var(--green);font-weight:700;text-decoration-thickness:1px;text-underline-offset:3px}
+    @media(max-width:860px){
+      .page{width:min(100% - 28px,720px)}
+      .hero{grid-template-columns:1fr;padding-top:44px;gap:28px}
+      .market-grid{grid-template-columns:1fr 1fr}.metric.primary{grid-column:1/-1}
+      .section-head{grid-template-columns:70px 1fr}
+      .strategy{grid-template-columns:1fr}.recommendation{position:static}
+      .moat-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:620px){
+      h1{font-size:3.35rem}.hero-copy{font-size:1.06rem}.hero{padding-top:36px}
+      .jump{margin-bottom:62px;overflow:visible}.jump a{font-size:.82rem;padding:7px 10px}
+      section{margin-bottom:76px}.section-head{grid-template-columns:1fr;gap:9px}.num{width:max-content;min-width:88px}
+      .market-grid,.competitor-list,.moat-grid,.questions,.source-grid{grid-template-columns:1fr}
+      .metric.primary{grid-column:auto}.metric{min-height:210px}
+      .takeaway,.balance,.model{grid-template-columns:1fr;gap:12px}
+      .signals{display:grid;grid-template-columns:1fr}.signal-card:nth-child(n){grid-column:auto;min-height:0}
+      .signal-card h3{margin-top:20px}
+      .roadmap{padding:28px 22px}.steps{grid-template-columns:1fr}.step:not(:last-child){border-right:0;border-bottom:1px solid rgba(255,255,255,.18);margin-right:0;padding-bottom:22px}.step{padding-right:0}
+      .recommendation{padding:28px}.source-link{white-space:normal}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media print{body{background:white}.jump,.filters{display:none}.page{width:100%}.recommendation{position:static}.sources details{display:block}.sources details>div{display:grid}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Market fit brief · September 2026</p>
+        <h1>A free pranayama app has a credible opening.</h1>
+        <p class="hero-copy">The opportunity is not “another box-breathing timer.” It is a polished, cross-platform, pranayama-authentic product where core practice stays free—and health integration makes every session count.</p>
+      </div>
+      <aside class="verdict" aria-label="Research verdict">
+        <span class="signal"><i aria-hidden="true"></i> Medium-high confidence</span>
+        <strong>Build the wedge.</strong>
+        <p>Demand is growing, paywall frustration is visible, and no clear leader combines free core practice, authentic pranayama, and Apple Health + Health Connect parity.</p>
+      </aside>
+    </header>
+
+    <nav class="jump" aria-label="Jump to section">
+      <a href="#market">Market</a><a href="#competition">Competitors</a><a href="#signals">Demand signals</a><a href="#differentiation">Positioning</a><a href="#commercialization">Commercialization</a><a href="#plan">Recommendation</a>
+    </nav>
+
+    <section id="market">
+      <div class="section-head">
+        <div class="num">01 / Market</div>
+        <div><h2>A small category inside a much larger habit.</h2><p>Analyst estimates disagree on the exact size of breathwork apps, but they agree on direction: sustained low-teens to roughly 20% annual growth.</p></div>
+      </div>
+      <div class="market-grid">
+        <article class="metric primary">
+          <span class="label">Broad meditation apps</span>
+          <div class="big">$2.25B → $10.37B<small>2025 to 2034 · 18.5% CAGR</small></div>
+          <p class="note"><a href="https://straitsresearch.com/report/meditation-management-apps-market" target="_blank" rel="noopener">Straits Research</a> estimates North America at about 38% of the market.</p>
+        </article>
+        <article class="metric">
+          <span class="label">Breathwork therapy</span>
+          <div class="big">$1.3B<small>2025 · 12.8% CAGR to 2033</small></div>
+          <p class="note">Stress and anxiety management represented 35.5% in 2025. <a href="https://www.grandviewresearch.com/industry-analysis/breathwork-therapy-market-report" target="_blank" rel="noopener">Grand View Research</a></p>
+        </article>
+        <article class="metric">
+          <span class="label">Breathwork coaching apps</span>
+          <div class="big">$93M–$682M<small>2025 estimate range</small></div>
+          <p class="note"><a href="https://dataintelo.com/report/breathwork-coaching-app-market" target="_blank" rel="noopener">Dataintelo</a> projects 14.2% CAGR; <a href="https://www.marketresearch.com/Stratistics-Market-Research-Consulting-v4058/Breathwork-Coaching-Apps-Forecasts-Global-42075165/" target="_blank" rel="noopener">Stratistics MRC</a> projects 20.0%.</p>
+        </article>
+      </div>
+      <div class="caveat"><strong>Read the range, not a single headline.</strong> The $93M–$682M spread reflects different category definitions—pure breathwork apps versus broader coaching platforms. The useful conclusion is growth direction, not false precision.</div>
+    </section>
+
+    <section id="competition">
+      <div class="section-head">
+        <div class="num">02 / Field</div>
+        <div><h2>Yes, apps already do this. None owns the whole promise.</h2><p>Paid specialists have richer libraries. Free products tend to be platform-limited, basic, ad-supported, or very new. Use the filters to compare the competitive set.</p></div>
+      </div>
+      <div class="filters" role="group" aria-label="Filter competitors">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All models</button>
+        <button class="filter" type="button" data-filter="free" aria-pressed="false">Free core</button>
+        <button class="filter" type="button" data-filter="partial" aria-pressed="false">Freemium</button>
+        <button class="filter" type="button" data-filter="paid" aria-pressed="false">Paid-heavy</button>
+      </div>
+      <div class="competitor-list" id="competitorList">
+        <article class="competitor" data-model="paid"><div><h3>Breathwrk</h3><p>Protocol library for calm, sleep, energy and focus; box breathing included.</p><p class="price">≈ $9/mo or $49/yr</p><a class="source-link" href="https://innerfire-app.com/blog/best-breathwork-apps" target="_blank" rel="noopener">Pricing roundup ↗</a></div><span class="tag paid">Depth paywalled</span></article>
+        <article class="competitor" data-model="paid"><div><h3>Othership</h3><p>500+ music-driven sessions, including Buteyko and somatic approaches; around five rotating free sessions.</p><p class="price">$17.99/mo or $129.99/yr</p><a class="source-link" href="https://www.othership.us/app" target="_blank" rel="noopener">Othership ↗</a></div><span class="tag paid">Minimal free</span></article>
+        <article class="competitor" data-model="partial"><div><h3>Prana Breath</h3><p>Android-first, eight patterns, strong custom controls. 4.8★, about 98K reviews and 5M+ downloads.</p><p class="price">Free core; Guru $5.99/mo or $14.99/yr</p><a class="source-link" href="https://play.google.com/store/apps/details?id=com.abdula.pranabreath&hl=en_US" target="_blank" rel="noopener">Google Play ↗</a></div><span class="tag partial">Advanced gated</span></article>
+        <article class="competitor" data-model="partial"><div><h3>The Breathing App</h3><p>Resonance breathing ratios and simple timers; no account needed.</p><p class="price">Free basics; $4.99/mo or $44.99/yr</p><a class="source-link" href="https://play.google.com/store/apps/details?id=org.ayny.breathingapp" target="_blank" rel="noopener">Google Play ↗</a></div><span class="tag free">Basics free</span></article>
+        <article class="competitor" data-model="free"><div><h3>Breath Ball</h3><p>Android visual pacer with custom protocols. 4.91★ and about 400K downloads.</p><p class="price">Free · no ads · no IAP</p><a class="source-link" href="https://www.AppBrain.com/app/breath-ball-breathing-hrv/com.fundriven.breath_ball" target="_blank" rel="noopener">AppBrain ↗</a></div><span class="tag free">Fully free</span></article>
+        <article class="competitor" data-model="free"><div><h3>Oak</h3><p>Breathing and meditation with no subscription flow; iOS-only and subject to maintenance concerns.</p><p class="price">Free</p><a class="source-link" href="https://uproxx.com/life/meditation-breath-work-app-2023/" target="_blank" rel="noopener">Roundup ↗</a></div><span class="tag free">Free · iOS</span></article>
+        <article class="competitor" data-model="free"><div><h3>Simple Breathing</h3><p>Box, Triangle, 4-1-7, 4-7-8, Equal and meditation timer. New cross-platform entrant launched around July 2026.</p><p class="price">Free · no ads · no subscriptions</p><a class="source-link" href="https://lifestyle.baretnews.com/story/223503/apnea-apps-launches-free-simple-breathing-app-for-daily-breathing-exercises/" target="_blank" rel="noopener">Launch coverage ↗</a></div><span class="tag free">Direct rival</span></article>
+        <article class="competitor" data-model="partial"><div><h3>Yogi Breath</h3><p>37 guided exercises spanning Nadi Shodhana, Kapalabhati, Ujjayi, Bhramari and bandhas; Apple Health mindful minutes.</p><p class="price">Freemium; current price not verified</p><a class="source-link" href="https://appadvice.com/app/yogi-breath-guided-pranayama/6744612926" target="_blank" rel="noopener">App listing ↗</a></div><span class="tag partial">Pricing open</span></article>
+        <article class="competitor" data-model="partial"><div><h3>Wim Hof Method</h3><p>Power breathing, retention, cold and yoga; Apple Health sync. 4.89★ and about 2.5M downloads.</p><p class="price">Free core; $5.99/mo or $42.99/yr</p><a class="source-link" href="https://www.AppBrain.com/app/wim-hof-method-breathwork/nl.deckeron.apps.innerfire" target="_blank" rel="noopener">AppBrain ↗</a></div><span class="tag partial">Custom paid</span></article>
+        <article class="competitor" data-model="partial"><div><h3>Insight Timer</h3><p>Huge free meditation library, timer, live sessions and Apple Health mindful-minutes sync.</p><p class="price">Free library; $9.99/mo or $59.99/yr</p><a class="source-link" href="https://help.insighttimer.com/support/solutions/articles/67000664858-why-isn-t-insight-timer-showing-up-in-my-ios-health-app-" target="_blank" rel="noopener">Health support ↗</a></div><span class="tag partial">Courses paid</span></article>
+        <article class="competitor" data-model="paid"><div><h3>Headspace</h3><p>Breathwork inside a broader meditation catalog; Apple Health integration.</p><p class="price">$12.99/mo or $69.99/yr</p><a class="source-link" href="https://innerfire-app.com/blog/best-breathwork-apps" target="_blank" rel="noopener">Pricing roundup ↗</a></div><span class="tag paid">Paid-heavy</span></article>
+        <article class="competitor" data-model="paid"><div><h3>Calm</h3><p>Breathing programs alongside meditation and a leading sleep library.</p><p class="price">$14.99/mo or $69.99/yr</p><a class="source-link" href="https://innerfire-app.com/blog/best-breathwork-apps" target="_blank" rel="noopener">Pricing roundup ↗</a></div><span class="tag paid">Paid-heavy</span></article>
+      </div>
+      <div class="takeaway"><b>The gap</b><p>A premium-feeling, cross-platform app that treats authentic pranayama instruction, custom patterns, and both Apple HealthKit and Google Health Connect as free core features. “Free” alone is not enough; <strong>Simple Breathing is already contesting that claim.</strong></p></div>
+    </section>
+
+    <section id="signals">
+      <div class="section-head">
+        <div class="num">03 / Demand</div>
+        <div><h2>The free wedge is real—and time-sensitive.</h2><p>Evidence is strongest in market behavior: subscription complaints, anti-paywall launches and millions of downloads for utilitarian alternatives.</p></div>
+      </div>
+      <div class="signals">
+        <article class="signal-card"><span class="index">A</span><h3>Paywall frustration repeats</h3><p>A 2026 pricing roundup reports complaints about Breathe+ premium gating, Othership’s recurring cost, paid-heavy Calm and Headspace libraries, and Wim Hof’s move toward subscription. <a href="https://innerfire-app.com/blog/best-breathwork-apps" target="_blank" rel="noopener"><strong>InnerFire roundup ↗</strong></a></p></article>
+        <article class="signal-card"><span class="index">B</span><h3>Free is a launch headline</h3><p>Simple Breathing markets “No advertisements. No subscriptions.” Breathing In Labour says core techniques are “free forever.” <a href="https://lifestyle.baretnews.com/story/223503/apnea-apps-launches-free-simple-breathing-app-for-daily-breathing-exercises/" target="_blank" rel="noopener"><strong>Launch coverage ↗</strong></a></p></article>
+        <article class="signal-card"><span class="index">C</span><h3>Millions choose practical tools</h3><p>Prana Breath reports 5M+ downloads; Wim Hof about 2.5M; Breath Ball about 400K. These are scale signals, not proof that a new entrant will convert.</p></article>
+        <article class="signal-card"><span class="index">D</span><h3>Subscription fatigue is structural</h3><p>Technavio identifies acute subscription fatigue in consumer mindfulness, nudging developers toward B2B models. <a href="https://www.technavio.com/report/mindfulness-meditation-apps-market-industry-analysis" target="_blank" rel="noopener"><strong>Technavio ↗</strong></a></p></article>
+        <article class="signal-card"><span class="index">E</span><h3>The lane is moving now</h3><p>Two free entrants launched within roughly three months of this brief. Speed matters, but only if the product clears the bar on polish, trust and differentiation.</p></article>
+      </div>
+      <div class="balance"><h3>What tempers confidence</h3><ul><li>Google Trends testing was inconclusive; no reliable five-year comparison was captured.</li><li>No verbatim Reddit or forum threads were verified for this brief.</li><li>Some iOS ratings and two competitors’ current pricing remain unconfirmed.</li></ul></div>
+    </section>
+
+    <section id="differentiation">
+      <div class="section-head">
+        <div class="num">04 / Position</div>
+        <div><h2>Compete on trust, not content volume.</h2><p>The defensible product is more than a timer and less than a sprawling wellness subscription.</p></div>
+      </div>
+      <div class="moat-grid">
+        <article class="moat"><span class="n">01</span><h3>Authentic pranayama</h3><p>Teach Sanskrit names, lineage, safe progression and contraindications—not only westernized “calm” protocols.</p></article>
+        <article class="moat"><span class="n">02</span><h3>Core stays free</h3><p>Make the promise legible: breathing exercises, customization and health logging are not demos for a subscription.</p></article>
+        <article class="moat"><span class="n">03</span><h3>Health parity</h3><p>Write every eligible session to Apple Health and Health Connect. This is uncommon among free timers, especially on Android.</p></article>
+        <article class="moat"><span class="n">04</span><h3>Evidence-aware</h3><p>Avoid inflated medical claims. One large Sussex trial found coherent breathing produced no psychological benefit beyond placebo; honest framing can earn clinician trust. <a href="https://www.psypost.org/breathwork-study-largest-controlled-trial-to-date-finds-no-psychological-benefits-beyond-placebo-effect/" target="_blank" rel="noopener">Study coverage ↗</a></p></article>
+        <article class="moat"><span class="n">05</span><h3>Cross-platform quality</h3><p>Match experience and capability on iOS and Android instead of inheriting the current platform split.</p></article>
+        <article class="moat"><span class="n">06</span><h3>Free pattern builder</h3><p>Custom inhale, hold and exhale patterns undercut a common paid upsell while creating repeat habit value.</p></article>
+      </div>
+    </section>
+
+    <section id="commercialization">
+      <div class="section-head">
+        <div class="num">05 / Revenue</div>
+        <div><h2>Commercialize around the breath.</h2><p>Yes, the app can become a business later without breaking the free-core promise. The best paths monetize institutions, branding and advanced services—not access to basic breathing.</p></div>
+      </div>
+      <div class="strategy">
+        <aside class="recommendation">
+          <h3>Best-fit model</h3>
+          <p>Build consumer trust first. Then sell a workplace edition and white-label studio tier, supported by outcome research.</p>
+          <p class="principle">Keep every core technique, the pattern builder and health logging free.</p>
+        </aside>
+        <div class="models">
+          <article class="model"><div><span class="viability">Strong · later</span><h3>Corporate wellness</h3></div><div><p>Employer per-seat licensing preserves free consumer access. Calm and Headspace establish the enterprise precedent; Regulate raised €1.4M in May 2026 for workplace breathwork with wearable and calendar integration.</p><p><strong>Watch:</strong> long sales cycles, evidence requirements, admin tooling and privacy-preserving analytics. <a href="https://business20channel.tv/regulate-raises-14m-in-2026-personio-ceo-backs-breathwork-startup-12-may-2026" target="_blank" rel="noopener">Source ↗</a></p></div></article>
+          <article class="model"><div><span class="viability">Strong · mid-term</span><h3>White-label studios</h3></div><div><p>Branded versions for yoga studios and therapists have direct precedent. StudioGrowth advertised custom-branded studio apps at $150/month in February 2026; BreathClock targets branded breathwork timers.</p><p><strong>Watch:</strong> support burden and price-sensitive small businesses. <a href="https://breathclock.com/" target="_blank" rel="noopener">BreathClock ↗</a></p></div></article>
+          <article class="model"><div><span class="viability medium">Useful · selective</span><h3>Friendly freemium</h3></div><div><p>Charge for advanced programs, coaching, deeper analytics or cosmetics—never the foundational practices. Prana Breath’s pay-what-you-want “FOREVER” unlock is a trust-preserving reference.</p><p><strong>Watch:</strong> even soft gating can weaken an anti-paywall brand. <a href="https://pranabreath.info/wiki/index.php?title=Guru_version" target="_blank" rel="noopener">Prana Breath Guru ↗</a></p></div></article>
+          <article class="model"><div><span class="viability medium">Credibility first</span><h3>Research partnerships</h3></div><div><p>Consented, anonymized practice data can support academic collaboration, efficacy research and eventual B2B sales. Near-term direct revenue is likely small.</p><p><strong>Watch:</strong> IRB approval, explicit consent, privacy engineering and modest claims.</p></div></article>
+          <article class="model"><div><span class="viability later">Possible · limited</span><h3>Tips & donations</h3></div><div><p>A tip jar can work as in-app consumable purchases, but Apple’s platform share applies—typically 30%, or 15% under the Small Business Program. Charitable donation exceptions do not generally apply to tips to the app.</p><p><strong>Watch:</strong> Apple required Insight Timer to route teacher tips through IAP in 2024. <a href="https://techcrunch.com/2024/02/21/in-a-reversal-apple-is-now-demanding-30-of-the-donations-to-meditation-app-insight-timers-teachers/?ref=dailydev" target="_blank" rel="noopener">TechCrunch ↗</a></p></div></article>
+          <article class="model"><div><span class="viability later">Wait for scale</span><h3>Sponsorships</h3></div><div><p>Brand partnerships become plausible with reach, but ads conflict with a calm experience and have little leverage at small scale.</p><p><strong>Watch:</strong> sponsor fit and UX erosion.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="plan">
+      <div class="section-head">
+        <div class="num">06 / Action</div>
+        <div><h2>Start narrow. Earn the right to expand.</h2><p>The immediate objective is not revenue—it is proving repeat use and trust around a sharp, credible product promise.</p></div>
+      </div>
+      <div class="roadmap">
+        <h3>Recommended sequence</h3>
+        <div class="steps">
+          <article class="step"><b>Phase 1 · Wedge</b><strong>Ship box breathing beautifully.</strong><p>Cross-platform timer, audio/haptics, custom patterns, offline operation and opt-in Apple Health / Health Connect logging.</p></article>
+          <article class="step"><b>Phase 2 · Proof</b><strong>Measure the habit.</strong><p>Track opt-in retention and completed sessions; add authentic techniques with expert review, contraindications and evidence notes.</p></article>
+          <article class="step"><b>Phase 3 · Business</b><strong>Sell around the free core.</strong><p>Pilot one employer program and one white-label studio offer. Use research partnerships to strengthen evidence and trust.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="questions-title">
+      <div class="section-head">
+        <div class="num">07 / Unknowns</div>
+        <div><h2 id="questions-title">What to validate before committing.</h2><p>These are the remaining questions that should shape—not delay—the first release.</p></div>
+      </div>
+      <div class="questions">
+        <article class="question-box"><h3>Customer evidence</h3><ul><li>Interview beginners, yoga practitioners and current paid-app users.</li><li>Test whether “pranayama authenticity” or “free forever” drives installs.</li><li>Capture user language from Reddit and forums in a dedicated pass.</li></ul></article>
+        <article class="question-box"><h3>Competitive detail</h3><ul><li>Verify current iOS ratings for major specialists.</li><li>Confirm Yogi Breath and 7 Minute Pranayama monetization.</li><li>Monitor Simple Breathing’s early reviews and release velocity.</li></ul></article>
+      </div>
+    </section>
+
+    <footer class="sources">
+      <details>
+        <summary>Research sources and methodology</summary>
+        <div class="source-grid">
+          <a href="https://straitsresearch.com/report/meditation-management-apps-market" target="_blank" rel="noopener">Straits Research — Meditation Management Apps Market</a>
+          <a href="https://www.grandviewresearch.com/industry-analysis/breathwork-therapy-market-report" target="_blank" rel="noopener">Grand View Research — Breathwork Therapy Market</a>
+          <a href="https://dataintelo.com/report/breathwork-coaching-app-market" target="_blank" rel="noopener">Dataintelo — Breathwork Coaching App Market</a>
+          <a href="https://www.marketresearch.com/Stratistics-Market-Research-Consulting-v4058/Breathwork-Coaching-Apps-Forecasts-Global-42075165/" target="_blank" rel="noopener">Stratistics MRC — Breathwork Coaching Apps</a>
+          <a href="https://innerfire-app.com/blog/best-breathwork-apps" target="_blank" rel="noopener">InnerFire — 2026 breathwork app pricing roundup</a>
+          <a href="https://www.othership.us/resources/breathwork-apps" target="_blank" rel="noopener">Othership — Breathwork app guide</a>
+          <a href="https://www.technavio.com/report/mindfulness-meditation-apps-market-industry-analysis" target="_blank" rel="noopener">Technavio — Mindfulness app industry analysis</a>
+          <a href="https://techcrunch.com/2024/02/21/in-a-reversal-apple-is-now-demanding-30-of-the-donations-to-meditation-app-insight-timers-teachers/?ref=dailydev" target="_blank" rel="noopener">TechCrunch — Apple and Insight Timer tips</a>
+          <a href="https://business20channel.tv/regulate-raises-14m-in-2026-personio-ceo-backs-breathwork-startup-12-may-2026" target="_blank" rel="noopener">Business20Channel — Regulate funding</a>
+          <a href="https://www.psypost.org/breathwork-study-largest-controlled-trial-to-date-finds-no-psychological-benefits-beyond-placebo-effect/" target="_blank" rel="noopener">PsyPost — Sussex coherent-breathing trial</a>
+        </div>
+        <p class="method">Snapshot prepared September 2026 from analyst estimates, app listings, published pricing roundups and company materials. Market estimates are directional because definitions differ. App prices, ratings and store policies can change. Unverified items are marked rather than inferred.</p>
+      </details>
+    </footer>
+  </main>
+
+  <script>
+    const buttons = [...document.querySelectorAll('.filter')];
+    const cards = [...document.querySelectorAll('.competitor')];
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const selected = button.dataset.filter;
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      cards.forEach(card => { card.hidden = selected !== 'all' && card.dataset.model !== selected; });
+    }));
+  </script>
+</body>
+</html>

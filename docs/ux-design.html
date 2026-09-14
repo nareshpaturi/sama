@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href="data:," />
+  <title>UX Design</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+    :root{
+      --paper:#f3f0e8; --paper-2:#e8e4d9; --ink:#1d2d27; --muted:#59665f; --pine:#225b49;
+      --pine-dark:#174338; --pine-soft:#d9e6dc; --sky:#dce8eb; --terracotta:#c86543;
+      --line:#cbcfc7; --white:#fffef9; --black:#111915; --shadow:0 24px 65px rgba(25,45,36,.14);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:'Atkinson Hyperlegible',sans-serif;line-height:1.45;overflow-x:hidden}
+    button{font:inherit;color:inherit} button:focus-visible,a:focus-visible{outline:3px solid #ef9b73;outline-offset:3px}
+    .topline{height:7px;background:linear-gradient(90deg,var(--pine) 0 58%,var(--terracotta) 58% 78%,#6b8c98 78%)}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .hero{padding:68px 0 44px;border-bottom:1px solid var(--line)}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(290px,.7fr);gap:64px;align-items:end}
+    .kicker{font-size:13px;font-weight:700;color:var(--pine);margin-bottom:14px}
+    h1,h2,h3{font-family:'Alegreya',serif}
+    h1{font-size:clamp(43px,7vw,78px);line-height:.95;letter-spacing:-.04em;margin:0;max-width:760px;font-weight:600}
+    .hero p{font-size:19px;max-width:680px;margin:24px 0 0;color:#405049}
+    .brief{border-top:3px solid var(--ink);padding-top:17px;display:grid;gap:14px}
+    .brief-row{display:grid;grid-template-columns:88px 1fr;gap:14px;font-size:14px}.brief-row span:first-child{color:var(--muted)}.brief-row strong{font-weight:700}
+    .jump{display:flex;gap:8px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(243,240,232,.96);backdrop-filter:blur(10px);z-index:30}
+    .jump a{text-decoration:none;border:1px solid var(--line);background:var(--white);padding:8px 13px;border-radius:999px;font-size:13px}.jump a:hover{border-color:var(--pine);color:var(--pine)}
+
+    .prototype{padding:52px 0 72px}
+    .section-lead{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:end;margin-bottom:30px}
+    .section-lead h2{font-size:clamp(34px,5vw,54px);line-height:1;margin:0;letter-spacing:-.025em;font-weight:600}.section-lead p{margin:0;color:var(--muted);max-width:580px}
+    .flow-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+    .flow-tab{border:1px solid var(--line);background:transparent;padding:9px 13px;border-radius:8px;cursor:pointer;font-size:14px}.flow-tab.active{background:var(--ink);color:white;border-color:var(--ink)}
+    .stage{background:#dfe4dd;min-height:760px;display:grid;grid-template-columns:minmax(340px,.9fr) minmax(0,1.1fr);border:1px solid #c7cec6;box-shadow:var(--shadow);overflow:hidden}
+    .phone-zone{display:grid;place-items:center;padding:44px;position:relative;background:linear-gradient(145deg,#d8dfd8,#eef0ea)}
+    .phone-zone:before{content:"INTERACTIVE PROTOTYPE";position:absolute;top:20px;left:22px;font-size:11px;letter-spacing:.1em;font-weight:700;color:#69776f}
+    .phone{width:360px;max-width:100%;height:712px;border:8px solid #14201b;border-radius:42px;background:var(--white);box-shadow:0 25px 48px rgba(20,32,27,.22);overflow:hidden;position:relative}
+    .phone:before{content:"";position:absolute;z-index:20;top:8px;left:50%;transform:translateX(-50%);width:86px;height:22px;background:#14201b;border-radius:14px}
+    .screen{position:absolute;inset:0;padding:44px 24px 20px;background:var(--white);display:none;flex-direction:column}.screen.active{display:flex}
+    .screen.onboard{background:#e7eee8}.screen.practice-screen{background:#173f35;color:white}.screen.complete-screen{background:#f2e9df}
+    .statusbar{position:absolute;top:14px;left:24px;right:24px;display:flex;justify-content:space-between;font-size:11px;font-weight:700;z-index:25;pointer-events:none}.practice-screen .statusbar{color:white}
+    .app-top{display:flex;align-items:center;justify-content:space-between;min-height:38px}.app-top .wordmark{font-family:'Alegreya',serif;font-size:19px;font-weight:600}.icon-btn{border:0;background:transparent;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer}.icon-btn:hover{background:rgba(34,91,73,.08)}
+    .line-icon{width:21px;height:21px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .onboard-art{height:250px;display:grid;place-items:center;position:relative}.orb{width:172px;height:172px;border-radius:50%;border:1px solid rgba(34,91,73,.3);display:grid;place-items:center;position:relative}.orb:before,.orb:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(34,91,73,.22)}.orb:before{width:210px;height:210px}.orb:after{width:118px;height:118px;background:rgba(255,255,255,.35)}.breath-mark{width:62px;height:62px;border:2px solid var(--pine);border-radius:50% 50% 45% 55%;transform:rotate(45deg);position:relative;z-index:2}.breath-mark:after{content:"";position:absolute;width:19px;height:19px;border-left:2px solid var(--terracotta);border-bottom:2px solid var(--terracotta);left:18px;top:18px}
+    .screen h3{font-size:34px;line-height:1.02;letter-spacing:-.02em;margin:0 0 13px;font-weight:600}.screen-copy{margin:0;color:#51615a;font-size:16px}.spacer{flex:1}
+    .progress-dots{display:flex;gap:6px;margin:20px 0}.dot{width:24px;height:4px;background:#bac8be;border-radius:2px}.dot.on{background:var(--pine)}
+    .primary,.secondary,.text-btn{border:0;cursor:pointer}.primary{width:100%;min-height:52px;background:var(--pine);color:white;border-radius:10px;font-weight:700;padding:13px 18px}.primary:hover{background:var(--pine-dark)}.primary.light{background:white;color:var(--pine-dark)}.secondary{width:100%;min-height:48px;border:1px solid #aeb9b2;background:transparent;border-radius:10px;font-weight:700}.text-btn{background:transparent;color:inherit;padding:10px;font-weight:700}
+    .safety-visual{width:94px;height:94px;border-radius:50%;background:var(--sky);display:grid;place-items:center;margin:52px 0 44px}.safety-visual svg{width:45px;height:45px;stroke:var(--pine)}
+    .notice{font-size:14px;background:rgba(255,255,255,.6);padding:13px;border-radius:8px;margin:17px 0 24px;color:#42524b}
+    .pref-list{display:grid;gap:11px;margin:28px 0}.pref{display:flex;align-items:center;justify-content:space-between;background:white;padding:15px;border-radius:10px}.pref strong{display:block}.pref small{color:var(--muted)}
+    .switch{width:46px;height:27px;border:0;padding:3px;border-radius:20px;background:#aab4ae;cursor:pointer}.switch span{display:block;width:21px;height:21px;border-radius:50%;background:white;transition:transform .18s}.switch.on{background:var(--pine)}.switch.on span{transform:translateX(19px)}
+    .home-greeting{margin:18px 0 2px;color:var(--muted);font-size:14px}.home-title{font-size:31px!important;margin-bottom:24px!important}.session-card{background:#e5eee7;padding:23px 20px;border-radius:16px 16px 6px 16px;margin-bottom:16px}.session-card .label{font-size:12px;color:var(--pine);font-weight:700}.session-card .time{font-family:'Alegreya',serif;font-size:58px;line-height:1;margin:7px 0 3px}.session-card .meta{font-size:14px;color:#52635a}
+    .duration-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 13px}.duration{border:1px solid var(--line);background:white;border-radius:7px;padding:8px 2px;cursor:pointer;font-size:13px}.duration.selected{background:var(--ink);color:white;border-color:var(--ink)}
+    .pattern-editor{border-top:1px solid var(--line);padding:11px 0 9px}.pattern-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.pattern-head strong{font-size:14px}.pattern-preset{border:0;background:transparent;color:var(--pine);font-size:12px;font-weight:700;padding:3px;cursor:pointer}.pattern-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.phase-control{text-align:center;background:#f1f1eb;padding:7px 3px;border-radius:7px}.phase-control span{display:block;font-size:10px;color:var(--muted);margin-bottom:3px}.phase-stepper{display:flex;align-items:center;justify-content:center;gap:5px}.phase-stepper button{border:1px solid var(--line);background:white;border-radius:50%;width:24px;height:24px;padding:0;cursor:pointer;line-height:1}.phase-stepper strong{min-width:21px;font-size:13px}.home-nav{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin:12px -24px -20px;padding:7px 12px 2px}.nav-btn{border:0;background:transparent;font-size:11px;color:var(--muted);padding:5px;cursor:pointer}.nav-btn svg{display:block;margin:0 auto 2px}.nav-btn.active{color:var(--pine);font-weight:700}
+    .practice-top{display:flex;justify-content:space-between;align-items:center}.practice-top button{color:white}.phase-label{text-align:center;font-size:14px;letter-spacing:.04em;margin-top:24px;color:#d7e8e1}.breath-circle{width:202px;height:202px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;margin:16px auto;position:relative}.breath-circle:before{content:"";position:absolute;inset:18px;border-radius:50%;background:#d7e6dc;transform:scale(.76);transition:transform 3.8s ease-in-out}.phase-inhale .breath-circle:before{transform:scale(1)}.phase-exhale .breath-circle:before{transform:scale(.62)}.breath-count{position:relative;color:var(--pine-dark);font-family:'Alegreya',serif;font-size:63px;line-height:1}.phase-name{text-align:center;font-family:'Alegreya',serif;font-size:32px}.cycle-info{text-align:center;color:#bad0c8;font-size:13px;margin-top:3px}.sensor-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);margin-top:18px}.sensor-item{padding:10px 8px}.sensor-item+ .sensor-item{border-left:1px solid rgba(255,255,255,.18)}.sensor-item span{display:block;color:#a9c4ba;font-size:10px;letter-spacing:.04em}.sensor-item strong{display:block;font-size:14px;margin-top:2px}.sensor-item small{display:block;color:#a9c4ba;font-size:10px}.session-progress{height:3px;background:rgba(255,255,255,.2);margin:17px 0 9px}.session-progress span{display:block;height:100%;width:23%;background:white}.time-row{display:flex;justify-content:space-between;color:#cfe0da;font-size:12px}.practice-actions{display:flex;justify-content:center;gap:22px;margin-top:auto}.round-action{width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:transparent;color:white;display:grid;place-items:center;cursor:pointer}.round-action.main{background:white;color:var(--pine-dark);border-color:white}.pause-panel{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);padding:17px;border-radius:12px;margin-top:24px;text-align:center}.pause-panel p{font-size:13px;color:#bdd0c9}
+    .complete-mark{width:68px;height:68px;border-radius:50%;background:var(--pine);color:white;display:grid;place-items:center;margin:28px 0 20px}.complete-mark svg{width:32px;height:32px}.summary-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #cec6bd;border-bottom:1px solid #cec6bd;margin:18px 0 12px}.summary-stat{padding:13px 0}.summary-stat+ .summary-stat{padding-left:18px;border-left:1px solid #cec6bd}.summary-stat strong{display:block;font-family:'Alegreya',serif;font-size:25px}.summary-stat span{font-size:11px;color:var(--muted)}.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:10px}.insight{background:rgba(255,255,255,.68);padding:10px;border-radius:7px}.insight span{display:block;font-size:10px;color:var(--muted)}.insight strong{display:block;font-size:13px;margin-top:2px}.insight small{display:block;font-size:10px;color:var(--muted)}.health-line{display:flex;gap:11px;align-items:center;background:white;padding:11px;border-radius:8px;font-size:12px;margin-bottom:10px}.health-line svg{flex:0 0 auto}
+    .sheet{position:absolute;inset:0;background:rgba(15,24,20,.42);display:none;align-items:flex-end;z-index:50}.sheet.open{display:flex}.sheet-card{background:white;width:100%;padding:24px 22px 28px;border-radius:22px 22px 0 0}.sheet-card h4{font-family:'Alegreya';font-size:25px;margin:0 0 7px}.sheet-card p{font-size:14px;color:var(--muted)}.system-label{font-size:11px;font-weight:700;color:var(--terracotta);margin-bottom:8px}
+    .screen-title{font-size:31px!important;margin:14px 0 22px!important}.history-tabs{display:grid;grid-template-columns:1fr 1fr;background:#e6e6e0;border-radius:8px;padding:3px;margin-bottom:20px}.history-tab{border:0;background:transparent;padding:8px;border-radius:6px;cursor:pointer}.history-tab.active{background:white;box-shadow:0 1px 3px rgba(0,0,0,.08)}.empty{flex:1;display:grid;place-content:center;text-align:center;padding:20px}.empty .empty-ring{width:88px;height:88px;border:1px solid var(--line);border-radius:50%;margin:0 auto 20px;display:grid;place-items:center}.empty h4{font-family:'Alegreya';font-size:24px;margin:0 0 5px}.empty p{color:var(--muted);font-size:14px}.sample-history{display:none}.sample-history.show{display:block}.sample-note{font-size:11px;color:var(--terracotta);font-weight:700;margin-bottom:10px}.history-group{font-size:12px;color:var(--muted);font-weight:700;margin:15px 0 6px}.history-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}.history-row strong{display:block}.history-row span{font-size:13px;color:var(--muted)}
+    .insights-screen{overflow-y:auto}.insights-screen .screen-title{margin-bottom:12px!important}.insights-source{font-size:11px;color:var(--terracotta);font-weight:700;margin-bottom:9px}.insights-sample.hidden{display:none}.insights-empty{display:none;text-align:center;padding:52px 14px 10px}.insights-empty.show{display:block}.insights-empty .empty-ring{width:82px;height:82px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;margin:0 auto 18px}.insights-empty h4{font-family:'Alegreya';font-size:24px;margin:0 0 6px}.insights-empty p{font-size:13px;color:var(--muted);margin:0 0 20px}.period-tabs{display:grid;grid-template-columns:1fr 1fr;background:#e6e6e0;border-radius:8px;padding:3px;margin-bottom:10px}.period-tab{border:0;background:transparent;padding:7px;border-radius:6px;cursor:pointer;font-size:12px}.period-tab.active{background:white;box-shadow:0 1px 3px rgba(0,0,0,.08)}.trend-stack{display:grid;gap:7px}.trend-card{border-top:1px solid var(--line);padding-top:7px}.trend-head{display:flex;justify-content:space-between;align-items:baseline}.trend-head strong{font-size:12px}.trend-head span{font-size:10px;color:var(--muted)}.trend-card svg{width:100%;height:62px;display:block;overflow:visible}.chart-axis{stroke:#cbd0c9;stroke-width:1}.chart-line{fill:none;stroke:var(--pine);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.chart-point{fill:var(--pine)}.chart-bar{fill:#7e9f92}.chart-label{font-size:8px;fill:#647068}.insight-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:10px 0 6px}.insight-summary div{background:#eef0ea;padding:8px 6px;border-radius:6px}.insight-summary span{display:block;font-size:9px;color:var(--muted)}.insight-summary strong{display:block;font-size:13px}.coverage-note{font-size:11px;color:var(--muted);margin:7px 0 12px}.health-coverage{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:10px}.health-coverage span{font-size:9px;text-align:center;padding:5px 2px;border:1px solid var(--line);border-radius:5px;background:white}
+    .settings-list{display:grid;gap:0}.settings-row{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line)}.settings-row small{display:block;color:var(--muted)}.section-label{font-size:12px;color:var(--pine);font-weight:700;margin:20px 0 5px}.danger{color:#9f462f}.back-btn{border:0;background:transparent;padding:0;width:38px;height:38px;display:grid;place-items:center;cursor:pointer}
+
+    .notes{padding:48px 44px;background:var(--ink);color:white;display:flex;flex-direction:column}.note-eyebrow{font-size:12px;color:#a9c8bb;font-weight:700;margin-bottom:15px}.notes h3{font-size:40px;line-height:1;margin:0 0 16px}.notes>p{color:#c7d3ce;max-width:520px;margin:0 0 27px}.rationale{display:grid;gap:0;margin-top:3px}.rationale-item{display:grid;grid-template-columns:40px 1fr;gap:13px;padding:18px 0;border-top:1px solid rgba(255,255,255,.16)}.rationale-item b{font-family:'Alegreya';font-size:24px;color:#89b5a3}.rationale-item strong{display:block;margin-bottom:4px}.rationale-item p{margin:0;color:#b9c8c2;font-size:14px}.prototype-tip{margin-top:auto;background:#2d4b40;padding:15px;border-radius:7px;color:#dbe7e2;font-size:13px}
+
+    .blueprint{background:var(--white);padding:72px 0}.blueprint h2{font-size:clamp(36px,5vw,56px);line-height:1;margin:0 0 12px}.blueprint-intro{color:var(--muted);max-width:680px;margin:0 0 38px}.flow-map{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:center;margin:24px 0 46px}.flow-node{border:1px solid var(--line);padding:15px 10px;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;background:#fff}.flow-node strong{font-size:14px}.flow-node span{font-size:11px;color:var(--muted)}.flow-arrow{text-align:center;color:var(--pine)}
+    .blue-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.blue-card{padding:24px;border-top:3px solid var(--ink);background:var(--paper)}.blue-card:nth-child(2){border-color:var(--terracotta)}.blue-card:nth-child(3){border-color:#668b97}.blue-card h3{font-size:26px;margin:0 0 12px}.blue-card ul{margin:0;padding:0;list-style:none}.blue-card li{padding:8px 0;border-top:1px solid var(--line);font-size:14px}.blue-card li:first-child{border-top:0}
+    .screens-section{padding:72px 0;border-top:1px solid var(--line)}.screens-section h2{font-size:clamp(36px,5vw,54px);margin:0 0 28px;line-height:1}.screen-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.screen-card{padding:21px;background:var(--white);border:1px solid var(--line);min-height:210px}.screen-card .num{font-family:'Alegreya';font-size:36px;color:var(--pine)}.screen-card h3{font-size:24px;margin:16px 0 8px}.screen-card p{font-size:14px;color:var(--muted);margin:0}.screen-card .state{display:inline-block;margin-top:15px;font-size:11px;padding:4px 7px;background:var(--pine-soft);color:var(--pine);border-radius:4px;font-weight:700}
+    .handoff{padding:72px 0;background:var(--paper-2);border-top:1px solid var(--line)}.handoff-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:58px}.handoff h2{font-size:clamp(36px,5vw,54px);line-height:1;margin:0 0 16px}.handoff p{color:var(--muted)}.rules{border-top:1px solid #bfc5bd}.rule{display:grid;grid-template-columns:130px 1fr;gap:22px;padding:18px 0;border-bottom:1px solid #bfc5bd}.rule strong{color:var(--pine)}.rule p{margin:0;color:#3f4d46}.footer{padding:30px 0 48px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+
+    @media(max-width:980px){.hero-grid,.section-lead,.handoff-grid{grid-template-columns:1fr}.hero-grid{gap:34px}.stage{grid-template-columns:1fr}.notes{min-height:580px}.flow-map{grid-template-columns:1fr 24px 1fr 24px 1fr}.flow-map .flow-node:nth-of-type(n+4),.flow-map .flow-arrow:nth-of-type(n+4){margin-top:8px}.blue-grid,.screen-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:640px){.wrap{width:min(100% - 24px,1180px)}.hero{padding:42px 0 30px}.hero p{font-size:17px}.jump{margin:0 -12px;padding:12px;top:0}.prototype{padding:36px 0 52px}.flow-tabs{gap:6px}.flow-tab{font-size:13px;padding:8px 10px}.stage{margin-left:-12px;margin-right:-12px;border-left:0;border-right:0}.phone-zone{padding:52px 12px 28px}.phone{height:690px;width:350px;border-width:6px;border-radius:37px}.screen{padding-left:21px;padding-right:21px}.notes{padding:34px 24px;min-height:auto}.notes h3{font-size:34px}.blueprint,.screens-section,.handoff{padding:52px 0}.flow-map{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg);height:20px}.blue-grid,.screen-grid{grid-template-columns:1fr}.rule{grid-template-columns:1fr;gap:5px}.section-lead{gap:15px}.brief-row{grid-template-columns:72px 1fr}}
+    @media(max-width:370px){.wrap{width:calc(100% - 16px)}.phone-zone{padding-left:8px;padding-right:8px}.phone{height:670px}.session-card .time{font-size:50px}.screen h3{font-size:31px}.notes{padding-left:18px;padding-right:18px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.breath-circle:before{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Pranayama MVP · Interaction design</div>
+        <h1>A calm path from need to relief.</h1>
+        <p>The test build pairs simple breathing guidance with tones and haptics, while permission-gated HealthKit and Health Connect data unlock richer session feedback. Recorded voice guidance follows testing, before launch.</p>
+      </div>
+      <div class="brief" aria-label="Design brief">
+        <div class="brief-row"><span>Focus</span><strong>Box + custom four-phase breathing</strong></div>
+        <div class="brief-row"><span>Platforms</span><strong>iOS + Android parity</strong></div>
+        <div class="brief-row"><span>Default</span><strong>5 min · 4–4–4–4</strong></div>
+        <div class="brief-row"><span>Health</span><strong>HealthKit + Health Connect · read-only indicators</strong></div>
+        <div class="brief-row"><span>Guidance</span><strong>Test: tones + haptics · Launch: recorded voice</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap jump" aria-label="Page sections">
+    <a href="#prototype">Prototype</a><a href="#flow">User flow</a><a href="#screens">Screen inventory</a><a href="#handoff">Design rules</a>
+  </div>
+
+  <main>
+    <section class="prototype" id="prototype">
+      <div class="wrap">
+        <div class="section-lead">
+          <h2>Try the core journey</h2>
+          <p>Use the prototype like a real app. The tabs jump to key moments; buttons inside the phone continue the flow. Session timing is accelerated for review.</p>
+        </div>
+        <div class="flow-tabs" role="tablist" aria-label="Prototype scenes">
+          <button class="flow-tab active" data-screen="welcome">Onboarding</button>
+          <button class="flow-tab" data-screen="home">Home</button>
+          <button class="flow-tab" data-screen="active">Practice</button>
+          <button class="flow-tab" data-screen="complete">Completion</button>
+          <button class="flow-tab" data-screen="insights">Insights</button>
+          <button class="flow-tab" data-screen="history">History</button>
+          <button class="flow-tab" data-screen="settings">Settings</button>
+        </div>
+
+        <div class="stage">
+          <div class="phone-zone">
+            <div class="phone" id="phone" aria-label="Interactive app prototype">
+              <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+
+              <section class="screen onboard active" data-id="welcome">
+                <div class="onboard-art" aria-hidden="true"><div class="orb"><div class="breath-mark"></div></div></div>
+                <h3>A steadier breath, right when you need it.</h3>
+                <p class="screen-copy">Simple box-breathing guidance, free to use and ready offline.</p>
+                <div class="spacer"></div>
+                <div class="progress-dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+                <button class="primary" data-go="safety">Continue</button>
+              </section>
+
+              <section class="screen onboard" data-id="safety">
+                <div class="app-top"><button class="back-btn" data-go="welcome" aria-label="Back"><svg class="line-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+                <div class="safety-visual" aria-hidden="true"><svg class="line-icon" viewBox="0 0 48 48"><path d="M24 5C15 12 10 19 10 28a14 14 0 0 0 28 0C38 19 33 12 24 5Z"/><path d="M18 28c2 3 4 4 6 4s4-1 6-4"/></svg></div>
+                <h3>Stay comfortable.</h3>
+                <p class="screen-copy">Breathe gently—never strain. If you feel dizzy or uncomfortable, stop and return to your normal breath.</p>
+                <div class="notice">This is a wellness tool, not medical advice.</div>
+                <div class="spacer"></div>
+                <div class="progress-dots"><span class="dot"></span><span class="dot on"></span><span class="dot"></span></div>
+                <button class="primary" data-go="cues">I understand</button>
+              </section>
+
+              <section class="screen onboard" data-id="cues">
+                <div class="app-top"><button class="back-btn" data-go="safety" aria-label="Back"><svg class="line-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+                <h3 style="margin-top:36px">Choose your cues.</h3>
+                <p class="screen-copy">The test build uses tones and haptics. Recorded voice guidance comes after we validate the pacing.</p>
+                <div class="pref-list">
+                  <div class="pref"><div><strong>Gentle tones</strong><small>At each phase change</small></div><button class="switch on" aria-label="Toggle gentle tones" aria-pressed="true"><span></span></button></div>
+                  <div class="pref"><div><strong>Haptic cues</strong><small>Distinct tap patterns</small></div><button class="switch on" aria-label="Toggle haptic cues" aria-pressed="true"><span></span></button></div>
+                  <div class="pref"><div><strong>Reduced motion</strong><small>A quiet numeric guide</small></div><button class="switch" aria-label="Toggle reduced motion" aria-pressed="false"><span></span></button></div>
+                </div>
+                <div class="spacer"></div>
+                <div class="progress-dots"><span class="dot"></span><span class="dot"></span><span class="dot on"></span></div>
+                <button class="primary" data-go="home">Set up my first breath</button>
+              </section>
+
+              <section class="screen" data-id="home">
+                <div class="app-top"><div class="wordmark">Today</div><button class="icon-btn" data-go="settings" aria-label="Open settings"><svg class="line-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1-2.8 2.8-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1 1.6v.2h-4V21a1.8 1.8 0 0 0-1-1.6 1.8 1.8 0 0 0-2 .4l-.1.1-2.8-2.8.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 3 14H3v-4h.2a1.8 1.8 0 0 0 1.6-1 1.8 1.8 0 0 0-.4-2l-.1-.1 2.8-2.8.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 10 3V3h4v.2a1.8 1.8 0 0 0 1 1.6 1.8 1.8 0 0 0 2-.4l.1-.1 2.8 2.8-.1.1a1.8 1.8 0 0 0-.4 2A1.8 1.8 0 0 0 21 10h.2v4H21a1.8 1.8 0 0 0-1.6 1Z"/></svg></button></div>
+                <p class="home-greeting">Ready when you are</p><h3 class="home-title">Take a breathing break.</h3>
+                <div class="session-card"><span class="label">FOUR-PHASE BREATHING</span><div class="time"><span id="durationValue">5</span> min</div><div class="meta"><span id="cycleValue">18</span> cycles · <span id="patternValue">4–4–4–4</span></div></div>
+                <div class="duration-row" aria-label="Session duration"><button class="duration" data-duration="1">1</button><button class="duration" data-duration="3">3</button><button class="duration selected" data-duration="5">5</button><button class="duration" data-duration="10">10</button></div>
+                <div class="pattern-editor"><div class="pattern-head"><strong>Custom pattern</strong><button class="pattern-preset" id="customPreset">Use 4–4–6–4</button></div><div class="pattern-grid" aria-label="Custom phase timing">
+                  <div class="phase-control"><span>INHALE</span><div class="phase-stepper"><button data-phase="0" data-delta="-1" aria-label="Shorten inhale">−</button><strong><span data-phase-value="0">4</span>s</strong><button data-phase="0" data-delta="1" aria-label="Lengthen inhale">+</button></div></div>
+                  <div class="phase-control"><span>HOLD</span><div class="phase-stepper"><button data-phase="1" data-delta="-1" aria-label="Shorten first hold">−</button><strong><span data-phase-value="1">4</span>s</strong><button data-phase="1" data-delta="1" aria-label="Lengthen first hold">+</button></div></div>
+                  <div class="phase-control"><span>EXHALE</span><div class="phase-stepper"><button data-phase="2" data-delta="-1" aria-label="Shorten exhale">−</button><strong><span data-phase-value="2">4</span>s</strong><button data-phase="2" data-delta="1" aria-label="Lengthen exhale">+</button></div></div>
+                  <div class="phase-control"><span>HOLD</span><div class="phase-stepper"><button data-phase="3" data-delta="-1" aria-label="Shorten second hold">−</button><strong><span data-phase-value="3">4</span>s</strong><button data-phase="3" data-delta="1" aria-label="Lengthen second hold">+</button></div></div>
+                </div></div>
+                <div class="spacer"></div><button class="primary" data-start>Begin</button>
+                <nav class="home-nav" aria-label="Primary app navigation"><button class="nav-btn active" data-go="home"><svg class="line-icon" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9h-6v-6h-4v6H4Z"/></svg>Breathe</button><button class="nav-btn" data-go="insights"><svg class="line-icon" viewBox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></svg>Insights</button><button class="nav-btn" data-go="history"><svg class="line-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>History</button><button class="nav-btn" data-go="settings"><svg class="line-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M19 5l-2 2M7 17l-2 2"/></svg>Settings</button></nav>
+              </section>
+
+              <section class="screen practice-screen phase-inhale" data-id="active" id="activeScreen">
+                <div class="practice-top"><button class="text-btn" data-go="home">End</button><span id="practiceDuration">5:00</span><span style="width:42px"></span></div>
+                <div class="phase-label">PHASE <span id="phaseNumber">1</span> OF 4</div>
+                <div class="breath-circle"><span class="breath-count" id="breathCount">4</span></div>
+                <div class="phase-name" id="phaseName">Inhale</div><div class="cycle-info">Cycle <span id="practiceCycle">1</span> of <span id="practiceCyclesTotal">18</span> · <span id="practicePattern">4–4–4–4</span></div>
+                <div class="sensor-strip" aria-label="Practice insights"><div class="sensor-item"><span>GUIDED PACE</span><strong id="guidedRate">3.8 / min</strong><small>From timing</small></div><div class="sensor-item"><span>MEASURED BREATH</span><strong>— / min</strong><small>Live if supplied</small></div><div class="sensor-item"><span>HEART RATE</span><strong>— bpm</strong><small>Live if supplied</small></div></div>
+                <div class="session-progress"><span></span></div><div class="time-row"><span>0:16</span><span>Session in progress</span></div>
+                <div class="practice-actions"><button class="round-action main" id="pauseButton" aria-label="Pause session"><svg class="line-icon" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg></button></div>
+              </section>
+
+              <section class="screen practice-screen" data-id="paused">
+                <div class="practice-top"><button class="text-btn" data-go="complete">End</button><span>Paused</span><span style="width:42px"></span></div>
+                <div style="flex:1;display:grid;place-content:center;text-align:center"><div class="phase-name">Take your time.</div><div class="pause-panel"><strong>Session paused</strong><p>Resume starts this phase again after a short countdown.</p></div></div>
+                <div class="practice-actions"><button class="round-action main" data-resume aria-label="Resume session"><svg class="line-icon" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6Z"/></svg></button></div>
+              </section>
+
+              <section class="screen complete-screen" data-id="complete">
+                <div class="complete-mark" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></div>
+                <h3>You made space to breathe.</h3><p class="screen-copy">A calm pause counts, no matter how the rest of the day goes.</p>
+                <div class="summary-grid"><div class="summary-stat"><strong id="summaryDuration">5:00</strong><span>DURATION</span></div><div class="summary-stat"><strong id="summaryCycles">18</strong><span>CYCLES</span></div></div>
+                <div class="insight-grid"><div class="insight"><span>GUIDED RATE</span><strong id="summaryGuidedRate">3.8 / min</strong><small>From 4–4–4–4 timing</small></div><div class="insight"><span>MEASURED BREATH</span><strong>Not available</strong><small>No session sample</small></div><div class="insight"><span>HEART RATE</span><strong>Not available</strong><small>No before / after samples</small></div></div>
+                <div class="health-line"><svg class="line-icon" viewBox="0 0 24 24"><path d="M12 20S4 15.5 4 9.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 3.5C20 15.5 12 20 12 20Z"/></svg><span>Save the session and any heart or respiratory samples the platform supplied.</span></div>
+                <div class="spacer"></div><button class="primary" id="healthButton">Connect & add to Health</button><button class="text-btn" data-go="home">Not now</button>
+              </section>
+
+              <section class="screen insights-screen" data-id="insights">
+                <div class="app-top"><button class="back-btn" data-go="home" aria-label="Back"><svg class="line-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><span style="font-size:11px;color:var(--muted)">Apple Health / Health Connect</span></div>
+                <h3 class="screen-title">Progression</h3>
+                <div class="history-tabs" aria-label="Insight data state"><button class="history-tab" data-insight-state="empty">No wearable</button><button class="history-tab active" data-insight-state="sample">Sample view</button></div>
+                <div class="insights-sample" id="insightsSample">
+                  <div class="insights-source">ILLUSTRATIVE PROTOTYPE DATA</div>
+                  <div class="period-tabs" aria-label="Insight period"><button class="period-tab active" data-period="7">7 days</button><button class="period-tab" data-period="30">30 days</button></div>
+                  <div class="trend-stack">
+                    <div class="trend-card"><div class="trend-head"><strong>Resting heart rate</strong><span>bpm</span></div><svg id="rhrChart" role="img" aria-label="Illustrative resting heart-rate trend"></svg></div>
+                    <div class="trend-card"><div class="trend-head"><strong>Heart rate variability</strong><span>ms</span></div><svg id="hrvChart" role="img" aria-label="Illustrative heart-rate variability trend"></svg></div>
+                    <div class="trend-card"><div class="trend-head"><strong>Total mindful minutes</strong><span>min / day</span></div><svg id="mindfulChart" role="img" aria-label="Illustrative daily mindful-minute totals"></svg></div>
+                  </div>
+                  <div class="insight-summary"><div><span>AVG HR CHANGE</span><strong id="avgHrChange">—</strong></div><div><span>TOP PATTERN</span><strong id="topPattern">—</strong></div><div><span>STREAK</span><strong id="streakValue">—</strong></div></div>
+                  <p class="coverage-note">Before-vs-after heart rate uses available session samples. Pattern totals and streaks come from completed practices.</p>
+                  <div class="health-coverage" aria-label="Supported read-only health indicators"><span>Heart rate</span><span>HRV</span><span>Resting HR</span><span>Breath rate</span><span>SpO₂</span><span>Sleep</span></div>
+                </div>
+                <div class="insights-empty" id="insightsEmpty"><div class="empty-ring"><svg class="line-icon" viewBox="0 0 24 24"><path d="M5 12h3l2-5 4 10 2-5h3"/><path d="M4 4v16h16"/></svg></div><h4>Practice works without a wearable.</h4><p>Connect Apple Health or Health Connect to add available heart, breathing, oxygen, and sleep insights.</p><button class="primary" id="insightsConnect">Connect health data</button></div>
+              </section>
+
+              <section class="screen" data-id="history">
+                <div class="app-top"><button class="back-btn" data-go="home" aria-label="Back"><svg class="line-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+                <h3 class="screen-title">Your practice</h3>
+                <div class="history-tabs"><button class="history-tab active" data-history="empty">Empty state</button><button class="history-tab" data-history="sample">Sample state</button></div>
+                <div class="empty" id="emptyHistory"><div><div class="empty-ring"><svg class="line-icon" viewBox="0 0 24 24"><path d="M12 3v9l5 3"/><circle cx="12" cy="12" r="9"/></svg></div><h4>Your first pause starts here.</h4><p>Completed sessions will appear in this space.</p></div></div>
+                <div class="sample-history" id="sampleHistory"><div class="sample-note">ILLUSTRATIVE PROTOTYPE DATA</div><div class="history-group">TODAY</div><div class="history-row"><div><strong>Custom breathing</strong><span>5 min · 16 cycles · 4–4–6–4 · HR 72→67</span></div><span>9:10 AM</span></div><div class="history-group">PREVIOUS DAY</div><div class="history-row"><div><strong>Box breathing</strong><span>3 min · 11 cycles · 4–4–4–4</span></div><span>6:30 PM</span></div><div class="history-row"><div><strong>Box breathing</strong><span>5 min · 18 cycles · 4–4–4–4</span></div><span>8:05 AM</span></div></div>
+              </section>
+
+              <section class="screen" data-id="settings">
+                <div class="app-top"><button class="back-btn" data-go="home" aria-label="Back"><svg class="line-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><h3 class="screen-title">Settings</h3>
+                <div class="section-label">GUIDANCE</div><div class="settings-list"><div class="settings-row"><div><strong>Gentle tones</strong><small>Phase changes</small></div><button class="switch on" aria-label="Toggle tones" aria-pressed="true"><span></span></button></div><div class="settings-row"><div><strong>Haptics</strong><small>Phase changes</small></div><button class="switch on" aria-label="Toggle haptics" aria-pressed="true"><span></span></button></div><div class="settings-row"><div><strong>Reduced motion</strong><small>Follow device setting</small></div><button class="switch" aria-label="Toggle reduced motion" aria-pressed="false"><span></span></button></div></div>
+                <div class="section-label">CONNECTIONS</div><div class="settings-list"><div class="settings-row"><div><strong>Health data & wearables</strong><small>HealthKit / Health Connect · Not connected</small></div><span>›</span></div><div class="settings-row"><div><strong>Daily reminder</strong><small>Off</small></div><span>›</span></div></div>
+                <div class="section-label">ABOUT</div><div class="settings-list"><div class="settings-row"><span>Safety & wellbeing</span><span>›</span></div><div class="settings-row"><span>Privacy</span><span>›</span></div><div class="settings-row danger"><span>Delete local history</span></div></div>
+              </section>
+
+              <div class="sheet" id="healthSheet" aria-hidden="true"><div class="sheet-card"><div class="system-label">SYSTEM HANDOFF PREVIEW</div><h4>Connect Health & your wearable</h4><p>The shipped app writes completed breathing sessions and requests read-only access—one category at a time—to heart rate, HRV, resting heart rate, respiratory rate, blood oxygen, and sleep through Apple HealthKit or Android Health Connect. Supported watches and trackers sync there; no direct device connection is required. Session readings appear only when timestamped heart or respiratory samples overlap the practice window; delayed and latest historical samples are labeled separately. Guided pace remains separate from measured breath rate.</p><button class="primary" id="allowHealth">Return as allowed</button><button class="text-btn" id="dismissHealth" style="width:100%">Not now</button></div></div>
+            </div>
+          </div>
+
+          <aside class="notes" aria-live="polite">
+            <div class="note-eyebrow" id="noteEyebrow">FIRST USE · STEP 1 OF 3</div>
+            <h3 id="noteTitle">Lead with relief, not features.</h3>
+            <p id="noteBody">The opening gives one clear promise and one action. No account prompt, health permission, plan picker, or tutorial carousel before the user understands the value.</p>
+            <div class="rationale" id="rationale">
+              <div class="rationale-item"><b>01</b><div><strong>Short onboarding</strong><p>Three screens establish value, safety, and cue preferences without delaying practice.</p></div></div>
+              <div class="rationale-item"><b>02</b><div><strong>Accessible from the start</strong><p>Tones, haptics, and reduced motion are presented as equal ways to practice in the test build.</p></div></div>
+              <div class="rationale-item"><b>03</b><div><strong>No premature permission</strong><p>Health access appears after a completed session, when its benefit is concrete.</p></div></div>
+            </div>
+            <div class="prototype-tip">Tip: choose another journey above, or continue using the buttons inside the phone.</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="blueprint" id="flow">
+      <div class="wrap">
+        <div class="kicker">Core flow</div><h2>Two taps—or tune every phase</h2><p class="blueprint-intro">The returning-user path keeps 4–4–4–4 ready, while custom inhale, hold, exhale, and hold timing remains directly editable without a separate setup screen.</p>
+        <div class="flow-map" aria-label="Returning user flow">
+          <div class="flow-node"><strong>Open</strong><span>Default or last pattern</span></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Customize</strong><span>Optional phase edits</span></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Begin</strong><span>Primary action</span></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Practice</strong><span>Guidance + optional HR / breath samples</span></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Complete</strong><span>Timing + insights</span></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Health</strong><span>Session + available samples</span></div>
+        </div>
+        <div class="blue-grid">
+          <article class="blue-card"><h3>Custom, not complicated</h3><ul><li>5-minute 4–4–4–4 is ready immediately</li><li>Each of four phases adjusts independently</li><li>4–4–6–4 is available as a one-tap preset</li><li>Cycle count and guided pace recalculate instantly</li></ul></article>
+          <article class="blue-card"><h3>Safe interruption</h3><ul><li>Pause is always reachable with one tap</li><li>Resume restarts the interrupted phase</li><li>End is present but visually secondary</li><li>App backgrounding enters a clear paused state</li></ul></article>
+          <article class="blue-card"><h3>Health context, by consent</h3><ul><li>Practice works fully without a wearable</li><li>HealthKit and Health Connect aggregate supported devices</li><li>HR, HRV, resting HR, breath rate, SpO₂, and sleep are read-only</li><li>Missing samples stay unavailable—never estimated</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="screens-section" id="screens">
+      <div class="wrap"><div class="kicker">MVP screen inventory</div><h2>Seven surfaces, complete states</h2>
+        <div class="screen-grid">
+          <article class="screen-card"><div class="num">01</div><h3>Onboarding</h3><p>Value, safety, and test-build preferences for tones and haptics. The final action lands on a ready-to-start home.</p><span class="state">FIRST RUN</span></article>
+          <article class="screen-card"><div class="num">02</div><h3>Home</h3><p>One primary action, duration presets, and independent controls for inhale, hold, exhale, and hold.</p><span class="state">DEFAULT + CUSTOM</span></article>
+          <article class="screen-card"><div class="num">03</div><h3>Practice</h3><p>Phase, count, pause, timer-derived pace, and supported-device heart-rate and respiratory-rate samples during the session.</p><span class="state">LIVE + DELAYED + UNAVAILABLE</span></article>
+          <article class="screen-card"><div class="num">04</div><h3>Completion</h3><p>Duration, pattern, guided pace, measured respiratory-rate summary, and before-vs-after heart rate from session samples.</p><span class="state">SESSION SAMPLES + GAPS</span></article>
+          <article class="screen-card"><div class="num">05</div><h3>Progression</h3><p>Seven- and 30-day trends for resting HR, HRV, and mindful minutes, plus session deltas, pattern totals, and streaks.</p><span class="state">CONNECTED + NO DATA</span></article>
+          <article class="screen-card"><div class="num">06</div><h3>History</h3><p>Reverse-chronological sessions with timing pattern, sync status, and available before-vs-after heart rate.</p><span class="state">EMPTY + POPULATED</span></article>
+          <article class="screen-card"><div class="num">07</div><h3>Settings</h3><p>Cues, accessibility, per-category health permissions, reminder, safety, privacy, and local deletion.</p><span class="state">CONNECTED + DENIED</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="handoff" id="handoff">
+      <div class="wrap handoff-grid">
+        <div><div class="kicker">Design handoff</div><h2>Rules that survive implementation</h2><p>These are the non-negotiable interaction details to carry into the React Native build.</p></div>
+        <div class="rules">
+          <div class="rule"><strong>Typography</strong><p>Respect Dynamic Type. Never truncate a phase label, countdown, safety message, or primary action.</p></div>
+          <div class="rule"><strong>Contrast</strong><p>Maintain WCAG AA. The practice screen uses bright type on deep green; phase meaning never depends on color alone.</p></div>
+          <div class="rule"><strong>Motion</strong><p>The breathing form expands and contracts slowly. With reduced motion, hold the shape still and retain the number, label, tone, and haptic.</p></div>
+          <div class="rule"><strong>Haptics</strong><p>Use distinct but gentle phase-boundary patterns. Unsupported devices fail silently; haptics never become required.</p></div>
+          <div class="rule"><strong>Guidance rollout</strong><p>Keep the test build to tones and haptics. After pacing and cue comprehension are validated, record the phase prompts, add voice as an optional cue, regression-test all cue combinations, then launch.</p></div>
+          <div class="rule"><strong>Timer</strong><p>Store four independent phase durations. Animation reads the timer state; it does not own it. Recalculate cycles and guided breaths per minute from the full pattern.</p></div>
+          <div class="rule"><strong>Health layer</strong><p>Read wearable data through HealthKit on iOS and Health Connect on Android. Do not add direct Apple Watch, Fitbit, Pixel Watch, or Galaxy Watch SDKs for MVP.</p></div>
+          <div class="rule"><strong>Indicators</strong><p>Request heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep as separate read-only categories. Store timestamped heart and respiratory samples that overlap the practice window; label them live or delayed. Show a latest historical sample separately, never as a session measurement.</p></div>
+          <div class="rule"><strong>Progression</strong><p>Offer 7- and 30-day views for resting HR, HRV, and mindful minutes. Compute before/after HR, pattern totals, and streaks only from available records; render gaps as gaps.</p></div>
+          <div class="rule"><strong>Permissions</strong><p>Explain each read category and the breathing-session write scope before the native prompt. Denial or missing wearable data never blocks practice.</p></div>
+          <div class="rule"><strong>Copy</strong><p>Say “practice,” “session,” and “wellbeing.” Avoid treatment claims, guilt, productivity pressure, and language that judges consistency.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap">Test build: tones + haptics · Launch build: optional recorded voice · Custom four-phase timing · HealthKit and Health Connect insights.</div></footer>
+
+  <script>
+    const screens=[...document.querySelectorAll('.screen')];
+    const tabs=[...document.querySelectorAll('.flow-tab')];
+    const noteData={
+      welcome:['FIRST USE · STEP 1 OF 3','Lead with relief, not features.','The opening gives one clear promise and one action. No account prompt, health permission, plan picker, or tutorial carousel before the user understands the value.'],
+      safety:['FIRST USE · STEP 2 OF 3','Safety belongs in the flow.','A short, readable caution appears before practice. It is clear without feeling clinical, and remains available later in Settings.'],
+      cues:['FIRST USE · STEP 3 OF 3','Test the simplest useful guidance.','The test build exposes tones, haptics, and reduced motion—no voice option yet. Recorded prompts are added only after pacing and cue comprehension are validated.'],
+      home:['RETURNING USER','Make the useful default flexible.','Start with 4–4–4–4, use the one-tap 4–4–6–4 preset, or tune each phase independently from 1 to 15 seconds. The complete pattern remains visible before “Begin.”'],
+      active:['ACTIVE SESSION','Guide the breath; sample physiology only when available.','The app calculates guided pace from the selected timing and separately stores timestamped heart-rate and respiratory-rate samples supplied during the session by HealthKit or Health Connect. Each reading is labeled live, delayed, or unavailable.'],
+      paused:['INTERRUPTION STATE','A pause should feel safe, not broken.','The app names the state, explains what resume will do, and keeps both resume and end available without a confirmation trap.'],
+      complete:['POST-SESSION','Keep measured and calculated data distinct.','The session record summarizes any measured respiratory-rate samples and before-vs-after heart-rate samples captured within the practice window. A latest historical reading is never mislabeled as a session measurement.'],
+      insights:['PROGRESSION','Turn aggregated health data into useful context.','With permission, HealthKit or Health Connect supplies relevant wearable data. Seven- and 30-day trends, per-session heart-rate change, pattern totals, and streaks degrade to a clear connect state when data is missing.'],
+      history:['LOCAL HISTORY','Support return without manufacturing guilt.','The empty state invites a first practice. The populated state records the chosen timing pattern alongside duration and cycles.'],
+      settings:['PREFERENCES','Keep consent and control close.','Cue controls, accessibility, health and wearable permissions, reminder, safety, privacy, and deletion live in one predictable place.']
+    };
+    let timer=null,phaseIndex=0,count=4;
+    let duration=5,phaseValues=[4,4,4,4];
+    const phaseNames=['Inhale','Hold','Exhale','Hold'];
+    const patternText=()=>phaseValues.join('–');
+    const cycleSeconds=()=>phaseValues.reduce((sum,value)=>sum+value,0);
+    const totalCycles=()=>Math.floor(duration*60/cycleSeconds());
+    const guidedRate=()=>Math.round((60/cycleSeconds())*10)/10;
+    function syncSummary(){
+      document.getElementById('summaryDuration').textContent=`${duration}:00`;
+      document.getElementById('summaryCycles').textContent=totalCycles();
+      document.getElementById('summaryGuidedRate').textContent=`${guidedRate()} / min`;
+      document.querySelector('#summaryGuidedRate + small').textContent=`From ${patternText()} timing`;
+    }
+    function showScreen(id){
+      screens.forEach(s=>s.classList.toggle('active',s.dataset.id===id));
+      tabs.forEach(t=>t.classList.toggle('active',t.dataset.screen===id || (id==='safety'||id==='cues')&&t.dataset.screen==='welcome' || id==='paused'&&t.dataset.screen==='active'));
+      const d=noteData[id]||noteData.home;
+      document.getElementById('noteEyebrow').textContent=d[0];document.getElementById('noteTitle').textContent=d[1];document.getElementById('noteBody').textContent=d[2];
+      if(id==='complete')syncSummary();
+      if(id!=='active')stopPractice();
+    }
+    document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.go)));
+    tabs.forEach(b=>b.addEventListener('click',()=>{showScreen(b.dataset.screen);document.getElementById('prototype').scrollIntoView({behavior:'smooth',block:'start'})}));
+    document.querySelectorAll('.switch').forEach(b=>b.addEventListener('click',()=>{const on=b.classList.toggle('on');b.setAttribute('aria-pressed',String(on))}));
+    function refreshSetup(){
+      document.getElementById('durationValue').textContent=duration;
+      document.getElementById('cycleValue').textContent=totalCycles();
+      document.getElementById('patternValue').textContent=patternText();
+      document.getElementById('practicePattern').textContent=patternText();
+      document.getElementById('practiceCyclesTotal').textContent=totalCycles();
+      document.getElementById('practiceDuration').textContent=`${duration}:00`;
+      document.getElementById('guidedRate').textContent=`${guidedRate()} / min`;
+      document.querySelectorAll('[data-phase-value]').forEach(el=>el.textContent=phaseValues[+el.dataset.phaseValue]);
+      syncSummary();
+    }
+    document.querySelectorAll('.duration').forEach(b=>b.addEventListener('click',()=>{duration=+b.dataset.duration;document.querySelectorAll('.duration').forEach(x=>x.classList.toggle('selected',x===b));refreshSetup()}));
+    document.querySelectorAll('[data-phase][data-delta]').forEach(b=>b.addEventListener('click',()=>{const index=+b.dataset.phase;phaseValues[index]=Math.max(1,Math.min(15,phaseValues[index]+(+b.dataset.delta)));refreshSetup()}));
+    document.getElementById('customPreset').addEventListener('click',()=>{phaseValues=[4,4,6,4];refreshSetup()});
+    function updatePractice(){const s=document.getElementById('activeScreen');document.getElementById('phaseName').textContent=phaseNames[phaseIndex];document.getElementById('phaseNumber').textContent=phaseIndex+1;document.getElementById('breathCount').textContent=count;s.classList.remove('phase-inhale','phase-exhale');if(phaseIndex===0)s.classList.add('phase-inhale');if(phaseIndex===2)s.classList.add('phase-exhale');document.getElementById('practiceCyclesTotal').textContent=totalCycles();}
+    function startPractice(){stopPractice();phaseIndex=0;count=phaseValues[0];document.getElementById('practiceCycle').textContent='1';refreshSetup();updatePractice();showScreen('active');timer=setInterval(()=>{count--;if(count<1){phaseIndex=(phaseIndex+1)%4;count=phaseValues[phaseIndex];if(phaseIndex===0){const c=document.getElementById('practiceCycle');c.textContent=Math.min(+c.textContent+1,99)}}updatePractice()},1000)}
+    function stopPractice(){if(timer){clearInterval(timer);timer=null}}
+    document.querySelectorAll('[data-start]').forEach(b=>b.addEventListener('click',startPractice));
+    document.getElementById('pauseButton').addEventListener('click',()=>showScreen('paused'));
+    document.querySelector('[data-resume]').addEventListener('click',startPractice);
+    const insightData={
+      resting:[74,73,73,72,72,71,72,71,70,71,70,69,70,69,68,69,68,68,67,68,67,67,66,67,66,66,65,66,65,65],
+      hrv:[31,33,32,34,35,34,36,35,37,36,38,37,39,38,40,39,41,40,42,41,43,42,44,43,45,44,46,45,47,46],
+      mindful:[0,5,0,8,5,0,10,5,7,0,5,12,5,0,8,10,5,0,12,5,8,10,0,12,5,15,8,10,5,12]
+    };
+    const sessionSamples=[
+      {dayOffset:0,pattern:'4–4–4–4',minutes:5,before:74,after:69},{dayOffset:1,pattern:'4–4–6–4',minutes:5,before:72,after:67},
+      {dayOffset:2,pattern:'4–4–4–4',minutes:8,before:73,after:68},{dayOffset:3,pattern:'4–4–4–4',minutes:5,before:70,after:66}
+    ];
+    function lineChart(values){
+      const w=270,h=62,left=25,right=4,top=6,bottom=13,min=Math.min(...values),max=Math.max(...values),range=Math.max(1,max-min);
+      const points=values.map((value,index)=>`${left+(index/(values.length-1))*(w-left-right)},${top+((max-value)/range)*(h-top-bottom)}`).join(' ');
+      const circles=values.length<=7?values.map((value,index)=>`<circle class="chart-point" cx="${left+(index/(values.length-1))*(w-left-right)}" cy="${top+((max-value)/range)*(h-top-bottom)}" r="2"/>`).join(''):'';
+      return `<line class="chart-axis" x1="${left}" y1="${top}" x2="${left}" y2="${h-bottom}"/><line class="chart-axis" x1="${left}" y1="${h-bottom}" x2="${w-right}" y2="${h-bottom}"/><text class="chart-label" x="1" y="${top+3}">${max}</text><text class="chart-label" x="1" y="${h-bottom+3}">${min}</text><text class="chart-label" x="${left}" y="${h-1}">Earlier</text><text class="chart-label" x="${w-28}" y="${h-1}">Today</text><polyline class="chart-line" points="${points}"/>${circles}`;
+    }
+    function barChart(values){
+      const w=270,h=62,left=25,right=4,top=6,bottom=13,max=Math.max(...values),plotH=h-top-bottom,gap=2,barW=(w-left-right)/values.length-gap;
+      const bars=values.map((value,index)=>{const height=max?value/max*plotH:0;return `<rect class="chart-bar" x="${left+index*(barW+gap)}" y="${h-bottom-height}" width="${Math.max(1,barW)}" height="${height}"/>`}).join('');
+      return `<line class="chart-axis" x1="${left}" y1="${top}" x2="${left}" y2="${h-bottom}"/><line class="chart-axis" x1="${left}" y1="${h-bottom}" x2="${w-right}" y2="${h-bottom}"/><text class="chart-label" x="1" y="${top+3}">${max}</text><text class="chart-label" x="8" y="${h-bottom+3}">0</text><text class="chart-label" x="${left}" y="${h-1}">Earlier</text><text class="chart-label" x="${w-28}" y="${h-1}">Today</text>${bars}`;
+    }
+    function renderInsights(days){
+      const take=series=>series.slice(-days);
+      document.getElementById('rhrChart').setAttribute('viewBox','0 0 270 62');document.getElementById('rhrChart').innerHTML=lineChart(take(insightData.resting));
+      document.getElementById('hrvChart').setAttribute('viewBox','0 0 270 62');document.getElementById('hrvChart').innerHTML=lineChart(take(insightData.hrv));
+      document.getElementById('mindfulChart').setAttribute('viewBox','0 0 270 62');document.getElementById('mindfulChart').innerHTML=barChart(take(insightData.mindful));
+      const avg=sessionSamples.reduce((sum,s)=>sum+(s.after-s.before),0)/sessionSamples.length;
+      const totals=sessionSamples.reduce((all,s)=>{all[s.pattern]=(all[s.pattern]||0)+s.minutes;return all},{});
+      const top=Object.entries(totals).sort((a,b)=>b[1]-a[1])[0];
+      const completedDays=[...new Set(sessionSamples.map(s=>s.dayOffset))].sort((a,b)=>a-b);let streak=0;while(completedDays.includes(streak))streak++;
+      document.getElementById('avgHrChange').textContent=`${avg} bpm`;
+      document.getElementById('topPattern').textContent=`${top[0]} · ${top[1]}m`;
+      document.getElementById('streakValue').textContent=`${streak} days`;
+    }
+    document.querySelectorAll('.period-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.period-tab').forEach(x=>x.classList.toggle('active',x===b));renderInsights(+b.dataset.period)}));
+    document.querySelectorAll('[data-insight-state]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-insight-state]').forEach(x=>x.classList.toggle('active',x===b));const empty=b.dataset.insightState==='empty';document.getElementById('insightsSample').classList.toggle('hidden',empty);document.getElementById('insightsEmpty').classList.toggle('show',empty)}));
+    function openHealthSheet(){const s=document.getElementById('healthSheet');s.classList.add('open');s.setAttribute('aria-hidden','false')}
+    document.getElementById('healthButton').addEventListener('click',openHealthSheet);
+    document.getElementById('insightsConnect').addEventListener('click',openHealthSheet);
+    function closeSheet(){const s=document.getElementById('healthSheet');s.classList.remove('open');s.setAttribute('aria-hidden','true')}
+    document.getElementById('dismissHealth').addEventListener('click',closeSheet);
+    document.getElementById('allowHealth').addEventListener('click',()=>{closeSheet();showScreen('home')});
+    document.querySelectorAll('.history-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.history-tab').forEach(x=>x.classList.toggle('active',x===b));const sample=b.dataset.history==='sample';document.getElementById('emptyHistory').style.display=sample?'none':'grid';document.getElementById('sampleHistory').classList.toggle('show',sample)}));
+    refreshSetup();renderInsights(7);
+  </script>
+</body>
+</html>

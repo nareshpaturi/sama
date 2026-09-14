@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href="data:," />
+  <title>MVP Product Specification</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Libre+Franklin:wght@600;700;800&display=swap');
+    :root{
+      --ink:#15211d;--muted:#58635e;--line:#d7ddd8;--paper:#f7f8f5;--white:#fff;
+      --sage:#21624f;--sage-2:#dcebe4;--mint:#edf5f0;--rust:#a94e2d;--sand:#f0e6db;
+      --amber:#9a6b16;--slate:#344b5b;--shadow:0 16px 40px rgba(21,33,29,.08);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:auto} body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.55}
+    button,a{font:inherit} a{color:inherit} button{color:inherit}
+    .page{max-width:1480px;margin:auto;display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+    aside{position:sticky;top:0;height:100vh;padding:28px 22px;border-right:1px solid var(--line);background:#f1f3ef;overflow:auto}
+    .doc-meta{font:500 11px/1.4 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin-bottom:26px}
+    .version{display:flex;align-items:center;gap:8px;margin-bottom:22px}.version b{font-size:12px;background:var(--ink);color:white;padding:4px 8px;border-radius:3px}.version span{font-size:12px;color:var(--muted)}
+    nav{display:grid;gap:3px}.nav-link{text-decoration:none;padding:8px 10px;border-radius:5px;font-size:13px;color:#46534d;border-left:3px solid transparent}.nav-link:hover,.nav-link.active{background:var(--white);color:var(--ink);border-left-color:var(--sage)}
+    .aside-foot{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+    main{min-width:0;background:var(--white)}
+    .hero{padding:68px clamp(28px,6vw,88px) 54px;border-bottom:1px solid var(--line);background:linear-gradient(110deg,#fff 0%,#fff 62%,#edf5f0 100%);position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;right:-85px;top:-100px;width:330px;height:330px;border:42px solid rgba(33,98,79,.08);border-radius:50%}
+    .eyebrow{font:500 12px/1.4 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--sage);margin-bottom:16px}
+    h1{font:800 clamp(36px,6vw,68px)/.98 'Libre Franklin',sans-serif;letter-spacing:-.05em;max-width:820px;margin:0 0 22px;position:relative;z-index:1}
+    .lede{font-size:19px;line-height:1.55;max-width:760px;color:#3b4742;margin:0 0 30px;position:relative;z-index:1}
+    .hero-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);max-width:900px;position:relative;z-index:1}.hero-stat{background:white;padding:16px}.hero-stat strong{display:block;font:700 23px 'Libre Franklin',sans-serif;margin-bottom:3px}.hero-stat span{font-size:12px;color:var(--muted)}
+    .content{max-width:1050px;padding:24px clamp(28px,6vw,88px) 100px}
+    section{scroll-margin-top:22px;padding:52px 0;border-bottom:1px solid var(--line)}section:last-child{border-bottom:0}
+    .section-head{display:grid;grid-template-columns:70px 1fr;gap:14px;align-items:start;margin-bottom:28px}.section-no{font:500 12px 'IBM Plex Mono';color:var(--sage);padding-top:8px}.section-head h2{font:800 clamp(27px,4vw,40px)/1.08 'Libre Franklin';letter-spacing:-.035em;margin:0 0 8px}.section-head p{color:var(--muted);margin:0;max-width:700px}
+    h3{font:700 19px/1.3 'Libre Franklin';margin:34px 0 12px;letter-spacing:-.01em}h4{margin:0 0 5px;font-size:15px}p{margin:0 0 14px}.small{font-size:12px;color:var(--muted)}
+    .callout{background:var(--ink);color:white;padding:26px 28px;margin:24px 0;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;border-radius:4px}.callout .mark{font:700 24px 'IBM Plex Mono';color:#8cd1b6}.callout strong{display:block;font:700 17px 'Libre Franklin';margin-bottom:5px}.callout p{margin:0;color:#d7e1dc}
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--mint);color:var(--sage);border:1px solid #c9ddd2}.pill.out{background:#f3f1ee;color:#666;border-color:#ddd8d0}
+    .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.three-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .card{border:1px solid var(--line);border-radius:7px;padding:20px;background:#fff}.card.tint{background:var(--mint);border-color:#cbded4}.card h3{margin:0 0 10px}.card p:last-child{margin:0}
+    .card-kicker{font:500 10px 'IBM Plex Mono';letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+    .list{list-style:none;padding:0;margin:0}.list li{position:relative;padding:8px 0 8px 25px;border-bottom:1px solid rgba(0,0,0,.07)}.list li:last-child{border-bottom:0}.list li:before{content:"";position:absolute;left:2px;top:15px;width:8px;height:8px;border:2px solid var(--sage);border-radius:50%}.list.compact li{padding-top:5px;padding-bottom:5px;font-size:14px}.list.compact li:before{top:12px}
+    .no-list li:before{border-color:var(--rust);border-radius:0;transform:rotate(45deg);width:7px;height:7px}
+    .scope-table{border:1px solid var(--line);border-radius:7px;overflow:hidden}.scope-row{display:grid;grid-template-columns:1.4fr .7fr 2fr;gap:18px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:start}.scope-row:last-child{border-bottom:0}.scope-row.header{background:#eef1ed;font:500 11px 'IBM Plex Mono';letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.tag{display:inline-block;font:500 10px 'IBM Plex Mono';padding:4px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}.tag.must{background:var(--sage-2);color:var(--sage)}.tag.should{background:var(--sand);color:var(--rust)}.tag.later{background:#edf0f2;color:var(--slate)}
+    .flow{display:flex;align-items:stretch;gap:8px;margin:22px 0}.step{flex:1;min-width:0;border:1px solid var(--line);padding:14px;border-radius:6px;background:#fff}.step b{display:block;font:500 10px 'IBM Plex Mono';color:var(--sage);margin-bottom:7px}.step span{font-size:13px}.arrow{display:grid;place-items:center;color:#88928d}
+    .state-machine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0}.phase{padding:17px 12px;text-align:center;border:1px solid var(--line);position:relative}.phase:after{content:"→";position:absolute;right:-9px;top:calc(50% - 11px);z-index:2;background:white;color:var(--sage)}.phase:last-child:after{content:"↻";right:5px;top:4px;background:transparent}.phase b{display:block;font:700 15px 'Libre Franklin';margin-bottom:4px}.phase small{font:400 11px 'IBM Plex Mono';color:var(--muted)}.phase.inhale{background:#e7f3ed}.phase.hold1{background:#f0eee7}.phase.exhale{background:#e5eef0}.phase.hold2{background:#f4eae5}
+    .spec{display:grid;grid-template-columns:180px 1fr;border-top:1px solid var(--line)}.spec dt,.spec dd{margin:0;padding:13px 0;border-bottom:1px solid var(--line)}.spec dt{font:500 12px 'IBM Plex Mono';color:var(--muted);padding-right:20px}.spec dd{font-size:14px}
+    .screen{border:1px solid var(--line);border-radius:7px;padding:18px;display:grid;grid-template-columns:56px 1fr;gap:14px}.screen-num{width:42px;height:42px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font:500 12px 'IBM Plex Mono'}.screen h4{font-size:16px}.screen p{font-size:13px;color:var(--muted);margin:0}.screens{display:grid;gap:10px}
+    .criteria{counter-reset:item;list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}.criteria li{counter-increment:item;padding:12px 0 12px 42px;border-bottom:1px solid var(--line);position:relative;font-size:14px}.criteria li:before{content:counter(item,decimal-leading-zero);position:absolute;left:0;top:13px;font:500 11px 'IBM Plex Mono';color:var(--sage)}
+    .code{background:#17221e;color:#dce8e1;padding:20px;border-radius:5px;font:400 12px/1.65 'IBM Plex Mono';white-space:pre-wrap;overflow-wrap:anywhere}
+    details{border-top:1px solid var(--line)}details:last-child{border-bottom:1px solid var(--line)}summary{cursor:pointer;padding:15px 32px 15px 0;font-weight:600;position:relative;list-style:none}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:8px;font:500 18px 'IBM Plex Mono';color:var(--sage)}details[open] summary:after{content:"−"}details .detail-body{padding:0 0 18px;color:#47534e;font-size:14px}
+    .milestones{display:grid;gap:0}.milestone{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}.milestone:first-child{border-top:1px solid var(--line)}.week{font:500 11px 'IBM Plex Mono';color:var(--sage);text-transform:uppercase}.milestone h4{margin-bottom:5px}.milestone p{font-size:14px;color:var(--muted);margin:0}
+    .decision{display:grid;grid-template-columns:1fr auto;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}.decision b{display:block;margin-bottom:3px}.decision p{font-size:13px;color:var(--muted);margin:0}.decision .choice{font:500 11px 'IBM Plex Mono';color:var(--sage);background:var(--mint);padding:6px 9px;border-radius:3px;white-space:nowrap}
+    .footer-note{padding:30px;background:#edf2ee;border-radius:7px;margin-top:30px;font-size:14px}.footer-note strong{display:block;font-family:'Libre Franklin';margin-bottom:6px}
+    .mobile-menu{display:none;position:sticky;top:0;z-index:20;background:rgba(247,248,245,.96);border-bottom:1px solid var(--line);padding:10px 16px;backdrop-filter:blur(8px)}.mobile-menu select{width:100%;border:1px solid var(--line);background:white;padding:10px;border-radius:5px;color:var(--ink)}
+    @media(max-width:900px){.page{display:block}aside{display:none}.mobile-menu{display:block}.hero{padding:48px 24px 38px}.hero-grid{grid-template-columns:repeat(2,1fr)}.content{padding:12px 24px 72px}.section-head{grid-template-columns:48px 1fr}.three-col{grid-template-columns:1fr}.scope-row{grid-template-columns:1fr}.scope-row.header{display:none}.scope-row>div:nth-child(2){order:-1}.flow{display:grid;grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:16px}.state-machine{grid-template-columns:repeat(2,1fr)}.phase:nth-child(2):after{content:"↓";right:8px;top:auto;bottom:-14px}.spec{grid-template-columns:135px 1fr}}
+    @media(max-width:600px){.hero h1{font-size:40px}.hero-grid{grid-template-columns:1fr 1fr}.hero-stat{padding:13px}.hero-stat strong{font-size:19px}.two-col{grid-template-columns:1fr}.section-head{display:block}.section-no{margin-bottom:8px}.callout{grid-template-columns:1fr;padding:22px}.scope-row{gap:8px}.state-machine{grid-template-columns:1fr}.phase:after,.phase:nth-child(2):after{content:"↓";right:8px;top:auto;bottom:-15px}.phase:last-child:after{content:"↻";top:4px;bottom:auto}.spec{display:block}.spec dt{padding-bottom:3px;border-bottom:0}.spec dd{padding-top:2px}.milestone{grid-template-columns:1fr;gap:5px}.decision{grid-template-columns:1fr}.decision .choice{justify-self:start}.content{padding-left:19px;padding-right:19px}}
+    @media print{aside,.mobile-menu{display:none}.page{display:block}.hero{padding:32px 0;background:white}.content{padding:0;max-width:none}section{break-inside:avoid;padding:30px 0}.card,.callout,.scope-table{break-inside:avoid}.hero:after{display:none}}
+  </style>
+</head>
+<body>
+<div class="page">
+  <aside>
+    <div class="doc-meta">Product requirements document</div>
+    <div class="version"><b>v1.3</b><span>Beta → launch</span></div>
+    <nav id="sideNav">
+      <a class="nav-link active" href="#summary">Executive summary</a>
+      <a class="nav-link" href="#scope">MVP boundary</a>
+      <a class="nav-link" href="#experience">Core experience</a>
+      <a class="nav-link" href="#requirements">Functional requirements</a>
+      <a class="nav-link" href="#health">Health integration</a>
+      <a class="nav-link" href="#architecture">Technical architecture</a>
+      <a class="nav-link" href="#data">Data & privacy</a>
+      <a class="nav-link" href="#quality">Quality bar</a>
+      <a class="nav-link" href="#delivery">Delivery plan</a>
+      <a class="nav-link" href="#launch">Launch checklist</a>
+      <a class="nav-link" href="#decisions">Decisions</a>
+    </nav>
+    <div class="aside-foot">One codebase · iOS + Android<br>Core breathing stays free.</div>
+  </aside>
+
+  <main>
+    <div class="mobile-menu">
+      <select id="sectionSelect" aria-label="Jump to section">
+        <option value="summary">Executive summary</option><option value="scope">MVP boundary</option><option value="experience">Core experience</option><option value="requirements">Functional requirements</option><option value="health">Health integration</option><option value="architecture">Technical architecture</option><option value="data">Data & privacy</option><option value="quality">Quality bar</option><option value="delivery">Delivery plan</option><option value="launch">Launch checklist</option><option value="decisions">Decisions</option>
+      </select>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">Pranayama app · MVP specification</div>
+      <h1>Box breathing that gets out of the way.</h1>
+      <p class="lede">A focused, free breathing companion for iOS and Android. The closed beta guides customizable four-phase practice with tones and haptics; after testing, recorded voice guidance is added for public launch. With permission, the app turns available Apple Health or Health Connect data into simple, non-medical progress views.</p>
+      <div class="hero-grid">
+        <div class="hero-stat"><strong>4</strong><span>independent phase timers</span></div>
+        <div class="hero-stat"><strong>2</strong><span>mobile platforms</span></div>
+        <div class="hero-stat"><strong>0</strong><span>accounts required</span></div>
+        <div class="hero-stat"><strong>Free</strong><span>core experience</span></div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section id="summary">
+        <div class="section-head"><div class="section-no">01</div><div><h2>Executive summary</h2><p>What ships, who it serves, and how to tell if it works.</p></div></div>
+        <div class="callout"><div class="mark">→</div><div><strong>Product promise</strong><p>Open the app, begin a calm four-phase session in two taps, or set each phase independently—for example 4–4–6–4. Finish without watching the screen. With permission, the session and any available biometric samples are connected to Apple Health or Health Connect.</p></div></div>
+        <div class="two-col">
+          <div class="card tint"><div class="card-kicker">Primary user</div><h3>The stressed beginner</h3><p>Wants a quick, private way to calm down without learning a meditation system or committing to a subscription.</p></div>
+          <div class="card"><div class="card-kicker">Secondary user</div><h3>The regular practitioner</h3><p>Already knows box breathing and wants adjustable timing, reliable cues, and health-app logging.</p></div>
+        </div>
+        <h3>Jobs to be done</h3>
+        <ul class="list">
+          <li>When I feel stressed, help me start a guided breathing cycle immediately.</li>
+          <li>When I cannot watch the screen, guide each transition with sound or haptics.</li>
+          <li>When I complete a practice, let me record it alongside my other wellness activity.</li>
+          <li>When compatible wearable data is available, help me see simple relationships between practice, heart rate, recovery indicators, sleep, and consistency—without medical claims.</li>
+          <li>When I return, remember my preferred four phase timings and cue settings on this device.</li>
+        </ul>
+        <h3>MVP success signals</h3>
+        <div class="three-col">
+          <div class="card"><div class="card-kicker">Activation</div><h3>≥ 60%</h3><p class="small">of first-time users start a session after onboarding.</p></div>
+          <div class="card"><div class="card-kicker">Completion</div><h3>≥ 70%</h3><p class="small">of started sessions reach the final cycle.</p></div>
+          <div class="card"><div class="card-kicker">Reliability</div><h3>≥ 99.5%</h3><p class="small">crash-free sessions during launch validation.</p></div>
+        </div>
+        <p class="small" style="margin-top:12px">Targets are initial product hypotheses, not market benchmarks. Revisit after the first 500 opted-in usage sessions.</p>
+      </section>
+
+      <section id="scope">
+        <div class="section-head"><div class="section-no">02</div><div><h2>MVP boundary</h2><p>A deliberately narrow first release: excellent at box breathing, not a content library.</p></div></div>
+        <div class="pill-row"><span class="pill">Must ship</span><span class="pill">Should ship if stable</span><span class="pill out">Explicitly later</span></div>
+        <div class="scope-table" role="table" aria-label="MVP scope">
+          <div class="scope-row header" role="row"><div>Capability</div><div>Priority</div><div>Definition</div></div>
+          <div class="scope-row" role="row"><div><strong>Guided box breathing</strong></div><div><span class="tag must">Must</span></div><div>4 phases—inhale, hold, exhale, hold—with animation, distinct non-verbal tones, and haptic cues. The closed beta ships with tones and haptics only.</div></div>
+          <div class="scope-row" role="row"><div><strong>Recorded voice guidance</strong></div><div><span class="tag must">Launch</span></div><div>Add concise, professionally recorded phase prompts after closed-beta testing and before public release. No synthetic voice or live narration.</div></div>
+          <div class="scope-row" role="row"><div><strong>Custom phase timing</strong></div><div><span class="tag must">Must</span></div><div>Set inhale, first hold, exhale, and second hold independently in whole seconds. Default 4–4–4–4; combinations such as 4–4–6–4 are supported.</div></div>
+          <div class="scope-row" role="row"><div><strong>Health session + wearable data</strong></div><div><span class="tag must">Must</span></div><div>Write completed sessions and, through Apple Health or Health Connect only, read permitted heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep data. Never block practice when data is absent.</div></div>
+          <div class="scope-row" role="row"><div><strong>Insights & progression</strong></div><div><span class="tag must">Must</span></div><div>Simple 7-day and 30-day trends, before-vs-after session heart rate, totals by breathing pattern, and practice streaks—without scores, diagnosis, or treatment guidance.</div></div>
+          <div class="scope-row" role="row"><div><strong>Local history</strong></div><div><span class="tag must">Must</span></div><div>Device-only list of completed sessions with date, duration, cycles, and sync status.</div></div>
+          <div class="scope-row" role="row"><div><strong>Accessibility</strong></div><div><span class="tag must">Must</span></div><div>Screen reader labels, reduced motion, high contrast, dynamic text, non-visual cues.</div></div>
+          <div class="scope-row" role="row"><div><strong>Gentle reminders</strong></div><div><span class="tag should">Should</span></div><div>One optional daily local notification at a user-selected time; off by default.</div></div>
+          <div class="scope-row" role="row"><div><strong>Named techniques</strong></div><div><span class="tag later">Later</span></div><div>Technique-specific instruction for 4–7–8, coherent breathing, alternate-nostril guidance, and a reusable routine library. MVP custom timing can reproduce four-phase counts without claiming technique-specific coaching.</div></div>
+          <div class="scope-row" role="row"><div><strong>Accounts & cloud sync</strong></div><div><span class="tag later">Later</span></div><div>No login, social profile, or cross-device sync in v1.</div></div>
+          <div class="scope-row" role="row"><div><strong>Medical interpretation</strong></div><div><span class="tag later">Later</span></div><div>No diagnosis, therapy claims, readiness scoring, personalized treatment, or clinical advice. These are outside the consumer wellness product boundary.</div></div>
+          <div class="scope-row" role="row"><div><strong>Payments</strong></div><div><span class="tag later">Later</span></div><div>No ads, subscription, purchase flow, or donation prompt in launch MVP.</div></div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-head"><div class="section-no">03</div><div><h2>Core experience</h2><p>The shortest safe path from intent to a completed session.</p></div></div>
+        <h3>First-use flow</h3>
+        <div class="flow">
+          <div class="step"><b>01</b><span>Welcome + one-sentence purpose</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>Safety note and “Continue”</span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>Choose cues; health sync stays optional</span></div><div class="arrow">→</div>
+          <div class="step"><b>04</b><span>Home with 5-minute session ready</span></div>
+        </div>
+        <h3>Returning-user flow</h3>
+        <div class="flow">
+          <div class="step"><b>01</b><span>Open to previous settings</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>Tap “Begin”</span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>3-second settling countdown</span></div><div class="arrow">→</div>
+          <div class="step"><b>04</b><span>Practice, then completion summary</span></div>
+        </div>
+        <h3>Breathing state machine</h3>
+        <div class="state-machine" aria-label="Box breathing phases">
+          <div class="phase inhale"><b>Inhale</b><small>default 4 sec</small></div>
+          <div class="phase hold1"><b>Hold</b><small>default 4 sec</small></div>
+          <div class="phase exhale"><b>Exhale</b><small>default 4 sec</small></div>
+          <div class="phase hold2"><b>Hold</b><small>default 4 sec</small></div>
+        </div>
+        <dl class="spec">
+          <dt>Default session</dt><dd>5 minutes with a 4–4–4–4 profile; continue full cycles until the selected duration is reached.</dd>
+          <dt>Custom timing</dt><dd>Inhale, first hold, exhale, and second hold are each adjustable from 1–20 seconds in whole-second increments. Example: 4–4–6–4. The app remembers the last profile.</dd>
+          <dt>Session options</dt><dd>1, 3, 5, 10, or 15 minutes. Default is 5. A future release may add free-form duration and named routine presets.</dd>
+          <dt>Start</dt><dd>Three-second neutral countdown. Tone and haptic previews are available before beginning; recorded voice is added only after the closed beta.</dd>
+          <dt>Pause</dt><dd>Pause immediately; resume from the start of the interrupted phase after a 3-second countdown.</dd>
+          <dt>End early</dt><dd>Single tap reveals “End session.” Partial sessions are kept locally but are not written to health unless at least 60 seconds elapsed.</dd>
+          <dt>Completion</dt><dd>Soft completion cue, elapsed time, completed cycles, health-write result, “Done,” and “Breathe again.”</dd>
+        </dl>
+        <h3>Screen inventory</h3>
+        <div class="screens">
+          <div class="screen"><div class="screen-num">01</div><div><h4>Onboarding</h4><p>Three short pages: value, safety, cue preferences. Health permission is requested contextually after the first completed session—not on launch.</p></div></div>
+          <div class="screen"><div class="screen-num">02</div><div><h4>Home / session setup</h4><p>Large “Begin” action, session duration, and four independent phase steppers labeled Inhale · Hold · Exhale · Hold. Default 4–4–4–4; last-used values such as 4–4–6–4 are restored.</p></div></div>
+          <div class="screen"><div class="screen-num">03</div><div><h4>Active session</h4><p>Full-screen phase name, countdown, progress ring, elapsed/remaining time, pause, and discreet end control. An optional heart-rate chip appears only when a recent sensor sample is available; guidance never depends on it.</p></div></div>
+          <div class="screen"><div class="screen-num">04</div><div><h4>Completion</h4><p>Duration, cycles, guided breaths per minute, health sync status, and a before-vs-after heart-rate comparison when sufficient samples exist. Missing sensor data is shown honestly, never estimated.</p></div></div>
+          <div class="screen"><div class="screen-num">05</div><div><h4>History</h4><p>Reverse-chronological completed sessions grouped by day, with totals by saved timing profile or named pattern.</p></div></div>
+          <div class="screen"><div class="screen-num">06</div><div><h4>Insights</h4><p>7-day and 30-day views for resting heart rate, HRV, and mindful minutes, plus pattern totals and streaks. If no wearable data is available, show a clear connect-device empty state while practice remains fully available.</p></div></div>
+          <div class="screen"><div class="screen-num">07</div><div><h4>Settings & safety</h4><p>Guidance mode (tones or recorded voice at launch), haptics, reduced motion, reminder, health connection and per-data-type permission status, privacy, and “delete local history.”</p></div></div>
+        </div>
+      </section>
+
+      <section id="requirements">
+        <div class="section-head"><div class="section-no">04</div><div><h2>Functional requirements</h2><p>Testable behavior for the product and engineering team.</p></div></div>
+        <details open><summary>FR-01 · Session configuration</summary><div class="detail-body"><ul class="criteria"><li>Home shows current duration plus inhale, first-hold, exhale, and second-hold values without opening another screen.</li><li>Each phase is independently adjustable from 1–20 seconds using accessible steppers; 4–4–6–4 is a valid profile.</li><li>Changing any value immediately updates cycle length, estimated cycle count, and guided breaths per minute.</li><li>Selections persist locally and restore on the next launch; invalid or free-text values cannot be entered.</li></ul></div></details>
+        <details><summary>FR-02 · Timer accuracy</summary><div class="detail-body"><ul class="criteria"><li>Use a monotonic clock and calculate phase from elapsed time; never rely on chained one-second intervals.</li><li>Visual countdown updates smoothly while tone, voice, or haptic cues fire once per phase boundary.</li><li>After interruption or app resume, reconcile against elapsed wall time and show the correct phase.</li><li>A five-minute foreground session finishes within ±250 ms of its intended duration in device tests.</li></ul></div></details>
+        <details open><summary>FR-03 · Guidance cues</summary><div class="detail-body"><ul class="criteria"><li>The closed beta includes distinct, non-verbal tones for inhale, hold, exhale, and completion, plus independently toggleable haptics.</li><li>Use beta feedback to validate cue timing, clarity, loudness, and whether guidance works without watching the screen before recording voice assets.</li><li>Before public launch, add professionally recorded, concise phase prompts synchronized to the same timer boundaries. Do not use synthetic speech.</li><li>At launch, users can choose tones or recorded voice, and toggle haptics independently; the visual-only path remains available.</li><li>Haptic patterns are recognizable without being startling; unsupported devices degrade silently.</li><li>Respect silent-mode and audio-focus conventions per platform; do not unexpectedly interrupt other audio.</li></ul></div></details>
+        <details><summary>FR-04 · Interruption handling</summary><div class="detail-body"><ul class="criteria"><li>Incoming call, audio interruption, or app backgrounding pauses guidance unless platform-safe background behavior is explicitly implemented and tested.</li><li>Returning shows a clear paused state, never an apparently active but stale timer.</li><li>Force-quit during a session does not create a completed record.</li><li>Screen can remain awake during active guidance when the user permits; normal sleep behavior resumes afterward.</li></ul></div></details>
+        <details><summary>FR-05 · Session history</summary><div class="detail-body"><ul class="criteria"><li>Only completed or intentionally ended sessions are stored.</li><li>Each entry includes start time, actual duration, all four phase values, completed cycles, guided cadence, completion state, health-write status, and available biometric summaries.</li><li>User can delete all local history from Settings after an in-page confirmation step.</li><li>Deleting local history does not delete records already written to Apple Health or Health Connect; explain this before deletion.</li></ul></div></details>
+        <details><summary>FR-06 · Offline behavior</summary><div class="detail-body"><ul class="criteria"><li>Every breathing feature works in airplane mode after install.</li><li>No account, network request, remote content, or server is required to begin or complete a session.</li><li>Health writes queue locally if the platform API is temporarily unavailable and retry on the next app open.</li></ul></div></details>
+        <details><summary>FR-07 · Safety language</summary><div class="detail-body"><ul class="criteria"><li>Onboarding says to stop and return to normal breathing if lightheaded or uncomfortable.</li><li>Settings includes a durable wellness—not medical advice—statement.</li><li>No copy promises to treat anxiety, disease, insomnia, or any medical condition.</li><li>No forced breath holds longer than the selected count and no competitive scoring.</li><li>Heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep are presented as recorded wellness data—not diagnoses, readiness scores, causal claims, or treatment guidance.</li></ul></div></details>
+        <details open><summary>FR-08 · Wearable health reads</summary><div class="detail-body"><ul class="criteria"><li>Use Apple HealthKit on iOS and Health Connect on Android as the only wearable-data aggregators; do not add direct Fitbit, Garmin, Oura, Samsung, or other vendor SDKs in MVP.</li><li>Request read access for each supported type only after explaining its use: heart rate, HRV, resting heart rate, respiratory rate, blood oxygen saturation (SpO₂), and sleep.</li><li>Associate timestamped heart-rate samples whose timestamps overlap the actual session window; do not synthesize or carry forward missing readings.</li><li>Show heart rate during practice only when a compatible source supplies a recent sample; otherwise omit the value without interrupting guidance.</li><li>Guided breath cadence is derived from the selected phase profile and labeled “guided cadence,” never “measured breathing rate.”</li></ul></div></details>
+        <details open><summary>FR-09 · Insights & progression</summary><div class="detail-body"><ul class="criteria"><li>Provide 7-day and 30-day trend views for resting heart rate, HRV, and mindful minutes; clearly label the selected date range and units.</li><li>On each qualifying session summary, compare average heart rate from a defined pre-session window with average heart rate from a defined post-session window; show the windows and sample sufficiency.</li><li>Aggregate completed-session count and total minutes by timing profile or named breathing pattern.</li><li>Show current and longest practice streaks based on local calendar days, with timezone changes handled deterministically.</li><li>Use neutral descriptions such as “higher,” “lower,” or “no clear change”; never generate a readiness score, diagnosis, causal claim, or treatment recommendation.</li></ul></div></details>
+        <details open><summary>NFR-01 · Graceful data absence</summary><div class="detail-body"><ul class="criteria"><li>Every timer, cue, history, and session-completion function works with no wearable, denied permissions, or no health records.</li><li>The Insights screen shows an empty state explaining that availability depends on connected devices and granted permissions, with a route to connection guidance.</li><li>Missing one data type hides only the affected chart or comparison; it must not blank the entire Insights screen.</li><li>Delayed wearable sync updates insights on a later app open without rewriting or duplicating the breathing session.</li></ul></div></details>
+      </section>
+
+      <section id="health">
+        <div class="section-head"><div class="section-no">05</div><div><h2>Health integration</h2><p>Record the practice, add available sensor context, and make denial or missing hardware fully supported states.</p></div></div>
+        <div class="two-col">
+          <div class="card tint"><div class="card-kicker">iOS aggregator</div><h3>Apple HealthKit</h3><ul class="list compact"><li>Write completed mindful sessions.</li><li>Request read access, per type, for heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep.</li><li>Use records contributed by Apple Watch or any other source the user has connected to Apple Health.</li><li>Do not integrate wearable-vendor SDKs directly.</li></ul></div>
+          <div class="card"><div class="card-kicker">Android aggregator</div><h3>Health Connect</h3><ul class="list compact"><li>Write the supported breathing or mindfulness session record.</li><li>Request read access, per type, for heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep.</li><li>Use records contributed by compatible watches and apps that the user has connected to Health Connect.</li><li>Do not integrate Fitbit, Garmin, Samsung, or other vendor SDKs directly.</li></ul></div>
+        </div>
+        <h3>Supported health indicators</h3>
+        <dl class="spec">
+          <dt>During practice</dt><dd>The app records the phase profile, cycle timestamps, completed cycles, and guided cadence. With permission, it associates heart-rate samples that overlap the session and may show a recent reading when one exists.</dd>
+          <dt>Heart & recovery</dt><dd>Heart rate supports session context and before-vs-after comparison. Resting heart rate and HRV support 7-day and 30-day trend views. Keep platform units and metric definitions explicit.</dd>
+          <dt>Breathing & oxygen</dt><dd>Respiratory rate and blood oxygen saturation (SpO₂) appear only when the platform contains records from a compatible source. Do not infer either value from the timer.</dd>
+          <dt>Sleep</dt><dd>Read permitted sleep sessions and duration for contextual display. MVP does not score sleep, infer sleep quality, or claim that breathing practice caused a change.</dd>
+          <dt>Mindful minutes</dt><dd>Trend completed breathing minutes over 7 and 30 days, combining the app’s local sessions with platform records only where duplicate prevention is reliable.</dd>
+          <dt>Availability</dt><dd>Data varies by connected devices, source-app sync behavior, sampling frequency, platform support, and permissions. The phone alone may provide none of these measurements.</dd>
+        </dl>
+        <div class="callout"><div class="mark">≠</div><div><strong>Guidance is not measurement</strong><p>The timer knows the rhythm it instructed; it does not know whether the user followed each breath. Heart, breathing, oxygen, HRV, resting heart rate, and sleep values appear only when Apple Health or Health Connect provides real records.</p></div></div>
+        <h3>Permission flow</h3>
+        <ol class="criteria"><li>User completes the first qualifying session.</li><li>Completion offers “Add sessions to Health.” Insights separately explains the benefit of each read category before requesting access.</li><li>Open the native permission sheet and let the user grant or deny every supported type. Never simulate consent or treat partial access as all-or-nothing.</li><li>Write the completed session; query only granted data types for the exact ranges needed by session comparison and 7-day/30-day insights.</li><li>On denial or missing data, keep the full breathing experience and show a neutral Insights empty state with connection guidance.</li></ol>
+        <h3>Health acceptance criteria</h3>
+        <ul class="criteria"><li>One completed app session creates at most one health record; retries are idempotent.</li><li>Sessions under 60 seconds are not written.</li><li>Every displayed indicator names its unit, date range, and availability state: recent, imported, unavailable, or permission denied.</li><li>No value is carried forward, interpolated, or fabricated when records are missing.</li><li>Charts remain correct under partial permissions—for example HRV allowed but sleep denied.</li><li>Changing device time or crossing midnight does not corrupt session duration, streaks, or sample matching.</li><li>Tests cover no wearable, delayed sync, sparse records, mixed data sources, permission revocation, and supported data on physical devices.</li></ul>
+      </section>
+
+      <section id="architecture">
+        <div class="section-head"><div class="section-no">06</div><div><h2>Technical architecture</h2><p>A cross-platform foundation with native health bridges and no backend dependency.</p></div></div>
+        <div class="decision"><div><b>Framework</b><p>React Native with Expo development builds and TypeScript. Expo Go alone is insufficient for native health modules.</p></div><span class="choice">Recommended</span></div>
+        <div class="decision"><div><b>Navigation</b><p>Expo Router or React Navigation; keep a shallow stack with modal setup and settings screens.</p></div><span class="choice">Either</span></div>
+        <div class="decision"><div><b>State</b><p>Pure timer state machine plus a small app settings store. Avoid a global state library unless complexity earns it.</p></div><span class="choice">Lean</span></div>
+        <div class="decision"><div><b>Persistence</b><p>Encrypted or platform-appropriate local storage for preferences and session history; schema-versioned migrations from day one.</p></div><span class="choice">Device only</span></div>
+        <div class="decision"><div><b>Backend</b><p>None for MVP. Optional privacy-preserving product analytics can be added only with explicit policy disclosure.</p></div><span class="choice">No server</span></div>
+        <div class="decision"><div><b>Native boundaries</b><p>HealthKit and Health Connect sit behind one platform-neutral HealthRepository for session writes, per-type permissions, date-range reads, source metadata, and deduplication. No vendor-specific wearable SDKs.</p></div><span class="choice">Aggregators only</span></div>
+        <h3>Suggested module structure</h3>
+        <div class="code">src/
+  app/                 routes, navigation, app lifecycle
+  breathing/           timer engine, phases, session reducer
+  components/          controls, ring, typography, feedback
+  health/              interface + ios/android adapters
+  history/             session repository, pattern totals, streaks
+  insights/            7/30-day trends, session comparisons
+  settings/            preferences, per-type permissions, reminders
+  accessibility/       reduced-motion and cue helpers
+  analytics/           typed events; no-op when disabled
+  legal/               privacy, safety, acknowledgments</div>
+        <h3>Timer model</h3>
+        <div class="code">phaseAt(elapsedMs, phases):
+  durationsMs = phases.map(seconds => seconds × 1000)
+  cycleMs = sum(durationsMs)
+  position = elapsedMs % cycleMs
+  phaseIndex = first cumulative boundary greater than position
+  phaseRemaining = current boundary − position
+
+Example phases = [4, 4, 6, 4]; cycle = 18 seconds.
+Source of truth = session start timestamp + accumulated paused duration.
+Animation reads state; it never owns time.</div>
+        <h3>Platform notes</h3>
+        <div class="two-col">
+          <div class="card"><h4>iOS</h4><p class="small">HealthKit mindful-session write plus permission-gated reads for heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep; use all HealthKit-connected sources without direct wearable SDKs.</p></div>
+          <div class="card"><h4>Android</h4><p class="small">Health Connect session writes plus permission-gated reads for heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep; rely on connected sources rather than direct vendor SDKs.</p></div>
+        </div>
+      </section>
+
+      <section id="data">
+        <div class="section-head"><div class="section-no">07</div><div><h2>Data & privacy</h2><p>Collect less, explain clearly, and keep sensitive wellness data under user control.</p></div></div>
+        <h3>Local data model</h3>
+        <dl class="spec">
+          <dt>Session</dt><dd><code>id</code>, timestamps, duration, four-value <code>phaseProfile</code>, optional pattern name, guided cadence, cycles, completion state, health sync state, and optional before/after heart-rate summary.</dd>
+          <dt>Progression</dt><dd>Derived 7-day/30-day series for resting heart rate, HRV, and mindful minutes; totals by pattern; current and longest streak. Recompute from local sessions and permitted platform records.</dd>
+          <dt>Preferences</dt><dd>Duration, four independent phase seconds, guidance mode (tones or recorded voice at launch), haptics, reduced motion override, reminder setting, onboarding complete, and per-data-type permission/availability state.</dd>
+          <dt>Wearable data</dt><dd>Keep raw heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep records in Apple Health or Health Connect. Cache only bounded summaries needed for responsive insights, with source and date-range metadata.</dd>
+          <dt>Not stored</dt><dd>Name, email, precise location, contacts, advertising ID, free-text journal, diagnosis, readiness score, or a duplicate long-term store of raw wearable records.</dd>
+        </dl>
+        <h3>Privacy requirements</h3>
+        <ul class="list">
+          <li>Publish a plain-language privacy policy before beta distribution.</li>
+          <li>Session write and each read type—heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep—are explained, optional, revocable, and never used for advertising.</li>
+          <li>Do not sell or broker session data. Do not place third-party ad SDKs in the MVP.</li>
+          <li>If analytics is enabled, use coarse product events without health values, exact timestamps, or persistent cross-app identifiers.</li>
+          <li>Provide “Delete local history” and explain the separate platform steps for deleting health records.</li>
+          <li>Document every SDK and its data behavior for App Store privacy labels and Google Play Data Safety.</li>
+        </ul>
+        <h3>Minimal analytics event set</h3>
+        <div class="scope-table">
+          <div class="scope-row header"><div>Event</div><div>Allowed properties</div><div>Purpose</div></div>
+          <div class="scope-row"><div><code>session_started</code></div><div>duration bucket, timing-profile bucket</div><div>Measure activation and preferred setup; never include biometric values.</div></div>
+          <div class="scope-row"><div><code>session_completed</code></div><div>duration bucket, completion</div><div>Measure core reliability; no exact start time.</div></div>
+          <div class="scope-row"><div><code>health_prompt_result</code></div><div>platform, accepted/declined</div><div>Improve explanation and timing.</div></div>
+          <div class="scope-row"><div><code>cue_setting_changed</code></div><div>tone/voice mode, haptic enabled</div><div>Understand non-visual guidance needs.</div></div>
+        </div>
+        <p class="small" style="margin-top:10px">Analytics is optional for launch. If omitted, collect product feedback through beta interviews instead.</p>
+      </section>
+
+      <section id="quality">
+        <div class="section-head"><div class="section-no">08</div><div><h2>Quality bar</h2><p>Wellness UX fails when timing, cues, or accessibility are unreliable.</p></div></div>
+        <div class="three-col">
+          <div class="card"><div class="card-kicker">Performance</div><ul class="list compact"><li>Cold launch to usable home under 2 seconds on target devices.</li><li>60 fps breathing animation on mid-range devices.</li><li>No network dependency for core flow.</li></ul></div>
+          <div class="card"><div class="card-kicker">Accessibility</div><ul class="list compact"><li>WCAG AA contrast.</li><li>Dynamic text without clipping.</li><li>VoiceOver/TalkBack phase announcements.</li><li>Reduced-motion alternative.</li></ul></div>
+          <div class="card"><div class="card-kicker">Reliability</div><ul class="list compact"><li>No duplicate health records.</li><li>No stale or fabricated wearable values.</li><li>Full breathing flow with no wearable data.</li><li>Crash-free session target ≥99.5%.</li><li>Deterministic timer and trend tests.</li></ul></div>
+        </div>
+        <h3>Device test matrix</h3>
+        <dl class="spec">
+          <dt>iOS</dt><dd>Oldest supported iOS version on a smaller iPhone; current iOS on standard and large-screen iPhones; VoiceOver; silent mode; reduced motion.</dd>
+          <dt>Android</dt><dd>Oldest supported Android version, one mid-range physical device, current Pixel, one Samsung device; TalkBack; battery saver; Health Connect unavailable and installed states.</dd>
+          <dt>Wearables</dt><dd>No wearable, Apple Health/Health Connect unavailable, delayed sync, sparse or mixed-source records, every combination of per-type permission granted/denied/revoked, and records arriving after completion.</dd>
+          <dt>Interruptions</dt><dd>Call, alarm, audio route change, app background/foreground, screen lock, permission revocation, low battery, timezone change.</dd>
+        </dl>
+        <h3>Release blockers</h3>
+        <ul class="list no-list"><li>Timer or phase cue drifts by more than one second.</li><li>App records duplicate, zero-length, or incorrect-time health sessions.</li><li>App labels guided cadence as measured respiratory rate, shows stale data as current, invents a missing wearable value, or presents an insight as a medical conclusion.</li><li>No-wearable or partial-permission users cannot complete a session or reach a useful Insights empty/partial state.</li><li>Session cannot be paused or safely ended.</li><li>Core guidance is unusable with screen reader or reduced motion.</li><li>Any health permission is requested before context is explained.</li><li>Privacy policy and store disclosures disagree with actual SDK behavior.</li></ul>
+      </section>
+
+      <section id="delivery">
+        <div class="section-head"><div class="section-no">09</div><div><h2>Delivery plan</h2><p>A realistic sequence for one experienced cross-platform engineer plus part-time design and QA.</p></div></div>
+        <div class="milestones">
+          <div class="milestone"><div class="week">Week 1</div><div><h4>Product + interaction foundation</h4><p>Confirm MVP decisions, prototype timer states, finalize copy and safety language, establish app project and CI.</p></div></div>
+          <div class="milestone"><div class="week">Weeks 2–3</div><div><h4>Core breathing experience</h4><p>Home, timer engine, animation, non-verbal tones, haptics, pause/resume, local preferences, and completion state. No recorded voice in this build.</p></div></div>
+          <div class="milestone"><div class="week">Week 4</div><div><h4>History + progression</h4><p>Local repository, history, pattern totals, streak logic, 7-day/30-day views, empty states, dynamic text, screen reader flow, and reduced motion.</p></div></div>
+          <div class="milestone"><div class="week">Week 5</div><div><h4>Native health integrations</h4><p>HealthKit and Health Connect session writes, six permission-gated read types, before/after heart-rate windows, trend queries, deduplication, and physical-device verification.</p></div></div>
+          <div class="milestone"><div class="week">Week 6</div><div><h4>Hardening</h4><p>Variable-phase timers, trend calculations, streaks, partial permissions, no-watch and delayed-sync cases, lifecycle testing, privacy review, and polish.</p></div></div>
+          <div class="milestone"><div class="week">Week 7</div><div><h4>Tone + haptic closed beta</h4><p>TestFlight and Play closed testing with 20–50 users. Validate cue timing, comprehension, volume, haptic comfort, starts, completions, and device-specific failures before recording voice.</p></div></div>
+          <div class="milestone"><div class="week">Week 8</div><div><h4>Recorded voice launch candidate</h4><p>Resolve beta cue issues, finalize and record concise voice scripts, add the voice guidance option, and test timing, accessibility, audio focus, bundled assets, and fallback to tones.</p></div></div>
+          <div class="milestone"><div class="week">Weeks 9–10</div><div><h4>Store submission</h4><p>Run release-candidate regression, prepare listings and screenshots, complete disclosures, and submit both platforms only after recorded voice guidance passes launch checks.</p></div></div>
+        </div>
+        <p class="small" style="margin-top:12px">This is a planning estimate, not a fixed delivery promise. Native health edge cases and store review feedback are the largest schedule risks.</p>
+        <h3>Team</h3>
+        <div class="two-col"><div class="card"><h4>Minimum build team</h4><p class="small">1 cross-platform mobile engineer, product owner, and a designer/QA partner available part-time.</p></div><div class="card"><h4>Helpful review</h4><p class="small">Privacy/legal review for health wording and a qualified pranayama instructor to review cue language and safety—not to create medical claims.</p></div></div>
+      </section>
+
+      <section id="launch">
+        <div class="section-head"><div class="section-no">10</div><div><h2>Launch checklist</h2><p>Definition of done for the public MVP.</p></div></div>
+        <div class="two-col">
+          <div>
+            <h3>Product</h3><ul class="criteria"><li>All must-have scope passes acceptance tests.</li><li>The tones-and-haptics build completes closed-beta testing before voice scripts are finalized.</li><li>Recorded voice prompts are professionally produced, reviewed for clarity, and included in the public launch build.</li><li>Onboarding and first session tested with new users.</li><li>Empty, loading, denied, unavailable, and error states have final copy.</li><li>No unfinished controls, sample history, or dead links.</li></ul>
+            <h3>Engineering</h3><ul class="criteria"><li>Production signing, CI builds, crash reporting, and versioning configured.</li><li>Tone, recorded voice, haptic, and visual-only guidance paths stay synchronized and work offline.</li><li>Session writes and all six read categories verified on physical iOS and Android devices, including no-wearable and partial-permission cases.</li><li>Offline and lifecycle tests pass.</li><li>Dependency and permission audit completed.</li></ul>
+          </div>
+          <div>
+            <h3>Store readiness</h3><ul class="criteria"><li>App name, subtitle, descriptions, icon, screenshots, and support URL prepared.</li><li>Privacy policy URL and contact channel live.</li><li>Apple privacy labels and Google Play Data Safety answers match the app.</li><li>Age rating, wellness disclaimer, and review notes complete.</li></ul>
+            <h3>Go / no-go</h3><ul class="criteria"><li>No release blocker from the quality section remains.</li><li>Closed beta has at least 7 days of stable usage.</li><li>Health-denied users can complete every core flow.</li><li>Rollback and hotfix owner is named.</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="decisions">
+        <div class="section-head"><div class="section-no">11</div><div><h2>Decisions to lock before design</h2><p>Key choices that prevent avoidable rework. Recommended defaults and locked decisions are shown.</p></div></div>
+        <div class="decision"><div><b>Brand and product name</b><p>Choose a name only after basic trademark and store-name checks.</p></div><span class="choice">Open</span></div>
+        <div class="decision"><div><b>Supported OS versions</b><p>Set from the chosen health-library requirements and intended device reach.</p></div><span class="choice">Validate libraries</span></div>
+        <div class="decision"><div><b>Background guidance</b><p>For MVP, pause when interrupted rather than promising unreliable background timing.</p></div><span class="choice">Foreground-first</span></div>
+        <div class="decision"><div><b>Guidance rollout</b><p>Test the complete experience with non-verbal tones and haptics first. Use the findings to finalize concise recorded prompts, then add recorded voice before public store launch.</p></div><span class="choice">Locked</span></div>
+        <div class="decision"><div><b>Wearable integration boundary</b><p>Read every supported indicator through Apple HealthKit or Health Connect. Let Fitbit, Garmin, Oura, Samsung, and other devices sync into those aggregators; no direct vendor SDKs in MVP.</p></div><span class="choice">Platform aggregators</span></div>
+        <div class="decision"><div><b>Analytics</b><p>Either launch with a minimal privacy-preserving event set or no analytics. Do not add an ad-tech SDK.</p></div><span class="choice">Minimal or none</span></div>
+        <div class="decision"><div><b>Reminder</b><p>Include only if it does not delay health integration and accessibility testing.</p></div><span class="choice">Stretch</span></div>
+        <div class="footer-note"><strong>Recommended build brief</strong>Build a free, offline-first four-phase breathing app with independently adjustable counts—including 4–4–6–4—plus reliable guidance and local history. Begin closed testing with distinct tones and haptics only; after validating cue timing and comprehension, add professionally recorded voice guidance and then launch publicly. Through Apple HealthKit and Health Connect only, read permission-granted heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep data. Differentiate with simple 7-day/30-day trends, before-vs-after heart rate, pattern totals, and streaks; keep the full breathing experience useful with no wearable data and make no medical claims.</div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+  const links=[...document.querySelectorAll('.nav-link')];
+  const sections=[...document.querySelectorAll('section[id]')];
+  const select=document.getElementById('sectionSelect');
+  select.addEventListener('change',()=>document.getElementById(select.value)?.scrollIntoView({behavior:'auto'}));
+  const observer=new IntersectionObserver(entries=>{
+    const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!visible)return;
+    links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+visible.target.id));
+    select.value=visible.target.id;
+  },{rootMargin:'-15% 0px -70% 0px',threshold:[0,.1,.5]});
+  sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>

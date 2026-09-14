@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FAF6EE",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      },
+      "package": "com.samabreath.app",
+      "predictiveBackGestureEnabled": false
+    },
+    "icon": "./assets/icon.png",
+    "ios": {
+      "bundleIdentifier": "com.samabreath.app",
+      "supportsTablet": true
+    },
+    "name": "Sama Breath",
+    "orientation": "portrait",
+    "plugins": [
+      "expo-router",
+      "expo-audio",
+      "expo-sqlite",
+      [
+        "react-native-health",
+        {
+          "healthSharePermission": "Sama Breath reads heart rate, HRV, respiratory rate, sleep and blood oxygen to show how your practice trends over time. Your health data never leaves your device.",
+          "healthUpdatePermission": "Sama Breath saves your breathing sessions as mindful minutes in Apple Health."
+        }
+      ],
+      "react-native-health-connect",
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FAF6EE",
+          "image": "./assets/splash.png",
+          "imageWidth": 200,
+          "resizeMode": "contain"
+        }
+      ]
+    ],
+    "scheme": "samabreath",
+    "slug": "sama-breath",
+    "userInterfaceStyle": "light",
+    "version": "1.0.0",
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

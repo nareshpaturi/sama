@@ -172,6 +172,11 @@ sama/
 - **Voice guidance comes later.** The engine fires `onPhaseStart` per phase —
   the hook for recorded voice cues is already there; add playback in
   `session.tsx` when the voice assets land.
+- **Native patches.** `patches/react-native-health+1.19.0.patch` (applied
+  automatically via the `postinstall` script) removes two obsolete lines from
+  the library's iOS code that used a pre-New-Architecture API
+  (`RCTCallableJSModules setBridge:`), which no longer exists in React Native
+  0.81. Without it, `npx expo run:ios` fails to compile the HealthKit pod.
 
 ## 6. Roadmap
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import * as Haptics from 'expo-haptics';
 import { colors, spacing, radius, type, fontWeight } from '../src/theme';
 import PrimaryButton from '../src/components/PrimaryButton';
 import {
@@ -76,6 +77,7 @@ export default function SetupScreen() {
   }, []);
 
   const choosePreset = (idx: number) => {
+    void Haptics.selectionAsync();
     setSelectedPreset(idx);
     setPattern({ ...PRESETS[idx].pattern });
     setPatternName(PRESETS[idx].name);
@@ -105,17 +107,30 @@ export default function SetupScreen() {
     <SafeAreaView style={styles.safe} edges={['left', 'right', 'bottom']}>
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.sectionTitle}>Choose a pattern</Text>
+        <Text style={styles.sectionHint}>Tap a card to select it.</Text>
         {PRESETS.map((preset, idx) => {
           const selected = selectedPreset === idx;
           return (
             <Pressable
               key={preset.name}
               onPress={() => choosePreset(idx)}
-              style={[styles.card, selected && styles.cardSelected]}
+              accessibilityRole="radio"
+              accessibilityState={{ selected }}
+              accessibilityLabel={`${preset.name}, ${formatPattern(preset.pattern)}`}
+              style={({ pressed }) => [
+                styles.card,
+                selected && styles.cardSelected,
+                pressed && styles.cardPressed,
+              ]}
             >
-              <View style={styles.rowBetween}>
-                <Text style={styles.presetName}>{preset.name}</Text>
-                <Text style={styles.presetPattern}>{formatPattern(preset.pattern)}</Text>
+              <View style={styles.cardHeader}>
+                <View style={styles.cardTitleWrap}>
+                  <Text style={styles.presetName}>{preset.name}</Text>
+                  <Text style={styles.presetPattern}>{formatPattern(preset.pattern)}</Text>
+                </View>
+                <View style={[styles.radio, selected && styles.radioSelected]}>
+                  {selected ? <View style={styles.radioDot} /> : null}
+                </View>
               </View>
               {preset.sanskrit ? (
                 <Text style={styles.presetSanskrit}>{preset.sanskrit}</Text>
@@ -145,8 +160,15 @@ export default function SetupScreen() {
           {DURATIONS.map((d) => (
             <Pressable
               key={d}
-              onPress={() => setMinutes(d)}
-              style={[styles.chip, minutes === d && styles.chipSelected]}
+              onPress={() => {
+                void Haptics.selectionAsync();
+                setMinutes(d);
+              }}
+              style={({ pressed }) => [
+                styles.chip,
+                minutes === d && styles.chipSelected,
+                pressed && styles.cardPressed,
+              ]}
             >
               <Text style={[styles.chipText, minutes === d && styles.chipTextSelected]}>
                 {d} min
@@ -177,6 +199,11 @@ const styles = StyleSheet.create({
     fontWeight: fontWeight.semibold,
     color: colors.ink,
     marginTop: spacing.lg,
+    marginBottom: spacing.xs,
+  },
+  sectionHint: {
+    fontSize: type.caption,
+    color: colors.inkFaint,
     marginBottom: spacing.md,
   },
   card: {
@@ -191,10 +218,38 @@ const styles = StyleSheet.create({
     borderColor: colors.accentDeep,
     borderWidth: 2,
   },
-  rowBetween: {
+  cardPressed: {
+    opacity: 0.7,
+  },
+  cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  cardTitleWrap: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: spacing.sm,
+    flexShrink: 1,
+  },
+  radio: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: colors.divider,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: spacing.sm,
+  },
+  radioSelected: {
+    borderColor: colors.accentDeep,
+  },
+  radioDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: colors.accentDeep,
   },
   presetName: {
     fontSize: type.body,

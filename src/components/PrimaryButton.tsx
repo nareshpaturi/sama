@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
-import { colors, radius, spacing, type, fontWeight } from '../theme';
+import { colors, fonts, radius, spacing, type } from '../theme';
 
 interface Props {
   title: string;
@@ -32,8 +32,9 @@ export default function PrimaryButton({ title, onPress, variant = 'primary' }: P
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: radius.pill,
-    paddingVertical: 16,
+    minHeight: 52,
+    borderRadius: radius.md,
+    paddingVertical: 13,
     paddingHorizontal: spacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
@@ -51,10 +52,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansBold,
   },
   labelPrimary: {
-    color: '#FFFFFF',
+    color: colors.white,
   },
   labelSecondary: {
     color: colors.ink,

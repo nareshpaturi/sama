@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useWindowDimensions } from 'react-native';
 import Svg, { Rect, Text as SvgText, Line } from 'react-native-svg';
-import { colors, spacing } from '../theme';
+import { colors, fonts, spacing } from '../theme';
 
 interface Props {
   data: { label: string; minutes: number }[];
@@ -43,14 +43,15 @@ export default function TrendChart({ data }: Props) {
               width={barWidth}
               height={barHeight}
               rx={barWidth / 2}
-              fill={d.minutes > 0 ? colors.accent : colors.surfaceMuted}
+              fill={d.minutes > 0 ? colors.sky : colors.surfaceMuted}
             />
             {showLabel ? (
               <SvgText
                 x={i * slot + slot / 2}
                 y={plotHeight + 16}
                 fontSize={10}
-                fill={colors.inkFaint}
+                fill={colors.inkSoft}
+                fontFamily={fonts.sansRegular}
                 textAnchor="middle"
               >
                 {d.label}

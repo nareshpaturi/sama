@@ -58,21 +58,21 @@
     .orbit:before{width:16px;height:16px;top:36px;right:80px}
     .orbit:after{width:10px;height:10px;bottom:54px;left:62px;background:var(--saffron)}
     .phone{width:252px;background:#0c211c;border:8px solid #0c211c;border-radius:38px;box-shadow:0 30px 70px rgba(0,0,0,.35);overflow:hidden;position:relative;transform:rotate(2.5deg)}
-    .phone-screen{background:var(--mist);min-height:472px;border-radius:30px;padding:20px 17px;color:var(--ink);display:flex;flex-direction:column}
-    .phone-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;color:var(--pine)}
-    .tiny-mark{width:27px;height:27px;display:grid;place-items:center;background:var(--pine);border-radius:8px}
+    .phone-screen{background:var(--pine-2);min-height:472px;border-radius:30px;padding:20px 17px;color:white;display:flex;flex-direction:column}
+    .phone-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;color:#cbe3d4}
+    .tiny-mark{width:27px;height:27px;display:grid;place-items:center;background:var(--pine);border:1px solid rgba(255,255,255,.22);border-radius:8px}
     .tiny-mark svg{width:16px}
-    .session-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:32px}
+    .session-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#cbe3d4;margin-top:32px}
     .breath-orb{width:154px;height:154px;margin:18px auto 16px;border-radius:50%;background:var(--sky);display:grid;place-items:center;box-shadow:inset 0 0 0 16px rgba(255,255,255,.35),0 12px 36px rgba(18,55,47,.16);position:relative}
     .breath-orb:before{content:"";position:absolute;inset:18px;border:2px solid rgba(18,55,47,.24);border-radius:38% 62% 50% 45%;transform:rotate(20deg)}
     .phase{font:600 25px/1 var(--serif);color:var(--pine);z-index:1}
-    .count{text-align:center;font:600 45px/1 var(--serif);color:var(--pine)}
-    .pattern{text-align:center;color:var(--muted);font-size:11px;margin-top:7px}
+    .count{text-align:center;font:600 45px/1 var(--serif);color:white}
+    .pattern{text-align:center;color:#cbe3d4;font-size:11px;margin-top:7px}
     .progress{display:flex;gap:5px;margin:28px 8px 0}
-    .progress i{height:4px;flex:1;border-radius:9px;background:#cfddd3}
+    .progress i{height:4px;flex:1;border-radius:9px;background:rgba(255,255,255,.24)}
     .progress i:first-child{background:var(--coral)}
-    .phone-copy{text-align:center;font-size:10px;color:var(--muted);margin-top:9px}
-    .pause{margin:auto auto 4px;width:42px;height:42px;border-radius:50%;border:0;background:var(--pine);color:white;display:grid;place-items:center}
+    .phone-copy{text-align:center;font-size:10px;color:#cbe3d4;margin-top:9px}
+    .pause{margin:auto auto 4px;width:42px;height:42px;border-radius:50%;border:0;background:white;color:var(--pine);display:grid;place-items:center}
 
     section{padding:82px 0}
     .section-head{display:grid;grid-template-columns:.72fr 1.28fr;gap:34px;align-items:start;margin-bottom:44px}
@@ -137,7 +137,7 @@
     .insight i:nth-child(1){height:34%}.insight i:nth-child(2){height:48%}.insight i:nth-child(3){height:43%}.insight i:nth-child(4){height:66%;background:var(--coral)}.insight i:nth-child(5){height:78%;background:var(--pine)}
     .pattern-line{height:84px;display:flex;align-items:center;gap:8px}
     .pattern-line span{height:55px;min-width:45px;flex:1;border-radius:11px;background:var(--mist);display:grid;place-items:center;font:600 20px var(--serif);color:var(--pine)}
-    .pattern-line span:nth-child(3){background:var(--coral);color:white;height:72px}
+    .pattern-line span:nth-child(1){background:var(--sky)}.pattern-line span:nth-child(2){background:var(--saffron)}.pattern-line span:nth-child(3){background:var(--coral);color:var(--ink);height:72px}.pattern-line span:nth-child(4){background:var(--mist)}
 
     .voice{background:var(--pine);color:white}
     .voice .section-no{color:#f0a58f}.voice h2{color:white}
@@ -196,7 +196,7 @@
 <div class="page">
   <nav class="nav" aria-label="Brand board sections">
     <div class="wrap nav-inner">
-      <div class="nav-note">Recommended direction</div>
+      <div class="nav-note">Canonical MVP visual system · aligned 2026-09-15</div>
       <div class="nav-links">
         <a href="#strategy">Strategy</a><a href="#identity">Identity</a><a href="#application">In app</a><a href="#launch">Launch</a>
       </div>
@@ -270,7 +270,7 @@
 
     <section class="visual" id="identity">
       <div class="wrap">
-        <div class="section-head"><div class="section-no">03 · Identity</div><div><h2>Organic rhythm, measured form.</h2><p class="sub">The visual system balances human warmth with the precision of a timer. No lotus, lungs, or generic wellness gradient.</p></div></div>
+        <div class="section-head"><div class="section-no">03 · Identity</div><div><h2>Organic rhythm, measured form.</h2><p class="sub">The visual system balances human warmth with the precision of a timer. This board is the canonical source for application colors, typography, logo, and launch icon; the UX prototype owns interaction and state behavior. No lotus, lungs, or generic wellness gradient.</p></div></div>
         <div class="visual-grid">
           <div class="logo-board">
             <div class="logo-lockup">
@@ -312,7 +312,7 @@
           </article>
           <article class="app-card">
             <div class="pattern-line" aria-label="Custom breathing pattern 4 4 6 4"><span>4</span><span>4</span><span>6</span><span>4</span></div>
-            <h3>Custom patterns</h3><p>Numbers are tactile and prominent. The longest phase carries the active accent.</p>
+            <h3>Custom patterns</h3><p>Numbers are tactile and prominent. Phase color remains semantic—sky inhale, saffron hold, coral exhale, mist recovery—while duration is communicated by the number.</p>
           </article>
           <article class="app-card">
             <div class="insight" aria-label="Seven-day rising practice chart"><i></i><i></i><i></i><i></i><i></i></div>
@@ -337,7 +337,7 @@
         <div class="section-head"><div class="section-no">06 · Launch kit</div><div><h2>One message everywhere.</h2><p class="sub">Lead with freedom and flexibility. Let wearable insights support the story rather than overwhelm the first impression.</p></div></div>
         <div class="launch-grid">
           <div class="store-copy"><div class="store-title">Your breath. Your rhythm.</div><p>Practice box breathing or create your own four-phase pattern. Sama keeps the essentials free and helps you see your consistency alongside supported health signals.</p></div>
-          <div class="checklist"><h3>What to make next</h3><ol><li>Validate the name and reserve handles.</li><li>Test the icon at 29 px, 60 px, and store size.</li><li>Build light and dark app themes from this palette.</li><li>Create App Store screenshots around custom patterns and progress.</li></ol></div>
+          <div class="checklist"><h3>What to make next</h3><ol><li>Validate the name and reserve handles.</li><li>Test the icon at 29 px, 60 px, and store size.</li><li>Ship the light application theme and immersive pine practice surface; defer a complete dark theme until after MVP.</li><li>Create App Store screenshots around custom patterns and progress.</li></ol></div>
         </div>
         <div class="decision"><strong>Recommendation</strong><span>Move forward with <b>Sama</b> as the lead direction, use <b>Sama Breath</b> in app stores for clarity, and launch with the line <b>“Breathe by your numbers.”</b></span></div>
       </div>

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as Haptics from 'expo-haptics';
-import { colors, spacing, radius, type, fontWeight } from '../src/theme';
+import { colors, fonts, spacing, radius, type } from '../src/theme';
 import PrimaryButton from '../src/components/PrimaryButton';
 import {
   PRESETS,
@@ -196,13 +196,14 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: type.subtitle,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
     marginTop: spacing.lg,
     marginBottom: spacing.xs,
   },
   sectionHint: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginBottom: spacing.md,
   },
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   cardSelected: {
-    borderColor: colors.accentDeep,
+    borderColor: colors.primary,
     borderWidth: 2,
   },
   cardPressed: {
@@ -243,31 +244,34 @@ const styles = StyleSheet.create({
     marginLeft: spacing.sm,
   },
   radioSelected: {
-    borderColor: colors.accentDeep,
+    borderColor: colors.primary,
   },
   radioDot: {
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: colors.accentDeep,
+    backgroundColor: colors.primary,
   },
   presetName: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
   },
   presetPattern: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     fontVariant: ['tabular-nums'],
   },
   presetSanskrit: {
     fontSize: type.caption,
+    fontFamily: fonts.displayMedium,
     color: colors.accentDeep,
     marginTop: spacing.xs,
   },
   presetDesc: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.xs,
     lineHeight: 18,
@@ -280,6 +284,7 @@ const styles = StyleSheet.create({
   },
   stepperLabel: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.ink,
   },
   stepperControls: {
@@ -288,21 +293,22 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   stepButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: colors.surfaceMuted,
     alignItems: 'center',
     justifyContent: 'center',
   },
   stepButtonText: {
     fontSize: 20,
+    fontFamily: fonts.sansRegular,
     color: colors.ink,
     lineHeight: 22,
   },
   stepperValue: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
     minWidth: 40,
     textAlign: 'center',
@@ -310,6 +316,7 @@ const styles = StyleSheet.create({
   },
   hint: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginTop: spacing.sm,
     lineHeight: 18,
@@ -320,6 +327,7 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   chip: {
+    minHeight: 44,
     borderRadius: radius.pill,
     borderWidth: 1,
     borderColor: colors.divider,
@@ -333,11 +341,12 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.ink,
   },
   chipTextSelected: {
-    color: '#FFFFFF',
-    fontWeight: fontWeight.semibold,
+    color: colors.white,
+    fontFamily: fonts.sansSemibold,
   },
   cta: {
     marginTop: spacing.xl,

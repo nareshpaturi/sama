@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { colors, type, fontWeight } from '../theme';
+import { colors, fonts, phaseColors, type } from '../theme';
 import type { Phase } from '../engine/types';
 
 interface Props {
@@ -26,16 +26,7 @@ function scaleFor(phase: Phase, progress: number): number {
 }
 
 function circleColor(phase: Phase): string {
-  switch (phase) {
-    case 'inhale':
-      return colors.breathEnd;
-    case 'hold':
-      return colors.breathStart;
-    case 'exhale':
-      return colors.accent;
-    case 'rest':
-      return colors.inkFaint;
-  }
+  return phaseColors[phase];
 }
 
 /**
@@ -54,7 +45,13 @@ export default function BreathingCircle({ phase, progress, secondsLeft, size = 2
       <View
         style={[
           styles.ring,
-          { width: size, height: size, borderRadius: size / 2, backgroundColor: colors.accentSoft },
+          {
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            borderWidth: 1,
+            borderColor: colors.practiceLine,
+          },
         ]}
       />
       <View
@@ -100,9 +97,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   seconds: {
-    fontSize: type.hero,
-    fontWeight: fontWeight.semibold,
-    color: colors.ink,
+    fontSize: type.hero + 16,
+    fontFamily: fonts.displaySemibold,
+    color: colors.pine,
     fontVariant: ['tabular-nums'],
   },
 });

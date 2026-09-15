@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { colors, radius, spacing, type, fontWeight } from '../theme';
+import { colors, fonts, radius, spacing, type } from '../theme';
 
 interface Props {
   label: string;
@@ -29,16 +29,18 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginBottom: spacing.xs,
   },
   value: {
     fontSize: type.subtitle,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
   },
   sub: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginTop: spacing.xs,
   },

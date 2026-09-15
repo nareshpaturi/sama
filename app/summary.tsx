@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
-import { colors, spacing, radius, type, fontWeight } from '../src/theme';
+import { colors, fonts, spacing, radius, type } from '../src/theme';
 import PrimaryButton from '../src/components/PrimaryButton';
 import StatCard from '../src/components/StatCard';
 import { getSession, type SessionRecord } from '../src/storage/sessions';
@@ -103,21 +103,24 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
   },
   title: {
     fontSize: type.title,
-    fontWeight: fontWeight.bold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
     marginTop: spacing.sm,
   },
   subtitle: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.xs,
   },
   date: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginTop: spacing.xs,
     marginBottom: spacing.lg,
@@ -136,22 +139,24 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginBottom: spacing.xs,
   },
   hrLine: {
     fontSize: type.subtitle,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
     fontVariant: ['tabular-nums'],
   },
   hrDelta: {
     fontSize: type.body,
-    fontWeight: fontWeight.regular,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
   },
   cardSub: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginTop: spacing.sm,
     lineHeight: 18,

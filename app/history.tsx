@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from 'expo-router';
-import { colors, spacing, radius, type, fontWeight } from '../src/theme';
+import { colors, fonts, spacing, radius, type } from '../src/theme';
 import { listSessions, type SessionRecord } from '../src/storage/sessions';
 import { formatClock, formatDateTime } from '../src/lib/format';
 
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   },
   empty: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     lineHeight: 22,
   },
@@ -92,16 +93,18 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
   },
   date: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginTop: spacing.xs,
   },
   meta: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.xs,
     fontVariant: ['tabular-nums'],
@@ -112,17 +115,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.sm,
   },
   badgeComplete: {
-    backgroundColor: colors.accentSoft,
+    backgroundColor: colors.mist,
   },
   badgeEnded: {
     backgroundColor: colors.surfaceMuted,
   },
   badgeText: {
     fontSize: type.caption,
-    fontWeight: fontWeight.medium,
+    fontFamily: fonts.sansMedium,
   },
   badgeTextComplete: {
-    color: colors.accentDeep,
+    color: colors.success,
   },
   badgeTextEnded: {
     color: colors.inkSoft,

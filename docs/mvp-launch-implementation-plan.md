@@ -1,6 +1,6 @@
 # Sama Breath MVP launch implementation plan
 
-Status: proposed · updated with iOS readiness audit (2026-09-14)  
+Status: proposed · updated with visual-system alignment (2026-09-15)
 Target: public iOS and Android MVP  
 Expected delivery: 8–10 weeks with one experienced cross-platform engineer plus part-time product/design/QA
 
@@ -34,7 +34,7 @@ Daily reminders remain a stretch feature. Dark mode and direct wearable-vendor i
 | CP0 · Scope and build baseline | Blocked | Android targets min SDK 24 while Health Connect requires 26. The iOS bundle succeeds, but no native iOS build has run because Xcode is unavailable and the deployment target is not locked. |
 | CP1 · Session correctness | Not started | Background pause, iOS interruption handling, phase restart, active-duration accounting, and completed-cycle accounting are incomplete. |
 | CP2 · First-use and navigation | Not started | Onboarding and persistent primary navigation are absent. |
-| CP3 · Accessibility and visual system | Not started | Reduced motion, VoiceOver phase announcements, AA contrast, responsive session layout, and Apple touch targets are incomplete. |
+| CP3 · Accessibility and visual system | In progress | Canonical brand tokens, fonts, launch identity, contrast-tested text roles, responsive breathing geometry, and the immersive practice surface are implemented. Reduced motion, VoiceOver phase announcements, large-text/device visual evidence, and remaining control semantics are incomplete. |
 | CP4 · Local records and user control | Not started | History details, correct aggregates, privacy, and deletion are incomplete. |
 | CP5 · Health consent and data integrity | Not started | Latest historical HealthKit samples are presented as session measurements, read authorization is misreported as granted, and every ended session is submitted for a Health write. |
 | CP6 · Insights and closed beta | Not started | Required health trends and beta evidence are absent. |
@@ -70,6 +70,35 @@ HealthKit permission-state design must follow [Apple’s authorization model](ht
 | P1 | Several interactive controls are smaller than Apple’s 44-point target. | CP3 enlarges phase steppers, duration chips, and End Session while preserving hierarchy. |
 | P1 | iPad support is enabled and generated configuration permits all iPad orientations, but the product has no verified tablet layout. | CP0 decides whether iPad ships; CP3 adds portrait/landscape responsive tests if it remains enabled. |
 | P1 | The generated minimum-version metadata and the React Native/Hermes minimum are not explicitly aligned. | CP0 sets one supported iOS deployment target in Expo configuration, native build settings, CI, and the PRD. |
+
+## Visual-system alignment contract
+
+Alignment date: 2026-09-15
+
+The branding and UX documents previously described different palettes and font pairs, while the application used a third indigo/teal system. The following ownership contract now prevents further drift:
+
+- `docs/branding-design.html` is canonical for palette, typography, logo, app icon, and launch identity.
+- `docs/ux-design.html` is canonical for screen hierarchy, interaction behavior, state treatment, and accessibility handoff rules.
+- `src/theme.ts` is the runtime expression of the branding tokens. Screens consume semantic roles rather than inventing local colors.
+- The MVP uses the light application theme plus an immersive pine practice surface. A complete system-wide dark theme remains outside MVP.
+
+### Implemented and verified in this alignment slice
+
+- [x] Replaced the indigo/teal runtime palette with deep pine, living coral, quiet sky, saffron, mist, paper, and AA-safe semantic text roles.
+- [x] Bundled Newsreader display weights and DM Sans interface weights for offline iOS and Android use.
+- [x] Applied the font hierarchy and reduced component radii across Home, setup, practice, summary, history, progression, settings, and shared controls.
+- [x] Rebuilt the practice screen as an immersive pine surface with brand-coded phase forms, bright labels, responsive breathing geometry, progress, paused treatment, and mock-aligned circular controls.
+- [x] Replaced the indigo spiral app icon, adaptive icon foreground, favicon, and blank splash treatment with the canonical pine/sky/coral breath mark.
+- [x] Updated the product requirements and both design documents to state the source-of-truth contract and use the same semantic phase palette.
+- [x] Added `npm run check:theme`; 14 normal-text pairs, four large phase-number pairs, and one non-text focus pair pass their WCAG thresholds.
+- [x] `npm run typecheck` passes, and Expo production exports for both iOS and Android include only the six selected font files.
+
+### Evidence still required
+
+- [ ] Capture and approve Home, setup, all four practice phases, paused, completion, history, progression, and settings on representative iOS and Android devices.
+- [ ] Repeat visual review at 100%, 150%, and 200% text sizes on the smallest and largest supported phones.
+- [ ] Validate icon safe areas on iOS masks and representative Android adaptive-icon masks.
+- [ ] Complete VoiceOver/TalkBack, reduced-motion, and non-color phase-cue testing before CP3 can pass.
 
 ## CP0 · Lock scope and establish a buildable baseline
 
@@ -172,7 +201,7 @@ Target: Week 4
 
 ### Implementation checklist
 
-- [ ] Replace failing text colors with tokens that meet WCAG AA on every used surface.
+- [x] Replace failing text colors with tokens that meet WCAG AA on every used surface.
 - [ ] Support Dynamic Type without truncating phase labels, countdowns, safety copy, values, or primary actions.
 - [ ] Make session and setup layouts responsive on the smallest supported phone and at 200% text size.
 - [ ] Replace the fixed 280-point breathing geometry with bounded responsive sizing so the phase, countdown, controls, and safety actions remain visible on a small iPhone at large text sizes.

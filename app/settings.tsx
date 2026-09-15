@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Switch, Pressable, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors, spacing, radius, type, fontWeight } from '../src/theme';
+import { colors, fonts, spacing, radius, type } from '../src/theme';
 import PrimaryButton from '../src/components/PrimaryButton';
 import { PRESETS } from '../src/engine/types';
 import { getSettings, saveSettings, type AppSettings } from '../src/storage/settings';
@@ -129,7 +129,7 @@ export default function SettingsScreen() {
             <Switch
               value={tonesEnabled}
               onValueChange={setTones}
-              trackColor={{ false: colors.divider, true: colors.accent }}
+              trackColor={{ false: colors.divider, true: colors.primary }}
             />
           </View>
           <View style={styles.divider} />
@@ -138,7 +138,7 @@ export default function SettingsScreen() {
             <Switch
               value={hapticsEnabled}
               onValueChange={setHaptics}
-              trackColor={{ false: colors.divider, true: colors.accent }}
+              trackColor={{ false: colors.divider, true: colors.primary }}
             />
           </View>
           <View style={styles.divider} />
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: type.subtitle,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
     marginTop: spacing.lg,
     marginBottom: spacing.md,
@@ -235,18 +235,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardSelected: {
-    borderColor: colors.accentDeep,
+    borderColor: colors.primary,
     borderWidth: 2,
   },
   presetName: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
   },
   selectedMark: {
     fontSize: type.caption,
-    fontWeight: fontWeight.medium,
-    color: colors.accentDeep,
+    fontFamily: fonts.sansMedium,
+    color: colors.primary,
   },
   switchRow: {
     flexDirection: 'row',
@@ -260,6 +260,7 @@ const styles = StyleSheet.create({
   },
   rowLabel: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.ink,
   },
   stepperRow: {
@@ -274,21 +275,22 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   stepButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: colors.surfaceMuted,
     alignItems: 'center',
     justifyContent: 'center',
   },
   stepButtonText: {
     fontSize: 20,
+    fontFamily: fonts.sansRegular,
     color: colors.ink,
     lineHeight: 22,
   },
   stepperValue: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
     minWidth: 56,
     textAlign: 'center',
@@ -296,11 +298,13 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.ink,
     lineHeight: 22,
   },
   bodyMuted: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.xs,
   },

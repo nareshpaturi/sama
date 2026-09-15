@@ -2,7 +2,7 @@
   "expo": {
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#FAF6EE",
+        "backgroundColor": "#12372F",
         "foregroundImage": "./assets/android-icon-foreground.png"
       },
       "package": "com.samabreath.app",
@@ -31,7 +31,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#FAF6EE",
+          "backgroundColor": "#FBFCF8",
           "image": "./assets/splash.png",
           "imageWidth": 200,
           "resizeMode": "contain"

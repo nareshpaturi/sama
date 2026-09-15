@@ -3,6 +3,11 @@
 Product and design documentation for the Sama Breath app. The `.html` files
 are self-contained exports — open any of them in a browser.
 
+Visual-system ownership: `branding-design.html` is canonical for palette,
+typography, logo, and launch identity; `ux-design.html` is canonical for screen
+hierarchy, interaction behavior, and state treatment. The runtime mapping lives
+in `src/theme.ts`.
+
 | File | What it is |
 |---|---|
 | `product-requirements.html` | MVP product specification (v1.3): scope, requirements, data model, audio rollout (tones + haptics first, recorded voice before launch), launch checklist |

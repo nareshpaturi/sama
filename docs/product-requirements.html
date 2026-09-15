@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#12372f" />
   <link rel="icon" href="data:," />
   <title>MVP Product Specification</title>
   <style>
@@ -12,6 +13,7 @@
       --ink:#15211d;--muted:#58635e;--line:#d7ddd8;--paper:#f7f8f5;--white:#fff;
       --sage:#21624f;--sage-2:#dcebe4;--mint:#edf5f0;--rust:#a94e2d;--sand:#f0e6db;
       --amber:#9a6b16;--slate:#344b5b;--shadow:0 16px 40px rgba(21,33,29,.08);
+      --brand-pine:#12372f;--brand-pine-dark:#0c211c;--brand-sky:#a8cfd0;--brand-saffron:#e4b84a;--brand-coral:#e46f51;--brand-mist:#eef4ef;
     }
     *{box-sizing:border-box} html{scroll-behavior:auto} body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.55}
     button,a{font:inherit} a{color:inherit} button{color:inherit}
@@ -41,7 +43,7 @@
     .no-list li:before{border-color:var(--rust);border-radius:0;transform:rotate(45deg);width:7px;height:7px}
     .scope-table{border:1px solid var(--line);border-radius:7px;overflow:hidden}.scope-row{display:grid;grid-template-columns:1.4fr .7fr 2fr;gap:18px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:start}.scope-row:last-child{border-bottom:0}.scope-row.header{background:#eef1ed;font:500 11px 'IBM Plex Mono';letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.tag{display:inline-block;font:500 10px 'IBM Plex Mono';padding:4px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}.tag.must{background:var(--sage-2);color:var(--sage)}.tag.should{background:var(--sand);color:var(--rust)}.tag.later{background:#edf0f2;color:var(--slate)}
     .flow{display:flex;align-items:stretch;gap:8px;margin:22px 0}.step{flex:1;min-width:0;border:1px solid var(--line);padding:14px;border-radius:6px;background:#fff}.step b{display:block;font:500 10px 'IBM Plex Mono';color:var(--sage);margin-bottom:7px}.step span{font-size:13px}.arrow{display:grid;place-items:center;color:#88928d}
-    .state-machine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0}.phase{padding:17px 12px;text-align:center;border:1px solid var(--line);position:relative}.phase:after{content:"→";position:absolute;right:-9px;top:calc(50% - 11px);z-index:2;background:white;color:var(--sage)}.phase:last-child:after{content:"↻";right:5px;top:4px;background:transparent}.phase b{display:block;font:700 15px 'Libre Franklin';margin-bottom:4px}.phase small{font:400 11px 'IBM Plex Mono';color:var(--muted)}.phase.inhale{background:#e7f3ed}.phase.hold1{background:#f0eee7}.phase.exhale{background:#e5eef0}.phase.hold2{background:#f4eae5}
+    .state-machine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0}.phase{padding:17px 12px;text-align:center;border:1px solid var(--line);position:relative;color:var(--brand-pine-dark)}.phase:after{content:"→";position:absolute;right:-9px;top:calc(50% - 11px);z-index:2;background:white;color:var(--sage)}.phase:last-child:after{content:"↻";right:5px;top:4px;background:transparent}.phase b{display:block;font:700 15px 'Libre Franklin';margin-bottom:4px}.phase small{font:400 11px 'IBM Plex Mono';color:var(--brand-pine-dark)}.phase.inhale{background:var(--brand-sky)}.phase.hold1{background:var(--brand-saffron)}.phase.exhale{background:var(--brand-coral)}.phase.hold2{background:var(--brand-mist)}
     .spec{display:grid;grid-template-columns:180px 1fr;border-top:1px solid var(--line)}.spec dt,.spec dd{margin:0;padding:13px 0;border-bottom:1px solid var(--line)}.spec dt{font:500 12px 'IBM Plex Mono';color:var(--muted);padding-right:20px}.spec dd{font-size:14px}
     .screen{border:1px solid var(--line);border-radius:7px;padding:18px;display:grid;grid-template-columns:56px 1fr;gap:14px}.screen-num{width:42px;height:42px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font:500 12px 'IBM Plex Mono'}.screen h4{font-size:16px}.screen p{font-size:13px;color:var(--muted);margin:0}.screens{display:grid;gap:10px}
     .criteria{counter-reset:item;list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}.criteria li{counter-increment:item;padding:12px 0 12px 42px;border-bottom:1px solid var(--line);position:relative;font-size:14px}.criteria li:before{content:counter(item,decimal-leading-zero);position:absolute;left:0;top:13px;font:500 11px 'IBM Plex Mono';color:var(--sage)}
@@ -224,6 +226,7 @@
       <section id="architecture">
         <div class="section-head"><div class="section-no">06</div><div><h2>Technical architecture</h2><p>A cross-platform foundation with native health bridges and no backend dependency.</p></div></div>
         <div class="decision"><div><b>Framework</b><p>React Native with Expo development builds and TypeScript. Expo Go alone is insufficient for native health modules.</p></div><span class="choice">Recommended</span></div>
+        <div class="decision"><div><b>Visual system</b><p>The branding board owns palette, Newsreader/DM Sans typography, logo, and launch identity; the UX prototype owns screen hierarchy and state behavior. Runtime code maps both through semantic theme tokens.</p></div><span class="choice">Locked</span></div>
         <div class="decision"><div><b>Navigation</b><p>Expo Router or React Navigation; keep a shallow stack with modal setup and settings screens.</p></div><span class="choice">Either</span></div>
         <div class="decision"><div><b>State</b><p>Pure timer state machine plus a small app settings store. Avoid a global state library unless complexity earns it.</p></div><span class="choice">Lean</span></div>
         <div class="decision"><div><b>Persistence</b><p>Encrypted or platform-appropriate local storage for preferences and session history; schema-versioned migrations from day one.</p></div><span class="choice">Device only</span></div>

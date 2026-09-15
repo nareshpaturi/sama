@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useFocusEffect } from 'expo-router';
-import { colors, spacing, radius, type, fontWeight } from '../src/theme';
+import { colors, fonts, spacing, radius, type } from '../src/theme';
 import PrimaryButton from '../src/components/PrimaryButton';
 import StatCard from '../src/components/StatCard';
 import {
@@ -117,17 +117,19 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.sm,
   },
   brand: {
     fontSize: type.hero,
-    fontWeight: fontWeight.bold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
     marginTop: spacing.xs,
   },
   tagline: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.xs,
     marginBottom: spacing.lg,
@@ -141,7 +143,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: type.subtitle,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.displaySemibold,
     color: colors.ink,
     marginTop: spacing.xl,
     marginBottom: spacing.md,
@@ -156,6 +158,7 @@ const styles = StyleSheet.create({
   },
   empty: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     lineHeight: 22,
   },
@@ -166,15 +169,17 @@ const styles = StyleSheet.create({
   },
   sessionName: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
   },
   sessionMeta: {
     fontSize: type.body,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
   },
   sessionDate: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkFaint,
     marginTop: spacing.xs,
   },
@@ -193,11 +198,12 @@ const styles = StyleSheet.create({
   },
   navTitle: {
     fontSize: type.body,
-    fontWeight: fontWeight.semibold,
+    fontFamily: fonts.sansSemibold,
     color: colors.ink,
   },
   navSub: {
     fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
     color: colors.inkSoft,
     marginTop: spacing.xs,
   },

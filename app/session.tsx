@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import { useKeepAwake } from 'expo-keep-awake';
-import { colors, spacing, type, fontWeight } from '../src/theme';
+import { StatusBar } from 'expo-status-bar';
+import { colors, fonts, radius, spacing, type } from '../src/theme';
 import { BreathingEngine } from '../src/engine/BreathingEngine';
 import {
   PRESETS,
@@ -15,7 +16,6 @@ import {
   type PatternConfig,
 } from '../src/engine/types';
 import BreathingCircle from '../src/components/BreathingCircle';
-import PrimaryButton from '../src/components/PrimaryButton';
 import { playPhaseTone, playCompletionTone } from '../src/audio/tones';
 import { phaseHaptic, completionHaptic } from '../src/haptics';
 import { saveSession } from '../src/storage/sessions';
@@ -44,6 +44,7 @@ function parsePattern(raw: string | undefined): PatternConfig {
 
 export default function SessionScreen() {
   useKeepAwake();
+  const { width, height, fontScale } = useWindowDimensions();
 
   const params = useLocalSearchParams<{
     pattern?: string;
@@ -218,34 +219,71 @@ export default function SessionScreen() {
   const progress =
     phaseDurationMs > 0 ? Math.min(1, Math.max(0, phaseElapsedMs / phaseDurationMs)) : 0;
   const secondsLeft = Math.ceil(Math.max(0, phaseDurationMs - phaseElapsedMs) / 1000);
+  const sessionProgress = Math.min(1, totalElapsedMs / Math.max(1, totalDurationSec * 1000));
+  const phaseNumber = { inhale: 1, hold: 2, exhale: 3, rest: 4 }[phase];
+  const circleSize = Math.max(
+    190,
+    Math.min(280, width - spacing.xxl, height * (fontScale > 1.3 ? 0.27 : 0.34)),
+  );
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right', 'bottom']}>
+      <StatusBar style="light" />
       <View style={styles.container}>
-        <Text style={styles.patternName}>{patternName}</Text>
+        <View style={styles.topRow}>
+          <Pressable
+            onPress={endSession}
+            style={({ pressed }) => [styles.endButton, pressed && styles.controlPressed]}
+            accessibilityRole="button"
+            accessibilityLabel="End session"
+          >
+            <Text style={styles.endButtonText}>End</Text>
+          </Pressable>
+          <Text style={styles.topTime}>{formatClock(totalDurationSec)}</Text>
+          <View style={styles.topSpacer} />
+        </View>
+
+        <Text style={styles.patternName}>PHASE {phaseNumber} OF 4</Text>
 
         <View style={styles.circleWrap}>
-          <BreathingCircle phase={phase} progress={progress} secondsLeft={secondsLeft} />
+          <BreathingCircle
+            phase={phase}
+            progress={progress}
+            secondsLeft={secondsLeft}
+            size={circleSize}
+          />
         </View>
 
         <Text style={styles.phaseLabel}>{PHASE_LABELS[phase]}</Text>
         <Text style={styles.cue}>{PHASE_CUES[phase]}</Text>
 
         <Text style={styles.cycle}>
-          Cycle {cycle} of {totalCycles}
-        </Text>
-        <Text style={styles.time}>
-          {formatClock(totalElapsedMs / 1000)} / {formatClock(totalDurationSec)}
+          Cycle {cycle} of {totalCycles} · {pattern.inhaleSec}–{pattern.holdSec}–{pattern.exhaleSec}–{pattern.restSec}
         </Text>
 
+        {paused ? (
+          <View style={styles.pausePanel} accessibilityRole="alert">
+            <Text style={styles.pauseTitle}>Session paused</Text>
+            <Text style={styles.pauseCopy}>Resume when you feel ready.</Text>
+          </View>
+        ) : null}
+
+        <View style={styles.progressTrack}>
+          <View style={[styles.progressFill, { width: `${sessionProgress * 100}%` }]} />
+        </View>
+        <View style={styles.timeRow}>
+          <Text style={styles.time}>{formatClock(totalElapsedMs / 1000)}</Text>
+          <Text style={styles.time}>{paused ? 'Session paused' : 'Session in progress'}</Text>
+        </View>
+
         <View style={styles.controls}>
-          <PrimaryButton
-            title={paused ? 'Resume' : 'Pause'}
-            variant="secondary"
+          <Pressable
             onPress={togglePause}
-          />
-          <Pressable onPress={endSession} style={styles.endButton} accessibilityRole="button">
-            <Text style={styles.endButtonText}>End session</Text>
+            style={({ pressed }) => [styles.roundAction, pressed && styles.controlPressed]}
+            accessibilityRole="button"
+            accessibilityLabel={paused ? 'Resume session' : 'Pause session'}
+          >
+            <Text style={styles.roundActionText}>{paused ? '▶' : 'Ⅱ'}</Text>
           </Pressable>
         </View>
       </View>
@@ -256,58 +294,135 @@ export default function SessionScreen() {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.practiceBackground,
   },
   container: {
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing.md,
-    paddingBottom: spacing.lg,
+    paddingBottom: spacing.md,
+  },
+  topRow: {
+    width: '100%',
+    minHeight: 48,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  topTime: {
+    fontSize: type.caption,
+    fontFamily: fonts.sansSemibold,
+    color: colors.practiceText,
+    fontVariant: ['tabular-nums'],
+  },
+  topSpacer: {
+    width: 52,
   },
   patternName: {
     fontSize: type.caption,
-    color: colors.inkSoft,
+    fontFamily: fonts.sansSemibold,
+    color: colors.practiceTextMuted,
     letterSpacing: 1,
     textTransform: 'uppercase',
+    marginTop: spacing.md,
   },
   circleWrap: {
-    marginTop: spacing.lg,
-    marginBottom: spacing.lg,
+    marginTop: spacing.md,
+    marginBottom: spacing.md,
   },
   phaseLabel: {
     fontSize: type.title,
-    fontWeight: fontWeight.semibold,
-    color: colors.ink,
+    fontFamily: fonts.displaySemibold,
+    color: colors.practiceText,
   },
   cue: {
     fontSize: type.body,
-    color: colors.inkSoft,
+    fontFamily: fonts.sansRegular,
+    color: colors.practiceTextMuted,
     marginTop: spacing.xs,
+    textAlign: 'center',
   },
   cycle: {
-    fontSize: type.body,
-    color: colors.inkSoft,
-    marginTop: spacing.lg,
+    fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
+    color: colors.practiceTextMuted,
+    marginTop: spacing.sm,
     fontVariant: ['tabular-nums'],
   },
   time: {
     fontSize: type.caption,
-    color: colors.inkFaint,
-    marginTop: spacing.xs,
+    fontFamily: fonts.sansRegular,
+    color: colors.practiceTextMuted,
     fontVariant: ['tabular-nums'],
   },
-  controls: {
-    marginTop: 'auto',
+  pausePanel: {
     width: '100%',
-    gap: spacing.md,
+    marginTop: spacing.md,
+    padding: spacing.md,
+    alignItems: 'center',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.practiceLine,
+    backgroundColor: colors.practiceSurface,
+  },
+  pauseTitle: {
+    fontSize: type.body,
+    fontFamily: fonts.sansSemibold,
+    color: colors.practiceText,
+  },
+  pauseCopy: {
+    fontSize: type.caption,
+    fontFamily: fonts.sansRegular,
+    color: colors.practiceTextMuted,
+    marginTop: spacing.xs,
+  },
+  progressTrack: {
+    width: '100%',
+    height: 3,
+    marginTop: 'auto',
+    backgroundColor: colors.practiceLine,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: colors.practiceText,
+  },
+  timeRow: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: spacing.sm,
+  },
+  controls: {
+    marginTop: spacing.md,
+    width: '100%',
+    alignItems: 'center',
   },
   endButton: {
+    width: 52,
+    minHeight: 44,
     alignItems: 'center',
-    paddingVertical: spacing.sm,
+    justifyContent: 'center',
   },
   endButtonText: {
     fontSize: type.body,
-    color: colors.danger,
+    fontFamily: fonts.sansSemibold,
+    color: colors.practiceText,
+  },
+  roundAction: {
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.practiceText,
+  },
+  roundActionText: {
+    fontSize: 20,
+    fontFamily: fonts.sansBold,
+    color: colors.pine,
+  },
+  controlPressed: {
+    opacity: 0.72,
   },
 });

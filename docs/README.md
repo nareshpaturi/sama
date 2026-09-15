@@ -10,6 +10,7 @@ are self-contained exports — open any of them in a browser.
 | `branding-design.html` | Brand and design direction: "Sama" / "Sama Breath", positioning ("Breathe by your numbers."), logo concept, color and typography systems, launch copy |
 | `market-research.html` | Breathwork app market research: competitive landscape, positioning gaps, differentiation |
 | `research/market-fit-report.md` | Raw market-fit research notes behind the market research doc |
+| `mvp-launch-implementation-plan.md` | Checkpointed implementation, validation, beta, and store-launch plan |
 
 Related: the app itself lives in `app/` and `src/`; the local testing guide is
 in the repo-root `README.md`.

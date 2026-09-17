@@ -10,8 +10,8 @@ in `src/theme.ts`.
 
 | File | What it is |
 |---|---|
-| `product-requirements.html` | MVP product specification (v1.3): scope, requirements, data model, audio rollout (tones + haptics first, recorded voice before launch), launch checklist |
-| `ux-design.html` | UX design: user flows, screen inventory, interactive mockups, custom timer builder, health permission flow, progression analytics |
+| `product-requirements.html` | Lean MVP product specification (v1.4): fastest safe launch scope, requirements, data model, tones/haptics guidance, optional health-session writing, and post-MVP boundaries |
+| `ux-design.html` | UX design: user flows, interactive mockups, progressively disclosed timer setup, focused practice, safe completion, and post-MVP progression concepts |
 | `branding-design.html` | Brand and design direction: "Sama" / "Sama Breath", positioning ("Breathe by your numbers."), logo concept, color and typography systems, launch copy |
 | `market-research.html` | Breathwork app market research: competitive landscape, positioning gaps, differentiation |
 | `research/market-fit-report.md` | Raw market-fit research notes behind the market research doc |

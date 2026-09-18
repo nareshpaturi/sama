@@ -1,10 +1,18 @@
 # Sama Breath MVP launch implementation plan
 
-Status: proposed · lean-scope update (2026-09-17)
+Status: proposed · lean scope (2026-09-17), design documentation aligned (2026-09-18)
 Target: fastest safe public iOS and Android MVP  
 Expected delivery: 5–7 weeks with one experienced cross-platform engineer plus part-time product/design/QA; health-session writing may follow in a rapid point release if native integration threatens the core launch date
 
 This plan converts the product requirements and UX design into gated implementation checkpoints. A checkpoint is complete only when its exit evidence exists; completing code without passing the gate does not advance the release.
+
+## Design documentation update · 2026-09-18
+
+The [brand guide](branding-design.html) and [UX mocks](ux-design.html) are now v2; the [design review](design-review.md) records the rationale. This is a documentation-only update. Existing checkpoint states, checkboxes, and historical evidence below have not been advanced or revalidated.
+
+Carry forward “Your breath. Your rhythm.”, the shared breath mark, the pine/paper/mist hierarchy, and Breathe/History/Settings navigation. Customize practice is an optional dedicated setup surface. Use full phase labels: Inhale, Hold after inhale, Exhale, Rest.
+
+The duration design is now explicit: round up to the cycle that reaches the target and disclose its actual duration before Begin. A 5-minute 4–4–4–4 practice is 19 cycles / 5:04; 4–4–6–4 is 17 cycles / 5:06. Pausing excludes paused time; restarting a partially used phase can extend actual active practice time. Completion reports actual active time and completed cycles. Implementation and device validation remain future work.
 
 ## Launch definition
 
@@ -27,7 +35,9 @@ Recorded voice, wearable reads, biometric comparisons, trend insights, streaks, 
 - Health-denied and no-wearable users must pass every core breathing flow at every checkpoint.
 - A post-MVP feature cannot enter the critical path unless the core release is already passing and the feature has complete evidence.
 
-## Current baseline
+## Recorded baseline · 2026-09-17
+
+These implementation findings are retained from the prior audit and were not revalidated by the September 18 design review.
 
 | Checkpoint | Current state | Blocking evidence |
 |---|---|---|
@@ -73,7 +83,9 @@ HealthKit permission-state design must follow [Apple’s authorization model](ht
 
 ## Visual-system alignment contract
 
-Alignment date: 2026-09-15
+Historical implementation alignment date: 2026-09-15
+
+The implementation evidence in this section predates the 2026-09-18 documentation polish. It does not certify conformance to v2. The v2 docs supersede the earlier visual examples and launch copy; runtime changes have not been made in this pass.
 
 The branding and UX documents previously described different palettes and font pairs, while the application used a third indigo/teal system. The following ownership contract now prevents further drift:
 
@@ -107,7 +119,7 @@ Target: Week 1
 ### Implementation checklist
 
 - [ ] Apply the locked phase contract in code and tests: all four phases are `1–20s` in whole seconds for MVP. Zero-second skipped phases and named 4-7-8 coaching are post-MVP.
-- [ ] Define the pre-session and post-session heart-rate windows, minimum sample counts, and delayed-data behavior before implementing comparisons.
+- Post-MVP dependency (outside CP0): define comparison windows, sample sufficiency, and delayed-data behavior before wearable comparisons are designed or implemented.
 - [ ] Define supported iOS and Android versions. Set Android min SDK to at least 26 and set an explicit iOS deployment target compatible with the selected Expo/React Native/Hermes versions; record both decisions in the PRD.
 - [ ] Provision and select a supported Xcode version locally and in CI, accept required licenses, install the selected iOS Simulator runtimes, and record the toolchain versions.
 - [ ] Disable iPad/tablet support for the first MVP; tablet-specific layouts and orientation validation are post-MVP.
@@ -157,7 +169,7 @@ Target: Weeks 2–3
 
 ### Exit evidence
 
-- [ ] A five-minute foreground session finishes within ±250 ms on representative iOS and Android devices.
+- [ ] A 5-minute target using 4–4–4–4 finishes within ±250 ms of its disclosed 5:04 duration on representative iOS and Android devices, without interruptions.
 - [ ] Locking or backgrounding always returns to an unmistakable paused state.
 - [ ] Resuming restarts the interrupted phase after the documented countdown.
 - [ ] Summary duration excludes paused time and cycle count includes only completed cycles.
@@ -178,7 +190,7 @@ Target: Week 3
 - [ ] Persist onboarding completion locally and provide a Settings route to revisit safety/cue information.
 - [ ] Do not request health permission during onboarding or app launch.
 - [ ] Make Home show the default or last-used practice and Begin action first.
-- [ ] Progressively disclose the 1, 3, 5, and 10 minute choices, 4–4–6–4 preset, and 1–20 second phase editing inline or in a sheet.
+- [ ] Use an optional Customize practice surface for the 1, 3, 5, and 10 minute targets, 4–4–6–4 preset, and 1–20 second phase editing. Use this rhythm returns to Breathe; show whole-cycle duration before Begin.
 - [ ] Recalculate cycle length, estimated whole cycles, actual duration, and guided cadence after every phase or duration change.
 - [ ] Persist configuration changes and restore them on the next launch.
 - [ ] Implement lean primary navigation for Breathe, History, and Settings. Do not expose Progress until real post-MVP insights are implemented.

@@ -198,7 +198,7 @@ export default function SettingsScreen() {
         <Text style={styles.sectionTitle}>About</Text>
         <View style={styles.card}>
           <Text style={styles.body}>Sama Breath 1.0.0</Text>
-          <Text style={styles.bodyMuted}>Breathe by your numbers.</Text>
+          <Text style={styles.bodyMuted}>Steady breath. Steady mind.</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

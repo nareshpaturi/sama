@@ -1,12 +1,27 @@
-# Sama Breath MVP launch implementation plan
+# Sama Breath launch implementation plan
 
-Status: proposed · lean scope (2026-09-17), design documentation aligned (2026-09-18)
-Target: fastest safe public iOS and Android MVP  
-Expected delivery: 5–7 weeks with one experienced cross-platform engineer plus part-time product/design/QA; health-session writing may follow in a rapid point release if native integration threatens the core launch date
+Status: proposed · v3 scope (2026-09-22); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
+Target: public iOS and Android v1.0 (the wedge), then the v1.1 track (reasons to return)  
+Expected delivery: v1.0 about 6–7 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 3–4 weeks. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
 
 This plan converts the product requirements and UX design into gated implementation checkpoints. A checkpoint is complete only when its exit evidence exists; completing code without passing the gate does not advance the release.
 
+## v3 scope update · 2026-09-22
+
+The binding decision contract is the “v3 direction” section of the [design review](design-review.md); the [PRD v2.0](product-requirements.html) turns it into requirements. This is a documentation-only update: no code changed, and no checkpoint state, checkbox, or historical evidence was advanced or revalidated.
+
+What changed:
+
+- **Positioning.** Practitioner-first (yoga practitioners, teacher-training students, teachers); the curious beginner follows techniques with gentle defaults; teachers distribute through share links. Promise: authentic pranayama, guided at your pace. Free, offline, no account.
+- **v1.0 adds** flexible rhythms (inhale and exhale 1–20 s; holds 0–20 s, where 0 is skipped and shown “Off”; library half-second steps and left/right side labels), the eight-technique practice library, bundled AI voice cues, My rhythms (up to 20), share links with a static web fallback, app-icon quick actions, one-screen first use, and four-tab navigation: Breathe · Practices · History · Settings.
+- **Moved to v1.1:** Apple Health / Health Connect writing (CP5). New in v1.1: routines, gentle progression, practice calendar (no streaks), daily reminder, fuller voice guidance.
+- **Not building:** wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, streaks, scores, badges. The Progress/Insights route is removed, not deferred.
+- **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
+- **Checkpoints.** CP0 adopts the step bounds; CP2 becomes one-screen first use, four tabs, and the cue chip; new CP2b covers the library, voice, My rhythms, sharing, and quick actions; CP3 and CP4 extend to the new surfaces; CP5 moves to the [v1.1 track](#v11-track--reasons-to-return); CP6 and CP7 add the voice licence, link-verification files, technique-name store copy, and the Play closed-testing requirement.
+
 ## Design documentation update · 2026-09-18
+
+Historical: this v2 note predates v3. Where it differs from the v3 scope update above (navigation, first use, “cycle”), v3 wins.
 
 The [brand guide](branding-design.html) and [UX mocks](ux-design.html) are now v2; the [design review](design-review.md) records the rationale. This is a documentation-only update. Existing checkpoint states, checkboxes, and historical evidence below have not been advanced or revalidated.
 
@@ -16,26 +31,31 @@ The duration design is now explicit: round up to the cycle that reaches the targ
 
 ## Launch definition
 
-The public MVP includes:
+The public v1.0 (the wedge) includes:
 
-- Offline four-phase breathing with presets and independently adjustable phase timing.
-- Accurate tones, haptics, visual guidance, pause/resume, interruption handling, and safe session ending.
-- First-run onboarding, progressively disclosed accessible configuration, and local session history.
-- Optional HealthKit and Health Connect session writing when it is stable and does not delay the core release.
-- Privacy, safety, local-data deletion, store disclosures, crash monitoring, and production builds.
+- The core practice from v2: monotonic timer, three-second settle countdown, pause and resume of the interrupted step, end confirmation, interruption pause, local history, accessibility, privacy, and Delete local history.
+- Flexible rhythms: inhale and exhale 1–20 s; holds 0–20 s (0 = skipped, shown “Off”); library techniques may use half-second steps and more than four steps with left/right side labels; the custom builder stays four rows in whole seconds.
+- The practice library: Sama Vritti, Visama Vritti, Nadi Shodhana, Bhramari, Ujjayi, Sheetali, coherent breathing, and 4-7-8, each with sourced content and gentle defaults.
+- Bundled AI voice cues (cue words, optional technique introductions, pronunciation clips) with Voice / Tones / Silent cue modes and independent haptics.
+- My rhythms (up to 20), share links (`https://samabreath.app/r/…`) with an in-app preview and a static web fallback, and app-icon quick actions.
+- One-screen first use and four-tab navigation: Breathe · Practices · History · Settings.
+- Store disclosures, crash monitoring, and production builds.
 
-Recorded voice, wearable reads, biometric comparisons, trend insights, streaks, pattern aggregates, daily reminders, tablet-specific layouts, dark mode, and direct wearable-vendor integrations are post-MVP. They must not delay the first public release.
+Apple Health / Health Connect writing is no longer part of v1.0; it moves to the [v1.1 track](#v11-track--reasons-to-return) with routines, gentle progression, the practice calendar, the daily reminder, and fuller voice guidance. Later concepts (Kapalabhati and Bhastrika rapid-rhythm mode, Hindi localization, widgets, Apple Watch / Wear OS), tablet-specific layouts, and dark mode must not delay v1.0. Wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, and streaks, scores, or badges are not being built.
 
 ## Gate rules
 
 - Checkpoints on the critical path are completed in order.
 - Every gate requires reproducible test evidence, not verbal confirmation.
 - A failed regression reopens the checkpoint that introduced the failure.
-- Sample data, dead controls, misleading health labels, and undocumented permission prompts are release blockers; unfinished post-MVP destinations are removed from production navigation.
-- Health-denied and no-wearable users must pass every core breathing flow at every checkpoint.
-- A post-MVP feature cannot enter the critical path unless the core release is already passing and the feature has complete evidence.
+- Sample data, dead controls, misleading health labels, and undocumented permission prompts are release blockers; unfinished v1.1 destinations are removed from production navigation.
+- Unsafe link rendering, an accepted out-of-bounds rhythm, an unreviewed vigorous technique, a “Reviewed by” line without a recorded review, and an unapproved voice clip are release blockers.
+- Users with no network and every permission denied must pass every core practice flow at every checkpoint.
+- A v1.1 feature cannot enter the v1.0 critical path. v1.1 checkpoints start after v1.0 is passing and may not regress any v1.0 gate.
 
 ## Recorded baseline · 2026-09-17
+
+Historical evidence; predates v3 and is not revalidated. CP2b and the v1.1 track have no recorded baseline, and CP5 now lives on the v1.1 track.
 
 These implementation findings are retained from the prior audit and were not revalidated by the September 18 design review.
 
@@ -52,6 +72,8 @@ These implementation findings are retained from the prior audit and were not rev
 | Post-MVP · Voice and insights | Deferred | Recorded voice, wearable reads, trends, streaks, and richer progression follow launch. |
 
 ## iOS readiness audit and disposition
+
+Historical evidence; predates v3. HealthKit findings now apply to the v1.1 Health track.
 
 Audit date: 2026-09-14
 
@@ -82,6 +104,8 @@ HealthKit permission-state design must follow [Apple’s authorization model](ht
 | P1 | The generated minimum-version metadata and the React Native/Hermes minimum are not explicitly aligned. | CP0 sets one supported iOS deployment target in Expo configuration, native build settings, CI, and the PRD. |
 
 ## Visual-system alignment contract
+
+Historical evidence; predates v3. Checkbox states below are unchanged.
 
 Historical implementation alignment date: 2026-09-15
 
@@ -118,14 +142,17 @@ Target: Week 1
 
 ### Implementation checklist
 
-- [ ] Apply the locked phase contract in code and tests: all four phases are `1–20s` in whole seconds for MVP. Zero-second skipped phases and named 4-7-8 coaching are post-MVP.
-- Post-MVP dependency (outside CP0): define comparison windows, sample sufficiency, and delayed-data behavior before wearable comparisons are designed or implemented.
+- [ ] Apply the v3 step contract in code and tests: inhale and exhale `1–20 s`; holds `0–20 s`, where 0 skips the step and displays “Off”; the custom builder has four steps in whole seconds; library techniques may use half-second steps, more than four steps, and left/right side labels.
+- Withdrawn in v3 (not a checkpoint item): wearable comparison windows. Wearable reads and comparisons are not being built.
+- [ ] Remove or disable HealthKit/Health Connect modules, entitlements, and purpose strings in the v1.0 release configuration; they return with the v1.1 Health track.
+- [ ] Confirm ownership and static hosting for samabreath.app (share links, link-verification files, web fallback, privacy policy).
+- [ ] Verify the quick-actions library (candidate: `expo-quick-actions`) against the installed Expo SDK 57, or choose an alternative, and record the decision.
 - [ ] Define supported iOS and Android versions. Set Android min SDK to at least 26 and set an explicit iOS deployment target compatible with the selected Expo/React Native/Hermes versions; record both decisions in the PRD.
 - [ ] Provision and select a supported Xcode version locally and in CI, accept required licenses, install the selected iOS Simulator runtimes, and record the toolchain versions.
-- [ ] Disable iPad/tablet support for the first MVP; tablet-specific layouts and orientation validation are post-MVP.
+- [ ] Disable iPad/tablet support for v1.0; tablet-specific layouts and orientation validation are outside v1.0.
 - [ ] Configure `expo-audio` for least privilege in the test build: disable microphone permission/recording and background playback unless a reviewed feature requires them.
 - [ ] Inspect the generated release `Info.plist` and entitlements. Remove unjustified microphone, background-audio, local-network, Bonjour, and development-client declarations from production artifacts.
-- [ ] Verify the `react-native-health` New Architecture patch against the selected Xcode, iOS SDK, React Native version, and CocoaPods build rather than assuming the existing patch is sufficient.
+- [ ] Verify the `react-native-health` New Architecture patch against the selected Xcode, iOS SDK, React Native version, and CocoaPods build rather than assuming the existing patch is sufficient (needed by the v1.1 Health track; may move with it if the module is removed from v1.0).
 - [ ] Add stable `typecheck`, unit-test, and build scripts to `package.json`.
 - [ ] Add CI gates for clean install, TypeScript, unit tests, Android debug build, and an unsigned iOS simulator build.
 - [ ] Audit the current dependency warnings and vulnerabilities; document accepted transitive risks and upgrade actionable direct dependencies.
@@ -142,7 +169,9 @@ Target: Week 1
 - [ ] The archived release `Info.plist` contains only justified privacy and background capabilities and reports the locked minimum iOS version.
 - [x] The App Store source icon is 1024×1024 and contains no alpha channel (verified 2026-09-14).
 - [ ] CI produces repeatable build artifacts for both platforms.
-- [ ] Product decisions for phase ranges and health windows are reflected consistently in the PRD, UX document, and tests.
+- [ ] Step bounds (inhale and exhale 1–20 s, holds 0–20 s, library half seconds) are reflected consistently in the PRD, UX document, and tests.
+- [ ] The v1.0 release configuration declares no HealthKit or Health Connect permission, entitlement, or purpose string.
+- [ ] Domain ownership and the quick-actions library decision are recorded.
 
 Gate: no core UX implementation proceeds on an unbuildable platform baseline.
 
@@ -153,117 +182,292 @@ Target: Weeks 2–3
 ### Implementation checklist
 
 - [ ] Use a monotonic elapsed-time source for foreground timing; keep wall-clock timestamps only for record boundaries.
-- [ ] Add explicit engine operations for the three-second pre-session countdown, pausing, restarting the interrupted phase, resuming after the same countdown, requesting end confirmation, and ending.
+- [ ] Model the engine as an ordered step list from the start (box 4 · 4 · 4 · 4 is four steps) so CP2b extends it rather than rewriting it.
+- [ ] Add explicit engine operations for the three-second pre-session countdown, pausing, restarting the interrupted step, resuming after the same countdown, requesting end confirmation, and ending.
 - [ ] Subscribe to app lifecycle and audio-interruption events. Backgrounding, screen locking, calls, and unsafe audio interruptions must enter the same visible paused state.
 - [ ] On iOS, handle both `inactive` and `background` transitions, including Notification Center/Control Center, app switching, calls, alarms, Siri, route changes, and device locking.
 - [ ] Create a dedicated paused presentation that names the state and keeps Resume and End available.
 - [ ] Keep the screen awake only while guidance is actively running.
 - [ ] Track active elapsed time separately from paused wall time.
-- [ ] Store completed cycles, allowing zero for a session ended during its first cycle.
+- [ ] Store completed rounds, allowing zero for a session ended during its first round.
 - [ ] Prevent duplicate completion and end actions while persistence/navigation is pending.
-- [ ] Add a session initialization state so health/settings reads cannot look like a frozen active timer.
-- [ ] Make the requested duration and expected whole-cycle behavior explicit before starting; MVP duration choices are 1, 3, 5, and 10 minutes.
-- [ ] Ensure tones and haptics fire exactly once per active phase boundary and do not fire while paused.
-- [ ] Configure the iOS audio session deliberately: validate silent-switch behavior, mixing/ducking with other audio, interruption recovery, Bluetooth route changes, and deactivation after practice.
-- [ ] Add engine tests for all MVP durations, 1–20 second phases, long phases, countdown, pause/resume, end confirmation, app resume, delayed ticks, and completion boundaries.
+- [ ] Add a session initialization state so settings or content reads cannot look like a frozen active timer.
+- [ ] Make the requested duration and whole-round behavior explicit before starting (planned rounds = round up of target ÷ round length); v1.0 duration choices are 1, 3, 5, and 10 minutes.
+- [ ] Ensure tones and haptics fire exactly once per active step boundary and do not fire while paused.
+- [ ] Configure the iOS audio session deliberately: validate silent-switch behavior, mixing/ducking with other audio, interruption recovery, Bluetooth route changes, and deactivation after practice. Record the result as the locked audio decision that voice clips will follow.
+- [ ] Add engine tests for all v1.0 durations, whole-second steps at the 1–20 s bounds, long steps, countdown, pause/resume, end confirmation, app resume, delayed ticks, and completion boundaries.
 
 ### Exit evidence
 
 - [ ] A 5-minute target using 4–4–4–4 finishes within ±250 ms of its disclosed 5:04 duration on representative iOS and Android devices, without interruptions.
 - [ ] Locking or backgrounding always returns to an unmistakable paused state.
-- [ ] Resuming restarts the interrupted phase after the documented countdown.
-- [ ] Summary duration excludes paused time and cycle count includes only completed cycles.
+- [ ] Resuming restarts the interrupted step after the documented countdown.
+- [ ] Summary duration excludes paused time and round count includes only completed rounds.
 - [ ] Force-quit does not create a completed record.
-- [ ] Tones, haptics, and the displayed phase remain synchronized during a 30-minute soak test.
-- [ ] On physical iPhone, locking or interrupting the app produces no background phase tones and no elapsed guidance time while paused.
+- [ ] Tones, haptics, and the displayed step remain synchronized during a 30-minute soak test.
+- [ ] On physical iPhone, locking or interrupting the app produces no background step cues and no elapsed guidance time while paused.
 - [ ] Silent-switch and other-audio behavior matches the locked product decision without unexpectedly stopping the user’s existing audio.
 
-Gate: timer drift, stale active UI, unsafe ending, or incorrect duration/cycle accounting blocks CP2.
+Gate: timer drift, stale active UI, unsafe ending, or incorrect duration/round accounting blocks CP2.
 
-## CP2 · Implement the first-use journey and primary navigation
+## CP2 · Implement one-screen first use, four tabs, and the cue chip
 
-Target: Week 3
+Target: Week 4
 
 ### Implementation checklist
 
-- [ ] Add three first-run screens: value, safety, and cue preferences.
-- [ ] Persist onboarding completion locally and provide a Settings route to revisit safety/cue information.
-- [ ] Do not request health permission during onboarding or app launch.
-- [ ] Make Home show the default or last-used practice and Begin action first.
-- [ ] Use an optional Customize practice surface for the 1, 3, 5, and 10 minute targets, 4–4–6–4 preset, and 1–20 second phase editing. Use this rhythm returns to Breathe; show whole-cycle duration before Begin.
-- [ ] Recalculate cycle length, estimated whole cycles, actual duration, and guided cadence after every phase or duration change.
+- [ ] Add one first-use screen: welcome, comfort guidance, wellness disclaimer, and Continue. Continue records first use as complete and opens Breathe with Sama Vritti (4 · 4 · 4 · 4, 5 min) ready; when a quick action or link opened first use, Continue proceeds to it. “Begin” is reserved for starting a practice.
+- [ ] Persist first-use completion locally; Settings repeats the comfort guidance and cue controls.
+- [ ] Do not request any permission during first use or app launch.
+- [ ] Make Breathe show the last or default practice, planned rounds and duration, and Begin first.
+- [ ] Add the cue chip on Breathe (Voice / Tones / Silent) and matching Settings controls; haptics are independent. Defaults: Voice on, haptics on, motion follows the system. The Voice option plays clips once CP2b bundles them.
+- [ ] Use an optional Adjust rhythm surface for the 1, 3, 5, and 10 minute targets and the four-row custom builder (inhale and exhale 1–20 s, holds 0–20 s with “Off” at 0, whole seconds). Use this rhythm returns to Breathe; show planned rounds and duration before Begin.
+- [ ] Recalculate round length, planned rounds, planned duration, and guided breaths per minute after every step or duration change.
 - [ ] Persist configuration changes and restore them on the next launch.
-- [ ] Implement lean primary navigation for Breathe, History, and Settings. Do not expose Progress until real post-MVP insights are implemented.
+- [ ] Implement four-tab navigation: Breathe · Practices · History · Settings. Remove the Progress route from production navigation. Practices lists Sama Vritti until CP2b adds the library.
 - [ ] Preserve navigation state safely around an active session and prevent accidental navigation away from it.
 - [ ] Add loading and recoverable error states for storage reads and missing session IDs.
 
 ### Exit evidence
 
-- [ ] A new user reaches a ready-to-start practice after the three short onboarding screens.
-- [ ] A returning user can start the last-used practice with one primary action from Home.
-- [ ] `4–4–6–4` is selectable in one action and editable phase by phase.
-- [ ] Every top-level destination is reachable with and without prior sessions.
+- [ ] A new user starts a practice from the single first-use screen with one tap.
+- [ ] A returning user can start the last practice with one primary action from Breathe.
+- [ ] `4 · 4 · 6 · 4` and `4 · 0 · 6 · 0` can be entered; a 0-second hold reads “Off.”
+- [ ] Every tab is reachable with and without prior sessions; no Progress or Insights route exists.
+- [ ] The cue chip and Settings stay in sync.
 - [ ] No permission prompt appears before contextual explanation.
 
-Gate: five moderated first-use tests must complete setup and start a session without facilitator correction.
+Gate: five moderated first-use tests must complete first use and start a practice without facilitator correction.
+
+## CP2b · Practice library, voice, and sharing
+
+Target: Weeks 4–7 (flexible engine and library about 1.5 weeks, voice about 0.5, My rhythms and share links about 1, quick actions within the 0.5-week first-use and quick-actions estimate)
+
+### Implementation checklist
+
+Engine and library
+
+- [ ] Generalize the engine to an ordered step list: kind (inhale, hold, exhale, rest), seconds, optional side (left or right). Skip 0-second steps without cues; support half-second steps; derive round length, planned rounds, and guided breaths per minute (inhale steps per minute).
+- [ ] Define the technique content schema (PRD section 05) and bundle the eight techniques as versioned data with a CI schema test.
+- [ ] Ship the library defaults from the PRD table (Sama Vritti 4 · 4 · 4 · 4, Visama Vritti in 4 · out 6, Nadi Shodhana in 4 · out 6 each side, Bhramari in 4 · hum 8, Ujjayi 5 · 5, Sheetali in 4 · out 6 at 3 min, coherent 5.5 · 5.5, 4-7-8 at 1 min).
+- [ ] Implement Practices (library, then My rhythms) and technique detail: names, pronunciation respelling and clip, how-to steps, traditional context, “Take care,” “What research says,” “Based on,” and “Reviewed by” only from a recorded review.
+- [ ] Extend Adjust rhythm to library techniques: step structure and sides preserved; half-second increments only where the technique defines them.
+- [ ] Show the guide and a progress ring instead of a countdown numeral for half-second steps; show Left / Right side cues and Hum for Bhramari.
+
+Voice
+
+- [ ] Bundle AI-generated clips—cue words (Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch), optional technique introductions, and pronunciation clips—with a build-time manifest of measured clip lengths. No runtime API, key, or network call.
+- [ ] Implement the cue scheduler: Voice replaces tones; a step shorter than its cue plus 0.2 s plays its tone; a missing clip falls back to its tone; haptics stay independent; audio follows the CP1 locked decision.
+- [ ] Add the voice-introductions setting and the Settings → About disclosure that voice guidance is AI-generated.
+
+My rhythms
+
+- [ ] Save up to 20 named rhythms (plain text, at most 40 characters) from the custom builder, an adjusted library technique, or a received link; rename; delete with confirmation; explain the limit at 20.
+
+Share links
+
+- [ ] Encode and decode `https://samabreath.app/r/…` carrying only a display name, step list (kind, seconds, optional side), target (1, 3, 5, or 10 min), and optional library technique ID.
+- [ ] Validate every field and reject the whole link on any failure; without a technique ID the steps must fit the custom builder, with one they must match the installed technique. Unknown technique IDs are invalid; vigorous techniques are not shareable.
+- [ ] Never render link content as HTML; safety and instruction text comes only from app content.
+- [ ] Implement the share preview, the incoming preview (Save, Begin), and the invalid-link state; first use comes first when incomplete.
+- [ ] Configure iOS Associated Domains and Android App Links; host `apple-app-site-association` and `assetlinks.json` on samabreath.app.
+- [ ] Publish the static web fallback page: rhythm as plain text, App Store and Google Play links with fixed campaign identifiers, no trackers or cookies.
+
+Quick actions
+
+- [ ] Implement “Begin last practice” (named with the most recent practice), “1-minute box breathing,” and the most recent other practice (omitted until history has two distinct practices) on iOS and Android with the library chosen in CP0. Each opens the settle countdown with Cancel; before first use is complete, each opens first use; a deleted last practice falls back to Breathe.
+
+### Exit evidence
+
+- [ ] Step-engine tests pass for 0-second holds (skipped, silent, shown “Off”), side labels in order, half-second steps, and planned rounds for every library default (for example 19 rounds / 5:04 box, 15 rounds / 5:00 Nadi Shodhana, 28 rounds / 5:08 coherent, 4 rounds / 1:16 4-7-8).
+- [ ] All eight techniques pass the schema test with sourced content (“Based on,” “Take care,” “What research says”); holds are at most 20 s; no “Reviewed by” appears without a review record.
+- [ ] Voice clips are bundled; every cue word measures at most 0.8 s; tone fallback is verified for short steps; a listener who knows Sanskrit or Hindi has approved every clip, with the approval recorded.
+- [ ] My rhythms save, rename, delete, and limit tests pass; history snapshots survive rename and delete.
+- [ ] Share-link encode/decode, per-field validation, and fuzz tests pass (malformed, truncated, oversized, out-of-bounds, unknown ID, HTML or script in the name).
+- [ ] Universal Links (iOS) and App Links (Android) open the in-app preview on physical devices from cold and warm start; without the app, the web fallback page is live and shows the rhythm and store links.
+- [ ] Quick actions work on physical iOS and Android devices from cold and warm start and route to first use when it is incomplete.
+- [ ] Every practice flow works in airplane mode.
+
+Gate: unsafe link rendering, an accepted out-of-bounds rhythm, unsourced technique content, or an unapproved voice clip blocks CP3.
 
 ## CP3 · Meet the accessibility and visual quality bar
 
-Target: Week 4
+Target: gate closes in Week 7; core-surface work runs alongside CP1, and new surfaces are covered as CP2 and CP2b land
 
 ### Implementation checklist
 
 - [x] Replace failing text colors with tokens that meet WCAG AA on every used surface.
-- [ ] Support Dynamic Type without truncating phase labels, countdowns, safety copy, values, or primary actions.
+- [ ] Support Dynamic Type without truncating step labels, side labels, countdowns, safety copy, values, or primary actions.
 - [ ] Make session and setup layouts responsive on the smallest supported phone and at 200% text size.
-- [ ] Replace the fixed 280-point breathing geometry with bounded responsive sizing so the phase, countdown, controls, and safety actions remain visible on a small iPhone at large text sizes.
-- [ ] Add screen-reader labels, roles, selected/disabled states, values, and hints to presets, duration chips, steppers, switches, charts, and session controls.
-- [ ] Announce phase changes, pause, resume countdown, completion, and recoverable errors without overwhelming the user.
-- [ ] Respect the system reduced-motion preference and expose the documented setting. Keep the breathing shape static while retaining count, label, tone, and haptic cues.
-- [ ] Ensure phase meaning never depends on color or animation alone.
+- [ ] Replace the fixed 280-point breathing geometry with bounded responsive sizing so the step, countdown or progress ring, controls, and safety actions remain visible on a small iPhone at large text sizes.
+- [ ] Add screen-reader labels, roles, selected/disabled states, values, and hints to the cue chip, duration chips, steppers, switches, library rows, and session controls.
+- [ ] Announce step changes (kind, side, and seconds), pause, resume countdown, completion, and recoverable errors without overwhelming the user.
+- [ ] Respect the system reduced-motion preference and expose the documented setting. Keep the breathing shape and progress ring static while retaining count, label, voice, tone, and haptic cues.
+- [ ] Ensure step meaning never depends on color or animation alone; half-second steps announce their seconds even though no countdown numeral is shown.
 - [ ] Use at least 44×44 pt iOS and 48×48 dp Android touch targets with visible pressed/focus states.
-- [ ] Increase the current 40-point phase steppers, compact duration chips, and End Session target to at least 44×44 points on iOS.
-- [ ] Give charts accessible summaries and expose their date range, unit, and missing-data state as text.
+- [ ] Increase the current 40-point steppers, compact duration chips, and End Session target to at least 44×44 points on iOS.
+- Moved to the v1.1 track: the practice calendar’s text summary. No trend charts are built.
+- [ ] Make first use, technique detail (including long content), Adjust rhythm, My rhythms, share preview, incoming link preview, and the invalid-link state work with screen readers and at 200% text size.
+- [ ] Expose each technique’s pronunciation respelling as its accessible hint and label the pronunciation play control.
+- [ ] Give app-icon quick actions clear titles that VoiceOver and TalkBack read correctly.
 
 ### Exit evidence
 
 - [ ] VoiceOver and TalkBack users can configure, start, pause, resume, end, and review a session.
+- [ ] VoiceOver and TalkBack users can choose a technique, hear its pronunciation, adjust and save a rhythm, share it, open a received link, and complete Nadi Shodhana with side cues.
 - [ ] All screens pass at 100%, 150%, and 200% text size on smallest and largest supported layouts.
-- [ ] Production configuration confirms tablet support is disabled for MVP.
-- [ ] Reduced-motion mode contains no scaling breathing animation.
+- [ ] Production configuration confirms tablet support is disabled for v1.0.
+- [ ] Reduced-motion mode contains no scaling breathing animation or moving progress ring.
 - [ ] Automated contrast checks and manual spot checks pass AA.
-- [ ] Core guidance remains usable with visual-only, tone-only, and haptic-only cues.
+- [ ] Core guidance remains usable with visual-only, voice-only, tone-only, and haptic-only cues.
 
 Gate: any inaccessible core guidance path remains a release blocker.
 
 ## CP4 · Correct local records, privacy, and user control
 
-Target: Week 4
+Target: gate closes in Week 7; core records land with CP1, and new record fields land with CP2b
 
 ### Implementation checklist
 
-- [ ] Add versioned SQLite migrations for active duration, four phase values, guided cadence, completed-cycle count, completion state, and optional health-write state/idempotency key.
-- [ ] Group History by local calendar day and show pattern timing, active duration, completed cycles, completion state, and health sync state when applicable.
-- [ ] Keep rows easy to scan; session detail is optional for MVP if every required value fits accessibly in the row.
-- [ ] Keep Summary focused on duration, cycles, pattern, and guided cadence. Do not render unavailable biometric placeholders.
-- [ ] Add Privacy, Safety & wellbeing, and Delete local history to Settings.
-- [ ] Require an in-page deletion confirmation that explains system Health records are not deleted.
-- [ ] Ensure deletion removes local sessions without touching preferences.
-- [ ] Do not implement streaks, pattern aggregates, reminders, or progression charts in this checkpoint.
+- [ ] Add versioned SQLite migrations for active duration, practice ID, practice-name snapshot, step snapshot (kind, seconds, side for every step), target, completed-round count, guided breaths per minute, and completion state. Health-write state and idempotency key move to the v1.1 track.
+- [ ] Add a SavedRhythm table (name, steps, target, optional technique ID, source; at most 20) and preferences for cue mode, voice introductions, and last practice.
+- [ ] Group History by local calendar day and show practice name, rhythm, active duration, completed rounds, and completion state.
+- [ ] Keep rows easy to scan; session detail is optional for v1.0 if every required value fits accessibly in the row.
+- [ ] Keep Summary focused on practice name, rhythm, active duration, rounds, and guided breaths per minute. Do not render unavailable biometric placeholders.
+- [ ] Add Privacy, Safety & wellbeing, About (content sources, AI-voice disclosure, acknowledgments), and Delete local history to Settings.
+- [ ] Require an in-page deletion confirmation that says what is deleted (history) and what is kept (preferences, My rhythms).
+- [ ] Ensure deletion removes local sessions without touching preferences or My rhythms.
+- [ ] Do not implement streaks, scores, or badges (not building); the calendar, reminder, and progression belong to the v1.1 track.
 
 ### Exit evidence
 
-- [ ] Seeded completed and intentionally ended sessions render correctly in History and Summary.
-- [ ] Paused time cannot inflate stored active duration or completed cycles.
-- [ ] Local deletion passes confirmation, restart, and system-Health-disclosure tests.
+- [ ] Seeded completed and intentionally ended sessions render correctly in History and Summary for library, adjusted, saved, received-link, and custom practices.
+- [ ] Records keep their practice-name and step snapshots after a saved rhythm is renamed or deleted and after a content version change.
+- [ ] Paused time cannot inflate stored active duration or completed rounds.
+- [ ] Local deletion passes confirmation and restart tests; preferences and My rhythms survive.
 
 Gate: incorrect records, irreversible deletion ambiguity, or missing privacy controls blocks beta.
 
-## CP5 · Add optional health-session writing without delaying launch
+## CP5 · Health-session writing — Moved to v1.1 track
 
-Target: Week 5 · may move to the first point release if native stability threatens launch
+Moved on 2026-09-22. Apple Health / Health Connect writing is no longer part of v1.0. Its checklist, exit evidence, and gate are kept unchanged under [v1.1-E](#v11-e--health-session-writing-moved-from-cp5). The v1.0 binary ships without Health permissions (CP0).
+
+## CP6 · Run the v1.0 closed beta and produce the launch candidate
+
+Target: after the v1.0 build; closed testing and store review add calendar time
 
 ### Implementation checklist
+
+- [ ] Complete the phone device matrix: oldest/current iOS, small/current iPhones, oldest/current Android, Pixel, and Samsung. Tablets and representative wearables are excluded.
+- [ ] Run timer, countdown, safe-end, interruption, audio route, silent-mode, battery-saver, accessibility, and offline regression suites.
+- [ ] Run the voice, share-link, and quick-action suites: clip timing and tone fallback, link validation and fuzz tests, Universal Links and App Links on physical devices, and quick actions from cold and warm start.
+- [ ] Distribute the v1.0 build to a closed-beta cohort of practitioners, teachers, and beginners for at least seven stable days. On Google Play, meet the closed-testing requirement for new personal developer accounts before applying for production access.
+- [ ] Collect consented crash data and feedback on voice clarity and pronunciation, side cues, technique comprehension, share links, haptic comfort, start success, completion, accessibility, and failures.
+- [ ] Collect wedge-validation feedback: which practices beta users choose (target: at least 40% of sessions on a practice other than box breathing).
+- [ ] Confirm the voice licence covers bundled commercial distribution and file it with the release evidence, together with the listener approvals.
+- [ ] Remove sample data, v1.1 routes, dead links, debug UI, and unfinished controls.
+- [ ] Freeze user-facing strings, complete privacy/legal review, produce signed release candidates, and triage issues into release blocker or post-launch work.
+
+### Exit evidence
+
+- [ ] Closed beta records at least 99.5% crash-free sessions and 70% completion, or product explicitly approves a documented exception.
+- [ ] Voice, tone, and haptic cue timing and comprehension are validated, including side cues and the short-step tone fallback.
+- [ ] Signed release candidates pass the supported phone, accessibility, interruption, offline, link, and quick-action matrices.
+- [ ] The Google Play closed-testing requirement is met and recorded.
+- [ ] No open P0/P1 defect remains in build, timer, accessibility, consent, records, content, voice, links, or privacy.
+
+Gate: no open core release blocker advances to store submission.
+
+## CP7 · Store submission, rollout, and monitoring
+
+Target: after CP6
+
+### Implementation checklist
+
+- [ ] Publish the privacy policy and support contact. The policy explains share links (what a link contains, that anyone with it can read it) and that the web page keeps only aggregate host logs.
+- [ ] Reconcile Apple privacy labels, Google Play Data Safety answers, permission copy, SDK behavior, and the privacy policy.
+- [ ] Verify the archived iOS binary does not declare microphone, background audio, local-network discovery, HealthKit, or other capabilities that the production app does not use.
+- [ ] Serve `apple-app-site-association` and `assetlinks.json` over HTTPS from samabreath.app with the production app IDs and the Play app-signing certificate; confirm Play Console deep-link verification passes.
+- [ ] Prepare app name, subtitle, descriptions, wellness disclaimer, review notes, icon, and required screenshots. Store copy and keywords name the shipped techniques (for example Nadi Shodhana, Bhramari, Ujjayi, 4-7-8) and nothing unshipped.
+- [ ] Complete name and cultural-language clearance, including the brand name’s pronunciation guidance.
+- [ ] Verify production signing, versioning, crash reporting, and symbol/mapping uploads.
+- [ ] Submit iOS and Android builds with review notes that explain share links and quick actions.
+- [ ] Prepare a rollback/hotfix owner, decision path, and tested patch build procedure.
+- [ ] Use a staged rollout where supported and monitor crashes, starts, completions, and invalid-link rates without collecting health values or link contents.
+- [ ] Review feedback daily during the initial rollout and pause rollout on any launch-stop condition.
+
+### Final go/no-go checklist
+
+- [ ] Every v1.0 PRD acceptance criterion has linked evidence.
+- [ ] Closed beta has at least seven stable days, and the Play closed-testing requirement is met.
+- [ ] No open release blocker or P0/P1 defect remains.
+- [ ] Users with no network and every permission denied can complete every core flow.
+- [ ] No link content renders unsafely and no out-of-bounds rhythm is accepted; no unreviewed vigorous technique or unrecorded “Reviewed by” ships.
+- [ ] The voice licence and every clip’s listener approval are on file; About discloses AI-generated voice.
+- [ ] VoiceOver, TalkBack, Dynamic Type, reduced motion, offline, and interruption suites pass.
+- [ ] Physical-iPhone silent-switch, haptic, lock-screen, audio-route, voice, Universal Link, and quick-action suites pass; physical-Android App Link, app-shortcut, TalkBack, and audio-focus suites pass. Simulator-only evidence is insufficient.
+- [ ] Store disclosures match the shipped binary.
+- [ ] Rollback and hotfix ownership is active.
+
+Gate: release only with unanimous product, engineering, QA, and privacy go/no-go approval.
+
+## v1.1 track · reasons to return
+
+Target: about 3–4 weeks after v1.0 is passing. Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
+
+### v1.1-A · Routines
+
+- [ ] Build routines of 2–6 practices (library techniques or saved rhythms) with per-practice minutes; store them as Routine records.
+- [ ] Show planned duration before Begin: the sum of segments, each rounded up to whole rounds of its own practice.
+- [ ] Add the 5-second transition screen that names the next practice; it is not practice time.
+- [ ] Apply pause, end, and interruption rules to the whole routine; store one session record with per-segment snapshots.
+- [ ] List each practice completed on the summary.
+
+Exit evidence
+
+- [ ] Engine tests pass for per-segment rounding (box 3 min = 12 rounds / 3:12, then coherent 5 min = 28 rounds / 5:08, planned 8:20), pausing across a transition, and ending during a segment.
+- [ ] Screen readers announce the transition and the next practice.
+
+### v1.1-B · Gentle progression
+
+- [ ] Add progression paths to content data only where the PRD library table defines one (Sama Vritti, Visama Vritti, Nadi Shodhana, Ujjayi).
+- [ ] After 5 completed (not ended early) sessions at the same rhythm within 14 days, offer one next step on the completion screen, for example 4 · 0 · 6 · 0 → 4 · 0 · 7 · 0.
+- [ ] Provide Try it / Not now / Stop suggesting. Never change a rhythm automatically.
+- [ ] Offer “Make it easier next time” after every practice.
+
+Exit evidence
+
+- [ ] Rule tests pass at the boundaries: 4 versus 5 sessions, the 14-day window, ended-early sessions excluded, sessions at a different rhythm not counted.
+- [ ] No suggestion exceeds the step bounds or a 20-second hold; no automatic change is observed.
+
+### v1.1-C · Practice calendar
+
+- [ ] Add a month view in History: a pine dot on each practiced day, days and minutes this month, and minutes by practice.
+- [ ] Show no streak count, broken-chain visual, or missed-day marking.
+- [ ] Use local calendar days with deterministic timezone handling.
+
+Exit evidence
+
+- [ ] Aggregation tests match seeded records, including a timezone change.
+- [ ] The month has a screen-reader text summary, and no streak language appears anywhere.
+
+### v1.1-D · Daily reminder
+
+- [ ] Add a reminder that is off by default and schedules one local notification at a chosen time with the copy “Time for a little space.”
+- [ ] Request the notification permission only after the user turns the reminder on; show a clear denied state without repeated prompting.
+
+Exit evidence
+
+- [ ] Physical iOS and Android tests pass for allowed, denied, time change, device restart, and timezone change.
+- [ ] No notification permission prompt appears before the user turns the reminder on.
+
+### v1.1-E · Health session writing (moved from CP5)
+
+Carried unchanged from CP5; “MVP” in these items now means this v1.1 release. v2 eligibility and result states are unchanged. One item is added for v3:
+
+- [ ] Restore the Health modules, entitlements, and write-only purpose strings removed from the v1.0 configuration in CP0.
+
+#### Implementation checklist
 
 - [ ] Offer session-write permission only after the first qualifying completed session; Done and Breathe again remain the primary completion actions.
 - [ ] Explain only the mindful/breathing session write before opening native permission UI. Do not request wearable read categories in MVP.
@@ -275,7 +479,7 @@ Target: Week 5 · may move to the first point release if native stability threat
 - [ ] Keep every breathing, history, and summary flow usable without permission or platform Health availability.
 - [ ] Remove health read permissions, biometric queries, sample placeholders, and insights routes from the production MVP.
 
-### Exit evidence
+#### Exit evidence
 
 - [ ] Physical iOS and Android tests pass for allowed, declined/restricted, revoked, and platform-unavailable write states.
 - [ ] Qualifying sessions write once; sub-60-second and intentionally ended sessions never write.
@@ -284,68 +488,29 @@ Target: Week 5 · may move to the first point release if native stability threat
 
 Gate: duplicate/incorrect-time writes or premature permission prompts are release blockers. If the native write path cannot pass on schedule, remove it cleanly and launch the core app without Health permissions.
 
-## CP6 · Run the core tone/haptic closed beta and produce the launch candidate
+### v1.1-F · Fuller voice guidance
 
-Target: Week 6
+- [ ] Add optional counting (off unless the user turns it on) and longer technique introductions in the same voice, under the same licence.
+- [ ] Apply the pronunciation dictionary and the cue-plus-0.2 s timing fallback to every new clip.
 
-### Implementation checklist
+Exit evidence
 
-- [ ] Complete the phone device matrix: oldest/current iOS, small/current iPhones, oldest/current Android, Pixel, and Samsung. Tablets and representative wearables are excluded.
-- [ ] Run timer, countdown, safe-end, interruption, audio route, silent-mode, battery-saver, accessibility, and offline regression suites.
-- [ ] Distribute the tones-and-haptics build to a small closed-beta cohort for at least seven stable days.
-- [ ] Collect consented crash data and feedback on cue clarity, haptic comfort, start success, completion, accessibility, and failures.
-- [ ] Remove sample data, post-MVP routes, dead links, debug UI, and unfinished controls.
-- [ ] Freeze user-facing strings, complete privacy/legal review, produce signed release candidates, and triage issues into release blocker or post-launch work.
-
-### Exit evidence
-
-- [ ] Closed beta records at least 99.5% crash-free sessions and 70% completion, or product explicitly approves a documented exception.
-- [ ] Cue timing and comprehension are validated for the tones/haptics public MVP.
-- [ ] Signed release candidates pass the supported phone, accessibility, interruption, offline, and optional health-write matrices.
-- [ ] No open P0/P1 defect remains in build, timer, accessibility, consent, records, or privacy.
-
-Gate: no open core release blocker advances to store submission.
-
-## CP7 · Store submission, rollout, and monitoring
-
-Target: Week 7
-
-### Implementation checklist
-
-- [ ] Publish the privacy policy and support contact.
-- [ ] Reconcile Apple privacy labels, Google Play Data Safety answers, permission copy, SDK behavior, and the privacy policy.
-- [ ] Verify the archived iOS binary does not declare microphone, background audio, local-network discovery, or other capabilities that the production app does not use.
-- [ ] Prepare app name, subtitle, descriptions, wellness disclaimer, review notes, icon, and required screenshots.
-- [ ] Verify production signing, versioning, crash reporting, and symbol/mapping uploads.
-- [ ] Submit iOS and Android builds with clear HealthKit/Health Connect review instructions.
-- [ ] Prepare a rollback/hotfix owner, decision path, and tested patch build procedure.
-- [ ] Use a staged rollout where supported and monitor crashes, starts, completions, permission failures, and health-write failures without collecting health values.
-- [ ] Review feedback daily during the initial rollout and pause rollout on any launch-stop condition.
-
-### Final go/no-go checklist
-
-- [ ] Every must-have PRD acceptance criterion has linked evidence.
-- [ ] Closed beta has at least seven stable days.
-- [ ] No open release blocker or P0/P1 defect remains.
-- [ ] Health-denied users can complete every core flow.
-- [ ] No duplicate, zero-length, stale-labeled, or incorrect-time health record is observed.
-- [ ] VoiceOver, TalkBack, Dynamic Type, reduced motion, offline, and interruption suites pass.
-- [ ] Physical-iPhone HealthKit, silent-switch, haptic, lock-screen, audio-route, and permission-copy suites pass; Simulator-only evidence is insufficient.
-- [ ] Store disclosures match the shipped binary.
-- [ ] Rollback and hotfix ownership is active.
-
-Gate: release only with unanimous product, engineering, QA, and privacy go/no-go approval.
+- [ ] A listener who knows Sanskrit or Hindi has approved every new clip, with the approval recorded.
+- [ ] Counting never overlaps the next step boundary in timing tests; the About disclosure still covers all voice guidance.
 
 ## Recommended implementation order by code area
 
-1. `app.json`, package scripts, and CI: restore buildability and repeatable evidence.
-2. `src/engine/` and `app/session.tsx`: timing, lifecycle, pause/resume, and active-duration correctness.
-3. Routing, onboarding, Home/setup, and primary navigation: complete the first-use and returning-user journeys.
-4. Theme and shared controls: accessibility, contrast, reduced motion, and reusable interaction states.
-5. SQLite schema, History, Summary, Progress, and Settings: correct records and user control.
-6. `src/health/`: optional contextual consent and idempotent session writing only.
-7. Closed-beta hardening, store assets, release candidate, and staged rollout.
-8. Post-MVP: recorded voice, wearable reads, biometric comparisons, insights charts, streaks, and reminders.
+1. `app.json`, package scripts, and CI: restore buildability and repeatable evidence; remove Health from the v1.0 configuration; record the domain and quick-actions decisions.
+2. `src/engine/` and `app/session.tsx`: timing, lifecycle, pause/resume, and active-duration correctness on an ordered step list; core-surface records and accessibility foundations land alongside.
+3. Routing, first use, Breathe, the cue chip, Adjust rhythm, and four-tab navigation.
+4. Step-sequence engine extensions (0-second holds, sides, half seconds), bundled technique content and schema, Practices, and technique detail.
+5. `src/audio/`: voice clip manifest, cue scheduler, tone fallback, introductions, and the About disclosure.
+6. My rhythms, link encode/decode and validation, share and incoming previews, Universal Links and App Links, and the static samabreath.app site.
+7. App-icon quick actions.
+8. Theme and shared controls: accessibility, contrast, reduced motion, and interaction states across every new surface.
+9. SQLite schema, History, Summary, and Settings: correct records, snapshots, and user control.
+10. Closed-beta hardening, the Play closed-testing requirement, store assets and technique-name keywords, release candidate, and staged rollout.
+11. v1.1 track: routines, gentle progression, practice calendar, daily reminder, `src/health/` session writing, and fuller voice guidance.
 
 ## Definition of done for every task
 

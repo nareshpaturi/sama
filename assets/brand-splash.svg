@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid slice">
-  <rect width="1024" height="1024" fill="#FBFCF8"/>
-  <circle cx="512" cy="458" r="224" fill="#12372F"/>
-  <path d="M512 320c85 54 138 112 138 185a138 138 0 1 1-276 0c0-73 53-131 138-185Z" fill="#A8CFD0"/>
-  <path d="M512 360v245M436 440h152M436 527h152" fill="none" stroke="#EEF4EF" stroke-width="21" stroke-linecap="round"/>
-  <circle cx="512" cy="360" r="20" fill="#E46F51"/>
-  <text x="512" y="765" text-anchor="middle" fill="#12372F" font-family="Georgia, serif" font-size="92" font-weight="600">Sama</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <rect width="100" height="100" fill="#FBFCF8"/>
+  <g transform="translate(22 22) scale(.56)">
+    <rect width="100" height="100" rx="22.4" fill="#12372F"/>
+    <path d="M36.85 27.28A28 28 0 0 0 36.85 76.72" stroke="#A8CFD0" stroke-width="9" stroke-linecap="round"/>
+    <path d="M63.15 27.28A28 28 0 0 1 63.15 76.72" stroke="#EEF4EF" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="50" cy="27.3" r="4.6" fill="#E46F51"/>
+  </g>
 </svg>

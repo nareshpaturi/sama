@@ -40,7 +40,8 @@
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "check:theme": "node scripts/check-theme-contrast.mjs",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "brand:assets": "node scripts/render-brand-assets.mjs"
   },
   "private": true,
   "overrides": {

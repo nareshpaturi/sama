@@ -2,18 +2,19 @@
 
 Start with the [design review](design-review.md): its **v3 direction** section is the shared decision contract. Then open the [brand guide](branding-design.html) and [UX mocks](ux-design.html) side by side in a browser. All three were revised on September 22, 2026.
 
-The direction is **“Steady breath. Steady mind.” · Pranayama, guided at your pace.**, with the two-breaths mark. Sama is a free, offline pranayama companion for practitioners, and for beginners who want to follow a technique properly. v1.0 ships eight gentle techniques with sourced guides, flexible rhythms, bundled AI voice cues, My rhythms, share links for teachers, and app-icon quick actions. v1.1 adds curated programs, routines, gentle progression, a practice calendar without streaks, an optional daily reminder, and Apple Health / Health Connect session writing.
+The direction is **“Steady breath. Steady mind.” · Pranayama, guided at your pace.**, with the two-breaths mark. Sama is a free, offline pranayama companion for practitioners, and for beginners who want to follow a technique properly. The MVP (v1.0) ships eight gentle techniques with sourced guides, flexible rhythms with a minutes or rounds target, bundled AI voice cues that keep guiding with the screen locked, sound controls, My rhythms, share links for teachers, app-icon quick actions, data export and backup, and a published free-core promise. v1.1 adds curated programs, night practice, gradual slowing, routines, gentle progression, a practice calendar without streaks, an optional daily reminder, and Apple Health / Health Connect session writing.
 
 | Document | Purpose |
 |---|---|
 | [Design review](design-review.md) | v3 decision contract (positioning, release plan, feature rules, content governance, AI voice, typography, share-link safety, success signals) plus the v2 history |
 | [Brand guide](branding-design.html) | Positioning and audiences, naming practices, the two-breaths mark and its construction, semantic palette, practice cue components, style rules, voice and spoken-voice rules, launch copy and link preview |
 | [Brand exploration](brand-exploration.html) | Logo, tagline, and style options with the reasoning behind the chosen direction |
-| [UX mocks](ux-design.html) | Feature map linked to 73 screen specimens across v1.0, v1.1, and later concepts; journeys; state contract; guidance and accessibility handoff |
+| [UX mocks](ux-design.html) | Feature map linked to 81 screen specimens across v1.0, v1.1, and later concepts; journeys; state contract; guidance and accessibility handoff |
 | [Product requirements](product-requirements.html) | v2.0 scope and testable behavior for v1.0 and v1.1 |
 | [Launch implementation plan](mvp-launch-implementation-plan.md) | Gated checkpoints for v1.0, the v1.1 track, and historical implementation evidence |
 | [Market research](market-research.html) | Research snapshot and opportunity hypotheses |
 | [Research notes](research/market-fit-report.md) | Supporting research and unverified items behind the market brief |
+| [User needs research](research/user-needs-research.md) | What ~10,000 App Store and Google Play reviews say users want, praise, and complain about; the Prana Breath relaunch; recommended changes |
 | [Programs research](research/programs-market-fit.md) | Competitors, teacher platforms, and evidence behind v1.1 curated programs and the pending v1.2 teacher programs |
 
 The brand guide owns identity, color roles, typography, component geometry, and voice. The UX guide owns screen hierarchy, navigation, interaction, and state treatment. The design review records the decisions both must follow. Product requirements describe the resulting scope and behavior.

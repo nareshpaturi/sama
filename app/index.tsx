@@ -49,7 +49,7 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.greeting}>{greeting()}</Text>
         <Text style={styles.brand}>Sama Breath</Text>
-        <Text style={styles.tagline}>Breathe by your numbers.</Text>
+        <Text style={styles.tagline}>Steady breath. Steady mind.</Text>
 
         <View style={styles.statsRow}>
           <StatCard

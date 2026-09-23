@@ -16,7 +16,7 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 | Secondary user | **The curious beginner:** follows a technique guide with gentle defaults; never has to build a rhythm. |
 | Distribution | Teachers share practices with students through links. |
 | Promise | Authentic pranayama, guided at your pace. Free, offline, no account. |
-| Brand line | Keep **Your breath. Your rhythm.** Descriptor changes to **Pranayama, guided at your pace.** |
+| Brand line | Lead line **Steady breath. Steady mind.**; descriptor **Pranayama, guided at your pace.**; **Your breath. Your rhythm.** becomes the secondary line for adjusting and saving rhythms. Decided in the brand refresh below. |
 | Navigation | **Breathe · Practices · History · Settings.** The library earns a top-level destination. |
 
 ### Release plan
@@ -97,6 +97,18 @@ The bundled Newsreader and DM Sans files contain macrons and ś but lack the IAS
 ### Delivery estimate
 
 One experienced full-time cross-platform engineer: v1.0 about 6–7 weeks (core correctness about 3, flexible engine and library about 1.5, voice about 0.5, My rhythms and share links about 1, quick actions and first use about 0.5), with content drafting in parallel. v1.1 about 3–4 weeks. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
+
+### Brand refresh · decided September 22, 2026
+
+The [brand exploration](brand-exploration.html) compared four marks, five lines, and three styles. Chosen:
+
+| Decision | Choice | Why |
+|---|---|---|
+| Logo | **Two breaths:** two equal open arcs (sky left, mist right) on pine, with the coral point in the top gap | Expresses the name (even, balanced), inhale and exhale, and left and right; clear at 29 px. The previous drop-and-cross mark read as a leaf and as a double-barred cross, an emblem of lung-health charities. |
+| Tagline | **Steady breath. Steady mind.** | Echoes Hatha Yoga Pradipika 2.2 and signals the tradition to practitioners. Framed as tradition, never paired with outcome claims. |
+| Style | **Pine & Paper, refined** | Already implemented and contrast-tested. Adds line-diagram, icon, motion, and coral-point rules plus an imagery “don't” list. |
+
+The mark's construction lives in the brand guide. `assets/brand-*.svg` are the sources, and `npm run brand:assets` renders the app icon, Android adaptive and monochrome icons, favicon, and splash from the same geometry. The splash now shows the tile mark without a wordmark, which avoids rasterizing a font. A trademark search on the mark remains a prelaunch task.
 
 ### Design validation boundary
 

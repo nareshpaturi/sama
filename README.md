@@ -1,6 +1,6 @@
 # Sama Breath
 
-**Breathe by your numbers.** A free, cross-platform pranayama app for iOS and Android.
+**Steady breath. Steady mind.** A free, cross-platform pranayama app for iOS and Android.
 
 Custom per-phase breathing timers (e.g. 4-4-6-4), guided tones + haptics, local
 session history, streaks, and permission-gated health trends from Apple HealthKit

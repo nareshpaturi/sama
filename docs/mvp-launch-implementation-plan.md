@@ -2,7 +2,7 @@
 
 Status: proposed · v3 scope (2026-09-22) with the user-needs update (2026-09-23); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
 Target: public iOS and Android v1.0 (the wedge), then the v1.1 track (reasons to return)  
-Expected delivery: v1.0 about 8–9 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 6–7 weeks including curated programs. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
+Expected delivery: v1.0 about 8–9 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 6.5–7.5 weeks including curated programs and four library additions. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
 
 This plan converts the product requirements and UX design into gated implementation checkpoints. A checkpoint is complete only when its exit evidence exists; completing code without passing the gate does not advance the release.
 
@@ -456,7 +456,7 @@ Gate: release only with unanimous product, engineering, QA, and privacy go/no-go
 
 ## v1.1 track · reasons to return
 
-Target: about 6–7 weeks after v1.0 is passing, including curated programs (v1.1-G), night practice (v1.1-H), and gradual slowing (v1.1-I). Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
+Target: about 6.5–7.5 weeks after v1.0 is passing, including curated programs (v1.1-G), night practice (v1.1-H), gradual slowing (v1.1-I), and library additions (v1.1-J). Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
 
 ### v1.1-A · Routines
 
@@ -580,9 +580,22 @@ Exit evidence
 
 - [ ] Engine tests cover interpolation, rounding, bounds, planned duration, and whole-round endings; the summary shows start and end guided pace.
 
+### v1.1-J · Library additions
+
+- [ ] Add Dirgha, Udgeeth, Chandra Bhedana, and cyclic sighing as bundled content meeting the FR-09 standard (steps, Take care, research, sources), with draft rhythms confirmed by the research pass.
+- [ ] Add “Anulom Vilom” as a search name and guide alias for Nadi Shodhana.
+- [ ] Generate and approve the “Om” and “Top up” cue words and the four pronunciation clips through the voice gate.
+- [ ] Show and speak “through the mouth” once per practice for mouth steps.
+
+Exit evidence
+
+- [ ] Content schema tests pass for all 12 techniques; searching “Anulom Vilom” finds Nadi Shodhana.
+- [ ] Cyclic sighing reports 6 guided breaths/min at in 3 · top up 1 · out 6 (the top-up does not count as a breath).
+- [ ] Every new clip has listener approval on file.
+
 ## v1.2 candidates
 
-Each needs its own go decision after v1.1 metrics: **teacher programs** (after 6–8 teacher interviews), an **Apple Watch companion** that keeps running with the wrist down, with per-step haptics (the most-requested platform feature), and **Hindi voice cues** (the listener gate applies).
+Each needs its own go decision after v1.1 metrics: **vigorous techniques** (Kapalabhati, Bhastrika, and Bahya, each after a named instructor review, with the rapid-rhythm mode and the safety check), **teacher programs** (after 6–8 teacher interviews), an **Apple Watch companion** that keeps running with the wrist down, with per-step haptics (the most-requested platform feature), and **Hindi voice cues** (the listener gate applies).
 
 ## Recommended implementation order by code area
 

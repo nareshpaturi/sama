@@ -24,9 +24,9 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 | Release | Scope |
 |---|---|
 | **v1.0 · the wedge (MVP)** | Core practice (monotonic timer, settle countdown, pause/resume-step, end confirmation, local history, accessibility, privacy, delete local history) **plus:** flexible rhythms with a minutes or rounds target, the practice library, bundled AI voice cues, **guidance that continues with the screen locked, sound controls,** My rhythms, share links, app-icon quick actions, one-screen first use, four-tab navigation, **data export and backup,** and the **free-core promise**. See “MVP definition” below. |
-| **v1.1 · reasons to return** | **Curated programs**, **night practice**, **gradual slowing within a session**, half-second steps in the custom builder, routines (a practice may repeat), gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
-| **v1.2 · candidates** | **Teacher programs** (after 6–8 teacher interviews; see [programs research](research/programs-market-fit.md)), an **Apple Watch companion** (the most-requested platform feature), and **Hindi voice cues**. |
-| **Later · concepts** | Kapalabhati and Bhastrika rapid-rhythm mode (needs named instructor review and a pre-practice safety check), full Hindi localization, home/lock-screen widgets, Wear OS, a full dark theme. |
+| **v1.1 · reasons to return** | **Library grows to 12** (Dirgha, Udgeeth, Chandra Bhedana, cyclic sighing), **curated programs**, **night practice**, **gradual slowing within a session**, half-second steps in the custom builder, routines (a practice may repeat), gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
+| **v1.2 · candidates** | **Vigorous techniques** (Kapalabhati, Bhastrika, Bahya, bringing the library to 15; each needs a named instructor review, the rapid-rhythm mode, and the safety check), **teacher programs** (after 6–8 teacher interviews; see [programs research](research/programs-market-fit.md)), an **Apple Watch companion** (the most-requested platform feature), and **Hindi voice cues**. |
+| **Later · concepts** | Full Hindi localization, home/lock-screen widgets, Wear OS, a full dark theme. |
 | **Not building** | Wearable reads, heart-rate/HRV comparisons, trend charts; accounts and cloud sync; large content or music libraries; streaks, scores, badges. |
 
 ### v1.0 feature decisions
@@ -71,7 +71,7 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 ### Content and safety governance
 
 - Claude drafts technique content from classical and modern sources; every technique lists its sources under “Based on.”
-- **Risk tiers.** *Gentle* techniques (the v1.0 eight) may ship with sourced content and gentle defaults. *Vigorous or retention-led* techniques (Kapalabhati, Bhastrika, long kumbhaka, bandhas) require a named human instructor review before they ship.
+- **Risk tiers.** *Gentle* techniques (the v1.0 eight and the v1.1 four) may ship with sourced content and gentle defaults. *Vigorous or retention-led* techniques (Kapalabhati, Bhastrika, long kumbhaka, bandhas) require a named human instructor review before they ship.
 - “Reviewed by [name, credential]” appears only after a real review is recorded. Never imply review.
 - Frame tradition as tradition (“Traditionally practiced to…”). State evidence plainly, including null results such as the Sussex coherent-breathing trial. No treatment, diagnosis, or outcome claims.
 - Library defaults sit below classical ratios. Holds never exceed 20 s in v1.x.
@@ -106,7 +106,7 @@ The bundled Newsreader and DM Sans files contain macrons and ś but lack the IAS
 
 ### Delivery estimate
 
-One experienced full-time cross-platform engineer: v1.0 about 8–9 weeks (core correctness about 3, locked-screen audio engine about 1–1.5, flexible engine and library about 1.5, voice and sound controls about 1, My rhythms and share links about 1, rounds, data safety, quick actions, and first use about 1), with content drafting in parallel. v1.1 about 6–7 weeks, of which curated programs are about 1.5–2 on top of routines, progression, and the reminder. The user-needs update below records the cut line. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
+One experienced full-time cross-platform engineer: v1.0 about 8–9 weeks (core correctness about 3, locked-screen audio engine about 1–1.5, flexible engine and library about 1.5, voice and sound controls about 1, My rhythms and share links about 1, rounds, data safety, quick actions, and first use about 1), with content drafting in parallel. v1.1 about 6.5–7.5 weeks, of which curated programs are about 1.5–2 and the library additions about 0.5 on top of routines, progression, and the reminder. The user-needs update below records the cut line. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
 
 ### Brand refresh · decided September 22, 2026
 
@@ -166,7 +166,24 @@ Replaces “pause on background or lock.”
 
 **Not in the MVP:** programs, routines, gentle progression, calendar, reminders, Apple Health / Health Connect, night practice, gradual slowing, half-second builder steps, Watch, Hindi, teacher programs, and a full dark theme.
 
-**Estimate and cut line:** v1.0 grows to about **8–9 weeks** for one full-time engineer. Most of the increase is the locked-screen audio engine (about 1–1.5 weeks), plus sound controls (about 0.5), rounds (about 0.25), and data safety and export (about 0.5). If the schedule slips, defer the export and import screens to v1.1 (keeping backup and migration safety) and ship one tone set. v1.1 grows to about **6–7 weeks**.
+**Estimate and cut line:** v1.0 grows to about **8–9 weeks** for one full-time engineer. Most of the increase is the locked-screen audio engine (about 1–1.5 weeks), plus sound controls (about 0.5), rounds (about 0.25), and data safety and export (about 0.5). If the schedule slips, defer the export and import screens to v1.1 (keeping backup and migration safety) and ship one tone set. v1.1 grows to about **6.5–7.5 weeks** with the four library additions.
+
+### Library roadmap · decided September 23, 2026
+
+Sama grows a small library deliberately instead of matching Prana Breath's 80+ practices. Only 12 of those are free, and users ask for simplicity far more than for volume. Target: **about 15 practices by v1.2, all free, each explained and sourced.** Rhythms below v1.0 are drafts until the technique research pass.
+
+| Release | Practices | Count |
+|---|---|---|
+| **v1.0** | Sama Vritti, Visama Vritti, Nadi Shodhana, Bhramari, Ujjayi, Sheetali, coherent breathing, 4-7-8 | 8 |
+| **v1.1** | + **Dirgha** (three-part yogic breath, in 4 · out 6), **Udgeeth** (Om on the exhale, in 4 · Om 8), **Chandra Bhedana** (in left, out right, in 4 · out 6), **cyclic sighing** (in 3 · top up 1 · out mouth 6) | 12 |
+| **v1.2 candidates** | + **Kapalabhati**, **Bhastrika**, **Bahya**: vigorous or retention-led; each needs a named instructor review, the rapid-rhythm mode, and the pre-practice safety check | 15 |
+
+- **“Anulom Vilom”** becomes a search name and guide alias for Nadi Shodhana in v1.1. It is the name most Indian practitioners use, and it is not a separate practice.
+- **New cue words in v1.1:** “Om” and “Top up,” under the same voice gate. A top-up step belongs to the same breath: it doesn't count toward guided breaths per minute, and cyclic sighing is 6 guided breaths/min at its default.
+- **Nose or mouth:** steps that breathe through the mouth (Sheetali's inhale, cyclic sighing's exhale) show and speak the route once per practice.
+- **Bahya** stays within the 20-second hold cap unless the instructor review records a different decision.
+- **Not planned:** other breathing traditions (Sufi, Tibetan, Taoist), applied collections (singers, divers, runners), habit collections (cravings, smoking), and self-measured health metrics. They are off-position, or they invite health claims.
+- **Cost:** gentle additions are data plus content, about half a day to a day of engineering each, with content and voice work in parallel. Vigorous additions depend on the rapid-rhythm mode (about 4–6 days) and the review.
 
 ### Design validation boundary
 

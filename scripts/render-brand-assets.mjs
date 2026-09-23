@@ -1,4 +1,4 @@
-// Renders the Sama "two breaths" mark into the PNG assets used by app.json.
+// Renders the Viram "two breaths" mark into the PNG assets used by app.json.
 // The mark is drawn from its construction (docs/branding-design.html #identity),
 // so the PNGs stay exact at every size without an SVG rasterizer.
 import { writeFileSync } from 'node:fs';

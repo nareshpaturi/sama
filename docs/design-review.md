@@ -1,8 +1,16 @@
-# Sama Breath design review
+# Viram design review
 
 ## v3 direction · September 22, 2026
 
 Scope: product direction, requirements, brand, UX mocks, and launch plan. Application code, assets, and checkpoint evidence are unchanged. This section is the shared decision contract for the v3 documents; the v2 review below is retained as history.
+
+### Rename · decided September 23, 2026
+
+The product is now **Viram** (विराम, “a pause, a place to rest,” said vee-RAHM). “Sama Breath” was already on the App Store (rarePixel LLC, a breathwork and reflection app, bundle `com.samabreath.sama`), so the name had to change. Viram won two naming rounds covering about 45 candidates; see the [naming exploration](research/naming-exploration.md). It names the mark's coral point, the pause between breaths, and it was clear in both stores with **viram.app unregistered**.
+
+- Store name “Viram: Pranayama & Breath”; subtitle “Steady breath. Steady mind.”; bundle ID and package `app.viram`; URL scheme `viram`; share links at `viram.app/r/…`.
+- Unchanged: the two-breaths mark, the lead line, Pine & Paper, and all product decisions. Earlier sections below were written under the former name; the current sections have been updated.
+- **Before launch:** register viram.app (the owner's action), run a trademark clearance in the US, India, and EU, and re-run the store checks. The existing samabreath.app can redirect or lapse. The local database keeps its internal file name.
 
 ### Why v3
 
@@ -35,7 +43,7 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 - **Practice library (8 gentle techniques).** Sama Vritti (box), Visama Vritti (extended exhale), Nadi Shodhana (alternate nostril, no retention), Bhramari (humming bee), Ujjayi (ocean breath), Sheetali (cooling; Sheetkari alternative), coherent breathing (5.5 · 5.5), and 4-7-8. Each technique has a romanized name and English name, pronunciation respelling and audio, how-to steps, traditional context, “Take care” guidance, “What research says,” and sources.
 - **Voice guidance.** AI-generated clips bundled in the app: cue words (Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch), optional technique introductions before practice, and pronunciation clips. Cue mode is Voice, Tones, or Silent; haptics are independent. Defaults: Voice on, haptics on, motion follows the system.
 - **My rhythms.** Save up to 20 named rhythms (custom or received through a link). Rename and delete are local.
-- **Share links.** Share a library technique's current settings or a saved rhythm as `https://samabreath.app/r/…`. Opening the link shows an in-app preview (Save, Begin). Without the app, a small web page shows the rhythm and store links.
+- **Share links.** Share a library technique's current settings or a saved rhythm as `https://viram.app/r/…`. Opening the link shows an in-app preview (Save, Begin). Without the app, a small web page shows the rhythm and store links.
 - **Quick start.** App-icon quick actions: “Begin last practice,” “1-minute box breathing,” and the most recent *other* practice (omitted until history has two distinct practices). They open the settle countdown with Cancel. Before first use is complete, they open first use.
 - **First use.** One screen: welcome, comfort guidance, wellness disclaimer, and **Continue** to Breathe (“Begin” is reserved for starting a practice). When a quick action or link opened first use, Continue proceeds to it. Cue choices move to a cue chip on Breathe and to Settings.
 - **Vocabulary.** “Round” replaces “cycle” (one pass through a practice's steps; a Nadi Shodhana round covers both sides). Planned rounds = round up (target seconds ÷ round seconds). Guided pace is shown in **guided breaths per minute** (inhale steps per minute), never as a measured rate. Examples: box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
@@ -114,7 +122,7 @@ The [brand exploration](brand-exploration.html) compared four marks, five lines,
 
 | Decision | Choice | Why |
 |---|---|---|
-| Logo | **Two breaths:** two equal open arcs (sky left, mist right) on pine, with the coral point in the top gap | Expresses the name (even, balanced), inhale and exhale, and left and right; clear at 29 px. The previous drop-and-cross mark read as a leaf and as a double-barred cross, an emblem of lung-health charities. |
+| Logo | **Two breaths:** two equal open arcs (sky left, mist right) on pine, with the coral point in the top gap | Expresses balance and the pause between breaths (the *viram* that now names the product), inhale and exhale, and left and right; clear at 29 px. The previous drop-and-cross mark read as a leaf and as a double-barred cross, an emblem of lung-health charities. |
 | Tagline | **Steady breath. Steady mind.** | Echoes Hatha Yoga Pradipika 2.2 and signals the tradition to practitioners. Framed as tradition, never paired with outcome claims. |
 | Style | **Pine & Paper, refined** | Already implemented and contrast-tested. Adds line-diagram, icon, motion, and coral-point rules plus an imagery “don't” list. |
 
@@ -122,7 +130,7 @@ The mark's construction lives in the brand guide. `assets/brand-*.svg` are the s
 
 ### User-needs update · decided September 23, 2026
 
-The [user needs research](research/user-needs-research.md) analyzed about 10,900 App Store and Google Play reviews. Price is the top reason for 1–2★ reviews (41.6%), followed by bugs (19.8%); simplicity is the top praise; users ask most for sound control, custom patterns, eyes-closed and locked-screen guidance, rounds, and a Watch app. Prana Breath's September 2026 relaunch now claims a sourced pranayama library, so Sama differentiates on **a free core that stays free, dependability, voice that names the side, teacher links, and platform parity**.
+The [user needs research](research/user-needs-research.md) analyzed about 10,900 App Store and Google Play reviews. Price is the top reason for 1–2★ reviews (41.6%), followed by bugs (19.8%); simplicity is the top praise; users ask most for sound control, custom patterns, eyes-closed and locked-screen guidance, rounds, and a Watch app. Prana Breath's September 2026 relaunch now claims a sourced pranayama library, so Viram differentiates on **a free core that stays free, dependability, voice that names the side, teacher links, and platform parity**.
 
 #### Changed decision: guidance continues with the screen locked
 
@@ -137,12 +145,12 @@ Replaces “pause on background or lock.”
 
 #### New v1.0 requirements
 
-1. **Sound controls:** a cue volume separate from media volume; “Play alongside other audio” (default on: Sama mixes with music and lowers it briefly during cues) or “Pause other audio”; three tone sets (Soft bells by default, Wood, Chimes), each with distinct inhale, hold, exhale, and rest sounds; haptic strength Light, Medium (default), or Strong. All persist.
+1. **Sound controls:** a cue volume separate from media volume; “Play alongside other audio” (default on: Viram mixes with music and lowers it briefly during cues) or “Pause other audio”; three tone sets (Soft bells by default, Wood, Chimes), each with distinct inhale, hold, exhale, and rest sounds; haptic strength Light, Medium (default), or Strong. All persist.
 2. **Rounds target:** the target can be minutes (1, 3, 5, 10) or rounds (1–108, with 11, 21, and 27 as shortcuts). Planned duration is shown for both. Practice shows “Round 6 of 21 · 16 left.” Share links, history, and programs carry the target type.
 3. **Data that can't be lost:** the local database is included in device backups (iOS device and iCloud backups; Android Auto Backup). Migrations are forward-only and tested from every released schema. A failed migration keeps the data and shows a recoverable error. **Export my data** writes a versioned JSON file (My rhythms, history, preferences) through the share sheet. **Import** validates it like a share link and merges without duplicates. No server.
 4. **Free-core promise,** in About and on the store page: every breathing practice, custom rhythms, voice, tone, and haptic guidance, and your history are free, with no ads and no account. Anything paid in future would be an addition, never a lock on these.
 5. **Natural-voice gate:** at least 8 listeners, including pranayama practitioners and a Sanskrit or Hindi speaker, rate calm, pace, and naturalness. The median must be at least 4 out of 5, or the clips are regenerated. Tones remain available.
-6. **No rating prompts** during or right after practice. v1.0 has no in-app rating prompt, only “Rate Sama” in About.
+6. **No rating prompts** during or right after practice. v1.0 has no in-app rating prompt, only “Rate Viram” in About.
 
 #### New v1.1 requirements
 
@@ -170,7 +178,7 @@ Replaces “pause on background or lock.”
 
 ### Library roadmap · decided September 23, 2026
 
-Sama grows a small library deliberately instead of matching Prana Breath's 80+ practices. Only 12 of those are free, and users ask for simplicity far more than for volume. Target: **about 15 practices by v1.2, all free, each explained and sourced.** Rhythms below v1.0 are drafts until the technique research pass.
+Viram grows a small library deliberately instead of matching Prana Breath's 80+ practices. Only 12 of those are free, and users ask for simplicity far more than for volume. Target: **about 15 practices by v1.2, all free, each explained and sourced.** Rhythms below v1.0 are drafts until the technique research pass.
 
 | Release | Practices | Count |
 |---|---|---|

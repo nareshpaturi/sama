@@ -1,4 +1,4 @@
-# Sama Breath
+# Viram
 
 **Steady breath. Steady mind.** A free, cross-platform pranayama app for iOS and Android.
 
@@ -85,7 +85,7 @@ Create a **private** repo on GitHub (don't initialize it with a README), then:
 cd sama
 git remote add origin git@github.com:<your-username>/<repo>.git
 git add -A
-git commit -m "Sama Breath — MVP (tones + haptics)"
+git commit -m "Viram — MVP (tones + haptics)"
 git push -u origin main
 ```
 
@@ -107,16 +107,16 @@ eas build --profile preview --platform all
 
 # Store-ready binaries
 eas build --profile production --platform all
-eas submit --platform ios     # needs App Store Connect record "Sama Breath"
-eas submit --platform android # needs Play Console app, package com.samabreath.app
+eas submit --platform ios     # needs App Store Connect record "Viram: Pranayama & Breath"
+eas submit --platform android # needs Play Console app, package app.viram
 ```
 
 **Before submitting:**
-- App Store Connect: create the **Sama Breath** record (bundle id
-  `com.samabreath.app`).
-- Play Console: create the app with package `com.samabreath.app`.
+- App Store Connect: create the **Viram: Pranayama & Breath** record (bundle id
+  `app.viram`).
+- Play Console: create the app with package `app.viram`.
 - Privacy policy: required by both stores (health data access). Host it at
-  `https://samabreath.app/privacy` and link it in the store listings.
+  `https://viram.app/privacy` and link it in the store listings.
 - Apple HealthKit: the build enables the HealthKit capability automatically via
   config plugin; answer Apple's health-data questions honestly in review
   ("reads heart/HRV/sleep to display trends; writes mindful minutes").
@@ -140,7 +140,7 @@ sama/
     progress.tsx          # streaks, charts, per-pattern totals, health
     settings.tsx          # toggles, defaults, health access, safety note
   src/
-    theme.ts              # Sama brand tokens
+    theme.ts              # Viram brand tokens
     engine/
       types.ts            # Phase, PatternConfig, presets (4-4-4-4, 4-4-6-4, 4-7-8)
       BreathingEngine.ts  # drift-free wall-clock phase machine
@@ -185,4 +185,4 @@ sama/
 - [x] HealthKit + Health Connect (read indicators, write mindful minutes)
 - [ ] Physical-device testing pass
 - [ ] Recorded voice guidance
-- [ ] Store submission (Sama Breath)
+- [ ] Store submission (Viram)

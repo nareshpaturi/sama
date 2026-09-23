@@ -1,8 +1,8 @@
-# Sama Breath — docs
+# Viram — docs
 
 Start with the [design review](design-review.md): its **v3 direction** section is the shared decision contract. Then open the [brand guide](branding-design.html) and [UX mocks](ux-design.html) side by side in a browser. All three were revised on September 22, 2026.
 
-The direction is **“Steady breath. Steady mind.” · Pranayama, guided at your pace.**, with the two-breaths mark. Sama is a free, offline pranayama companion for practitioners, and for beginners who want to follow a technique properly. The MVP (v1.0) ships eight gentle techniques with sourced guides, flexible rhythms with a minutes or rounds target, bundled AI voice cues that keep guiding with the screen locked, sound controls, My rhythms, share links for teachers, app-icon quick actions, data export and backup, and a published free-core promise. v1.1 grows the library to 12 practices and adds curated programs, night practice, gradual slowing, routines, gentle progression, a practice calendar without streaks, an optional daily reminder, and Apple Health / Health Connect session writing.
+The direction is **“Steady breath. Steady mind.” · Pranayama, guided at your pace.**, with the two-breaths mark. Viram is a free, offline pranayama companion for practitioners, and for beginners who want to follow a technique properly. The MVP (v1.0) ships eight gentle techniques with sourced guides, flexible rhythms with a minutes or rounds target, bundled AI voice cues that keep guiding with the screen locked, sound controls, My rhythms, share links for teachers, app-icon quick actions, data export and backup, and a published free-core promise. v1.1 grows the library to 12 practices and adds curated programs, night practice, gradual slowing, routines, gentle progression, a practice calendar without streaks, an optional daily reminder, and Apple Health / Health Connect session writing.
 
 | Document | Purpose |
 |---|---|

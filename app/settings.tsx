@@ -170,7 +170,7 @@ export default function SettingsScreen() {
         <Text style={styles.sectionTitle}>Health</Text>
         <View style={styles.card}>
           <Text style={styles.body}>
-            Sama can read resting heart rate, heart-rate variability, respiratory rate, blood
+            Viram can read resting heart rate, heart-rate variability, respiratory rate, blood
             oxygen and sleep from your device's health store, and log sessions as mindful
             minutes. Access is read-only except for session logging, and always optional.
           </Text>
@@ -197,7 +197,7 @@ export default function SettingsScreen() {
 
         <Text style={styles.sectionTitle}>About</Text>
         <View style={styles.card}>
-          <Text style={styles.body}>Sama Breath 1.0.0</Text>
+          <Text style={styles.body}>Viram 1.0.0</Text>
           <Text style={styles.bodyMuted}>Steady breath. Steady mind.</Text>
         </View>
       </ScrollView>

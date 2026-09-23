@@ -2,7 +2,7 @@
 
 **Decision (September 23, 2026):** the recommendations became requirements. Guidance continues with the screen locked; sound controls, a rounds target, data export and backup, the free-core promise, a natural-voice gate, and no rating prompts joined v1.0 (PRD FR-01–FR-05, FR-21, FR-22; plan CP1b and CP4). Night practice and gradual slowing joined v1.1 (FR-23, FR-24). Apple Watch and Hindi voice cues are v1.2 candidates. See the MVP definition in the [design review](../design-review.md).
 
-Research date: September 23, 2026. Question: what do potential users actually ask for, praise, and complain about in breathing and pranayama apps, and what would make Sama's market fit stronger?
+Research date: September 23, 2026. Question: what do potential users actually ask for, praise, and complain about in breathing and pranayama apps, and what would make Viram's market fit stronger?
 
 ## Method and sample
 
@@ -74,14 +74,14 @@ Ranked by the number of App Store reviews with an explicit request on the theme,
 
 Prana Breath (Android-first, 5M+ downloads) updated on **September 9, 2026**. Its Play listing now describes 80+ practices in 7 collections “from beginner breathwork to classical pranayama,” each with an explanation of what it does, how to sit, what can go wrong, and where it came from, with sources. It is free to start, with no ads and deliberately no narrator ([Play listing](https://play.google.com/store/apps/details?id=com.abdula.pranabreath)).
 
-- **This overlaps directly with Sama's “sourced, authentic library” position.** That alone is no longer enough to set Sama apart.
+- **This overlaps directly with Viram's “sourced, authentic library” position.** That alone is no longer enough to set Viram apart.
 - **The relaunch is hurting loyal users:** 16 of 41 September reviews in the Play sample are 1–2★. They cite a price increase, features moved behind the paywall, sounds skipping, lost custom settings, a lifetime purchase not honored, and missing nostril cues. Long-time users say they are looking for a new app **right now**.
 
-**What still sets Sama apart:** the core stays free with no paywall creep, reliability is treated as a feature, voice guidance that names the side (Prana chose no narrator), teacher links that need no account, iOS and Android parity, and simplicity.
+**What still sets Viram apart:** the core stays free with no paywall creep, reliability is treated as a feature, voice guidance that names the side (Prana chose no narrator), teacher links that need no account, iOS and Android parity, and simplicity.
 
 ---
 
-## 6. What this means for Sama
+## 6. What this means for Viram
 
 ### Already in the plan (keep)
 Free with no ads or account · a simple, one-action start · custom rhythms and My rhythms · voice, tones, and haptics with distinct phase cues · voice that names the side in Nadi Shodhana · finishing on a whole round with a visible countdown · reminders, a calendar without streaks, and curated programs (v1.1) · Apple Health (v1.1) · sourced technique guides.

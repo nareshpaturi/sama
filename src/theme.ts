@@ -1,5 +1,5 @@
 /**
- * Sama visual-system tokens.
+ * Viram visual-system tokens.
  *
  * The brand board is the identity source of truth: deep pine, living coral,
  * quiet sky, warm paper, Newsreader display type, and DM Sans interface type.

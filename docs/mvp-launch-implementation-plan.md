@@ -1,8 +1,8 @@
 # Sama Breath launch implementation plan
 
-Status: proposed · v3 scope (2026-09-22); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
+Status: proposed · v3 scope (2026-09-22) with the user-needs update (2026-09-23); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
 Target: public iOS and Android v1.0 (the wedge), then the v1.1 track (reasons to return)  
-Expected delivery: v1.0 about 6–7 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 5–6 weeks including curated programs. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
+Expected delivery: v1.0 about 8–9 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 6.5–7.5 weeks including curated programs and four library additions. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
 
 This plan converts the product requirements and UX design into gated implementation checkpoints. A checkpoint is complete only when its exit evidence exists; completing code without passing the gate does not advance the release.
 
@@ -18,6 +18,15 @@ What changed:
 - **Not building:** wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, streaks, scores, badges. The Progress/Insights route is removed, not deferred.
 - **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
 - **Checkpoints.** CP0 adopts the step bounds; CP2 becomes one-screen first use, four tabs, and the cue chip; new CP2b covers the library, voice, My rhythms, sharing, and quick actions; CP3 and CP4 extend to the new surfaces; CP5 moves to the [v1.1 track](#v11-track--reasons-to-return); CP6 and CP7 add the voice licence, link-verification files, technique-name store copy, and the Play closed-testing requirement.
+
+## User-needs update · 2026-09-23
+
+From the [user needs research](research/user-needs-research.md), recorded in the [design review](design-review.md) as the MVP definition:
+
+- **Changed:** Voice and Tones guidance continues with the screen locked (native audio timeline, iOS background audio, Android `mediaPlayback` foreground service, lock-screen controls). Calls, other apps' audio, and headphone disconnects pause with a named reason. Silent mode still pauses on lock.
+- **Added to v1.0:** sound controls (cue volume, other-audio mixing, tone sets, haptic strength, keep screen on), a rounds target, data safety (device backup, tested migrations, export and import), the free-core promise, a natural-voice listener gate, and no rating prompts.
+- **Added to v1.1:** night practice, gradual slowing, half-second builder steps, and repeating a practice within a routine. **v1.2 candidates:** teacher programs, an Apple Watch companion, Hindi voice cues.
+- **Cut line:** if v1.0 slips, defer the export and import screens (keep backup and migration safety) and ship one tone set.
 
 ## Design documentation update · 2026-09-18
 
@@ -36,12 +45,16 @@ The public v1.0 (the wedge) includes:
 - The core practice from v2: monotonic timer, three-second settle countdown, pause and resume of the interrupted step, end confirmation, interruption pause, local history, accessibility, privacy, and Delete local history.
 - Flexible rhythms: inhale and exhale 1–20 s; holds 0–20 s (0 = skipped, shown “Off”); library techniques may use half-second steps and more than four steps with left/right side labels; the custom builder stays four rows in whole seconds.
 - The practice library: Sama Vritti, Visama Vritti, Nadi Shodhana, Bhramari, Ujjayi, Sheetali, coherent breathing, and 4-7-8, each with sourced content and gentle defaults.
-- Bundled AI voice cues (cue words, optional technique introductions, pronunciation clips) with Voice / Tones / Silent cue modes and independent haptics.
+- Bundled AI voice cues (cue words, optional technique introductions, pronunciation clips) with Voice / Tones / Silent cue modes and independent haptics, passing the natural-voice listener gate.
+- Guidance that continues with the screen locked in Voice or Tones mode, lock-screen controls, named automatic pauses, and sound controls (cue volume, other audio, tone sets, haptic strength, keep screen on).
+- A minutes or rounds target (1–108 rounds; 11, 21, 27 shortcuts).
+- Data safety: device backup, tested forward-only migrations, and export and import of My rhythms, history, and preferences.
+- The free-core promise in About and on the store page; no ads, account, or rating prompts.
 - My rhythms (up to 20), share links (`https://samabreath.app/r/…`) with an in-app preview and a static web fallback, and app-icon quick actions.
 - One-screen first use and four-tab navigation: Breathe · Practices · History · Settings.
 - Store disclosures, crash monitoring, and production builds.
 
-Apple Health / Health Connect writing is no longer part of v1.0; it moves to the [v1.1 track](#v11-track--reasons-to-return) with routines, gentle progression, the practice calendar, the daily reminder, and fuller voice guidance. Later concepts (Kapalabhati and Bhastrika rapid-rhythm mode, Hindi localization, widgets, Apple Watch / Wear OS), tablet-specific layouts, and dark mode must not delay v1.0. Wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, and streaks, scores, or badges are not being built.
+Apple Health / Health Connect writing is no longer part of v1.0; it moves to the [v1.1 track](#v11-track--reasons-to-return) with routines, gentle progression, the practice calendar, the daily reminder, and fuller voice guidance. Night practice, gradual slowing, and half-second builder steps are v1.1. v1.2 candidates (teacher programs, Apple Watch companion, Hindi voice cues), later concepts (Kapalabhati and Bhastrika rapid-rhythm mode, full Hindi localization, widgets, Wear OS), tablet-specific layouts, and a full dark theme must not delay v1.0. Wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, and streaks, scores, or badges are not being built.
 
 ## Gate rules
 
@@ -150,8 +163,9 @@ Target: Week 1
 - [ ] Define supported iOS and Android versions. Set Android min SDK to at least 26 and set an explicit iOS deployment target compatible with the selected Expo/React Native/Hermes versions; record both decisions in the PRD.
 - [ ] Provision and select a supported Xcode version locally and in CI, accept required licenses, install the selected iOS Simulator runtimes, and record the toolchain versions.
 - [ ] Disable iPad/tablet support for v1.0; tablet-specific layouts and orientation validation are outside v1.0.
-- [ ] Configure `expo-audio` for least privilege in the test build: disable microphone permission/recording and background playback unless a reviewed feature requires them.
-- [ ] Inspect the generated release `Info.plist` and entitlements. Remove unjustified microphone, background-audio, local-network, Bonjour, and development-client declarations from production artifacts.
+- [ ] Configure audio for least privilege: disable microphone permission and recording; enable iOS background audio (`UIBackgroundModes: audio`) and an Android `mediaPlayback` foreground service only for locked-screen guidance (FR-04).
+- [ ] Inspect the generated release `Info.plist`, entitlements, and Android manifest. Remove unjustified microphone, local-network, Bonjour, and development-client declarations; keep background audio and the `mediaPlayback` foreground-service type with their FR-04 justification recorded.
+- [ ] Configure backups: keep the SQLite file in an iOS-backed-up location and include it in Android Auto Backup rules (FR-21).
 - [ ] Verify the `react-native-health` New Architecture patch against the selected Xcode, iOS SDK, React Native version, and CocoaPods build rather than assuming the existing patch is sufficient (needed by the v1.1 Health track; may move with it if the module is removed from v1.0).
 - [ ] Add stable `typecheck`, unit-test, and build scripts to `package.json`.
 - [ ] Add CI gates for clean install, TypeScript, unit tests, Android debug build, and an unsigned iOS simulator build.
@@ -184,15 +198,15 @@ Target: Weeks 2–3
 - [ ] Use a monotonic elapsed-time source for foreground timing; keep wall-clock timestamps only for record boundaries.
 - [ ] Model the engine as an ordered step list from the start (box 4 · 4 · 4 · 4 is four steps) so CP2b extends it rather than rewriting it.
 - [ ] Add explicit engine operations for the three-second pre-session countdown, pausing, restarting the interrupted step, resuming after the same countdown, requesting end confirmation, and ending.
-- [ ] Subscribe to app lifecycle and audio-interruption events. Backgrounding, screen locking, calls, and unsafe audio interruptions must enter the same visible paused state.
-- [ ] On iOS, handle both `inactive` and `background` transitions, including Notification Center/Control Center, app switching, calls, alarms, Siri, route changes, and device locking.
-- [ ] Create a dedicated paused presentation that names the state and keeps Resume and End available.
-- [ ] Keep the screen awake only while guidance is actively running.
+- [ ] Subscribe to app lifecycle and audio-interruption events. In Voice or Tones mode, backgrounding and screen locking keep guidance running (FR-04; engine in CP1b). Calls, VoIP, Siri, alarms, non-mixable audio from other apps, route loss, and lock-screen Pause enter the paused state with a reason. Silent mode continues only with haptics on Android; otherwise it pauses on lock.
+- [ ] On iOS, handle `inactive` and `background` transitions (Notification Center, Control Center, app switching, locking) without pausing Voice or Tones guidance; handle calls, alarms, Siri, and route changes as pauses.
+- [ ] Create a dedicated paused presentation that names the state and its reason (“Paused for a call”, “Paused: another app started audio”, “Paused: headphones disconnected”) and keeps Resume and End available.
+- [ ] Keep the screen awake only in Silent mode or when “Keep screen on during practice” is enabled; otherwise follow system auto-lock.
 - [ ] Track active elapsed time separately from paused wall time.
 - [ ] Store completed rounds, allowing zero for a session ended during its first round.
 - [ ] Prevent duplicate completion and end actions while persistence/navigation is pending.
 - [ ] Add a session initialization state so settings or content reads cannot look like a frozen active timer.
-- [ ] Make the requested duration and whole-round behavior explicit before starting (planned rounds = round up of target ÷ round length); v1.0 duration choices are 1, 3, 5, and 10 minutes.
+- [ ] Make the requested duration and whole-round behavior explicit before starting (planned rounds = round up of target ÷ round length); v1.0 targets are 1, 3, 5, or 10 minutes, or 1–108 rounds.
 - [ ] Ensure tones and haptics fire exactly once per active step boundary and do not fire while paused.
 - [ ] Configure the iOS audio session deliberately: validate silent-switch behavior, mixing/ducking with other audio, interruption recovery, Bluetooth route changes, and deactivation after practice. Record the result as the locked audio decision that voice clips will follow.
 - [ ] Add engine tests for all v1.0 durations, whole-second steps at the 1–20 s bounds, long steps, countdown, pause/resume, end confirmation, app resume, delayed ticks, and completion boundaries.
@@ -200,15 +214,39 @@ Target: Weeks 2–3
 ### Exit evidence
 
 - [ ] A 5-minute target using 4–4–4–4 finishes within ±250 ms of its disclosed 5:04 duration on representative iOS and Android devices, without interruptions.
-- [ ] Locking or backgrounding always returns to an unmistakable paused state.
+- [ ] In Voice or Tones mode, locking or backgrounding keeps guidance running with correct practice time and rounds; in Silent mode it returns to an unmistakable paused state.
 - [ ] Resuming restarts the interrupted step after the documented countdown.
 - [ ] Summary duration excludes paused time and round count includes only completed rounds.
 - [ ] Force-quit does not create a completed record.
 - [ ] Tones, haptics, and the displayed step remain synchronized during a 30-minute soak test.
-- [ ] On physical iPhone, locking or interrupting the app produces no background step cues and no elapsed guidance time while paused.
+- [ ] On physical iPhone and Android, a call or non-mixable audio pauses guidance with the right reason, and no cues play or time accrues until Resume.
 - [ ] Silent-switch and other-audio behavior matches the locked product decision without unexpectedly stopping the user’s existing audio.
 
 Gate: timer drift, stale active UI, unsafe ending, or incorrect duration/round accounting blocks CP2.
+
+## CP1b · Locked-screen audio engine and sound controls
+
+Target: Weeks 7–8 (about 1.5–2 weeks); the audio-clock design is agreed during CP1 so the engine is not rebuilt
+
+### Implementation checklist
+
+- [ ] Schedule every cue (voice clip, tone, completion) on a native audio timeline driven by the audio clock, not JavaScript timers. The engine supplies the timeline; the visual guide reads the same clock and re-syncs on return.
+- [ ] iOS: background audio session, interruption and route-change handling, Now Playing metadata (practice name, round, time left) and remote Pause and Resume; release the session after practice.
+- [ ] Android: `mediaPlayback` foreground service with a media session, audio focus handling, and a media-style notification (Pause, Resume, End); complete the Play Console foreground-service declaration.
+- [ ] A session keeps going with the screen locked when a non-visual cue can still play: Voice or Tones on both platforms, or haptics on Android. Otherwise (Silent without haptics, or Silent with haptics on iOS, where background haptics are not allowed) it pauses on lock.
+- [ ] Sound controls: cue volume separate from media volume; “Play alongside other audio” (mix and briefly lower others during cues) or “Pause other audio”; tone sets Soft bells, Wood, and Chimes with distinct per-step sounds; haptic strength Light, Medium, or Strong; “Keep screen on during practice.” All persist.
+- [ ] Rounds target: Minutes or Rounds in Adjust rhythm (1–108; 11, 21, 27 shortcuts); rounds left during practice; stored on sessions and saved rhythms, and carried in share links.
+- [ ] The settle screen shows the one-time note that the phone can be locked.
+
+### Exit evidence
+
+- [ ] With the screen locked from the first step, 5- and 20-minute Voice and Tones sessions keep cues within ±250 ms and record correct practice time and rounds on physical iPhone and Android, including Low Power Mode, battery saver, and Doze.
+- [ ] Lock-screen Pause and Resume work on both platforms; End works on Android.
+- [ ] Calls, VoIP, Siri, alarms, non-mixable audio, and headphone or Bluetooth disconnects pause with the right reason; mixable audio (music, podcasts) keeps playing under the cues.
+- [ ] Each tone set plays four distinct step sounds; cue volume and haptic strength changes take effect on the next cue.
+- [ ] A 21-round Nadi Shodhana practice ends after exactly 21 rounds and shows rounds left throughout.
+
+Gate: drift beyond ±250 ms while locked, guidance continuing through a call, or a missing lock-screen control blocks CP6.
 
 ## CP2 · Implement one-screen first use, four tabs, and the cue chip
 
@@ -266,7 +304,7 @@ My rhythms
 
 Share links
 
-- [ ] Encode and decode `https://samabreath.app/r/…` carrying only a display name, step list (kind, seconds, optional side), target (1, 3, 5, or 10 min), and optional library technique ID.
+- [ ] Encode and decode `https://samabreath.app/r/…` carrying only a display name, step list (kind, seconds, optional side), target (1, 3, 5, or 10 minutes, or 1–108 rounds), and optional library technique ID.
 - [ ] Validate every field and reject the whole link on any failure; without a technique ID the steps must fit the custom builder, with one they must match the installed technique. Unknown technique IDs are invalid; vigorous techniques are not shareable.
 - [ ] Never render link content as HTML; safety and instruction text comes only from app content.
 - [ ] Implement the share preview, the incoming preview (Save, Begin), and the invalid-link state; first use comes first when incomplete.
@@ -337,6 +375,9 @@ Target: gate closes in Week 7; core records land with CP1, and new record fields
 - [ ] Add Privacy, Safety & wellbeing, About (content sources, AI-voice disclosure, acknowledgments), and Delete local history to Settings.
 - [ ] Require an in-page deletion confirmation that says what is deleted (history) and what is kept (preferences, My rhythms).
 - [ ] Ensure deletion removes local sessions without touching preferences or My rhythms.
+- [ ] Make migrations forward-only with tests from every released schema; a failed migration keeps the existing data and shows a recoverable error (FR-21).
+- [ ] Add Export my data (versioned JSON: My rhythms, history, preferences) through the share sheet, and Import from a file with the share-link validation rules, a summary, and duplicate-free merging.
+- [ ] Add the free-core promise and “Rate Sama” to About; add no in-app rating prompt (FR-22).
 - [ ] Do not implement streaks, scores, or badges (not building); the calendar, reminder, and progression belong to the v1.1 track.
 
 ### Exit evidence
@@ -345,8 +386,10 @@ Target: gate closes in Week 7; core records land with CP1, and new record fields
 - [ ] Records keep their practice-name and step snapshots after a saved rhythm is renamed or deleted and after a content version change.
 - [ ] Paused time cannot inflate stored active duration or completed rounds.
 - [ ] Local deletion passes confirmation and restart tests; preferences and My rhythms survive.
+- [ ] Upgrading from every released schema, killing the app mid-write, and restoring from an iOS backup and Android Auto Backup lose nothing.
+- [ ] Export then import into a clean install restores everything; importing into a populated install creates no duplicates; an invalid file imports nothing.
 
-Gate: incorrect records, irreversible deletion ambiguity, or missing privacy controls blocks beta.
+Gate: incorrect records, irreversible deletion ambiguity, data loss on update or import, or missing privacy controls blocks beta.
 
 ## CP5 · Health-session writing — Moved to v1.1 track
 
@@ -386,12 +429,12 @@ Target: after CP6
 
 - [ ] Publish the privacy policy and support contact. The policy explains share links (what a link contains, that anyone with it can read it) and that the web page keeps only aggregate host logs.
 - [ ] Reconcile Apple privacy labels, Google Play Data Safety answers, permission copy, SDK behavior, and the privacy policy.
-- [ ] Verify the archived iOS binary does not declare microphone, background audio, local-network discovery, HealthKit, or other capabilities that the production app does not use.
+- [ ] Verify the archived iOS binary does not declare microphone, local-network discovery, HealthKit, or other unused capabilities; background audio is declared and justified by locked-screen guidance in the review notes.
 - [ ] Serve `apple-app-site-association` and `assetlinks.json` over HTTPS from samabreath.app with the production app IDs and the Play app-signing certificate; confirm Play Console deep-link verification passes.
-- [ ] Prepare app name, subtitle, descriptions, wellness disclaimer, review notes, icon, and required screenshots. Store copy and keywords name the shipped techniques (for example Nadi Shodhana, Bhramari, Ujjayi, 4-7-8) and nothing unshipped.
+- [ ] Prepare app name, subtitle, descriptions, wellness disclaimer, review notes, icon, and required screenshots. Store copy and keywords name the shipped techniques (for example Nadi Shodhana, Bhramari, Ujjayi, 4-7-8) and nothing unshipped, and state the free-core promise, no ads, no account, and locked-screen guidance.
 - [ ] Complete name and cultural-language clearance, including the brand name’s pronunciation guidance.
 - [ ] Verify production signing, versioning, crash reporting, and symbol/mapping uploads.
-- [ ] Submit iOS and Android builds with review notes that explain share links and quick actions.
+- [ ] Submit iOS and Android builds with review notes that explain share links, quick actions, background audio, and the `mediaPlayback` foreground service.
 - [ ] Prepare a rollback/hotfix owner, decision path, and tested patch build procedure.
 - [ ] Use a staged rollout where supported and monitor crashes, starts, completions, and invalid-link rates without collecting health values or link contents.
 - [ ] Review feedback daily during the initial rollout and pause rollout on any launch-stop condition.
@@ -405,7 +448,7 @@ Target: after CP6
 - [ ] No link content renders unsafely and no out-of-bounds rhythm is accepted; no unreviewed vigorous technique or unrecorded “Reviewed by” ships.
 - [ ] The voice licence and every clip’s listener approval are on file; About discloses AI-generated voice.
 - [ ] VoiceOver, TalkBack, Dynamic Type, reduced motion, offline, and interruption suites pass.
-- [ ] Physical-iPhone silent-switch, haptic, lock-screen, audio-route, voice, Universal Link, and quick-action suites pass; physical-Android App Link, app-shortcut, TalkBack, and audio-focus suites pass. Simulator-only evidence is insufficient.
+- [ ] Physical-iPhone silent-switch, haptic, locked-screen guidance, audio-route, voice, Universal Link, quick-action, and data-safety suites pass; physical-Android App Link, app-shortcut, TalkBack, and audio-focus suites pass. Simulator-only evidence is insufficient.
 - [ ] Store disclosures match the shipped binary.
 - [ ] Rollback and hotfix ownership is active.
 
@@ -413,11 +456,11 @@ Gate: release only with unanimous product, engineering, QA, and privacy go/no-go
 
 ## v1.1 track · reasons to return
 
-Target: about 5–6 weeks after v1.0 is passing, including curated programs (v1.1-G). Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
+Target: about 6.5–7.5 weeks after v1.0 is passing, including curated programs (v1.1-G), night practice (v1.1-H), gradual slowing (v1.1-I), and library additions (v1.1-J). Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
 
 ### v1.1-A · Routines
 
-- [ ] Build routines of 2–6 practices (library techniques or saved rhythms) with per-practice minutes; store them as Routine records.
+- [ ] Build routines of 2–6 practices (library techniques or saved rhythms) with per-practice minutes; a practice may appear more than once; store them as Routine records.
 - [ ] Show planned duration before Begin: the sum of segments, each rounded up to whole rounds of its own practice.
 - [ ] Add the 5-second transition screen that names the next practice; it is not practice time.
 - [ ] Apply pause, end, and interruption rules to the whole routine; store one session record with per-segment snapshots.
@@ -519,6 +562,41 @@ Exit evidence
 - [ ] Screen readers read session dots as text (“Session 3 of 7 complete”) and announce the next session.
 - [ ] Program copy passes the voice review: no streak, guilt, or outcome language.
 
+### v1.1-H · Night practice
+
+- [ ] Add a true-black settle, practice, and completion surface with a dimmer guide, AA-passing labels, and a soft completion cue.
+- [ ] Setting: Off (default), 9 PM–6 AM (local time), or Always.
+
+Exit evidence
+
+- [ ] Contrast checks pass for every night-surface text role; step labels, side cues, and controls stay as legible as in day mode.
+
+### v1.1-I · Gradual slowing and half-second builder steps
+
+- [ ] Add optional gradual slowing for coherent breathing and custom rhythms: start and end inhale and exhale; step lengths change evenly round by round, to 0.1 s; the session ends on a whole round.
+- [ ] Add an option for half-second steps in the custom builder.
+
+Exit evidence
+
+- [ ] Engine tests cover interpolation, rounding, bounds, planned duration, and whole-round endings; the summary shows start and end guided pace.
+
+### v1.1-J · Library additions
+
+- [ ] Add Dirgha, Udgeeth, Chandra Bhedana, and cyclic sighing as bundled content meeting the FR-09 standard (steps, Take care, research, sources), with draft rhythms confirmed by the research pass.
+- [ ] Add “Anulom Vilom” as a search name and guide alias for Nadi Shodhana.
+- [ ] Generate and approve the “Om” and “Top up” cue words and the four pronunciation clips through the voice gate.
+- [ ] Show and speak “through the mouth” once per practice for mouth steps.
+
+Exit evidence
+
+- [ ] Content schema tests pass for all 12 techniques; searching “Anulom Vilom” finds Nadi Shodhana.
+- [ ] Cyclic sighing reports 6 guided breaths/min at in 3 · top up 1 · out 6 (the top-up does not count as a breath).
+- [ ] Every new clip has listener approval on file.
+
+## v1.2 candidates
+
+Each needs its own go decision after v1.1 metrics: **vigorous techniques** (Kapalabhati, Bhastrika, and Bahya, each after a named instructor review, with the rapid-rhythm mode and the safety check), **teacher programs** (after 6–8 teacher interviews), an **Apple Watch companion** that keeps running with the wrist down, with per-step haptics (the most-requested platform feature), and **Hindi voice cues** (the listener gate applies).
+
 ## Recommended implementation order by code area
 
 1. `app.json`, package scripts, and CI: restore buildability and repeatable evidence; remove Health from the v1.0 configuration; record the domain and quick-actions decisions.
@@ -526,12 +604,13 @@ Exit evidence
 3. Routing, first use, Breathe, the cue chip, Adjust rhythm, and four-tab navigation.
 4. Step-sequence engine extensions (0-second holds, sides, half seconds), bundled technique content and schema, Practices, and technique detail.
 5. `src/audio/`: voice clip manifest, cue scheduler, tone fallback, introductions, and the About disclosure.
+5b. Native audio timeline, locked-screen guidance, lock-screen controls, sound controls, and the rounds target (CP1b).
 6. My rhythms, link encode/decode and validation, share and incoming previews, Universal Links and App Links, and the static samabreath.app site.
 7. App-icon quick actions.
 8. Theme and shared controls: accessibility, contrast, reduced motion, and interaction states across every new surface.
-9. SQLite schema, History, Summary, and Settings: correct records, snapshots, and user control.
+9. SQLite schema, History, Summary, and Settings: correct records, snapshots, user control, backups, migrations, and export and import.
 10. Closed-beta hardening, the Play closed-testing requirement, store assets and technique-name keywords, release candidate, and staged rollout.
-11. v1.1 track: routines, gentle progression, practice calendar, daily reminder, curated programs (after routines, progression, and the reminder), `src/health/` session writing, and fuller voice guidance.
+11. v1.1 track: routines, gentle progression, practice calendar, daily reminder, curated programs (after routines, progression, and the reminder), night practice, gradual slowing, `src/health/` session writing, and fuller voice guidance.
 
 ## Definition of done for every task
 

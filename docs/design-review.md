@@ -23,10 +23,10 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 
 | Release | Scope |
 |---|---|
-| **v1.0 · the wedge** | Core practice from v2 (monotonic timer, settle countdown, pause/resume-phase, end confirmation, interruption pause, local history, accessibility, privacy, delete local history) **plus:** flexible rhythms, the practice library, bundled AI voice cues, My rhythms, share links, app-icon quick actions, one-screen first use, and four-tab navigation. |
-| **v1.1 · reasons to return** | **Curated programs**, routines, gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
-| **v1.2 · teacher programs (pending)** | Teachers build programs and share them privately by link or QR; students import them; anyone can duplicate and tweak. Starts only after 6–8 teacher interviews; see [programs research](research/programs-market-fit.md). |
-| **Later · concepts** | Kapalabhati and Bhastrika rapid-rhythm mode (needs named instructor review and a pre-practice safety check), Hindi localization, home/lock-screen widgets, Apple Watch / Wear OS. |
+| **v1.0 · the wedge (MVP)** | Core practice (monotonic timer, settle countdown, pause/resume-step, end confirmation, local history, accessibility, privacy, delete local history) **plus:** flexible rhythms with a minutes or rounds target, the practice library, bundled AI voice cues, **guidance that continues with the screen locked, sound controls,** My rhythms, share links, app-icon quick actions, one-screen first use, four-tab navigation, **data export and backup,** and the **free-core promise**. See “MVP definition” below. |
+| **v1.1 · reasons to return** | **Library grows to 12** (Dirgha, Udgeeth, Chandra Bhedana, cyclic sighing), **curated programs**, **night practice**, **gradual slowing within a session**, half-second steps in the custom builder, routines (a practice may repeat), gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
+| **v1.2 · candidates** | **Vigorous techniques** (Kapalabhati, Bhastrika, Bahya, bringing the library to 15; each needs a named instructor review, the rapid-rhythm mode, and the safety check), **teacher programs** (after 6–8 teacher interviews; see [programs research](research/programs-market-fit.md)), an **Apple Watch companion** (the most-requested platform feature), and **Hindi voice cues**. |
+| **Later · concepts** | Full Hindi localization, home/lock-screen widgets, Wear OS, a full dark theme. |
 | **Not building** | Wearable reads, heart-rate/HRV comparisons, trend charts; accounts and cloud sync; large content or music libraries; streaks, scores, badges. |
 
 ### v1.0 feature decisions
@@ -71,7 +71,7 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 ### Content and safety governance
 
 - Claude drafts technique content from classical and modern sources; every technique lists its sources under “Based on.”
-- **Risk tiers.** *Gentle* techniques (the v1.0 eight) may ship with sourced content and gentle defaults. *Vigorous or retention-led* techniques (Kapalabhati, Bhastrika, long kumbhaka, bandhas) require a named human instructor review before they ship.
+- **Risk tiers.** *Gentle* techniques (the v1.0 eight and the v1.1 four) may ship with sourced content and gentle defaults. *Vigorous or retention-led* techniques (Kapalabhati, Bhastrika, long kumbhaka, bandhas) require a named human instructor review before they ship.
 - “Reviewed by [name, credential]” appears only after a real review is recorded. Never imply review.
 - Frame tradition as tradition (“Traditionally practiced to…”). State evidence plainly, including null results such as the Sussex coherent-breathing trial. No treatment, diagnosis, or outcome claims.
 - Library defaults sit below classical ratios. Holds never exceed 20 s in v1.x.
@@ -106,7 +106,7 @@ The bundled Newsreader and DM Sans files contain macrons and ś but lack the IAS
 
 ### Delivery estimate
 
-One experienced full-time cross-platform engineer: v1.0 about 6–7 weeks (core correctness about 3, flexible engine and library about 1.5, voice about 0.5, My rhythms and share links about 1, quick actions and first use about 0.5), with content drafting in parallel. v1.1 about 5–6 weeks, of which curated programs are about 1.5–2 on top of routines, progression, and the reminder. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
+One experienced full-time cross-platform engineer: v1.0 about 8–9 weeks (core correctness about 3, locked-screen audio engine about 1–1.5, flexible engine and library about 1.5, voice and sound controls about 1, My rhythms and share links about 1, rounds, data safety, quick actions, and first use about 1), with content drafting in parallel. v1.1 about 6.5–7.5 weeks, of which curated programs are about 1.5–2 and the library additions about 0.5 on top of routines, progression, and the reminder. The user-needs update below records the cut line. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
 
 ### Brand refresh · decided September 22, 2026
 
@@ -119,6 +119,71 @@ The [brand exploration](brand-exploration.html) compared four marks, five lines,
 | Style | **Pine & Paper, refined** | Already implemented and contrast-tested. Adds line-diagram, icon, motion, and coral-point rules plus an imagery “don't” list. |
 
 The mark's construction lives in the brand guide. `assets/brand-*.svg` are the sources, and `npm run brand:assets` renders the app icon, Android adaptive and monochrome icons, favicon, and splash from the same geometry. The splash now shows the tile mark without a wordmark, which avoids rasterizing a font. A trademark search on the mark remains a prelaunch task.
+
+### User-needs update · decided September 23, 2026
+
+The [user needs research](research/user-needs-research.md) analyzed about 10,900 App Store and Google Play reviews. Price is the top reason for 1–2★ reviews (41.6%), followed by bugs (19.8%); simplicity is the top praise; users ask most for sound control, custom patterns, eyes-closed and locked-screen guidance, rounds, and a Watch app. Prana Breath's September 2026 relaunch now claims a sourced pranayama library, so Sama differentiates on **a free core that stays free, dependability, voice that names the side, teacher links, and platform parity**.
+
+#### Changed decision: guidance continues with the screen locked
+
+Replaces “pause on background or lock.”
+
+- **In Voice or Tones mode, guidance keeps going** when the screen locks or the app is in the background. Practice time counts, and cues stay within ±250 ms. When the app returns, the visual guide re-syncs from the same clock.
+- **It pauses automatically** for phone and VoIP calls, Siri and alarms, another app taking audio focus without mixing, headphones disconnecting, or a pause from the lock-screen controls. Returning shows the paused state, with the reason (“Paused for a call”).
+- **Silent mode:** A session keeps going with the screen locked when a non-visual cue can still play: Voice or Tones on both platforms, or haptics on Android. Otherwise (Silent without haptics, or Silent with haptics on iOS, where background haptics are not allowed) it pauses on lock.
+- **Lock-screen controls:** iOS Now Playing (practice name, round and time left, Pause/Resume); Android media-style notification from a `mediaPlayback` foreground service (Pause/Resume, End). No Live Activity in v1.0.
+- **Screen:** with Voice or Tones the screen may sleep normally. “Keep screen on during practice” is off by default; the screen always stays on in Silent mode.
+- **Implementation:** cues are scheduled on a native audio timeline driven by the audio clock, not JavaScript timers. iOS background audio mode is justified by audible guidance; the microphone stays disabled. The audio session deactivates after practice. The settle screen tells people they can lock the phone.
+
+#### New v1.0 requirements
+
+1. **Sound controls:** a cue volume separate from media volume; “Play alongside other audio” (default on: Sama mixes with music and lowers it briefly during cues) or “Pause other audio”; three tone sets (Soft bells by default, Wood, Chimes), each with distinct inhale, hold, exhale, and rest sounds; haptic strength Light, Medium (default), or Strong. All persist.
+2. **Rounds target:** the target can be minutes (1, 3, 5, 10) or rounds (1–108, with 11, 21, and 27 as shortcuts). Planned duration is shown for both. Practice shows “Round 6 of 21 · 16 left.” Share links, history, and programs carry the target type.
+3. **Data that can't be lost:** the local database is included in device backups (iOS device and iCloud backups; Android Auto Backup). Migrations are forward-only and tested from every released schema. A failed migration keeps the data and shows a recoverable error. **Export my data** writes a versioned JSON file (My rhythms, history, preferences) through the share sheet. **Import** validates it like a share link and merges without duplicates. No server.
+4. **Free-core promise,** in About and on the store page: every breathing practice, custom rhythms, voice, tone, and haptic guidance, and your history are free, with no ads and no account. Anything paid in future would be an addition, never a lock on these.
+5. **Natural-voice gate:** at least 8 listeners, including pranayama practitioners and a Sanskrit or Hindi speaker, rate calm, pace, and naturalness. The median must be at least 4 out of 5, or the clips are regenerated. Tones remain available.
+6. **No rating prompts** during or right after practice. v1.0 has no in-app rating prompt, only “Rate Sama” in About.
+
+#### New v1.1 requirements
+
+- **Night practice:** a true-black settle, practice, and completion surface with a dimmer guide and a soft completion cue. Off, 9 PM–6 AM, or Always (local time).
+- **Gradual slowing:** optional for coherent breathing and custom rhythms. Set a start and end inhale and exhale (holds unchanged). Step lengths change evenly round by round, to 0.1 s, and the session still ends on a whole round, with planned duration shown.
+- **Half-second steps** in the custom builder (an option).
+- **Routines may repeat a practice.**
+
+#### MVP definition (v1.0)
+
+| Area | Ships in the MVP |
+|---|---|
+| Practice | Step-sequence timer that ends on whole rounds; visible countdown; pause, resume the step, end with confirmation; minutes or rounds target |
+| Library | Eight gentle techniques with sourced guides, pronunciation, and Take care |
+| Guidance | Voice, Tones, or Silent; haptics; voice that names the side; introductions; guidance with the screen locked; sound controls |
+| Personal | Custom rhythms (four rows); My rhythms (up to 20); last practice remembered; app-icon quick actions |
+| Sharing | Share links with preview, validation, and a static web page |
+| Records and trust | Local history; delete; export and import; device backup; safe migrations |
+| Access and safety | One-screen first use; four tabs; screen reader, large text, reduced motion; safety and privacy views |
+| Promises | Free core, no ads, no account, no rating prompts during practice |
+
+**Not in the MVP:** programs, routines, gentle progression, calendar, reminders, Apple Health / Health Connect, night practice, gradual slowing, half-second builder steps, Watch, Hindi, teacher programs, and a full dark theme.
+
+**Estimate and cut line:** v1.0 grows to about **8–9 weeks** for one full-time engineer. Most of the increase is the locked-screen audio engine (about 1–1.5 weeks), plus sound controls (about 0.5), rounds (about 0.25), and data safety and export (about 0.5). If the schedule slips, defer the export and import screens to v1.1 (keeping backup and migration safety) and ship one tone set. v1.1 grows to about **6.5–7.5 weeks** with the four library additions.
+
+### Library roadmap · decided September 23, 2026
+
+Sama grows a small library deliberately instead of matching Prana Breath's 80+ practices. Only 12 of those are free, and users ask for simplicity far more than for volume. Target: **about 15 practices by v1.2, all free, each explained and sourced.** Rhythms below v1.0 are drafts until the technique research pass.
+
+| Release | Practices | Count |
+|---|---|---|
+| **v1.0** | Sama Vritti, Visama Vritti, Nadi Shodhana, Bhramari, Ujjayi, Sheetali, coherent breathing, 4-7-8 | 8 |
+| **v1.1** | + **Dirgha** (three-part yogic breath, in 4 · out 6), **Udgeeth** (Om on the exhale, in 4 · Om 8), **Chandra Bhedana** (in left, out right, in 4 · out 6), **cyclic sighing** (in 3 · top up 1 · out mouth 6) | 12 |
+| **v1.2 candidates** | + **Kapalabhati**, **Bhastrika**, **Bahya**: vigorous or retention-led; each needs a named instructor review, the rapid-rhythm mode, and the pre-practice safety check | 15 |
+
+- **“Anulom Vilom”** becomes a search name and guide alias for Nadi Shodhana in v1.1. It is the name most Indian practitioners use, and it is not a separate practice.
+- **New cue words in v1.1:** “Om” and “Top up,” under the same voice gate. A top-up step belongs to the same breath: it doesn't count toward guided breaths per minute, and cyclic sighing is 6 guided breaths/min at its default.
+- **Nose or mouth:** steps that breathe through the mouth (Sheetali's inhale, cyclic sighing's exhale) show and speak the route once per practice.
+- **Bahya** stays within the 20-second hold cap unless the instructor review records a different decision.
+- **Not planned:** other breathing traditions (Sufi, Tibetan, Taoist), applied collections (singers, divers, runners), habit collections (cravings, smoking), and self-measured health metrics. They are off-position, or they invite health claims.
+- **Cost:** gentle additions are data plus content, about half a day to a day of engineering each, with content and voice work in parallel. Vigorous additions depend on the rapid-rhythm mode (about 4–6 days) and the review.
 
 ### Design validation boundary
 

@@ -24,7 +24,8 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 | Release | Scope |
 |---|---|
 | **v1.0 · the wedge** | Core practice from v2 (monotonic timer, settle countdown, pause/resume-phase, end confirmation, interruption pause, local history, accessibility, privacy, delete local history) **plus:** flexible rhythms, the practice library, bundled AI voice cues, My rhythms, share links, app-icon quick actions, one-screen first use, and four-tab navigation. |
-| **v1.1 · reasons to return** | Routines, gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
+| **v1.1 · reasons to return** | **Curated programs**, routines, gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
+| **v1.2 · teacher programs (pending)** | Teachers build programs and share them privately by link or QR; students import them; anyone can duplicate and tweak. Starts only after 6–8 teacher interviews; see [programs research](research/programs-market-fit.md). |
 | **Later · concepts** | Kapalabhati and Bhastrika rapid-rhythm mode (needs named instructor review and a pre-practice safety check), Hindi localization, home/lock-screen widgets, Apple Watch / Wear OS. |
 | **Not building** | Wearable reads, heart-rate/HRV comparisons, trend charts; accounts and cloud sync; large content or music libraries; streaks, scores, badges. |
 
@@ -57,6 +58,15 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 - **Gentle progression.** Only for techniques with a defined path. After 5 completed (not ended early) sessions at the same rhythm within 14 days, the completion screen offers one next step, e.g. 4 · 0 · 6 · 0 → 4 · 0 · 7 · 0. Try it / Not now / Stop suggesting. Never automatic. “Make it easier next time” is always available after a practice.
 - **Practice calendar.** A month view in History: a pine dot on each practiced day, days and minutes this month, minutes by practice. No streak count, broken-chain visual, or missed-day marking.
 - **Daily reminder.** Off by default; one notification at a chosen time; the notification permission is requested only after the user turns it on. Copy: “Time for a little space.”
+- **Curated programs** (decided September 23, 2026, from the [programs research](research/programs-market-fit.md)). Short, forgiving, multi-session plans built only from library techniques and routines. They live in a Programs group at the top of the Practices tab.
+  - **Pranayama Foundations · 7 sessions:** 1 Sama Vritti 3 min · 2 Visama Vritti 5 min · 3 Ujjayi 5 min · 4 Nadi Shodhana 5 min · 5 Bhramari 5 min · 6 Ujjayi 3 min → Nadi Shodhana 5 min · 7 Nadi Shodhana 5 min → Bhramari 3 min. About 39 minutes in total; each session introduces one technique or joins two.
+  - **Nadi Shodhana Path · 21 sessions in three phases:** in 4 · out 6 for 5 min (sessions 1–7), in 4 · out 7 for 7 min (8–14, 20 rounds / 7:20), in 4 · out 8 for 10 min (15–21, 25 rounds / 10:00). No breath retention. Finishing Foundations suggests this path.
+  - **Progress counts completed sessions, never calendar days.** Ended-early sessions don't count and stay ready. One session a day is suggested; more are allowed. No streaks, no resets, no missed-day marks.
+  - **Returning after 7 or more days** offers “Repeat session N−1” or “Continue with session N.” At each phase boundary: “Move on” or “Repeat this phase.”
+  - **Starting a program asks when you'll practise** (morning, midday, evening, or a time) and offers the daily reminder. Both can be skipped.
+  - **One active program at a time.** While enrolled, Breathe shows the next session as the ready practice. Other practices never advance or break the program. Leaving asks for confirmation and keeps progress for later. Gentle-progression suggestions are paused inside a program.
+  - **Program definitions are bundled and versioned;** an enrollment keeps a snapshot, so content updates never change a program mid-way.
+  - **Success signals:** 7-session completion of 25–30% (stretch), and more practice days per week for enrolled practitioners than for others (beta interviews and opt-in feedback).
 
 ### Content and safety governance
 
@@ -96,7 +106,7 @@ The bundled Newsreader and DM Sans files contain macrons and ś but lack the IAS
 
 ### Delivery estimate
 
-One experienced full-time cross-platform engineer: v1.0 about 6–7 weeks (core correctness about 3, flexible engine and library about 1.5, voice about 0.5, My rhythms and share links about 1, quick actions and first use about 0.5), with content drafting in parallel. v1.1 about 3–4 weeks. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
+One experienced full-time cross-platform engineer: v1.0 about 6–7 weeks (core correctness about 3, flexible engine and library about 1.5, voice about 0.5, My rhythms and share links about 1, quick actions and first use about 0.5), with content drafting in parallel. v1.1 about 5–6 weeks, of which curated programs are about 1.5–2 on top of routines, progression, and the reminder. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
 
 ### Brand refresh · decided September 22, 2026
 

@@ -2,7 +2,7 @@
 
 Status: proposed · v3 scope (2026-09-22); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
 Target: public iOS and Android v1.0 (the wedge), then the v1.1 track (reasons to return)  
-Expected delivery: v1.0 about 6–7 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 3–4 weeks. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
+Expected delivery: v1.0 about 6–7 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 5–6 weeks including curated programs. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
 
 This plan converts the product requirements and UX design into gated implementation checkpoints. A checkpoint is complete only when its exit evidence exists; completing code without passing the gate does not advance the release.
 
@@ -14,7 +14,7 @@ What changed:
 
 - **Positioning.** Practitioner-first (yoga practitioners, teacher-training students, teachers); the curious beginner follows techniques with gentle defaults; teachers distribute through share links. Promise: authentic pranayama, guided at your pace. Free, offline, no account.
 - **v1.0 adds** flexible rhythms (inhale and exhale 1–20 s; holds 0–20 s, where 0 is skipped and shown “Off”; library half-second steps and left/right side labels), the eight-technique practice library, bundled AI voice cues, My rhythms (up to 20), share links with a static web fallback, app-icon quick actions, one-screen first use, and four-tab navigation: Breathe · Practices · History · Settings.
-- **Moved to v1.1:** Apple Health / Health Connect writing (CP5). New in v1.1: routines, gentle progression, practice calendar (no streaks), daily reminder, fuller voice guidance.
+- **Moved to v1.1:** Apple Health / Health Connect writing (CP5). New in v1.1: curated programs (added 2026-09-23), routines, gentle progression, practice calendar (no streaks), daily reminder, fuller voice guidance. Teacher programs are planned for v1.2, pending teacher interviews.
 - **Not building:** wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, streaks, scores, badges. The Progress/Insights route is removed, not deferred.
 - **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
 - **Checkpoints.** CP0 adopts the step bounds; CP2 becomes one-screen first use, four tabs, and the cue chip; new CP2b covers the library, voice, My rhythms, sharing, and quick actions; CP3 and CP4 extend to the new surfaces; CP5 moves to the [v1.1 track](#v11-track--reasons-to-return); CP6 and CP7 add the voice licence, link-verification files, technique-name store copy, and the Play closed-testing requirement.
@@ -413,7 +413,7 @@ Gate: release only with unanimous product, engineering, QA, and privacy go/no-go
 
 ## v1.1 track · reasons to return
 
-Target: about 3–4 weeks after v1.0 is passing. Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
+Target: about 5–6 weeks after v1.0 is passing, including curated programs (v1.1-G). Each checkpoint may ship when its evidence passes; none may regress a v1.0 gate. The v1.0 gate rules, device matrix, and definition of done apply.
 
 ### v1.1-A · Routines
 
@@ -498,6 +498,27 @@ Exit evidence
 - [ ] A listener who knows Sanskrit or Hindi has approved every new clip, with the approval recorded.
 - [ ] Counting never overlaps the next step boundary in timing tests; the About disclosure still covers all voice guidance.
 
+### v1.1-G · Curated programs
+
+Added 2026-09-23 from the [programs research](research/programs-market-fit.md). Depends on v1.1-A (routines), v1.1-B (progression), and v1.1-D (reminder). Teacher-authored programs are a separate v1.2 decision.
+
+- [ ] Bundle versioned definitions for Pranayama Foundations (7 sessions) and the Nadi Shodhana Path (21 sessions in three phases) exactly as specified in FR-20, built only from library techniques and routines.
+- [ ] Add the Programs group to Practices, the program overview, and the start step (when you'll practise, optional reminder; both skippable).
+- [ ] Store one Program enrollment with a definition snapshot; allow one active program; support Leave (with confirmation), resume, and Restart.
+- [ ] Show the next session as the ready practice on Breathe while enrolled; other practices never advance or break the program.
+- [ ] Advance only on completed sessions; keep ended-early sessions as the next session; never reset or mark missed days.
+- [ ] Offer “Repeat session N−1” or “Continue with session N” after 7 or more days away, and “Move on” or “Repeat this phase” at phase boundaries.
+- [ ] Show “Session N of M” with session dots and the next-session preview on completion; show the program summary and suggested next program at the end.
+- [ ] Pause FR-15 progression suggestions for program sessions; tag program sessions in History with program name and session number.
+
+Exit evidence
+
+- [ ] Engine tests cover session advancement, ended-early sessions, the 7-day welcome-back offer, phase decisions, content-version snapshots, and planned durations (in 4 · out 7 at 7 min = 20 rounds / 7:20; in 4 · out 8 at 10 min = 25 rounds / 10:00).
+- [ ] A clock-change and timezone test shows no calendar logic affects progress.
+- [ ] The program works with notification permission denied and with the reminder off.
+- [ ] Screen readers read session dots as text (“Session 3 of 7 complete”) and announce the next session.
+- [ ] Program copy passes the voice review: no streak, guilt, or outcome language.
+
 ## Recommended implementation order by code area
 
 1. `app.json`, package scripts, and CI: restore buildability and repeatable evidence; remove Health from the v1.0 configuration; record the domain and quick-actions decisions.
@@ -510,7 +531,7 @@ Exit evidence
 8. Theme and shared controls: accessibility, contrast, reduced motion, and interaction states across every new surface.
 9. SQLite schema, History, Summary, and Settings: correct records, snapshots, and user control.
 10. Closed-beta hardening, the Play closed-testing requirement, store assets and technique-name keywords, release candidate, and staged rollout.
-11. v1.1 track: routines, gentle progression, practice calendar, daily reminder, `src/health/` session writing, and fuller voice guidance.
+11. v1.1 track: routines, gentle progression, practice calendar, daily reminder, curated programs (after routines, progression, and the reminder), `src/health/` session writing, and fuller voice guidance.
 
 ## Definition of done for every task
 

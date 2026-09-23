@@ -1,5 +1,111 @@
 # Sama Breath design review
 
+## v3 direction · September 22, 2026
+
+Scope: product direction, requirements, brand, UX mocks, and launch plan. Application code, assets, and checkpoint evidence are unchanged. This section is the shared decision contract for the v3 documents; the v2 review below is retained as history.
+
+### Why v3
+
+The v2 lean MVP was a well-crafted four-phase timer. A product review found it had almost no differentiation: free, cross-platform timers (Simple Breathing, Breath Ball, Breathly, Prana Breath's free tier) and Apple Watch's built-in Mindfulness app already cover free, custom, box breathing. The one lane the market research found unowned — authentic pranayama, free, on both platforms — had been cut for speed. v3 restores it while keeping the lean, offline, no-account engineering posture. Revenue is intentionally out of scope for now.
+
+### Positioning
+
+| Decision | v3 direction |
+|---|---|
+| Primary user | **The practitioner:** yoga practitioners, teacher-training students, and teachers who want authentic techniques without a subscription. |
+| Secondary user | **The curious beginner:** follows a technique guide with gentle defaults; never has to build a rhythm. |
+| Distribution | Teachers share practices with students through links. |
+| Promise | Authentic pranayama, guided at your pace. Free, offline, no account. |
+| Brand line | Keep **Your breath. Your rhythm.** Descriptor changes to **Pranayama, guided at your pace.** |
+| Navigation | **Breathe · Practices · History · Settings.** The library earns a top-level destination. |
+
+### Release plan
+
+| Release | Scope |
+|---|---|
+| **v1.0 · the wedge** | Core practice from v2 (monotonic timer, settle countdown, pause/resume-phase, end confirmation, interruption pause, local history, accessibility, privacy, delete local history) **plus:** flexible rhythms, the practice library, bundled AI voice cues, My rhythms, share links, app-icon quick actions, one-screen first use, and four-tab navigation. |
+| **v1.1 · reasons to return** | Routines, gentle progression, practice calendar (no streaks), optional daily reminder, Apple Health / Health Connect mindful-minute writing (v2 states unchanged), fuller voice guidance (optional counting, longer introductions). |
+| **Later · concepts** | Kapalabhati and Bhastrika rapid-rhythm mode (needs named instructor review and a pre-practice safety check), Hindi localization, home/lock-screen widgets, Apple Watch / Wear OS. |
+| **Not building** | Wearable reads, heart-rate/HRV comparisons, trend charts; accounts and cloud sync; large content or music libraries; streaks, scores, badges. |
+
+### v1.0 feature decisions
+
+- **Flexible rhythms.** Inhale and exhale are 1–20 s. Holds are 0–20 s; 0 means the step is skipped and displays as “Off.” Library techniques may define half-second steps (coherent breathing 5.5 · 5.5) and more than four steps with left/right side labels (Nadi Shodhana). The custom builder stays four rows in whole seconds.
+- **Practice library (8 gentle techniques).** Sama Vritti (box), Visama Vritti (extended exhale), Nadi Shodhana (alternate nostril, no retention), Bhramari (humming bee), Ujjayi (ocean breath), Sheetali (cooling; Sheetkari alternative), coherent breathing (5.5 · 5.5), and 4-7-8. Each technique has a romanized name and English name, pronunciation respelling and audio, how-to steps, traditional context, “Take care” guidance, “What research says,” and sources.
+- **Voice guidance.** AI-generated clips bundled in the app: cue words (Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch), optional technique introductions before practice, and pronunciation clips. Cue mode is Voice, Tones, or Silent; haptics are independent. Defaults: Voice on, haptics on, motion follows the system.
+- **My rhythms.** Save up to 20 named rhythms (custom or received through a link). Rename and delete are local.
+- **Share links.** Share a library technique's current settings or a saved rhythm as `https://samabreath.app/r/…`. Opening the link shows an in-app preview (Save, Begin). Without the app, a small web page shows the rhythm and store links.
+- **Quick start.** App-icon quick actions: “Begin last practice,” “1-minute box breathing,” and the most recent *other* practice (omitted until history has two distinct practices). They open the settle countdown with Cancel. Before first use is complete, they open first use.
+- **First use.** One screen: welcome, comfort guidance, wellness disclaimer, and **Continue** to Breathe (“Begin” is reserved for starting a practice). When a quick action or link opened first use, Continue proceeds to it. Cue choices move to a cue chip on Breathe and to Settings.
+- **Vocabulary.** “Round” replaces “cycle” (one pass through a practice's steps; a Nadi Shodhana round covers both sides). Planned rounds = round up (target seconds ÷ round seconds). Guided pace is shown in **guided breaths per minute** (inhale steps per minute), never as a measured rate. Examples: box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
+- **Half-second steps** show the guide and a progress ring instead of a countdown numeral; coherent breathing is followed, not counted.
+
+| Library default | Rhythm | Default target | Planned | Progression path (v1.1) |
+|---|---|---|---|---|
+| Sama Vritti · box | 4 · 4 · 4 · 4 | 5 min | 19 rounds · 5:04 | +1 s every phase, to 6 · 6 · 6 · 6 |
+| Visama Vritti · extended exhale | in 4 · out 6 | 5 min | 30 rounds · 5:00 | out 7, then out 8 |
+| Nadi Shodhana · alternate nostril | in 4 · out 6, each side | 5 min | 15 rounds · 5:00 | out 7, then out 8 |
+| Bhramari · humming bee | in 4 · hum 8 | 5 min | 25 rounds · 5:00 | — |
+| Ujjayi · ocean breath | in 5 · out 5 | 5 min | 30 rounds · 5:00 | in 6 · out 6 |
+| Sheetali · cooling breath | in 4 · out 6 | 3 min | 18 rounds · 3:00 | — |
+| Coherent breathing | in 5.5 · out 5.5 | 5 min | 28 rounds · 5:08 | — |
+| 4-7-8 | 4 · 7 · 8 · rest off | 1 min | 4 rounds · 1:16 | — |
+
+### v1.1 feature decisions
+
+- **Routines.** Chain 2–6 practices with per-practice minutes. A 5-second transition screen names the next practice. Pause, end, and interruption rules apply to the whole routine; the summary lists each practice completed.
+- **Gentle progression.** Only for techniques with a defined path. After 5 completed (not ended early) sessions at the same rhythm within 14 days, the completion screen offers one next step, e.g. 4 · 0 · 6 · 0 → 4 · 0 · 7 · 0. Try it / Not now / Stop suggesting. Never automatic. “Make it easier next time” is always available after a practice.
+- **Practice calendar.** A month view in History: a pine dot on each practiced day, days and minutes this month, minutes by practice. No streak count, broken-chain visual, or missed-day marking.
+- **Daily reminder.** Off by default; one notification at a chosen time; the notification permission is requested only after the user turns it on. Copy: “Time for a little space.”
+
+### Content and safety governance
+
+- Claude drafts technique content from classical and modern sources; every technique lists its sources under “Based on.”
+- **Risk tiers.** *Gentle* techniques (the v1.0 eight) may ship with sourced content and gentle defaults. *Vigorous or retention-led* techniques (Kapalabhati, Bhastrika, long kumbhaka, bandhas) require a named human instructor review before they ship.
+- “Reviewed by [name, credential]” appears only after a real review is recorded. Never imply review.
+- Frame tradition as tradition (“Traditionally practiced to…”). State evidence plainly, including null results such as the Sussex coherent-breathing trial. No treatment, diagnosis, or outcome claims.
+- Library defaults sit below classical ratios. Holds never exceed 20 s in v1.x.
+
+### AI voice
+
+- Generate once (ElevenLabs or equivalent) under a commercial licence, then bundle the clips. No runtime API, key, or network dependency.
+- One calm, consistent voice. Cue words are at most 0.8 s. When a step is shorter than its cue plus 0.2 s, play that step's tone instead.
+- Voice replaces tones when on; haptics stay independent. Platform audio conventions follow the CP1 locked decision.
+- Sanskrit names use a pronunciation dictionary. A listener who knows Sanskrit or Hindi approves every clip before release; text review alone cannot validate pronunciation.
+- Settings → About discloses that voice guidance is AI-generated.
+
+### Typography finding
+
+The bundled Newsreader and DM Sans files contain macrons and ś but lack the IAST underdot and overdot letters (ḍ ṣ ṭ ṇ ṃ ḥ ṛ), verified from each font's character map. The UI therefore uses common romanization without diacritics (Nadi Shodhana, Bhramari), a pronunciation respelling (“NAH-dee SHOH-duh-nuh”), and a pronunciation clip. Full IAST requires adding a covering font such as Noto Serif, which is a future brand decision.
+
+### Share-link safety
+
+- A link carries only a display name (plain text, at most 40 characters), a step list (kind, seconds within bounds, optional side), a target duration (1, 3, 5, or 10 min), and an optional library technique ID.
+- Validate every field; reject anything out of bounds; never render link content as HTML. Safety and instruction text always comes from the app's own content, never from a link.
+- Links cannot unlock techniques that are not in the installed library. Vigorous techniques are not shareable in v1.x.
+
+### Success signals
+
+| Signal | Target / source |
+|---|---|
+| Activation, completion, crash-free sessions | ≥ 60%, ≥ 70%, ≥ 99.5% (unchanged) |
+| **D30 retention** | Opted-in store analytics; hypothesis ≥ 8%; continue/adjust decision 8 weeks after launch |
+| **Wedge validation** | ≥ 40% of sessions use a practice other than box breathing (beta interviews and opt-in feedback until analytics exist) |
+| **Teacher loop** | Web-fallback page visits and store campaign attribution from share links |
+| **Discoverability** | Installs from technique-name searches (App Store Connect and Play Console acquisition reports) |
+
+### Delivery estimate
+
+One experienced full-time cross-platform engineer: v1.0 about 6–7 weeks (core correctness about 3, flexible engine and library about 1.5, voice about 0.5, My rhythms and share links about 1, quick actions and first use about 0.5), with content drafting in parallel. v1.1 about 3–4 weeks. Store review, the Google Play closed-testing requirement for new personal accounts, and physical-device testing add calendar time.
+
+### Design validation boundary
+
+The v3 UX mocks are documentation specimens. No timer, audio, voice, haptics, deep links, quick actions, notifications, storage, or Health access run in them. Technique copy in the mocks is illustrative until the sourced content pass is complete.
+
+---
+
+## v2 review · September 18, 2026
+
 Reviewed September 18, 2026. Scope: the product, branding, UX, and launch documentation in this folder. This is a design review and documentation revision; the installed app and runtime implementation were not evaluated or changed.
 
 The strongest existing assets were the deep-pine practice surface, Newsreader/DM Sans pairing, approachable breath mark, and ready-to-start default. The main problem was disagreement between the promise, the screens, and the lean launch scope. The revised direction keeps the visual foundation and makes the experience more coherent.

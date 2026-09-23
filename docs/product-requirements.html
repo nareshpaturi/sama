@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#12372f" />
   <link rel="icon" href="data:," />
-  <title>MVP Product Specification</title>
+  <title>Sama Breath Product Requirements</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Libre+Franklin:wght@600;700;800&display=swap');
     :root{
@@ -41,14 +41,14 @@
     .card-kicker{font:500 10px 'IBM Plex Mono';letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
     .list{list-style:none;padding:0;margin:0}.list li{position:relative;padding:8px 0 8px 25px;border-bottom:1px solid rgba(0,0,0,.07)}.list li:last-child{border-bottom:0}.list li:before{content:"";position:absolute;left:2px;top:15px;width:8px;height:8px;border:2px solid var(--sage);border-radius:50%}.list.compact li{padding-top:5px;padding-bottom:5px;font-size:14px}.list.compact li:before{top:12px}
     .no-list li:before{border-color:var(--rust);border-radius:0;transform:rotate(45deg);width:7px;height:7px}
-    .scope-table{border:1px solid var(--line);border-radius:7px;overflow:hidden}.scope-row{display:grid;grid-template-columns:1.4fr .7fr 2fr;gap:18px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:start}.scope-row:last-child{border-bottom:0}.scope-row.header{background:#eef1ed;font:500 11px 'IBM Plex Mono';letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.tag{display:inline-block;font:500 10px 'IBM Plex Mono';padding:4px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}.tag.must{background:var(--sage-2);color:var(--sage)}.tag.should{background:var(--sand);color:var(--rust)}.tag.later{background:#edf0f2;color:var(--slate)}
+    .scope-table{border:1px solid var(--line);border-radius:7px;overflow:hidden}.scope-row{display:grid;grid-template-columns:1.4fr .7fr 2fr;gap:18px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:start}.scope-row:last-child{border-bottom:0}.scope-row.header{background:#eef1ed;font:500 11px 'IBM Plex Mono';letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.tag{display:inline-block;font:500 10px 'IBM Plex Mono';padding:4px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}.tag.must{background:var(--sage-2);color:var(--sage)}.tag.should{background:var(--sand);color:var(--rust)}.tag.later{background:#edf0f2;color:var(--slate)}.tag.no{background:#f3f1ee;color:#666;border:1px solid #ddd8d0}
     .flow{display:flex;align-items:stretch;gap:8px;margin:22px 0}.step{flex:1;min-width:0;border:1px solid var(--line);padding:14px;border-radius:6px;background:#fff}.step b{display:block;font:500 10px 'IBM Plex Mono';color:var(--sage);margin-bottom:7px}.step span{font-size:13px}.arrow{display:grid;place-items:center;color:#88928d}
     .state-machine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0}.phase{padding:17px 12px;text-align:center;border:1px solid var(--line);position:relative;color:var(--brand-pine-dark)}.phase:after{content:"→";position:absolute;right:-9px;top:calc(50% - 11px);z-index:2;background:white;color:var(--sage)}.phase:last-child:after{content:"↻";right:5px;top:4px;background:transparent}.phase b{display:block;font:700 15px 'Libre Franklin';margin-bottom:4px}.phase small{font:400 11px 'IBM Plex Mono';color:var(--brand-pine-dark)}.phase.inhale{background:var(--brand-sky)}.phase.hold1{background:var(--brand-saffron)}.phase.exhale{background:var(--brand-coral)}.phase.hold2{background:var(--brand-mist)}
     .spec{display:grid;grid-template-columns:180px 1fr;border-top:1px solid var(--line)}.spec dt,.spec dd{margin:0;padding:13px 0;border-bottom:1px solid var(--line)}.spec dt{font:500 12px 'IBM Plex Mono';color:var(--muted);padding-right:20px}.spec dd{font-size:14px}
-    .screen{border:1px solid var(--line);border-radius:7px;padding:18px;display:grid;grid-template-columns:56px 1fr;gap:14px}.screen-num{width:42px;height:42px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font:500 12px 'IBM Plex Mono'}.screen h4{font-size:16px}.screen p{font-size:13px;color:var(--muted);margin:0}.screens{display:grid;gap:10px}
+    .screen{border:1px solid var(--line);border-radius:7px;padding:18px;display:grid;grid-template-columns:56px 1fr;gap:14px}.screen-num{width:42px;height:42px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font:500 12px 'IBM Plex Mono'}.screen-num.next{background:var(--slate)}.screen h4{font-size:16px}.screen p{font-size:13px;color:var(--muted);margin:0}.screens{display:grid;gap:10px}
     .criteria{counter-reset:item;list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}.criteria li{counter-increment:item;padding:12px 0 12px 42px;border-bottom:1px solid var(--line);position:relative;font-size:14px}.criteria li:before{content:counter(item,decimal-leading-zero);position:absolute;left:0;top:13px;font:500 11px 'IBM Plex Mono';color:var(--sage)}
     .code{background:#17221e;color:#dce8e1;padding:20px;border-radius:5px;font:400 12px/1.65 'IBM Plex Mono';white-space:pre-wrap;overflow-wrap:anywhere}
-    details{border-top:1px solid var(--line)}details:last-child{border-bottom:1px solid var(--line)}summary{cursor:pointer;padding:15px 32px 15px 0;font-weight:600;position:relative;list-style:none}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:8px;font:500 18px 'IBM Plex Mono';color:var(--sage)}details[open] summary:after{content:"−"}details .detail-body{padding:0 0 18px;color:#47534e;font-size:14px}
+    details{border-top:1px solid var(--line)}details:last-child{border-bottom:1px solid var(--line)}summary{cursor:pointer;padding:15px 32px 15px 0;font-weight:600;position:relative;list-style:none}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:8px;font:500 18px 'IBM Plex Mono';color:var(--sage)}details[open] summary:after{content:"−"}details .detail-body{padding:0 0 18px;color:#47534e;font-size:14px}details .detail-body h4{margin:18px 0 8px}
     .milestones{display:grid;gap:0}.milestone{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}.milestone:first-child{border-top:1px solid var(--line)}.week{font:500 11px 'IBM Plex Mono';color:var(--sage);text-transform:uppercase}.milestone h4{margin-bottom:5px}.milestone p{font-size:14px;color:var(--muted);margin:0}
     .decision{display:grid;grid-template-columns:1fr auto;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}.decision b{display:block;margin-bottom:3px}.decision p{font-size:13px;color:var(--muted);margin:0}.decision .choice{font:500 11px 'IBM Plex Mono';color:var(--sage);background:var(--mint);padding:6px 9px;border-radius:3px;white-space:nowrap}
     .footer-note{padding:30px;background:#edf2ee;border-radius:7px;margin-top:30px;font-size:14px}.footer-note strong{display:block;font-family:'Libre Franklin';margin-bottom:6px}
@@ -62,290 +62,474 @@
 <div class="page">
   <aside>
     <div class="doc-meta">Product requirements document</div>
-    <div class="version"><b>v1.5</b><span>Design aligned · 2026-09-18</span></div>
+    <div class="version"><b>v2.0</b><span>Pranayama-first · 2026-09-22</span></div>
     <nav id="sideNav">
       <a class="nav-link active" href="#summary">Executive summary</a>
-      <a class="nav-link" href="#scope">MVP boundary</a>
+      <a class="nav-link" href="#scope">Release boundary</a>
       <a class="nav-link" href="#experience">Core experience</a>
       <a class="nav-link" href="#requirements">Functional requirements</a>
-      <a class="nav-link" href="#health">Health integration</a>
+      <a class="nav-link" href="#content">Content &amp; safety governance</a>
+      <a class="nav-link" href="#voice">AI voice &amp; names</a>
       <a class="nav-link" href="#architecture">Technical architecture</a>
-      <a class="nav-link" href="#data">Data & privacy</a>
+      <a class="nav-link" href="#data">Data &amp; privacy</a>
       <a class="nav-link" href="#quality">Quality bar</a>
       <a class="nav-link" href="#delivery">Delivery plan</a>
       <a class="nav-link" href="#launch">Launch checklist</a>
       <a class="nav-link" href="#decisions">Decisions</a>
     </nav>
-    <div class="aside-foot">One codebase · iOS + Android<br>Core breathing stays free.</div>
+    <div class="aside-foot">One codebase · iOS + Android<br>Every technique free. Offline. No account.</div>
   </aside>
 
   <main>
     <div class="mobile-menu">
       <select id="sectionSelect" aria-label="Jump to section">
-        <option value="summary">Executive summary</option><option value="scope">MVP boundary</option><option value="experience">Core experience</option><option value="requirements">Functional requirements</option><option value="health">Health integration</option><option value="architecture">Technical architecture</option><option value="data">Data & privacy</option><option value="quality">Quality bar</option><option value="delivery">Delivery plan</option><option value="launch">Launch checklist</option><option value="decisions">Decisions</option>
+        <option value="summary">Executive summary</option><option value="scope">Release boundary</option><option value="experience">Core experience</option><option value="requirements">Functional requirements</option><option value="content">Content &amp; safety governance</option><option value="voice">AI voice &amp; names</option><option value="architecture">Technical architecture</option><option value="data">Data &amp; privacy</option><option value="quality">Quality bar</option><option value="delivery">Delivery plan</option><option value="launch">Launch checklist</option><option value="decisions">Decisions</option>
       </select>
     </div>
 
     <header class="hero">
-      <div class="eyebrow">Pranayama app · MVP specification</div>
-      <h1>A simple practice, on your terms.</h1>
-      <p class="lede">A focused, free breathing companion for iOS and Android. The public MVP ships the shortest safe path to a customizable four-phase practice with tones, haptics, local history, and optional health-session writing. Recorded voice and wearable trend insights follow after the core experience is validated.</p>
+      <div class="eyebrow">Pranayama app · v1.0 and v1.1 specification</div>
+      <h1>Authentic pranayama, free.</h1>
+      <p class="lede">A free, offline pranayama companion for iOS and Android. v1.0 ships eight gentle, sourced techniques, flexible rhythms, bundled voice cues, saved rhythms, and share links on top of a trustworthy practice timer. v1.1 adds reasons to return. No account, no subscription, no medical claims.</p>
       <div class="hero-grid">
-        <div class="hero-stat"><strong>4</strong><span>independent phase timers</span></div>
+        <div class="hero-stat"><strong>8</strong><span>techniques in the library</span></div>
         <div class="hero-stat"><strong>2</strong><span>mobile platforms</span></div>
         <div class="hero-stat"><strong>0</strong><span>accounts required</span></div>
-        <div class="hero-stat"><strong>Free</strong><span>core experience</span></div>
+        <div class="hero-stat"><strong>Free</strong><span>every technique, no paywall</span></div>
       </div>
     </header>
 
     <div class="content">
-      <div class="callout"><div class="mark">v2</div><div><strong>Design alignment · 2026-09-18</strong><p>Read with the <a href="branding-design.html">brand guide</a>, <a href="ux-design.html">UX mocks</a>, and <a href="design-review.md">review log</a>. This revision resolves design and scope contradictions only; no application code or implementation evidence is changed.</p></div></div>
+      <div class="callout"><div class="mark">v3</div><div><strong>Pranayama-first direction · 2026-09-22</strong><p>This PRD implements the v3 decision contract in the <a href="design-review.md">design review</a>; if the two disagree, the contract wins. Read with the <a href="branding-design.html">brand guide</a> and <a href="ux-design.html">UX mocks</a>. The mocks are documentation specimens, and technique copy in them is illustrative until the sourced content pass is complete. No application code or checkpoint evidence changed in this revision.</p></div></div>
       <section id="summary">
         <div class="section-head"><div class="section-no">01</div><div><h2>Executive summary</h2><p>What ships, who it serves, and how to tell if it works.</p></div></div>
-        <div class="callout"><div class="mark">→</div><div><strong>Product promise</strong><p>Open the app and begin a calm four-phase session with one primary action, or optionally adjust each phase—for example 4–4–6–4. Finish without watching the screen. With permission, qualifying completed sessions can be written to Apple Health or Health Connect.</p></div></div>
-                <div class="callout"><div class="mark">MVP</div><div><strong>Speed-to-market rule</strong><p>Launch is blocked only by the safe, accessible breathing loop, reliable local records, and honest optional health-session writing. Recorded voice, wearable reads, biometric comparisons, trend charts, streaks, reminders, tablet-specific layouts, and richer progression are post-MVP and outside the launch journey.</p></div></div>
-        <div class="two-col">
-          <div class="card tint"><div class="card-kicker">Primary user</div><h3>The stressed beginner</h3><p>Wants a quick, private way to calm down without learning a meditation system or committing to a subscription.</p></div>
-          <div class="card"><div class="card-kicker">Secondary user</div><h3>The regular practitioner</h3><p>Already knows box breathing and wants adjustable timing, reliable cues, and health-app logging.</p></div>
+        <div class="callout"><div class="mark">→</div><div><strong>Product promise</strong><p>Authentic pranayama, guided at your pace. Free, offline, no account. A practitioner can choose a named technique, learn how it is traditionally done, adjust its rhythm, and follow it with eyes closed. A beginner never has to build anything: choose a technique, or press Begin, and follow.</p></div></div>
+        <div class="callout"><div class="mark">1.0</div><div><strong>Release rule</strong><p>v1.0 is blocked only by the trustworthy practice loop, the eight sourced techniques, bundled voice cues, My rhythms, safe share links, quick start, one-screen first use, accessibility, and privacy. Routines, gentle progression, the practice calendar, the daily reminder, Health writing, and fuller voice are v1.1. Revenue is intentionally out of scope for now.</p></div></div>
+        <div class="three-col">
+          <div class="card tint"><div class="card-kicker">Primary user</div><h3>The practitioner</h3><p>Yoga practitioners, teacher-training students, and teachers who want authentic techniques, named and taught with care, without a subscription.</p></div>
+          <div class="card"><div class="card-kicker">Secondary user</div><h3>The curious beginner</h3><p>Follows a technique guide with gentle defaults and never has to build a rhythm.</p></div>
+          <div class="card"><div class="card-kicker">Distribution</div><h3>Teachers</h3><p>Share a practice with students as a link that opens the same rhythm in the app, or a small web page with store links.</p></div>
         </div>
         <h3>Jobs to be done</h3>
         <ul class="list">
-          <li>When I feel stressed, help me start a guided breathing cycle immediately.</li>
-          <li>When I cannot watch the screen, guide each transition with sound or haptics.</li>
-          <li>When I complete a practice, let me record it alongside my other wellness activity.</li>
-          <li>Post-MVP: when compatible wearable data is available, help me see simple relationships between practice, heart rate, recovery indicators, sleep, and consistency—without medical claims.</li>
-          <li>When I return, remember my preferred four phase timings and cue settings on this device.</li>
+          <li>When I learn a technique, show me how to do it properly—its name, pronunciation, steps, context, and care notes—then let me follow it.</li>
+          <li>When I practice with my eyes closed, guide every step with voice, or with tones and haptics.</li>
+          <li>When I have a minute, let me start instantly from the home screen.</li>
+          <li>When I teach, let me share a practice with my students so they follow the rhythm I set.</li>
+          <li>When I finish, keep a private record of my practice on this device.</li>
         </ul>
-        <h3>MVP success signals</h3>
+        <h3>Success signals</h3>
         <div class="three-col">
-          <div class="card"><div class="card-kicker">Activation</div><h3>≥ 60%</h3><p class="small">of first-time users start a session after onboarding.</p></div>
-          <div class="card"><div class="card-kicker">Completion</div><h3>≥ 70%</h3><p class="small">of started sessions reach the final cycle.</p></div>
+          <div class="card"><div class="card-kicker">Activation</div><h3>≥ 60%</h3><p class="small">of first-time users start a practice after first use.</p></div>
+          <div class="card"><div class="card-kicker">Completion</div><h3>≥ 70%</h3><p class="small">of started practices reach the final round.</p></div>
           <div class="card"><div class="card-kicker">Reliability</div><h3>≥ 99.5%</h3><p class="small">crash-free sessions during launch validation.</p></div>
         </div>
-        <p class="small" style="margin-top:12px">Targets are initial product hypotheses, not market benchmarks. Revisit after the first 500 opted-in usage sessions.</p>
+        <div class="two-col" style="margin-top:16px">
+          <div class="card tint"><div class="card-kicker">D30 retention</div><h3>≥ 8%</h3><p class="small">Hypothesis, from opted-in store analytics. Continue/adjust decision 8 weeks after launch.</p></div>
+          <div class="card tint"><div class="card-kicker">Wedge validation</div><h3>≥ 40%</h3><p class="small">of sessions use a practice other than box breathing. Measured through beta interviews and opt-in feedback until analytics exist.</p></div>
+          <div class="card"><div class="card-kicker">Teacher loop</div><h3>Link reach</h3><p class="small">Web-fallback page visits and store campaign attribution from share links.</p></div>
+          <div class="card"><div class="card-kicker">Discoverability</div><h3>Name searches</h3><p class="small">Installs from technique-name searches, from App Store Connect and Play Console acquisition reports.</p></div>
+        </div>
+        <p class="small" style="margin-top:12px">Targets are initial product hypotheses, not market benchmarks. Revisit activation, completion, and reliability after the first 500 opted-in usage sessions.</p>
       </section>
 
       <section id="scope">
-        <div class="section-head"><div class="section-no">02</div><div><h2>MVP boundary</h2><p>A deliberately narrow first release: excellent at box breathing, not a content library.</p></div></div>
-        <div class="pill-row"><span class="pill">Must ship</span><span class="pill">Should ship if stable</span><span class="pill out">Explicitly later</span></div>
-        <div class="scope-table" role="table" aria-label="MVP scope">
-          <div class="scope-row header" role="row"><div>Capability</div><div>Priority</div><div>Definition</div></div>
-          <div class="scope-row" role="row"><div><strong>Guided box breathing</strong></div><div><span class="tag must">Must</span></div><div>4 phases—Inhale, Hold after inhale, Exhale, Rest—with animation, distinct non-verbal tones, and haptic cues. The public MVP ships with tones and haptics; visual-only guidance remains available.</div></div>
-          <div class="scope-row" role="row"><div><strong>Recorded voice guidance</strong></div><div><span class="tag later">Later</span></div><div>Add concise, professionally recorded phase prompts after the public MVP validates pacing and non-visual cue comprehension. No synthetic voice or live narration.</div></div>
-          <div class="scope-row" role="row"><div><strong>Custom phase timing</strong></div><div><span class="tag must">Must</span></div><div>Set inhale, first hold, exhale, and second hold independently in whole seconds. Default 4–4–4–4; combinations such as 4–4–6–4 are supported.</div></div>
-          <div class="scope-row" role="row"><div><strong>Health session writing</strong></div><div><span class="tag should">Should</span></div><div>After contextual consent, write qualifying completed sessions through Apple HealthKit or Android Health Connect. This is optional and must never block practice or local completion.</div></div>
-          <div class="scope-row" role="row"><div><strong>Wearable reads & insights</strong></div><div><span class="tag later">Later</span></div><div>Permission-gated heart rate, HRV, resting heart rate, respiratory rate, SpO₂, sleep, biometric comparisons, 7/30-day trends, and streaks follow after the core MVP. Never fabricate or carry forward missing values.</div></div>
-          <div class="scope-row" role="row"><div><strong>Local history</strong></div><div><span class="tag must">Must</span></div><div>Device-only list of completed sessions with date, duration, cycles, and sync status.</div></div>
-          <div class="scope-row" role="row"><div><strong>Accessibility</strong></div><div><span class="tag must">Must</span></div><div>Screen reader labels, reduced motion, high contrast, dynamic text, non-visual cues.</div></div>
-          <div class="scope-row" role="row"><div><strong>Gentle reminders</strong></div><div><span class="tag later">Later</span></div><div>One optional daily local notification at a user-selected time; off by default. Do not delay MVP for notification permissions or scheduling.</div></div>
-          <div class="scope-row" role="row"><div><strong>Named techniques</strong></div><div><span class="tag later">Later</span></div><div>Technique-specific instruction for 4–7–8, coherent breathing, alternate-nostril guidance, and a reusable routine library. MVP custom timing can reproduce four-phase counts without claiming technique-specific coaching.</div></div>
-          <div class="scope-row" role="row"><div><strong>Accounts & cloud sync</strong></div><div><span class="tag later">Later</span></div><div>No login, social profile, or cross-device sync in v1.</div></div>
-          <div class="scope-row" role="row"><div><strong>Medical interpretation</strong></div><div><span class="tag later">Later</span></div><div>No diagnosis, therapy claims, readiness scoring, personalized treatment, or clinical advice. These are outside the consumer wellness product boundary.</div></div>
-          <div class="scope-row" role="row"><div><strong>Payments</strong></div><div><span class="tag later">Later</span></div><div>No ads, subscription, purchase flow, or donation prompt in launch MVP.</div></div>
+        <div class="section-head"><div class="section-no">02</div><div><h2>Release boundary</h2><p>v1.0 is the wedge: an authentic, free library on a trustworthy timer. v1.1 gives reasons to return. Some things we are deliberately not building.</p></div></div>
+        <div class="pill-row"><span class="pill">v1.0 · the wedge</span><span class="pill">v1.1 · reasons to return</span><span class="pill out">Later · concepts</span><span class="pill out">Not building</span></div>
+        <div class="scope-table" role="table" aria-label="Release scope">
+          <div class="scope-row header" role="row"><div>Capability</div><div>Release</div><div>Definition</div></div>
+          <div class="scope-row" role="row"><div><strong>Core practice</strong></div><div><span class="tag must">v1.0</span></div><div>Carried from v2: monotonic timer, three-second settle countdown, pause and resume of the interrupted step, end confirmation, interruption pause, and completion. Tones, haptics, and visual-only guidance remain available.</div></div>
+          <div class="scope-row" role="row"><div><strong>Flexible rhythms</strong></div><div><span class="tag must">v1.0</span></div><div>Inhale and exhale 1–20 s. Holds 0–20 s; 0 skips the step and displays “Off.” Library techniques may use half-second steps and more than four steps with left/right side labels. The custom builder stays four rows in whole seconds.</div></div>
+          <div class="scope-row" role="row"><div><strong>Practice library</strong></div><div><span class="tag must">v1.0</span></div><div>Eight gentle techniques: Sama Vritti, Visama Vritti, Nadi Shodhana, Bhramari, Ujjayi, Sheetali, coherent breathing, and 4-7-8. Each has a romanized and English name, pronunciation respelling and audio, how-to steps, traditional context, “Take care,” “What research says,” and sources.</div></div>
+          <div class="scope-row" role="row"><div><strong>Voice cues and introductions</strong></div><div><span class="tag must">v1.0</span></div><div>AI-generated clips bundled in the app: cue words, optional technique introductions, and pronunciation clips. Cue mode is Voice, Tones, or Silent; haptics are independent. Defaults: Voice on, haptics on, motion follows the system.</div></div>
+          <div class="scope-row" role="row"><div><strong>My rhythms</strong></div><div><span class="tag must">v1.0</span></div><div>Save up to 20 named rhythms, custom or received through a link. Rename and delete are local.</div></div>
+          <div class="scope-row" role="row"><div><strong>Share links</strong></div><div><span class="tag must">v1.0</span></div><div>Share a library technique’s current settings or a saved rhythm as <code>https://samabreath.app/r/…</code>. The app shows a preview (Save, Begin); without the app, a small web page shows the rhythm and store links.</div></div>
+          <div class="scope-row" role="row"><div><strong>Quick start</strong></div><div><span class="tag must">v1.0</span></div><div>App-icon quick actions—“Begin last practice” (named with the most recent practice), “1-minute box breathing,” and the most recent other practice—open the settle countdown with Cancel. Before first use is complete, they open first use.</div></div>
+          <div class="scope-row" role="row"><div><strong>First use</strong></div><div><span class="tag must">v1.0</span></div><div>One screen: welcome, comfort guidance, wellness disclaimer, Continue. Cue choices live in a cue chip on Breathe and in Settings.</div></div>
+          <div class="scope-row" role="row"><div><strong>Four-tab navigation</strong></div><div><span class="tag must">v1.0</span></div><div>Breathe · Practices · History · Settings. The library earns a top-level destination.</div></div>
+          <div class="scope-row" role="row"><div><strong>Local history</strong></div><div><span class="tag must">v1.0</span></div><div>Device-only list of completed and intentionally ended practices with practice name, rhythm, duration, and rounds. Delete local history from Settings.</div></div>
+          <div class="scope-row" role="row"><div><strong>Accessibility and privacy</strong></div><div><span class="tag must">v1.0</span></div><div>Screen-reader labels and step announcements, reduced motion, dynamic text, AA contrast, non-visual cues; privacy and safety views; no account.</div></div>
+          <div class="scope-row" role="row"><div><strong>Routines</strong></div><div><span class="tag should">v1.1</span></div><div>Chain 2–6 practices with per-practice minutes and a 5-second transition screen.</div></div>
+          <div class="scope-row" role="row"><div><strong>Gentle progression</strong></div><div><span class="tag should">v1.1</span></div><div>One suggested next step for techniques with a defined path. Never automatic.</div></div>
+          <div class="scope-row" role="row"><div><strong>Practice calendar</strong></div><div><span class="tag should">v1.1</span></div><div>A month view in History. No streaks.</div></div>
+          <div class="scope-row" role="row"><div><strong>Daily reminder</strong></div><div><span class="tag should">v1.1</span></div><div>Off by default; one local notification at a chosen time.</div></div>
+          <div class="scope-row" role="row"><div><strong>Health session writing</strong></div><div><span class="tag should">v1.1</span></div><div>Apple Health / Health Connect mindful-minute writing after contextual consent. The v2 eligibility and result states are unchanged. Never blocks practice or local completion.</div></div>
+          <div class="scope-row" role="row"><div><strong>Fuller voice guidance</strong></div><div><span class="tag should">v1.1</span></div><div>Optional counting and longer introductions, under the same voice rules as v1.0.</div></div>
+          <div class="scope-row" role="row"><div><strong>Rapid-rhythm mode</strong></div><div><span class="tag later">Later</span></div><div>Kapalabhati and Bhastrika. Needs a named instructor review and a pre-practice safety check before it can ship.</div></div>
+          <div class="scope-row" role="row"><div><strong>Hindi localization</strong></div><div><span class="tag later">Later</span></div><div>Concept only.</div></div>
+          <div class="scope-row" role="row"><div><strong>Widgets and watches</strong></div><div><span class="tag later">Later</span></div><div>Home/lock-screen widgets; Apple Watch / Wear OS. Concepts only.</div></div>
+          <div class="scope-row" role="row"><div><strong>Full IAST diacritics</strong></div><div><span class="tag later">Later</span></div><div>Requires adding a covering font such as Noto Serif; a future brand decision (see <a href="#voice">06</a>).</div></div>
+          <div class="scope-row" role="row"><div><strong>Wearable reads and insights</strong></div><div><span class="tag no">Not building</span></div><div>Wearable reads, heart-rate/HRV comparisons, and trend charts.</div></div>
+          <div class="scope-row" role="row"><div><strong>Accounts and cloud sync</strong></div><div><span class="tag no">Not building</span></div><div>No login, profile, or cross-device sync.</div></div>
+          <div class="scope-row" role="row"><div><strong>Large content or music libraries</strong></div><div><span class="tag no">Not building</span></div><div>The library stays small, sourced, and gentle.</div></div>
+          <div class="scope-row" role="row"><div><strong>Streaks, scores, badges</strong></div><div><span class="tag no">Not building</span></div><div>History is a record of practice, not a competition.</div></div>
+          <div class="scope-row" role="row"><div><strong>Medical interpretation</strong></div><div><span class="tag no">Not building</span></div><div>No diagnosis, treatment claims, readiness scoring, or clinical advice.</div></div>
+          <div class="scope-row" role="row"><div><strong>Payments</strong></div><div><span class="tag no">Not building</span></div><div>No ads, subscription, purchase flow, or donation prompt. Revenue is intentionally out of scope for now.</div></div>
         </div>
       </section>
 
       <section id="experience">
-        <div class="section-head"><div class="section-no">03</div><div><h2>Core experience</h2><p>The shortest safe path from intent to a completed session.</p></div></div>
-        <h3>First-use flow</h3>
+        <div class="section-head"><div class="section-no">03</div><div><h2>Core experience</h2><p>The shortest safe path from intent to a completed practice, for a beginner or a practitioner.</p></div></div>
+        <h3>First use · one screen</h3>
         <div class="flow">
-          <div class="step"><b>01</b><span>Welcome + one-sentence purpose</span></div><div class="arrow">→</div>
-          <div class="step"><b>02</b><span>Safety note and “Continue”</span></div><div class="arrow">→</div>
-          <div class="step"><b>03</b><span>Choose cues; health sync stays optional</span></div><div class="arrow">→</div>
-          <div class="step"><b>04</b><span>Home with 5-minute session ready</span></div>
+          <div class="step"><b>01</b><span>Welcome, comfort guidance, and wellness disclaimer on one screen</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>Tap “Continue”; no cue setup, permission, or account</span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>Breathe, with Sama Vritti at 5 minutes ready and Voice and haptics on</span></div><div class="arrow">→</div>
+          <div class="step"><b>04</b><span>“Begin,” or change the practice first</span></div>
         </div>
-        <h3>Returning-user flow</h3>
+        <h3>Returning</h3>
         <div class="flow">
-          <div class="step"><b>01</b><span>Open to previous settings</span></div><div class="arrow">→</div>
-          <div class="step"><b>02</b><span>Tap “Begin”</span></div><div class="arrow">→</div>
-          <div class="step"><b>03</b><span>3-second settling countdown</span></div><div class="arrow">→</div>
+          <div class="step"><b>01</b><span>Breathe opens to the last practice and its rhythm</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>Tap “Begin”; the cue chip changes Voice / Tones / Silent</span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>Optional introduction, then 3-second settle countdown</span></div><div class="arrow">→</div>
           <div class="step"><b>04</b><span>Practice, then completion summary</span></div>
         </div>
-        <h3>Breathing state machine</h3>
-        <div class="state-machine" aria-label="Box breathing phases">
-          <div class="phase inhale"><b>Inhale</b><small>default 4 sec</small></div>
-          <div class="phase hold1"><b>Hold after inhale</b><small>default 4 sec</small></div>
-          <div class="phase exhale"><b>Exhale</b><small>default 4 sec</small></div>
-          <div class="phase hold2"><b>Rest</b><small>default 4 sec</small></div>
+        <h3>Choose a practice</h3>
+        <div class="flow">
+          <div class="step"><b>01</b><span>Practices: the library and My rhythms</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>Technique detail: name, pronunciation, how-to, Take care</span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>“Begin,” or “Adjust rhythm” then “Use this rhythm”</span></div><div class="arrow">→</div>
+          <div class="step"><b>04</b><span>Settle countdown, practice, completion</span></div>
         </div>
+        <h3>Share and receive</h3>
+        <div class="flow">
+          <div class="step"><b>01</b><span>“Share” from technique detail or My rhythms shows exactly what the link contains</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>System share sheet sends <code>samabreath.app/r/…</code></span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>With the app: in-app preview. Without: web page with the rhythm and store links</span></div><div class="arrow">→</div>
+          <div class="step"><b>04</b><span>“Save” to My rhythms, or “Begin”</span></div>
+        </div>
+        <h3>Quick start</h3>
+        <div class="flow">
+          <div class="step"><b>01</b><span>Long-press the app icon</span></div><div class="arrow">→</div>
+          <div class="step"><b>02</b><span>Choose a quick action</span></div><div class="arrow">→</div>
+          <div class="step"><b>03</b><span>Settle countdown with Cancel (first use if not yet complete)</span></div><div class="arrow">→</div>
+          <div class="step"><b>04</b><span>Practice, then completion</span></div>
+        </div>
+        <h3>Practice engine · step sequence</h3>
+        <p>A practice is an ordered sequence of steps. Each step has a kind, a length in seconds, and an optional side. The v2 fixed four-phase loop becomes the custom builder’s four rows.</p>
+        <div class="state-machine" aria-label="Step kinds">
+          <div class="phase inhale"><b>Inhale</b><small>1–20 s</small></div>
+          <div class="phase hold1"><b>Hold</b><small>0–20 s · 0 = Off</small></div>
+          <div class="phase exhale"><b>Exhale</b><small>1–20 s</small></div>
+          <div class="phase hold2"><b>Rest</b><small>0–20 s · 0 = Off</small></div>
+        </div>
+        <div class="code">step  = { kind: inhale | hold | exhale | rest, seconds, side?: left | right }
+bounds: inhale, exhale 1–20 s · hold, rest 0–20 s (0 = skipped, shown “Off”)
+custom builder: exactly four steps, whole seconds
+library: half seconds allowed; more than four steps; side labels; content may name a
+         cue variant for a step (Hum on the Bhramari exhale; where Switch is spoken)
+
+Sama Vritti      [inhale 4] [hold 4] [exhale 4] [rest 4]
+Visama Vritti    [inhale 4] [hold Off] [exhale 6] [rest Off]
+Nadi Shodhana    [inhale 4 left] [exhale 6 right] [inhale 4 right] [exhale 6 left]
+Coherent         [inhale 5.5] [exhale 5.5]</div>
+        <h3>Duration contract</h3>
         <dl class="spec">
-          <dt>Default session</dt><dd>5-minute target with a 4–4–4–4 profile. Finish the cycle that reaches the target: 19 cycles / 5:04 planned practice. Planned cycles = ceil(target seconds ÷ cycle seconds); show actual planned duration before Begin. A 5-minute 4–4–6–4 practice is 17 cycles / 5:06.</dd>
-          <dt>Custom timing</dt><dd>Inhale, first hold, exhale, and second hold are each adjustable from 1–20 seconds in whole-second increments. Example: 4–4–6–4. The app remembers the last profile.</dd>
-          <dt>Session options</dt><dd>1, 3, 5, or 10 minutes. Default is 5. Fifteen-minute and free-form durations can follow after MVP.</dd>
-          <dt>Start</dt><dd>Three-second neutral countdown; Cancel returns without a session record. Tones and haptics are optional. Recorded voice is post-MVP.</dd>
-          <dt>Pause</dt><dd>Pause immediately; resume from the start of the interrupted phase after a 3-second countdown.</dd>
-          <dt>End early</dt><dd>Tapping End pauses guidance and asks “End this practice?” Keep breathing uses the resume countdown; dismissal leaves the session paused. End session stores actual active time and complete cycles locally as “Ended early.” Intentionally ended sessions are never written to Health, regardless of duration.</dd>
-          <dt>Completion</dt><dd>Soft completion cue, elapsed time, completed cycles, primary “Done,” and secondary “Breathe again.” Optional health-session consent/status is visually separate and never replaces the completion actions.</dd>
+          <dt>Round</dt><dd>One pass through a practice’s steps; a Nadi Shodhana round covers both sides. “Round” replaces the v2 term “cycle.” Round length = sum of step seconds; 0-second steps add nothing and are skipped.</dd>
+          <dt>Planned rounds</dt><dd>Planned rounds = round up (target seconds ÷ round seconds). Show planned rounds and planned duration before Begin. Box 4 · 4 · 4 · 4 at 5 minutes is <strong>19 rounds / 5:04</strong>; 4 · 4 · 6 · 4 is 17 rounds / 5:06; 4-7-8 at 1 minute is 4 rounds / 1:16.</dd>
+          <dt>Guided pace</dt><dd>Shown as <strong>guided breaths per minute</strong>: inhale steps per minute, calculated from the rhythm. Box 4 · 4 · 4 · 4 is 3.8; Nadi Shodhana in 4 · out 6 each side is 6. Never presented as a measured rate.</dd>
+          <dt>Targets</dt><dd>1, 3, 5, or 10 minutes. Each library technique sets its default target (table below). Targets are not exact cutoffs; the round that reaches the target finishes.</dd>
+          <dt>Routines · v1.1</dt><dd>Planned duration = sum of segments; each segment rounds up to whole rounds of its own practice. Example: box 3 min (12 rounds / 3:12) then coherent 5 min (28 rounds / 5:08) = 8:20. Transition screens are not practice time.</dd>
+          <dt>Start</dt><dd>Optional voice introduction (skippable), then a three-second neutral settle countdown. Cancel returns without a session record. Introductions and countdowns are not practice time.</dd>
+          <dt>Pause</dt><dd>Pause immediately; resume restarts the interrupted step after a 3-second countdown, preserving completed rounds and prior active time.</dd>
+          <dt>End early</dt><dd>End pauses guidance and asks “End this practice?” Keep breathing uses the resume countdown; dismissal leaves the practice paused. End session stores actual active time and complete rounds locally as “Ended early,” including zero rounds.</dd>
+          <dt>Half-second steps</dt><dd>Show the guide and a progress ring instead of a countdown numeral; coherent breathing is followed, not counted.</dd>
+          <dt>Completion</dt><dd>Soft completion cue, practice name, rhythm, actual active time, completed rounds, guided breaths per minute, and local-save result. Primary “Done,” secondary “Breathe again.” v1.1 adds the progression offer, “Make it easier next time,” and a separate Health status.</dd>
+        </dl>
+        <h3>Library defaults</h3>
+        <div class="scope-table" role="table" aria-label="Library defaults">
+          <div class="scope-row header" role="row"><div>Technique</div><div>Default target</div><div>Rhythm · planned · guided breaths/min · progression path (v1.1)</div></div>
+          <div class="scope-row" role="row"><div><strong>Sama Vritti</strong> · box</div><div>5 min</div><div>4 · 4 · 4 · 4 · 19 rounds / 5:04 · 3.8. Path: +1 s every step, to 6 · 6 · 6 · 6.</div></div>
+          <div class="scope-row" role="row"><div><strong>Visama Vritti</strong> · extended exhale</div><div>5 min</div><div>in 4 · out 6 (holds Off) · 30 rounds / 5:00 · 6. Path: out 7, then out 8.</div></div>
+          <div class="scope-row" role="row"><div><strong>Nadi Shodhana</strong> · alternate nostril</div><div>5 min</div><div>in 4 · out 6, each side; no retention · 15 rounds / 5:00 · 6. Path: out 7, then out 8.</div></div>
+          <div class="scope-row" role="row"><div><strong>Bhramari</strong> · humming bee</div><div>5 min</div><div>in 4 · hum 8 · 25 rounds / 5:00 · 5. No path.</div></div>
+          <div class="scope-row" role="row"><div><strong>Ujjayi</strong> · ocean breath</div><div>5 min</div><div>in 5 · out 5 · 30 rounds / 5:00 · 6. Path: in 6 · out 6.</div></div>
+          <div class="scope-row" role="row"><div><strong>Sheetali</strong> · cooling breath</div><div>3 min</div><div>in 4 · out 6 · 18 rounds / 3:00 · 6. Sheetkari offered as the alternative. No path.</div></div>
+          <div class="scope-row" role="row"><div><strong>Coherent breathing</strong></div><div>5 min</div><div>in 5.5 · out 5.5 · 28 rounds / 5:08 · 5.5. No path.</div></div>
+          <div class="scope-row" role="row"><div><strong>4-7-8</strong></div><div>1 min</div><div>4 · 7 · 8 · rest Off · 4 rounds / 1:16 · 3.2. No path.</div></div>
+        </div>
+        <p class="small" style="margin-top:10px">Guided breaths per minute are rounded to one decimal place; whole numbers show without a decimal.</p>
+        <h3>Navigation</h3>
+        <dl class="spec">
+          <dt>Breathe</dt><dd>The last practice (Sama Vritti, 5 minutes, until another is chosen), planned rounds and duration, Begin, Change practice, Adjust, and the cue chip.</dd>
+          <dt>Practices</dt><dd>The eight-technique library, then My rhythms. Routines join in v1.1.</dd>
+          <dt>History</dt><dd>Completed and ended practices grouped by day. The month calendar joins in v1.1.</dd>
+          <dt>Settings</dt><dd>Cue mode, voice introductions, haptics, motion, safety, privacy, About (sources and AI-voice disclosure), and Delete local history. Reminder and Health join in v1.1.</dd>
+          <dt>Stack screens</dt><dd>Technique detail, Adjust rhythm, practice, completion, share preview, and incoming link preview sit above the tabs. The practice screen prevents accidental navigation away.</dd>
         </dl>
         <h3>Screen inventory</h3>
         <div class="screens">
-          <div class="screen"><div class="screen-num">01</div><div><h4>Onboarding</h4><p>Three short pages: value, safety, cue preferences. Health permission is requested contextually after the first completed session—not on launch.</p></div></div>
-          <div class="screen"><div class="screen-num">02</div><div><h4>Home / session setup</h4><p>Default or last-used practice and a large “Begin” action appear first. Customize practice opens an optional setup surface with duration choices and four phase steppers labeled Inhale · Hold after inhale · Exhale · Rest.</p></div></div>
-          <div class="screen"><div class="screen-num">03</div><div><h4>Active session</h4><p>Three-second settling countdown, then a focused phase name, countdown, progress, remaining time, pause, and safe end control. Wearable measurements are omitted from the MVP practice surface.</p></div></div>
-          <div class="screen"><div class="screen-num">04</div><div><h4>Completion</h4><p>Actual active duration, complete cycles, timing pattern, and calculated guided pace in cycles/min. Local-save status comes first; optional Health write is separate. Do not show biometric placeholders or comparisons in MVP.</p></div></div>
-          <div class="screen"><div class="screen-num">05</div><div><h4>History</h4><p>Reverse-chronological completed and intentionally ended practices grouped by day, with pattern, duration, cycles, and record state. Details preserve the original session values. Streaks and pattern aggregates are post-MVP.</p></div></div>
-          <div class="screen"><div class="screen-num">06</div><div><h4>Insights · post-MVP</h4><p>Wearable trends and biometric comparisons do not block the first release. Until implemented and validated, omit this destination rather than shipping sample data, dead controls, or ambiguous empty states.</p></div></div>
-          <div class="screen"><div class="screen-num">07</div><div><h4>Settings & safety</h4><p>Optional tones, haptics, device-led motion with a reduced-motion override, optional Health session writing, privacy, safety, and “Delete local history.” Voice, reminders, and wearable read permissions are post-MVP.</p></div></div>
+          <div class="screen"><div class="screen-num">01</div><div><h4>Breathe</h4><p>Last or default practice with its romanized and English name, rhythm, planned rounds and duration, large “Begin,” secondary “Change practice” and “Adjust,” and a cue chip (Voice / Tones / Silent).</p></div></div>
+          <div class="screen"><div class="screen-num">02</div><div><h4>First use</h4><p>One screen: welcome, comfort guidance (stop and return to normal breathing if lightheaded or uncomfortable), wellness disclaimer, and “Continue” to Breathe. No permission prompt or cue setup.</p></div></div>
+          <div class="screen"><div class="screen-num">03</div><div><h4>Practices library</h4><p>Eight techniques, each with romanized name, English name, and default rhythm and target; My rhythms below, with an empty state that explains saving and receiving.</p></div></div>
+          <div class="screen"><div class="screen-num">04</div><div><h4>Technique detail</h4><p>Names, pronunciation respelling with a play control, how-to steps, traditional context, “Take care,” “What research says,” “Based on” sources, and “Reviewed by” only when a review is recorded. Actions: Begin, Adjust rhythm, Share.</p></div></div>
+          <div class="screen"><div class="screen-num">05</div><div><h4>Adjust rhythm</h4><p>Accessible steppers for each step within bounds; holds read “Off” at 0; side labels and half seconds preserved for library techniques; the custom builder has four rows in whole seconds. Duration chips; live planned rounds, duration, and guided breaths per minute; “Use this rhythm” and “Save to My rhythms.”</p></div></div>
+          <div class="screen"><div class="screen-num">06</div><div><h4>My rhythms · save</h4><p>Name a rhythm (plain text, at most 40 characters), list up to 20, rename, delete with confirmation, share. At 20, saving explains the limit.</p></div></div>
+          <div class="screen"><div class="screen-num">07</div><div><h4>Practice</h4><p>Optional introduction, settle countdown, then step name, side cue (Left / Right) where defined, Hum for Bhramari, countdown or progress ring, round progress, remaining time, Pause, End, paused state, and end confirmation.</p></div></div>
+          <div class="screen"><div class="screen-num">08</div><div><h4>Completion</h4><p>Practice name, rhythm, actual active time, completed rounds, guided breaths per minute, local-save status; Done and Breathe again. No biometric placeholders.</p></div></div>
+          <div class="screen"><div class="screen-num">09</div><div><h4>Share preview</h4><p>Before the system share sheet, shows exactly what the link contains: name, steps, and target. States that anyone with the link can see this.</p></div></div>
+          <div class="screen"><div class="screen-num">10</div><div><h4>Incoming link preview · invalid link</h4><p>Valid: name as plain text, steps, planned duration, and—when the technique ID matches the installed library—that technique’s name and “Take care” from app content; Save and Begin. Invalid: “This link can’t be opened,” with a route to Practices; nothing is imported.</p></div></div>
+          <div class="screen"><div class="screen-num">11</div><div><h4>Web fallback page</h4><p>Static page at <code>samabreath.app/r/…</code>: the rhythm as plain text, App Store and Google Play links, and a wellness note. No trackers.</p></div></div>
+          <div class="screen"><div class="screen-num">12</div><div><h4>History</h4><p>Reverse-chronological completed and ended practices grouped by day with practice name, rhythm, duration, rounds, and record state. Details preserve the original values.</p></div></div>
+          <div class="screen"><div class="screen-num">13</div><div><h4>Settings</h4><p>Cue mode, spoken introductions (First time / Always / Never; default First time), haptics, device-led motion with a reduced-motion override, safety, privacy, About (sources, AI-voice disclosure, acknowledgments), and Delete local history.</p></div></div>
+          <div class="screen"><div class="screen-num next">14</div><div><h4>Routines · v1.1</h4><p>Build and list routines of 2–6 practices with per-practice minutes and the summed planned duration.</p></div></div>
+          <div class="screen"><div class="screen-num next">15</div><div><h4>Routine transition · v1.1</h4><p>A 5-second screen that names the next practice.</p></div></div>
+          <div class="screen"><div class="screen-num next">16</div><div><h4>Progression suggestion · v1.1</h4><p>On completion: one next step with Try it / Not now / Stop suggesting; “Make it easier next time” is always available.</p></div></div>
+          <div class="screen"><div class="screen-num next">17</div><div><h4>Practice calendar · v1.1</h4><p>Month view in History: a pine dot on each practiced day, days and minutes this month, minutes by practice.</p></div></div>
+          <div class="screen"><div class="screen-num next">18</div><div><h4>Reminder · v1.1</h4><p>Off by default; time picker; the notification permission handoff only after the user turns it on; denied state.</p></div></div>
+          <div class="screen"><div class="screen-num next">19</div><div><h4>Health states · v1.1</h4><p>Contextual invitation after a qualifying practice, system permission handoff, and the five result states in FR-18.</p></div></div>
         </div>
       </section>
 
       <section id="requirements">
-        <div class="section-head"><div class="section-no">04</div><div><h2>Functional requirements</h2><p>Testable behavior for the product and engineering team.</p></div></div>
-        <details open><summary>FR-01 · Session configuration</summary><div class="detail-body"><ul class="criteria"><li>Home shows the default or last-used practice and primary Begin action first; optional Customize practice opens a dedicated setup surface with full labels and comfortable controls. Use this rhythm returns to Breathe. Setup is never a required step.</li><li>Each phase is independently adjustable from 1–20 seconds using accessible steppers; 4–4–6–4 is a valid profile.</li><li>Changing any value immediately updates cycle length, estimated cycle count, and guided breaths per minute.</li><li>Selections persist locally and restore on the next launch; invalid or free-text values cannot be entered.</li></ul></div></details>
-        <details><summary>FR-02 · Timer accuracy</summary><div class="detail-body"><ul class="criteria"><li>Use a monotonic clock and calculate phase from elapsed time; never rely on chained one-second intervals.</li><li>Visual countdown updates smoothly while enabled tone or haptic cues fire once per phase boundary. Recorded voice follows after MVP.</li><li>After interruption or app resume, remain visibly paused. Resume restarts the interrupted phase after three neutral seconds, preserving completed cycles and prior active time. Pauses and settling countdowns do not count toward practice time.</li><li>A 5-minute target with a 4–4–4–4 profile finishes within ±250 ms of the disclosed 5:04 whole-cycle duration in uninterrupted device tests.</li></ul></div></details>
-        <details open><summary>FR-03 · Guidance cues</summary><div class="detail-body"><ul class="criteria"><li>The closed beta includes distinct, non-verbal tones for inhale, hold, exhale, and completion, plus independently toggleable haptics.</li><li>Use beta feedback to validate cue timing, clarity, loudness, and whether guidance works without watching the screen before recording voice assets.</li><li>Post-MVP, add professionally recorded, concise phase prompts synchronized to the same timer boundaries. Do not use synthetic speech.</li><li>The public MVP uses tones with independently toggleable haptics; visual-only remains available. Recorded voice is a later optional guidance mode.</li><li>Haptic patterns are recognizable without being startling; unsupported devices degrade silently.</li><li>Respect silent-mode and audio-focus conventions per platform; do not unexpectedly interrupt other audio.</li></ul></div></details>
-        <details><summary>FR-04 · Interruption handling</summary><div class="detail-body"><ul class="criteria"><li>Incoming call, audio interruption, or app backgrounding pauses guidance unless platform-safe background behavior is explicitly implemented and tested.</li><li>Returning shows a clear paused state, never an apparently active but stale timer.</li><li>Force-quit during a session does not create a completed record.</li><li>Screen can remain awake during active guidance when the user permits; normal sleep behavior resumes afterward.</li></ul></div></details>
-        <details><summary>FR-05 · Session history</summary><div class="detail-body"><ul class="criteria"><li>Only completed or intentionally ended sessions are stored.</li><li>Each entry includes start time, actual duration, all four phase values, completed cycles, guided cadence, completion state and optional health-write status. Biometric summaries are post-MVP.</li><li>User can delete all local history from Settings after an in-page confirmation step.</li><li>Deleting local history does not delete records already written to Apple Health or Health Connect; explain this before deletion.</li></ul></div></details>
-        <details><summary>FR-06 · Offline behavior</summary><div class="detail-body"><ul class="criteria"><li>Every breathing feature works in airplane mode after install.</li><li>No account, network request, remote content, or server is required to begin or complete a session.</li><li>Health writes queue locally if the platform API is temporarily unavailable and retry on the next app open.</li></ul></div></details>
-        <details><summary>FR-07 · Safety language</summary><div class="detail-body"><ul class="criteria"><li>Onboarding says to stop and return to normal breathing if lightheaded or uncomfortable.</li><li>Settings includes a durable wellness—not medical advice—statement.</li><li>No copy promises to treat anxiety, disease, insomnia, or any medical condition.</li><li>No forced breath holds longer than the selected count and no competitive scoring.</li><li>Heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep are presented as recorded wellness data—not diagnoses, readiness scores, causal claims, or treatment guidance.</li></ul></div></details>
-        <details><summary>POST-MVP · Wearable health reads</summary><div class="detail-body"><ul class="criteria"><li>Use Apple HealthKit on iOS and Health Connect on Android as the only wearable-data aggregators; do not add direct Fitbit, Garmin, Oura, Samsung, or other vendor SDKs in MVP.</li><li>Request read access for each supported type only after explaining its use: heart rate, HRV, resting heart rate, respiratory rate, blood oxygen saturation (SpO₂), and sleep.</li><li>Associate timestamped heart-rate samples whose timestamps overlap the actual session window; do not synthesize or carry forward missing readings.</li><li>Post-MVP: show heart rate during practice only when a compatible source supplies a recent sample; otherwise omit the value without interrupting guidance.</li><li>Guided breath cadence is derived from the selected phase profile and labeled “guided cadence,” never “measured breathing rate.”</li></ul></div></details>
-        <details><summary>POST-MVP · Insights & progression</summary><div class="detail-body"><ul class="criteria"><li>Provide 7-day and 30-day trend views for resting heart rate, HRV, and mindful minutes; clearly label the selected date range and units.</li><li>On each qualifying session summary, compare average heart rate from a defined pre-session window with average heart rate from a defined post-session window; show the windows and sample sufficiency.</li><li>Aggregate completed-session count and total minutes by timing profile or named breathing pattern.</li><li>Show current and longest practice streaks based on local calendar days, with timezone changes handled deterministically.</li><li>Use neutral descriptions such as “higher,” “lower,” or “no clear change”; never generate a readiness score, diagnosis, causal claim, or treatment recommendation.</li></ul></div></details>
-        <details open><summary>NFR-01 · Graceful data absence</summary><div class="detail-body"><ul class="criteria"><li>Every timer, cue, history, and session-completion function works with no wearable, denied permissions, or no health records.</li><li>Post-MVP: the Insights screen shows an empty state explaining that availability depends on connected devices and granted permissions, with a route to connection guidance.</li><li>Post-MVP: missing one data type hides only the affected chart or comparison; it must not blank the entire Insights screen.</li><li>Post-MVP: delayed wearable sync updates insights on a later app open without rewriting or duplicating the breathing session.</li></ul></div></details>
+        <div class="section-head"><div class="section-no">04</div><div><h2>Functional requirements</h2><p>Testable behavior for the product and engineering team. FR-01 to FR-13 are v1.0; FR-14 to FR-19 are v1.1.</p></div></div>
+        <details open><summary>FR-01 · Rhythm configuration</summary><div class="detail-body"><ul class="criteria"><li>Breathe shows the last or default practice and the primary Begin action first. Adjust rhythm opens a dedicated surface; Use this rhythm returns to Breathe. Adjusting is never a required step.</li><li>A rhythm is an ordered list of steps. Kinds: inhale, hold, exhale, rest; optional side: left or right.</li><li>Inhale and exhale are 1–20 s. Hold and rest are 0–20 s; 0 skips the step and displays “Off.” 4 · 4 · 6 · 4 and 4 · 0 · 6 · 0 are valid.</li><li>The custom builder has four rows (Inhale, Hold, Exhale, Rest) in whole seconds using accessible steppers.</li><li>Library techniques may define half-second steps and more than four steps with side labels. Adjusting a library technique keeps its step structure and sides; values move in whole seconds, or half seconds where the technique defines them, within the same bounds.</li><li>Changing any value immediately updates round length, planned rounds, planned duration, and guided breaths per minute.</li><li>Targets are 1, 3, 5, or 10 minutes. The last practice and its settings persist locally; invalid or free-text values cannot be entered.</li></ul></div></details>
+        <details><summary>FR-02 · Timer accuracy</summary><div class="detail-body"><ul class="criteria"><li>Use a monotonic clock and calculate the current step from elapsed time; never rely on chained one-second intervals.</li><li>The visual guide updates smoothly while enabled voice, tone, or haptic cues fire once per non-zero step boundary. 0-second steps are skipped without a cue.</li><li>After interruption or app resume, remain visibly paused. Resume restarts the interrupted step after three neutral seconds, preserving completed rounds and prior active time. Pauses, settle countdowns, introductions, and routine transitions do not count toward practice time.</li><li>A 5-minute target at 4 · 4 · 4 · 4 finishes within ±250 ms of the disclosed 5:04 in uninterrupted device tests; coherent breathing at 5 minutes finishes within ±250 ms of 5:08.</li></ul></div></details>
+        <details open><summary>FR-03 · Guidance cues</summary><div class="detail-body"><ul class="criteria"><li>Cue mode is Voice, Tones, or Silent, changed from the cue chip on Breathe or in Settings. Haptics toggle independently. Defaults: Voice on, haptics on, motion follows the system.</li><li>Voice uses AI-generated clips bundled in the app: cue words Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch. No runtime speech generation, API, key, or network dependency.</li><li>Cue words are at most 0.8 s. A step’s cue is its kind word followed by its side word when present. When a step is shorter than its cue plus 0.2 s, that step plays its tone instead.</li><li>When Voice is on, voice replaces tones at step boundaries; haptics stay independent. Silent plays no audio. The completion cue is a soft tone in Voice and Tones modes.</li><li>Optional technique introductions play before the settle countdown, with captions, and can be skipped. Settings offers First time (default), Always, or Never.</li><li>In Tones and Silent modes, side labels stay visible and are announced to screen readers.</li><li>Haptic patterns are recognizable without being startling; unsupported devices degrade silently. A missing or unplayable clip falls back to that step’s tone.</li><li>Platform audio conventions (silent switch, mixing, audio focus) follow the CP1 locked decision; do not unexpectedly interrupt other audio.</li></ul></div></details>
+        <details><summary>FR-04 · Interruption handling</summary><div class="detail-body"><ul class="criteria"><li>Incoming call, audio interruption, or app backgrounding pauses guidance unless platform-safe background behavior is explicitly implemented and tested.</li><li>Returning shows a clear paused state, never an apparently active but stale timer. A voice clip interrupted mid-play does not resume on its own.</li><li>Force-quit during a session does not create a completed record.</li><li>Screen can remain awake during active guidance when the user permits; normal sleep behavior resumes afterward.</li></ul></div></details>
+        <details><summary>FR-05 · Session history</summary><div class="detail-body"><ul class="criteria"><li>Only completed or intentionally ended sessions are stored.</li><li>Each record includes start time, actual active duration, practice ID (library technique ID, saved rhythm ID, or custom), practice-name snapshot, step snapshot (kind, seconds, and side for every step), target, completed rounds, guided breaths per minute, and completion state.</li><li>Records keep their snapshots when a saved rhythm is renamed or deleted or when library content is updated.</li><li>User can delete all local history from Settings after an in-page confirmation step. Preferences and My rhythms are not deleted.</li><li>From v1.1, records also carry Health-write status, and deletion explains that records already written to Apple Health or Health Connect are not deleted.</li></ul></div></details>
+        <details><summary>FR-06 · Offline behavior</summary><div class="detail-body"><ul class="criteria"><li>Every practice feature works in airplane mode after install, including library content, voice clips, pronunciation clips, and decoding a share link.</li><li>No account, network request, remote content, or server is required to begin or complete a practice. Only the web fallback page and store links need a network.</li><li>From v1.1, Health writes queue locally if the platform API is temporarily unavailable and retry on the next app open.</li></ul></div></details>
+        <details><summary>FR-07 · Safety language</summary><div class="detail-body"><ul class="criteria"><li>First use says to stop and return to normal breathing if lightheaded or uncomfortable, and shows the wellness disclaimer.</li><li>Settings includes a durable wellness—not medical advice—statement.</li><li>No copy promises to treat anxiety, disease, insomnia, or any medical condition. No treatment, diagnosis, or outcome claims.</li><li>No hold longer than the selected count; holds never exceed 20 s in v1.x; no competitive scoring.</li><li>Guided breaths per minute are always labelled as guided, never as a measured rate.</li></ul></div></details>
+        <details><summary>FR-08 · Practice library</summary><div class="detail-body"><ul class="criteria"><li>Practices lists exactly eight gentle techniques in v1.0: Sama Vritti (box), Visama Vritti (extended exhale), Nadi Shodhana (alternate nostril, no retention), Bhramari (humming bee), Ujjayi (ocean breath), Sheetali (cooling; Sheetkari alternative), coherent breathing (5.5 · 5.5), and 4-7-8.</li><li>Each technique ships with the default rhythm and target in the library defaults table.</li><li>Rows show the romanized and English name; My rhythms follow the library.</li><li>Nadi Shodhana steps carry left/right side labels; the Bhramari exhale is cued as Hum; Sheetali offers Sheetkari for people who cannot roll the tongue.</li><li>Technique content is bundled, versioned data. No technique is downloaded, locked, or paid.</li></ul></div></details>
+        <details><summary>FR-09 · Technique content and safety</summary><div class="detail-body"><ul class="criteria"><li>Each technique has a romanized name (common romanization, no diacritics), English name, pronunciation respelling and pronunciation clip, how-to steps, traditional context, “Take care” guidance, “What research says,” and “Based on” sources.</li><li>“Take care” is visible on technique detail before Begin and is never hidden behind a collapsed control.</li><li>Tradition is framed as tradition (“Traditionally practiced to…”). Evidence is stated plainly, including null results.</li><li>“Reviewed by [name, credential]” appears only when a real review is recorded in the content data. No other copy implies review.</li><li>Only gentle-tier techniques ship in v1.x. Defaults sit below classical ratios, and holds never exceed 20 s.</li></ul></div></details>
+        <details><summary>FR-10 · My rhythms</summary><div class="detail-body"><ul class="criteria"><li>Save up to 20 named rhythms from the custom builder, an adjusted library technique, or a received link.</li><li>Names are plain text, 1–40 characters.</li><li>Rename and delete are local; delete asks for in-page confirmation. Deleting a rhythm leaves history records unchanged.</li><li>At 20 saved rhythms, Save explains the limit and routes to My rhythms; nothing is overwritten silently.</li><li>A rhythm based on a library technique keeps its technique ID, so its name variants, cues, and “Take care” come from the installed library.</li></ul></div></details>
+        <details open><summary>FR-11 · Share links</summary><div class="detail-body"><ul class="criteria"><li>Share a library technique’s current settings or a saved rhythm as <code>https://samabreath.app/r/…</code> through the system share sheet, after a share preview that shows exactly what the link contains.</li><li>A link carries only: a display name (plain text, at most 40 characters), a step list (kind, seconds within bounds, optional side), a target duration (1, 3, 5, or 10 min), and an optional library technique ID. No history, personal data, or device identifier.</li><li>Validate every field and reject the whole link if anything is missing, malformed, unknown, or out of bounds. Without a technique ID, the step list must fit the custom builder (four steps, whole seconds). With one, it must match that installed technique’s step structure.</li><li>Links cannot unlock techniques that are not in the installed library; an unknown technique ID is invalid. Vigorous techniques are not shareable in v1.x.</li><li>Never render link content as HTML, in the app or on the web page. Safety and instruction text always comes from the app’s own content, never from a link.</li><li>A valid link opens an in-app preview with Save and Begin. Begin goes through the settle countdown with Cancel. Nothing is saved automatically. If first use is incomplete, first use comes first, then the preview.</li><li>An invalid link shows “This link can’t be opened” with a route to Practices. Nothing is partially imported and the app never crashes.</li><li>Without the app, the same URL serves a static web page that shows the rhythm as plain text with App Store and Google Play links. The page has no trackers; the teacher-loop signal comes from aggregate host logs and store campaign attribution.</li></ul></div></details>
+        <details><summary>FR-12 · Quick start</summary><div class="detail-body"><ul class="criteria"><li>App-icon quick actions on iOS and Android: “Begin last practice” (its subtitle names the most recent practice), “1-minute box breathing,” and the most recent other practice (for example, “Bhramari · 5 min”). With fewer than two distinct practices in history, the third action is omitted.</li><li>Each action opens the settle countdown with Cancel; Cancel returns to Breathe without a record. Introductions are skipped.</li><li>Before first use is complete, every quick action opens first use.</li><li>If the most recent practice no longer exists (for example, a deleted saved rhythm), “Begin last practice” opens Breathe with the default practice.</li><li>Actions work from a cold start and while the app is in the background.</li></ul></div></details>
+        <details><summary>FR-13 · First use</summary><div class="detail-body"><ul class="criteria"><li>First use is one screen: welcome, comfort guidance, wellness disclaimer, and Continue.</li><li>No permission prompt, cue setup, account, or Health invitation appears in first use.</li><li>“Continue” records first use as complete and opens Breathe with Sama Vritti at 5 minutes ready. “Begin” is reserved for starting a practice. When a quick action or link opened first use, Continue proceeds to that settle countdown or link preview instead.</li><li>Cue choices live in the cue chip on Breathe and in Settings. Settings repeats the comfort guidance.</li></ul></div></details>
+        <details><summary>FR-14 · Routines · v1.1</summary><div class="detail-body"><ul class="criteria"><li>Chain 2–6 practices (library techniques or saved rhythms) with per-practice minutes.</li><li>Planned duration is the sum of segments; each segment rounds up to whole rounds of its practice. Show it before Begin.</li><li>A 5-second transition screen names the next practice; it is not practice time.</li><li>Pause, end, and interruption rules apply to the whole routine. Ending during a segment records the completed segments and the partial one as ended early.</li><li>The summary lists each practice completed.</li></ul></div></details>
+        <details><summary>FR-15 · Gentle progression · v1.1</summary><div class="detail-body"><ul class="criteria"><li>Only techniques with a defined progression path in their content data are eligible (see the library defaults table).</li><li>After 5 completed (not ended early) sessions at the same rhythm within 14 days, the completion screen offers one next step, for example 4 · 0 · 6 · 0 → 4 · 0 · 7 · 0.</li><li>Actions: Try it / Not now / Stop suggesting. Progression is never automatic.</li><li>“Make it easier next time” is always available after a practice.</li><li>Suggested steps stay within FR-01 bounds; holds never exceed 20 s.</li></ul></div></details>
+        <details><summary>FR-16 · Practice calendar · v1.1</summary><div class="detail-body"><ul class="criteria"><li>A month view in History: a pine dot on each practiced day, days and minutes this month, and minutes by practice.</li><li>No streak count, broken-chain visual, or missed-day marking.</li><li>Days use the local calendar; timezone changes are handled deterministically.</li><li>The month has a text summary for screen readers.</li></ul></div></details>
+        <details><summary>FR-17 · Daily reminder · v1.1</summary><div class="detail-body"><ul class="criteria"><li>Off by default. One local notification at a time the user chooses.</li><li>The notification permission is requested only after the user turns the reminder on.</li><li>Copy: “Time for a little space.”</li><li>If permission is denied, the setting says so and stays off; no repeated prompting.</li></ul></div></details>
+        <details><summary>FR-18 · Health session writing · v1.1</summary><div class="detail-body">
+          <p>Local practice is complete on its own. iOS writes the completed mindful session through HealthKit, named “Apple Health” in copy; Android writes the supported session record through Health Connect after detecting availability. No biometric reads. The v2 states below are unchanged.</p>
+          <h4>Eligibility and consent</h4>
+          <ol class="criteria"><li>Save a qualifying completed practice locally first: at least 60 seconds of active practice, never intentionally ended early.</li><li>Keep Done and Breathe again primary in the summary. Offer “Add sessions to [platform]” as a separate optional action; Settings provides a later entry point.</li><li>Explain session writing only, then open the real system permission UI. No prompt on first launch or during first use.</li><li>Write only after platform authorization permits it. A completed permission request is not a confirmed write.</li><li>After skipping, declining, failure, or unavailability, retain all core breathing and local-history behavior.</li></ol>
+          <h4>Result states</h4>
+          <dl class="spec"><dt>Not connected / skipped</dt><dd>“Saved here, as always.” Offer a later connection in Settings without repeated prompting.</dd><dt>Pending</dt><dd>“Waiting to add your session.” Local history remains available; retry transient failures safely.</dd><dt>Written</dt><dd>“Added to [platform].” Show only after a confirmed write.</dd><dt>Unavailable</dt><dd>“Health is unavailable.” No claim about wearable ownership or read access.</dd><dt>Failed</dt><dd>“Couldn’t add this session.” Retain the local record and provide a retry route in Settings.</dd></dl>
+          <h4>Acceptance criteria</h4>
+          <ul class="criteria"><li>One local practice creates at most one platform record; retries are idempotent.</li><li>Sub-60-second and intentionally ended sessions never export.</li><li>No read permissions, biometric placeholders, or insight screens appear.</li><li>Deleting local history leaves preferences and existing platform records untouched; explain this before confirmation.</li><li>Validate availability, restrictions, revocation, pending/failure handling, and actual write results on both physical platforms.</li></ul>
+        </div></details>
+        <details><summary>FR-19 · Fuller voice guidance · v1.1</summary><div class="detail-body"><ul class="criteria"><li>Optional counting within steps, off unless the user turns it on.</li><li>Longer technique introductions alongside the v1.0 short ones.</li><li>Same voice, licence, pronunciation approval, and timing-fallback rules as v1.0.</li></ul></div></details>
+        <details open><summary>NFR-01 · Graceful absence</summary><div class="detail-body"><ul class="criteria"><li>Every practice, cue, history, and completion function works with no network, no permissions granted, and no Health connection.</li><li>A missing voice clip falls back to its tone; with audio unavailable, haptic and visual guidance continue.</li><li>An invalid, truncated, oversized, or hostile link never crashes the app and never partially saves.</li><li>A library content version the app cannot read shows a recoverable error and keeps box breathing available.</li></ul></div></details>
+        <div class="footer-note"><strong>Not building</strong>Wearable reads, heart-rate and HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, and streaks, scores, or badges. The v1.5 post-MVP wearable-read and Insights requirements are withdrawn, not deferred.</div>
       </section>
 
-      <section id="health">
-        <div class="section-head"><div class="section-no">05</div><div><h2>Optional Health session writing</h2><p>Local practice is complete on its own. Health writing may follow in a point release if it delays the core launch.</p></div></div>
+      <section id="content">
+        <div class="section-head"><div class="section-no">05</div><div><h2>Content &amp; safety governance</h2><p>Technique content is product surface with safety consequences. These rules decide what ships.</p></div></div>
         <div class="two-col">
-          <div class="card tint"><div class="card-kicker">iOS</div><h3>Apple Health</h3><p>Offer completed mindful-session writing through HealthKit. Use “Apple Health” in product copy. Do not request biometric reads for MVP.</p></div>
-          <div class="card"><div class="card-kicker">Android</div><h3>Health Connect</h3><p>Offer the supported completed breathing or mindfulness session record. Detect availability. The full local experience works when the platform service is unavailable.</p></div>
+          <div class="card tint"><div class="card-kicker">Risk tier · gentle</div><h3>May ship with sourced content</h3><p>The v1.0 eight. Ship with sourced content and gentle defaults. Shareable.</p></div>
+          <div class="card"><div class="card-kicker">Risk tier · vigorous or retention-led</div><h3>Needs a named instructor review</h3><p>Kapalabhati, Bhastrika, long kumbhaka, bandhas. A named human instructor review is required before they ship; rapid-rhythm mode also needs a pre-practice safety check. Not shareable in v1.x.</p></div>
         </div>
-        <h3>Eligibility and consent</h3>
-        <ol class="criteria"><li>Save a qualifying completed practice locally first: at least 60 seconds of active practice, never intentionally ended early.</li><li>Keep Done and Breathe again primary in the summary. Offer “Add sessions to [platform]” as a separate optional action; Settings provides a later entry point.</li><li>Explain session writing only, then open the real system permission UI. No prompt on first launch or during onboarding.</li><li>Write only after platform authorization permits it. A completed permission request is not a confirmed write.</li><li>After skipping, declining, failure, or unavailability, retain all core breathing and local-history behavior.</li></ol>
-        <h3>Result states</h3>
-        <dl class="spec"><dt>Not connected / skipped</dt><dd>“Saved here, as always.” Offer a later connection in Settings without repeated prompting.</dd><dt>Pending</dt><dd>“Waiting to add your session.” Local history remains available; retry transient failures safely.</dd><dt>Written</dt><dd>“Added to [platform].” Show only after a confirmed write.</dd><dt>Unavailable</dt><dd>“Health is unavailable.” No claim about wearable ownership or read access.</dd><dt>Failed</dt><dd>“Couldn’t add this session.” Retain the local record and provide a retry route in Settings.</dd></dl>
-        <h3>Acceptance criteria</h3>
-        <ul class="criteria"><li>One local practice creates at most one platform record; retries are idempotent.</li><li>Sub-60-second and intentionally ended sessions never export.</li><li>No wearable-read permissions, biometric placeholders, or Insights destination appear in MVP.</li><li>Deleting local history leaves preferences and existing platform records untouched; explain this before confirmation.</li><li>Validate availability, restrictions, revocation, pending/failure handling, and actual write results on both physical platforms if Health writing ships.</li></ul>
-        <details><summary>Post-MVP · wearable insights design boundary</summary><div class="detail-body"><p>Later work may read heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep through platform aggregators. Each category needs a separate purpose and consent design, real records, source/timestamp labeling, missing-data treatment, and validated comparison windows. Define those before designing or shipping trend charts. Guided cadence is calculated from the selected rhythm and must never be labeled as measured breathing. No direct wearable-vendor SDKs or outcome claims are part of the MVP.</p></div></details>
+        <h3>Sources and review</h3>
+        <ol class="criteria"><li>Claude drafts technique content from classical and modern sources. Every technique lists its sources under “Based on.”</li><li>Each draft is checked against its listed sources before release; the check is recorded with the content version.</li><li>“Reviewed by [name, credential]” appears only after a real review is recorded (reviewer, credential, date, content version). Never imply review.</li></ol>
+        <h3>Framing rules</h3>
+        <ul class="list">
+          <li>Frame tradition as tradition: “Traditionally practiced to…”.</li>
+          <li>State evidence plainly, including null results such as the Sussex coherent-breathing trial.</li>
+          <li>No treatment, diagnosis, or outcome claims, in the app, on the web page, or in store copy.</li>
+        </ul>
+        <h3>Gentle defaults</h3>
+        <ul class="list">
+          <li>Library defaults sit below classical ratios.</li>
+          <li>Holds never exceed 20 s in v1.x. Nadi Shodhana ships without retention.</li>
+          <li>Progression paths (v1.1) stay within the same bounds and are never automatic.</li>
+        </ul>
+        <h3>Content data contract</h3>
+        <dl class="spec">
+          <dt>Identity</dt><dd><code>id</code>, <code>contentVersion</code>, <code>riskTier</code>, <code>shareable</code>.</dd>
+          <dt>Names</dt><dd>Romanized name (no diacritics), English name, pronunciation respelling, pronunciation clip reference.</dd>
+          <dt>Practice</dt><dd>Default steps (kind, seconds, side, optional cue variant), adjustment increment (whole or half seconds), default target, optional progression path (v1.1).</dd>
+          <dt>Guidance</dt><dd>How-to steps, traditional context, “Take care,” “What research says,” “Based on” sources, introduction clip reference.</dd>
+          <dt>Review</dt><dd>Optional recorded review. “Reviewed by” renders only from this field.</dd>
+        </dl>
+      </section>
+
+      <section id="voice">
+        <div class="section-head"><div class="section-no">06</div><div><h2>AI voice &amp; names</h2><p>One calm voice, generated once, bundled, and checked by ear.</p></div></div>
+        <h3>AI voice requirements</h3>
+        <ol class="criteria"><li>Generate once (ElevenLabs or equivalent) under a commercial licence, then bundle the clips. No runtime API, key, or network dependency.</li><li>One calm, consistent voice across cue words, introductions, and pronunciation clips.</li><li>Cue words are at most 0.8 s. When a step is shorter than its cue plus 0.2 s, play that step’s tone instead.</li><li>Voice replaces tones when on; haptics stay independent. Platform audio conventions follow the CP1 locked decision.</li><li>Sanskrit names use a pronunciation dictionary. A listener who knows Sanskrit or Hindi approves every clip before release; text review alone cannot validate pronunciation.</li><li>Settings → About discloses that voice guidance is AI-generated.</li><li>Keep the licence, generation settings, pronunciation dictionary, and clip manifest with the release evidence.</li></ol>
+        <h3>Clip inventory</h3>
+        <dl class="spec">
+          <dt>Cue words · v1.0</dt><dd>Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch.</dd>
+          <dt>Introductions · v1.0</dt><dd>One optional short introduction per technique, played before practice.</dd>
+          <dt>Pronunciation · v1.0</dt><dd>One clip per technique name, played from technique detail.</dd>
+          <dt>Fuller voice · v1.1</dt><dd>Optional counting and longer introductions.</dd>
+        </dl>
+        <h3>Names and typography</h3>
+        <p>The bundled Newsreader and DM Sans files contain macrons and ś but lack the IAST underdot and overdot letters (ḍ ṣ ṭ ṇ ṃ ḥ ṛ), verified from each font’s character map. The UI therefore uses common romanization without diacritics (Nadi Shodhana, Bhramari), a pronunciation respelling (“NAH-dee SHOH-duh-nuh”), and a pronunciation clip. Full IAST requires adding a covering font such as Noto Serif, which is a future brand decision.</p>
+        <p>Brand name: the v2 guidance “SAH-mah” is an anglicized reading; सम (sama, “even”) is closer to “SUH-muh.” The brand name does not change. Its pronunciation guidance is part of the name and cultural-language clearance item (<a href="#decisions">12</a>), and the pronunciation dictionary follows that outcome.</p>
+        <p class="small">Screen readers receive the respelling as the accessible hint for each technique name.</p>
       </section>
 
       <section id="architecture">
-        <div class="section-head"><div class="section-no">06</div><div><h2>Technical architecture</h2><p>A cross-platform foundation with native health bridges and no backend dependency.</p></div></div>
-        <div class="decision"><div><b>Framework</b><p>React Native with Expo development builds and TypeScript. Expo Go alone is insufficient for native health modules.</p></div><span class="choice">Recommended</span></div>
-        <div class="decision"><div><b>Visual system</b><p>The branding board owns palette, Newsreader/DM Sans typography, logo, and launch identity; the UX prototype owns screen hierarchy and state behavior. The v2 docs (2026-09-18) share the line “Your breath. Your rhythm.” and one breath mark. Runtime alignment is future work; this documentation revision is not implementation evidence.</p></div><span class="choice">Locked</span></div>
-        <div class="decision"><div><b>Navigation</b><p>Keep the MVP shallow: Breathe, History, and Settings. Add a Progress destination only when real insights are implemented; Customize practice opens an optional dedicated setup surface and returns to Breathe.</p></div><span class="choice">Lean</span></div>
-        <div class="decision"><div><b>State</b><p>Pure timer state machine plus a small app settings store. Avoid a global state library unless complexity earns it.</p></div><span class="choice">Lean</span></div>
-        <div class="decision"><div><b>Persistence</b><p>Encrypted or platform-appropriate local storage for preferences and session history; schema-versioned migrations from day one.</p></div><span class="choice">Device only</span></div>
-        <div class="decision"><div><b>Backend</b><p>None for MVP. Optional privacy-preserving product analytics can be added only with explicit policy disclosure.</p></div><span class="choice">No server</span></div>
-        <div class="decision"><div><b>Native boundaries</b><p>HealthKit and Health Connect sit behind one platform-neutral HealthRepository for optional session writing and deduplication. Per-type reads, date ranges, and source metadata are post-MVP extensions. No vendor-specific wearable SDKs.</p></div><span class="choice">Aggregators only</span></div>
+        <div class="section-head"><div class="section-no">07</div><div><h2>Technical architecture</h2><p>One cross-platform codebase, bundled content, and no backend beyond a static site.</p></div></div>
+        <div class="decision"><div><b>Framework</b><p>React Native with Expo development builds (Expo SDK 57), expo-router, and TypeScript. Expo Go alone is insufficient for the native modules.</p></div><span class="choice">Recommended</span></div>
+        <div class="decision"><div><b>Visual system</b><p>The branding board owns palette, Newsreader/DM Sans typography, logo, and launch identity; the UX mocks own screen hierarchy and state behavior. Runtime alignment to the v3 docs is future work; this revision is not implementation evidence.</p></div><span class="choice">Locked</span></div>
+        <div class="decision"><div><b>Navigation</b><p>Four expo-router tabs: Breathe · Practices · History · Settings. Technique detail, Adjust rhythm, practice, completion, and link preview are stack routes.</p></div><span class="choice">Four tabs</span></div>
+        <div class="decision"><div><b>Practice engine</b><p>A pure step-sequence engine: ordered steps (kind, seconds, optional side), 0-second steps skipped, half seconds allowed, time from a monotonic clock. Animation, voice, tones, and haptics read engine state and never own time.</p></div><span class="choice">Pure engine</span></div>
+        <div class="decision"><div><b>Technique content</b><p>Bundled, versioned structured data validated by a schema test in CI. No remote content. Sessions snapshot their steps, so content updates never rewrite history.</p></div><span class="choice">Bundled data</span></div>
+        <div class="decision"><div><b>Audio</b><p>Bundled voice clips and tones through <code>expo-audio</code>. A build-time clip manifest records each clip’s measured length for the cue-plus-0.2 s fallback rule.</p></div><span class="choice">Bundled</span></div>
+        <div class="decision"><div><b>Deep links</b><p>expo-router handles <code>https://samabreath.app/r/…</code> as a route. iOS Universal Links (Associated Domains) and Android App Links (verified intent filter), with <code>apple-app-site-association</code> and <code>assetlinks.json</code> hosted on samabreath.app. The payload is decoded and validated on device.</p></div><span class="choice">Verified links</span></div>
+        <div class="decision"><div><b>Web fallback</b><p>A static page at samabreath.app/r/* decodes the link in the browser and renders plain text only, with store links. No cookies, trackers, or analytics scripts; aggregate host logs only.</p></div><span class="choice">Static site</span></div>
+        <div class="decision"><div><b>Quick actions</b><p>iOS Home Screen quick actions and Android app shortcuts. Candidate library: <code>expo-quick-actions</code>. This is an assumption to verify against the installed Expo SDK 57 (config plugin, cold and warm launch routing) before CP2b starts.</p></div><span class="choice">Verify</span></div>
+        <div class="decision"><div><b>State and persistence</b><p>Pure engine plus a small settings store. <code>expo-sqlite</code> for sessions, My rhythms, and routines (v1.1), with schema-versioned migrations from day one.</p></div><span class="choice">Device only</span></div>
+        <div class="decision"><div><b>Backend</b><p>None. The only hosted surface is the static samabreath.app site (link files, web fallback, privacy policy). Optional privacy-preserving analytics only with explicit policy disclosure.</p></div><span class="choice">No server</span></div>
+        <div class="decision"><div><b>Native boundaries · v1.1</b><p>HealthKit and Health Connect sit behind one platform-neutral HealthRepository for session writing and deduplication; no reads, no vendor wearable SDKs. The daily reminder schedules one local notification.</p></div><span class="choice">Writes only</span></div>
         <h3>Suggested module structure</h3>
-        <div class="code">src/
-  app/                 routes, navigation, app lifecycle
-  breathing/           timer engine, phases, session reducer
-  components/          controls, ring, typography, feedback
-  health/              interface + ios/android adapters
-  history/             local session repository and record states
-  insights/            post-MVP only: trends and comparisons
-  settings/            cue preferences and optional Health write settings
-  accessibility/       reduced-motion and cue helpers
+        <div class="code">app/                   expo-router routes: tabs, technique/[id], adjust, practice, summary, r/[payload]
+src/
+  breathing/           step-sequence engine, duration and pace math, session reducer
+  content/             bundled technique library (versioned data), schema, progression paths
+  audio/               tones, voice clip manifest, cue scheduler with tone fallback
+  sharing/             link encode/decode, validation, preview model
+  quickstart/          app-icon quick actions and launch routing
+  rhythms/             My rhythms repository (up to 20)
+  history/             local session records; month calendar in v1.1
+  settings/            cue mode, voice introductions, haptics, motion; reminder in v1.1
+  routines/            v1.1 only: routine builder and runner
+  health/              v1.1 only: HealthRepository + iOS/Android write adapters
+  components/          controls, guide, progress ring, typography, feedback
+  accessibility/       reduced motion, step and side announcements
   analytics/           typed events; no-op when disabled
-  legal/               privacy, safety, acknowledgments</div>
-        <h3>Timer model</h3>
-        <div class="code">phaseAt(elapsedMs, phases):
-  durationsMs = phases.map(seconds => seconds × 1000)
-  cycleMs = sum(durationsMs)
-  position = elapsedMs % cycleMs
-  phaseIndex = first cumulative boundary greater than position
-  phaseRemaining = current boundary − position
+  legal/               privacy, safety, About, sources, AI-voice disclosure
+site/                  static samabreath.app: /r/ fallback page, AASA, assetlinks.json</div>
+        <h3>Engine model</h3>
+        <div class="code">stepAt(elapsedMs, steps):
+  active    = steps where seconds > 0            // 0-s holds and rests are skipped
+  roundMs   = sum(active.seconds × 1000)          // half seconds allowed
+  rounds    = floor(elapsedMs ÷ roundMs)
+  position  = elapsedMs mod roundMs
+  index     = first cumulative boundary greater than position
+  remaining = that boundary − position
 
-Example phases = [4, 4, 6, 4]; cycle = 18 seconds.
-Within uninterrupted guidance, phase position derives from a monotonic clock.
-Pause stores explicit phase position, completed cycles, and active duration.
-Resume restarts that phase after a neutral countdown; wall time is not practice time.
-Animation reads state; it never owns time.</div>
+plannedRounds = ceil(targetSeconds ÷ roundSeconds)
+guidedBreathsPerMinute = 60 × inhaleStepsPerRound ÷ roundSeconds
+
+cueFor(step, mode):
+  Silent                                       → none
+  Voice and step ≥ cue clip length + 0.2 s    → voice clip
+  otherwise                                    → the step’s tone
+
+Box 4·4·4·4, 5 min      → 16 s rounds, 19 rounds / 5:04, 3.8 breaths/min
+Nadi Shodhana 4·6 ×2    → 20 s rounds, 15 rounds / 5:00, 6 breaths/min
+Coherent 5.5·5.5, 5 min → 11 s rounds, 28 rounds / 5:08
+Pause stores step index, completed rounds, and active duration.
+Resume restarts that step after a neutral countdown; wall time is not practice time.</div>
         <h3>Platform notes</h3>
         <div class="two-col">
-          <div class="card"><h4>iOS</h4><p class="small">Optional HealthKit mindful-session writing only for MVP. Permission-gated biometric reads and connected-source handling are post-MVP; no direct wearable SDKs.</p></div>
-          <div class="card"><h4>Android</h4><p class="small">Optional supported Health Connect session writing only for MVP. Permission-gated biometric reads and connected-source handling are post-MVP; no direct vendor SDKs.</p></div>
+          <div class="card"><h4>iOS</h4><p class="small">Associated Domains entitlement for Universal Links; Home Screen quick actions; audio session per the CP1 decision. v1.1: HealthKit mindful-session writing only.</p></div>
+          <div class="card"><h4>Android</h4><p class="small">App Links verified against the Play app-signing certificate in <code>assetlinks.json</code>; app shortcuts. v1.1: Health Connect session writing only; the notification permission is requested only when the reminder is turned on.</p></div>
         </div>
       </section>
 
       <section id="data">
-        <div class="section-head"><div class="section-no">07</div><div><h2>Data & privacy</h2><p>Collect less, explain clearly, and keep sensitive wellness data under user control.</p></div></div>
+        <div class="section-head"><div class="section-no">08</div><div><h2>Data &amp; privacy</h2><p>Collect less, explain clearly, and keep practice data on the device.</p></div></div>
         <h3>Local data model</h3>
         <dl class="spec">
-          <dt>Session</dt><dd><code>id</code>, timestamps, duration, four-value <code>phaseProfile</code>, optional pattern name, guided cadence, cycles, completion state and optional Health write state. Before/after heart-rate summaries are deferred.</dd>
-          <dt>Progression · post-MVP</dt><dd>Derived 7-day/30-day series for resting heart rate, HRV, and mindful minutes; totals by pattern; current and longest streak. Recompute from local sessions and permitted platform records.</dd>
-          <dt>Preferences</dt><dd>Duration target, four independent phase seconds, tones, haptics, reduced-motion override, onboarding complete, and optional session-write preference/availability. Voice, reminders, and read-category preferences are deferred.</dd>
-          <dt>Wearable data · post-MVP</dt><dd>Keep raw heart rate, HRV, resting heart rate, respiratory rate, SpO₂, and sleep records in Apple Health or Health Connect. Cache only bounded summaries needed for responsive insights, with source and date-range metadata.</dd>
-          <dt>Not stored</dt><dd>Name, email, precise location, contacts, advertising ID, free-text journal, diagnosis, readiness score, or a duplicate long-term store of raw wearable records.</dd>
+          <dt>Session</dt><dd><code>id</code>, timestamps, active duration, <code>practiceId</code>, practice-name snapshot, step snapshot (kind, seconds, side), target, completed rounds, guided breaths per minute, completion state. v1.1: optional Health write state and idempotency key; routine segments for routine sessions.</dd>
+          <dt>SavedRhythm</dt><dd><code>id</code>, name (plain text, at most 40 characters), steps, target, optional library technique ID, source (custom, adjusted, received link), created and updated timestamps. At most 20.</dd>
+          <dt>Routine · v1.1</dt><dd><code>id</code>, name, 2–6 segments (library technique ID or saved rhythm ID, minutes), timestamps.</dd>
+          <dt>Preferences</dt><dd>Duration target, last practice (ID and rhythm), cue mode (Voice / Tones / Silent), voice introductions, haptics, reduced-motion override, first use complete. v1.1: reminder on/off and time, progression opt-outs, counting, Health write preference.</dd>
+          <dt>Technique content</dt><dd>Bundled, read-only, versioned. Not user data.</dd>
+          <dt>Not stored</dt><dd>Name, email, precise location, contacts, advertising ID, free-text journal, diagnosis, readiness score, or any wearable or biometric record.</dd>
         </dl>
         <h3>Privacy requirements</h3>
         <ul class="list">
-          <li>Publish a plain-language privacy policy before beta distribution.</li>
-          <li>Optional MVP session writing is explained before system permission. Any later read types require a separate explanation and consent design; no health data is used for advertising.</li>
-          <li>Do not sell or broker session data. Do not place third-party ad SDKs in the MVP.</li>
-          <li>If analytics is enabled, use coarse product events without health values, exact timestamps, or persistent cross-app identifiers.</li>
-          <li>Provide “Delete local history” and explain the separate platform steps for deleting health records.</li>
+          <li>Publish a plain-language privacy policy before beta distribution. It explains share links: what a link contains, that anyone with it can read it, and that the web page keeps only aggregate host logs.</li>
+          <li>Share links carry only rhythm data: display name, steps, target, and an optional technique ID. The share preview shows exactly this before sending.</li>
+          <li>The web fallback page has no trackers, cookies, or third-party embeds. Store links carry a fixed campaign identifier, never a per-user or per-link identifier.</li>
+          <li>Settings → About discloses that voice guidance is AI-generated and lists content sources.</li>
+          <li>Do not sell or broker practice data. Do not include third-party ad SDKs.</li>
+          <li>Analytics stays optional; launching with none is acceptable. If enabled, use coarse product events without health values, exact timestamps, rhythm names, or persistent cross-app identifiers.</li>
+          <li>Provide “Delete local history.” From v1.1, explain the separate platform steps for deleting Health records.</li>
           <li>Document every SDK and its data behavior for App Store privacy labels and Google Play Data Safety.</li>
         </ul>
-        <h3>Minimal analytics event set</h3>
+        <h3>Optional analytics event set</h3>
         <div class="scope-table">
           <div class="scope-row header"><div>Event</div><div>Allowed properties</div><div>Purpose</div></div>
-          <div class="scope-row"><div><code>session_started</code></div><div>duration bucket, timing-profile bucket</div><div>Measure activation and preferred setup; never include biometric values.</div></div>
-          <div class="scope-row"><div><code>session_completed</code></div><div>duration bucket, completion</div><div>Measure core reliability; no exact start time.</div></div>
-          <div class="scope-row"><div><code>health_prompt_result</code></div><div>platform, accepted/declined</div><div>Improve explanation and timing.</div></div>
-          <div class="scope-row"><div><code>cue_setting_changed</code></div><div>tone enabled, haptic enabled</div><div>Understand non-visual guidance needs.</div></div>
+          <div class="scope-row"><div><code>session_started</code></div><div>duration bucket, library ID or “custom”, cue mode</div><div>Activation and wedge validation; never a saved-rhythm name.</div></div>
+          <div class="scope-row"><div><code>session_completed</code></div><div>duration bucket, completion, library ID or “custom”</div><div>Completion and reliability; no exact start time.</div></div>
+          <div class="scope-row"><div><code>link_opened</code></div><div>valid / invalid</div><div>Teacher loop in the app; never the payload.</div></div>
+          <div class="scope-row"><div><code>rhythm_saved</code></div><div>source (custom, adjusted, link)</div><div>Understand saving and receiving.</div></div>
+          <div class="scope-row"><div><code>cue_setting_changed</code></div><div>cue mode, haptics enabled</div><div>Understand non-visual guidance needs.</div></div>
         </div>
-        <p class="small" style="margin-top:10px">Analytics is optional for launch. If omitted, collect product feedback through beta interviews instead.</p>
+        <p class="small" style="margin-top:10px">Without analytics, wedge validation comes from beta interviews and opt-in feedback, D30 from opted-in store analytics, and the teacher loop from web host logs and store campaign attribution.</p>
       </section>
 
       <section id="quality">
-        <div class="section-head"><div class="section-no">08</div><div><h2>Quality bar</h2><p>Wellness UX fails when timing, cues, or accessibility are unreliable.</p></div></div>
+        <div class="section-head"><div class="section-no">09</div><div><h2>Quality bar</h2><p>A practice app fails when timing, cues, content, or links are untrustworthy.</p></div></div>
         <div class="three-col">
-          <div class="card"><div class="card-kicker">Performance</div><ul class="list compact"><li>Cold launch to usable home under 2 seconds on target devices.</li><li>60 fps breathing animation on mid-range devices.</li><li>No network dependency for core flow.</li></ul></div>
-          <div class="card"><div class="card-kicker">Accessibility</div><ul class="list compact"><li>WCAG AA contrast.</li><li>Dynamic text without clipping.</li><li>VoiceOver/TalkBack phase announcements.</li><li>Reduced-motion alternative.</li></ul></div>
-          <div class="card"><div class="card-kicker">Reliability</div><ul class="list compact"><li>No duplicate health records.</li><li>No stale or fabricated wearable values.</li><li>Full breathing flow with no wearable data.</li><li>Crash-free session target ≥99.5%.</li><li>Deterministic timer and record tests; trend tests are post-MVP.</li></ul></div>
+          <div class="card"><div class="card-kicker">Performance</div><ul class="list compact"><li>Cold launch to usable Breathe under 2 seconds on target devices.</li><li>60 fps guide animation on mid-range devices.</li><li>Voice and tone cues start on the step boundary.</li><li>No network dependency for any practice flow.</li></ul></div>
+          <div class="card"><div class="card-kicker">Accessibility</div><ul class="list compact"><li>WCAG AA contrast.</li><li>Dynamic text without clipping, including technique content.</li><li>VoiceOver/TalkBack step and side announcements.</li><li>Reduced-motion alternative, including the progress ring.</li></ul></div>
+          <div class="card"><div class="card-kicker">Reliability</div><ul class="list compact"><li>Crash-free session target ≥99.5%.</li><li>Deterministic engine, record, and link tests.</li><li>Full practice flow with no permissions or network.</li><li>No duplicate Health records (v1.1).</li></ul></div>
         </div>
+        <h3>Test suites</h3>
+        <dl class="spec">
+          <dt>Engine</dt><dd>0-second holds skipped without cues, side labels in order, half-second steps, round-up duration math for every library default, pause/resume, and (v1.1) per-segment routine rounding.</dd>
+          <dt>Voice</dt><dd>Every cue word measured at 0.8 s or less; tone fallback when a step is shorter than its cue plus 0.2 s; voice, tone, haptic, and visual stay in sync; clip manifest matches content; every clip approved for pronunciation by a Sanskrit or Hindi listener.</dd>
+          <dt>Links</dt><dd>Encode/decode round trip; validation of every field; fuzz tests with malformed, truncated, oversized, out-of-bounds, unknown-ID, and HTML- or script-bearing input; no HTML rendering in the app or on the web page.</dd>
+          <dt>Content</dt><dd>Schema validation; every technique has sources, “Take care,” and “What research says”; holds ≤ 20 s; no “Reviewed by” without a review record; only gentle-tier techniques present.</dd>
+          <dt>Device checks</dt><dd>Universal Links and App Links on physical devices (installed and not installed, cold and warm start); quick actions on both platforms (cold and warm, before first use, after the referenced rhythm is deleted).</dd>
+        </dl>
         <h3>Device test matrix</h3>
         <dl class="spec">
-          <dt>iOS</dt><dd>Oldest supported iOS version on a smaller iPhone; current iOS on standard and large-screen iPhones; VoiceOver; silent mode; reduced motion.</dd>
-          <dt>Android</dt><dd>Oldest supported Android version, one mid-range physical device, current Pixel, one Samsung device; TalkBack; battery saver; Health Connect unavailable and installed states.</dd>
-          <dt>Optional Health write</dt><dd>No connection, unavailable platform, declined/restricted write, pending, failed, revoked, and confirmed write. Local practice works throughout. Wearable read permutations and trend verification are post-MVP.</dd>
-          <dt>Interruptions</dt><dd>Call, alarm, audio route change, app background/foreground, screen lock, permission revocation, low battery, timezone change.</dd>
+          <dt>iOS</dt><dd>Oldest supported iOS version on a smaller iPhone; current iOS on standard and large-screen iPhones; VoiceOver; silent mode; reduced motion; Universal Links; Home Screen quick actions.</dd>
+          <dt>Android</dt><dd>Oldest supported Android version, one mid-range physical device, current Pixel, one Samsung device; TalkBack; battery saver; App Links verification; app shortcuts.</dd>
+          <dt>Links</dt><dd>Opened from common messaging and browser apps with and without the app installed; first use incomplete; invalid link.</dd>
+          <dt>Interruptions</dt><dd>Call, alarm, audio route change, app background/foreground, screen lock, voice clip mid-play, low battery, timezone change.</dd>
+          <dt>Health write · v1.1</dt><dd>No connection, unavailable platform, declined/restricted write, pending, failed, revoked, and confirmed write. Local practice works throughout.</dd>
         </dl>
         <h3>Release blockers</h3>
-        <ul class="list no-list"><li>Timer or phase cue drifts by more than one second.</li><li>App records duplicate, zero-length, or incorrect-time health sessions.</li><li>App labels guided cadence as measured respiratory rate, shows stale data as current, invents a missing wearable value, or presents an insight as a medical conclusion.</li><li>Users without a Health connection cannot complete a session or use local History.</li><li>Session cannot be paused or safely ended.</li><li>Core guidance is unusable with screen reader or reduced motion.</li><li>Any health permission is requested before context is explained.</li><li>Privacy policy and store disclosures disagree with actual SDK behavior.</li></ul>
+        <ul class="list no-list"><li>Timer or step cue drifts by more than one second.</li><li>A 0-second step plays a cue, or a side label is wrong.</li><li>Link content is rendered unsafely (as HTML or markup), or an out-of-bounds rhythm is accepted from a link.</li><li>A vigorous or retention-led technique ships without a recorded named instructor review.</li><li>“Reviewed by” is shown without a recorded review.</li><li>A voice clip ships without pronunciation approval, or About does not disclose AI-generated voice.</li><li>Copy makes a treatment, diagnosis, or outcome claim, or labels guided pace as measured.</li><li>Session cannot be paused or safely ended.</li><li>Core guidance is unusable with screen reader or reduced motion.</li><li>Any permission is requested before context is explained.</li><li>Privacy policy and store disclosures disagree with actual SDK behavior.</li><li>v1.1: app records duplicate, zero-length, or incorrect-time Health sessions.</li></ul>
       </section>
 
       <section id="delivery">
-        <div class="section-head"><div class="section-no">09</div><div><h2>Delivery plan</h2><p>A realistic sequence for one experienced cross-platform engineer plus part-time design and QA.</p></div></div>
+        <div class="section-head"><div class="section-no">10</div><div><h2>Delivery plan</h2><p>One experienced full-time cross-platform engineer: v1.0 in about 6–7 weeks, v1.1 in about 3–4 weeks, content drafted in parallel.</p></div></div>
         <div class="milestones">
-          <div class="milestone"><div class="week">Week 1</div><div><h4>Lock and build</h4><p>Freeze lean scope, align the 1–20 second phase contract, finalize safety copy, establish repeatable iOS/Android builds, and remove post-MVP routes from production navigation.</p></div></div>
-          <div class="milestone"><div class="week">Weeks 2–3</div><div><h4>Trustworthy breathing loop</h4><p>Home, progressive setup, monotonic timer, settling countdown, animation, tones, haptics, pause/resume, interruption handling, safe ending, preferences, and completion.</p></div></div>
-          <div class="milestone"><div class="week">Week 4</div><div><h4>First use, history, and accessibility</h4><p>Three-screen onboarding, local session records, deletion, lean navigation, dynamic text, screen-reader flow, reduced motion, and minimum touch targets.</p></div></div>
-          <div class="milestone"><div class="week">Week 5</div><div><h4>Hardening and optional Health write</h4><p>Lifecycle and physical-device testing, privacy review, production configuration, and idempotent HealthKit/Health Connect session writing if native integration is stable. Wearable reads are excluded.</p></div></div>
-          <div class="milestone"><div class="week">Week 6</div><div><h4>Closed beta and launch candidate</h4><p>TestFlight and Play closed testing focused on starts, completions, cue comprehension, interruption safety, accessibility, and device-specific failures. Fix release blockers only.</p></div></div>
-          <div class="milestone"><div class="week">Week 7</div><div><h4>Store submission</h4><p>Run release-candidate regression, prepare listings and screenshots, complete disclosures, and submit. Recorded voice and wearable insights proceed on a separate post-MVP track.</p></div></div>
+          <div class="milestone"><div class="week">Weeks 1–3</div><div><h4>Core correctness · about 3 weeks</h4><p>Buildable iOS/Android baseline, monotonic timer, settle countdown, pause and resume of the interrupted step, end confirmation, interruption pause, local history, accessibility, privacy, and delete local history (CP0, CP1, and core-surface CP3/CP4 work).</p></div></div>
+          <div class="milestone"><div class="week">Week 4</div><div><h4>First use and navigation</h4><p>One-screen first use, four-tab navigation, the cue chip, and the four-row custom builder (CP2).</p></div></div>
+          <div class="milestone"><div class="week">Weeks 4–5</div><div><h4>Flexible engine and library · about 1.5 weeks</h4><p>Step-sequence engine (0-second holds, sides, half seconds), bundled versioned technique data, Practices, technique detail, and Adjust rhythm for library techniques (CP2b).</p></div></div>
+          <div class="milestone"><div class="week">Week 5</div><div><h4>Voice · about 0.5 week</h4><p>Clip manifest, cue scheduler with tone fallback, optional introductions, pronunciation clips, and the About disclosure (CP2b).</p></div></div>
+          <div class="milestone"><div class="week">Week 6</div><div><h4>My rhythms and share links · about 1 week</h4><p>Save, rename, and delete up to 20 rhythms; link encode/decode and validation; share and incoming previews; invalid state; Universal Links and App Links; static web fallback (CP2b).</p></div></div>
+          <div class="milestone"><div class="week">Week 7</div><div><h4>Quick actions and hardening</h4><p>App-icon quick actions on both platforms (with first use, about 0.5 week), accessibility and record passes on the new surfaces (CP3, CP4), and the launch candidate.</p></div></div>
+          <div class="milestone"><div class="week">Parallel</div><div><h4>Content drafting</h4><p>Source and draft the eight techniques, build the pronunciation dictionary, generate the clips, get listener approval, and draft store copy and keywords. Cue-word clips must be approved before voice integration closes; technique content before the closed beta.</p></div></div>
+          <div class="milestone"><div class="week">Calendar</div><div><h4>Beta, testing, and review</h4><p>Closed beta through TestFlight and Play closed testing, physical-device testing, the Google Play closed-testing requirement for new personal developer accounts, and store review add calendar time beyond the build estimate.</p></div></div>
+          <div class="milestone"><div class="week">v1.1</div><div><h4>Reasons to return · about 3–4 weeks</h4><p>Routines, gentle progression, practice calendar, daily reminder, Health session writing, and fuller voice guidance.</p></div></div>
         </div>
-        <p class="small" style="margin-top:12px">This is a planning estimate, not a fixed delivery promise. Native health edge cases and store review feedback are the largest schedule risks.</p>
+        <p class="small" style="margin-top:12px">This is a planning estimate, not a fixed delivery promise. The largest calendar risks are store review, the Play closed-testing requirement, physical-device testing of links, quick actions, and audio, and pronunciation approval.</p>
         <h3>Team</h3>
-        <div class="two-col"><div class="card"><h4>Minimum build team</h4><p class="small">1 cross-platform mobile engineer, product owner, and a designer/QA partner available part-time.</p></div><div class="card"><h4>Helpful review</h4><p class="small">Privacy/legal review for health wording and a qualified pranayama instructor to review cue language and safety—not to create medical claims.</p></div></div>
+        <div class="two-col"><div class="card"><h4>Minimum build team</h4><p class="small">One full-time cross-platform mobile engineer; a product owner who drafts content with Claude and checks sources; a part-time designer/QA partner.</p></div><div class="card"><h4>Required review</h4><p class="small">A listener who knows Sanskrit or Hindi approves every clip. Privacy review covers share links and store disclosures. A named instructor review is required only before a vigorous or retention-led technique ships.</p></div></div>
       </section>
 
       <section id="launch">
-        <div class="section-head"><div class="section-no">10</div><div><h2>Launch checklist</h2><p>Definition of done for the public MVP.</p></div></div>
+        <div class="section-head"><div class="section-no">11</div><div><h2>Launch checklist</h2><p>Definition of done for the v1.0 public release.</p></div></div>
         <div class="two-col">
           <div>
-            <h3>Product</h3><ul class="criteria"><li>All must-have scope passes acceptance tests.</li><li>The tones-and-haptics build completes closed-beta testing before voice scripts are finalized.</li><li>Recorded voice and wearable insights remain outside the public MVP; store copy reflects the released capabilities.</li><li>Onboarding and first session tested with new users.</li><li>Empty, loading, denied, unavailable, and error states have final copy.</li><li>No unfinished controls, sample history, or dead links.</li></ul>
-            <h3>Engineering</h3><ul class="criteria"><li>Production signing, CI builds, crash reporting, and versioning configured.</li><li>Tone, haptic, and visual-only guidance paths stay synchronized and work offline.</li><li>If included, session writes pass physical iOS and Android checks for supported, declined, unavailable, failed, and repeated-write cases. Wearable reads are not a launch gate.</li><li>Offline and lifecycle tests pass.</li><li>Dependency and permission audit completed.</li></ul>
+            <h3>Product</h3><ul class="criteria"><li>All v1.0 scope passes acceptance tests.</li><li>Content governance is complete: each of the eight techniques has sourced content, “Take care,” “What research says,” and “Based on”; defaults are gentle; no “Reviewed by” without a record.</li><li>Every voice clip has listener pronunciation approval; About discloses AI-generated voice.</li><li>First use and first practice tested with new practitioners and beginners.</li><li>Empty, loading, invalid-link, limit-reached, denied, and error states have final copy.</li><li>No unfinished controls, sample history, dead links, or v1.1 routes in production.</li></ul>
+            <h3>Engineering</h3><ul class="criteria"><li>Production signing, CI builds, crash reporting, and versioning configured.</li><li>Voice, tone, haptic, and visual guidance stay synchronized and work offline.</li><li>The voice licence is recorded and covers bundled distribution.</li><li><code>apple-app-site-association</code> and <code>assetlinks.json</code> are hosted on samabreath.app; Universal Links and App Links pass on physical devices; Play Console deep-link verification passes.</li><li>Quick actions pass on both platforms. Link validation and fuzz suites pass; the web fallback page is live with no trackers.</li><li>Offline, lifecycle, dependency, and permission audits completed.</li></ul>
           </div>
           <div>
-            <h3>Store readiness</h3><ul class="criteria"><li>App name, subtitle, descriptions, icon, screenshots, and support URL prepared.</li><li>Privacy policy URL and contact channel live.</li><li>Apple privacy labels and Google Play Data Safety answers match the app.</li><li>Age rating, wellness disclaimer, and review notes complete.</li></ul>
-            <h3>Go / no-go</h3><ul class="criteria"><li>No release blocker from the quality section remains.</li><li>Closed beta has at least 7 days of stable usage.</li><li>Health-denied users can complete every core flow.</li><li>Rollback and hotfix owner is named.</li></ul>
+            <h3>Store readiness</h3><ul class="criteria"><li>App name, subtitle, descriptions, icon, screenshots, and support URL prepared.</li><li>Store copy and keywords reflect the shipped techniques by name and nothing unshipped.</li><li>Name and cultural-language clearance is complete, including the brand name’s pronunciation guidance.</li><li>Privacy policy URL and contact channel live; the policy covers share links and web-page logging.</li><li>Apple privacy labels and Google Play Data Safety answers match the app.</li><li>Age rating, wellness disclaimer, and review notes (links and quick actions) complete.</li><li>The Google Play closed-testing requirement for the new personal developer account is met.</li></ul>
+            <h3>Go / no-go</h3><ul class="criteria"><li>No release blocker from the quality section remains.</li><li>Closed beta has at least 7 days of stable usage.</li><li>Users with no network and every permission denied can complete every core flow.</li><li>Rollback and hotfix owner is named.</li></ul>
           </div>
         </div>
       </section>
 
       <section id="decisions">
-        <div class="section-head"><div class="section-no">11</div><div><h2>Decisions to lock before design</h2><p>Key choices that prevent avoidable rework. Recommended defaults and locked decisions are shown.</p></div></div>
-        <div class="decision"><div><b>Brand and product name</b><p>Use Sama in the app and Sama Breath in stores, with “Your breath. Your rhythm.” Name clearance remains required before public release.</p></div><span class="choice">Design direction</span></div>
-        <div class="decision"><div><b>Supported OS versions</b><p>Set from the chosen health-library requirements and intended device reach.</p></div><span class="choice">Validate libraries</span></div>
-        <div class="decision"><div><b>Background guidance</b><p>For MVP, pause when interrupted rather than promising unreliable background timing.</p></div><span class="choice">Foreground-first</span></div>
-        <div class="decision"><div><b>Guidance rollout</b><p>Ship the public MVP with non-verbal tones and haptics. Use real usage findings to finalize concise recorded prompts as a post-MVP enhancement.</p></div><span class="choice">Lean MVP</span></div>
-        <div class="decision"><div><b>Wearable integration boundary</b><p>MVP uses optional session writes only. Later reads use Apple HealthKit or Health Connect with their own consent and availability design; no direct vendor SDKs.</p></div><span class="choice">Reads post-MVP</span></div>
-        <div class="decision"><div><b>Analytics</b><p>Either launch with a minimal privacy-preserving event set or no analytics. Do not add an ad-tech SDK.</p></div><span class="choice">Minimal or none</span></div>
-        <div class="decision"><div><b>Reminder</b><p>Defer notification permissions and scheduling until after the core public release.</p></div><span class="choice">Post-MVP</span></div>
-        <div class="footer-note"><strong>Recommended build brief</strong>Launch a free, offline-first four-phase breathing app with a ready-to-start default, progressively disclosed 1–20 second phase controls, reliable tones and haptics, safe interruption handling, accessibility, and local history. Add idempotent Apple Health and Health Connect session writing only if it does not delay release. Recorded voice, wearable reads, biometric comparisons, trend charts, streaks, reminders, and richer progression are post-MVP.</div>
+        <div class="section-head"><div class="section-no">12</div><div><h2>Decisions</h2><p>Locked choices and the few that still need validation.</p></div></div>
+        <div class="decision"><div><b>Positioning</b><p>Practitioner-first; the curious beginner follows techniques with gentle defaults; teachers distribute through share links.</p></div><span class="choice">Locked · v3</span></div>
+        <div class="decision"><div><b>Brand and product name</b><p>Sama in the app and Sama Breath in stores. Keep “Your breath. Your rhythm.”; the descriptor becomes “Pranayama, guided at your pace.” Name and cultural-language clearance remain required before public release, including pronunciation guidance: v2’s “SAH-mah” is anglicized, and सम (sama, “even”) is closer to “SUH-muh.”</p></div><span class="choice">Locked · clearance open</span></div>
+        <div class="decision"><div><b>Content governance</b><p>Gentle techniques ship with sourced content; vigorous or retention-led techniques need a named instructor review. “Reviewed by” only when real.</p></div><span class="choice">Locked</span></div>
+        <div class="decision"><div><b>Voice</b><p>AI-generated once under a commercial licence, bundled, one voice, listener-approved pronunciation, disclosed in About.</p></div><span class="choice">Bundled AI voice</span></div>
+        <div class="decision"><div><b>Names and diacritics</b><p>Common romanization, pronunciation respelling, and a clip. Full IAST waits for a covering font.</p></div><span class="choice">Brand decision later</span></div>
+        <div class="decision"><div><b>Share-link domain</b><p>Links use samabreath.app/r/… on a static host. Confirm domain ownership and hosting before CP2b.</p></div><span class="choice">Confirm domain</span></div>
+        <div class="decision"><div><b>Quick-actions library</b><p>Verify <code>expo-quick-actions</code> (or an alternative) against Expo SDK 57 before implementation.</p></div><span class="choice">Verify</span></div>
+        <div class="decision"><div><b>Supported OS versions</b><p>Set from Expo SDK 57, the quick-actions library, and the v1.1 Health libraries, plus intended device reach.</p></div><span class="choice">Validate libraries</span></div>
+        <div class="decision"><div><b>Background guidance</b><p>Pause when interrupted rather than promising unreliable background timing.</p></div><span class="choice">Foreground-first</span></div>
+        <div class="decision"><div><b>Health boundary</b><p>Mindful-minute writing only, in v1.1. No reads, comparisons, or vendor SDKs.</p></div><span class="choice">Writes only · v1.1</span></div>
+        <div class="decision"><div><b>Analytics</b><p>Either a minimal privacy-preserving event set or none. No ad-tech SDK.</p></div><span class="choice">Minimal or none</span></div>
+        <div class="decision"><div><b>Revenue</b><p>Intentionally out of scope for now. No ads, subscription, or purchase flow.</p></div><span class="choice">Free</span></div>
+        <div class="footer-note"><strong>Recommended build brief</strong>Launch a free, offline pranayama app for practitioners: a trustworthy step-sequence timer, eight gentle and sourced techniques, bundled AI voice cues with tone fallback, My rhythms, safe share links with a static web fallback, app-icon quick actions, one-screen first use, four-tab navigation, accessibility, and local history. Follow with routines, gentle progression, a streak-free calendar, an optional reminder, Health writing, and fuller voice in v1.1. Do not build wearable reads, trend charts, accounts, large content libraries, or streaks.</div>
       </section>
     </div>
   </main>

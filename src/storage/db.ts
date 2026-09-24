@@ -5,7 +5,7 @@ let db: SQLite.SQLiteDatabase | null = null;
 /** Lazily opens the local database and runs migrations. Safe to call often. */
 export function getDb(): SQLite.SQLiteDatabase {
   if (db) return db;
-  db = SQLite.openDatabaseSync('sama.db');
+  db = SQLite.openDatabaseSync('viram.db');
   db.execSync(`
     CREATE TABLE IF NOT EXISTS sessions (
       id TEXT PRIMARY KEY NOT NULL,

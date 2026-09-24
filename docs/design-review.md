@@ -10,7 +10,8 @@ The product is now **Viram** (विराम, “a pause, a place to rest,” s
 
 - Store name “Viram: Pranayama & Breath”; subtitle “Steady breath. Steady mind.”; bundle ID and package `app.viram`; URL scheme `viram`; share links at `viram.app/r/…`.
 - Unchanged: the two-breaths mark, the lead line, Pine & Paper, and all product decisions. Earlier sections below were written under the former name; the current sections have been updated.
-- **Before launch:** register viram.app (the owner's action), run a trademark clearance in the US, India, and EU, and re-run the store checks. The existing samabreath.app can redirect or lapse. The local database keeps its internal file name.
+- **Before launch:** register viram.app (the owner's action), run a trademark clearance in the US, India, and EU, and re-run the store checks. The existing samabreath.app can redirect or lapse.
+- Code and repo use Viram too (September 24): package `viram`, database file `viram.db` (the prototype never shipped, so no data migrates), the `viram-implementation-standards` agent skill, and the GitHub repo and local folder `viram`.
 
 ### Why v3
 

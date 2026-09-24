@@ -1,0 +1,324 @@
+/**
+ * Sources cited under “Based on” and listed in Settings → About. Every study
+ * was checked against its PubMed record (docs/content/technique-research.md#source-check).
+ */
+export interface Source {
+  kind: 'text' | 'book' | 'guide' | 'study';
+  authors: string;
+  year: string;
+  title: string;
+  /** Translator, publisher, site, or journal with volume and pages. */
+  venue?: string;
+  doi?: string;
+  pmid?: string;
+  url?: string;
+}
+
+export const SOURCES = {
+  // Classical texts in public-domain translations.
+  hyp: {
+    kind: 'text',
+    authors: 'Svatmarama',
+    year: 'c. 15th century',
+    title: 'Hatha Yoga Pradipika',
+    venue: 'Translated by Pancham Sinh, 1914',
+    url: 'https://archive.org/details/dli.csl.7087',
+  },
+  gheranda: {
+    kind: 'text',
+    authors: 'Gheranda (attributed)',
+    year: 'c. 17th century',
+    title: 'Gheranda Samhita',
+    venue: 'Translated by Srisa Chandra Vasu, 1914',
+    url: 'https://archive.org/details/Gheranda_Samhita',
+  },
+  'yoga-sutras': {
+    kind: 'text',
+    authors: 'Patanjali',
+    year: 'c. 4th century',
+    title: 'Yoga Sutras, with the commentary of Vyasa',
+    venue: 'Translated by James Haughton Woods, 1914',
+    url: 'https://archive.org/details/yogasystemofpata00wooduoft',
+  },
+
+  // Teaching books.
+  'iyengar-pranayama': {
+    kind: 'book',
+    authors: 'B.K.S. Iyengar',
+    year: '1981',
+    title: 'Light on Pranayama',
+    venue: 'George Allen & Unwin',
+  },
+  'satyananda-apmb': {
+    kind: 'book',
+    authors: 'Swami Satyananda Saraswati',
+    year: '2008',
+    title: 'Asana Pranayama Mudra Bandha',
+    venue: 'Yoga Publications Trust, 4th revised edition',
+  },
+  desikachar: {
+    kind: 'book',
+    authors: 'T.K.V. Desikachar',
+    year: '1995',
+    title: 'The Heart of Yoga',
+    venue: 'Inner Traditions',
+  },
+  elliott: {
+    kind: 'book',
+    authors: 'Stephen Elliott',
+    year: '2005',
+    title: 'The New Science of Breath',
+  },
+  'brown-gerbarg': {
+    kind: 'book',
+    authors: 'Richard P. Brown and Patricia L. Gerbarg',
+    year: '2012',
+    title: 'The Healing Power of the Breath',
+    venue: 'Shambhala',
+  },
+
+  // Public guides.
+  'ayush-cyp': {
+    kind: 'guide',
+    authors: 'Ministry of AYUSH, Government of India',
+    year: '2019',
+    title: 'Common Yoga Protocol',
+    venue: '4th revised edition',
+    url: 'https://www.mea.gov.in/images/pdf/common-yoga-protocol-english.pdf',
+  },
+  'divine-time': {
+    kind: 'guide',
+    authors: 'Mark Divine',
+    year: '2016',
+    title: 'The breathing technique a Navy SEAL uses to stay calm and focused',
+    venue: 'TIME',
+    url: 'https://time.com/4316151/breathing-technique-navy-seal-calm-focused/',
+  },
+  'weil-478': {
+    kind: 'guide',
+    authors: 'Andrew Weil Center for Integrative Medicine, University of Arizona',
+    year: 'n.d.',
+    title: '4-7-8 Breath',
+    url: 'https://awcim.arizona.edu/content/CLH00048.html',
+  },
+  'bhf-breathing': {
+    kind: 'guide',
+    authors: 'British Heart Foundation',
+    year: '2026',
+    title: '3 breathing exercises to relieve stress',
+    url: 'https://www.bhf.org.uk/informationsupport/heart-matters-magazine/wellbeing/breathing-exercises',
+  },
+  'nhs-breathing': {
+    kind: 'guide',
+    authors: 'NHS',
+    year: '2026',
+    title: 'Breathing exercises for stress',
+    url: 'https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/',
+  },
+
+  // Published studies.
+  'balban-2023': {
+    kind: 'study',
+    authors: 'Balban MY et al.',
+    year: '2023',
+    title: 'Brief structured respiration practices enhance mood and reduce physiological arousal',
+    venue: 'Cell Reports Medicine 4(1):100895',
+    doi: '10.1016/j.xcrm.2022.100895',
+    pmid: '36630953',
+  },
+  'mcallister-2026': {
+    kind: 'study',
+    authors: 'McAllister MJ et al.',
+    year: '2026',
+    title:
+      'Box breathing and prolonged exhalation reduces markers of physiological stress reactivity in response to a virtual Trier Social Stress Test',
+    venue: 'Comprehensive Psychoneuroendocrinology 27:100360',
+    doi: '10.1016/j.cpnec.2026.100360',
+    pmid: '42388906',
+  },
+  'van-diest-2014': {
+    kind: 'study',
+    authors: 'Van Diest I et al.',
+    year: '2014',
+    title: 'Inhalation/exhalation ratio modulates the effect of slow breathing on heart rate variability and relaxation',
+    venue: 'Applied Psychophysiology and Biofeedback 39(3–4):171–180',
+    doi: '10.1007/s10484-014-9253-x',
+    pmid: '25156003',
+  },
+  'magnon-2021': {
+    kind: 'study',
+    authors: 'Magnon V et al.',
+    year: '2021',
+    title: 'Benefits from one session of deep and slow breathing on vagal tone and anxiety in young and older adults',
+    venue: 'Scientific Reports 11:19267',
+    doi: '10.1038/s41598-021-98736-9',
+    pmid: '34588511',
+  },
+  'meehan-2024': {
+    kind: 'study',
+    authors: 'Meehan ZM, Shaffer F',
+    year: '2024',
+    title: 'Do longer exhalations increase HRV during slow-paced breathing?',
+    venue: 'Applied Psychophysiology and Biofeedback 49(3):407–417',
+    doi: '10.1007/s10484-024-09637-2',
+    pmid: '38507210',
+  },
+  'laborde-2022': {
+    kind: 'study',
+    authors: 'Laborde S et al.',
+    year: '2022',
+    title: 'Effects of voluntary slow breathing on heart rate and heart rate variability: a systematic review and a meta-analysis',
+    venue: 'Neuroscience and Biobehavioral Reviews 138:104711',
+    doi: '10.1016/j.neubiorev.2022.104711',
+    pmid: '35623448',
+  },
+  'nam-2024': {
+    kind: 'study',
+    authors: 'Nam TG et al.',
+    year: '2024',
+    title: 'Effectiveness of alternative nostril breathing on blood pressure: a systematic review and meta-analysis of randomized controlled trials',
+    venue: 'Complementary Medicine Research 31(5):449–460',
+    doi: '10.1159/000539707',
+    pmid: '39008954',
+  },
+  'ghiya-lee-2012': {
+    kind: 'study',
+    authors: 'Ghiya S, Lee CM',
+    year: '2012',
+    title: 'Influence of alternate nostril breathing on heart rate variability in non-practitioners of yogic breathing',
+    venue: 'International Journal of Yoga 5(1):66–69',
+    doi: '10.4103/0973-6131.91717',
+    pmid: '22346069',
+  },
+  'kamath-2017': {
+    kind: 'study',
+    authors: 'Kamath A et al.',
+    year: '2017',
+    title:
+      'Effect of alternate nostril breathing exercise on experimentally induced anxiety in healthy volunteers using the simulated public speaking model: a randomized controlled pilot study',
+    venue: 'BioMed Research International 2017:2450670',
+    doi: '10.1155/2017/2450670',
+    pmid: '29159176',
+  },
+  'weitzberg-2002': {
+    kind: 'study',
+    authors: 'Weitzberg E, Lundberg JO',
+    year: '2002',
+    title: 'Humming greatly increases nasal nitric oxide',
+    venue: 'American Journal of Respiratory and Critical Care Medicine 166(2):144–145',
+    doi: '10.1164/rccm.200202-138BC',
+    pmid: '12119224',
+  },
+  'ghati-2021': {
+    kind: 'study',
+    authors: 'Ghati N et al.',
+    year: '2021',
+    title:
+      'A randomized trial of the immediate effect of bee-humming breathing exercise on blood pressure and heart rate variability in patients with essential hypertension',
+    venue: 'Explore 17(4):312–319',
+    doi: '10.1016/j.explore.2020.03.009',
+    pmid: '32620379',
+  },
+  'trivedi-2023': {
+    kind: 'study',
+    authors: 'Trivedi GY et al.',
+    year: '2023',
+    title: 'Effect of various lengths of respiration on heart rate variability during simple Bhramari (humming)',
+    venue: 'International Journal of Yoga 16(2):123–131',
+    doi: '10.4103/ijoy.ijoy_113_23',
+    pmid: '38204770',
+  },
+  'kuppusamy-2018': {
+    kind: 'study',
+    authors: 'Kuppusamy M et al.',
+    year: '2018',
+    title: 'Effects of Bhramari Pranayama on health: a systematic review',
+    venue: 'Journal of Traditional and Complementary Medicine 8(1):11–16',
+    doi: '10.1016/j.jtcme.2017.02.003',
+    pmid: '29321984',
+  },
+  'mason-2013': {
+    kind: 'study',
+    authors: 'Mason H et al.',
+    year: '2013',
+    title: 'Cardiovascular and respiratory effect of yogic slow breathing in the yoga beginner: what is the best approach?',
+    venue: 'Evidence-Based Complementary and Alternative Medicine 2013:743504',
+    doi: '10.1155/2013/743504',
+    pmid: '23710236',
+  },
+  'telles-2020': {
+    kind: 'study',
+    authors: 'Telles S et al.',
+    year: '2020',
+    title: 'Body temperature and energy expenditure during and after yoga breathing practices traditionally described as cooling',
+    venue: 'Medical Science Monitor Basic Research 26:e920107',
+    doi: '10.12659/MSMBR.920107',
+    pmid: '31907342',
+  },
+  'shetty-2017': {
+    kind: 'study',
+    authors: 'Shetty P et al.',
+    year: '2017',
+    title: 'Effects of Sheetali and Sheetkari pranayamas on blood pressure and autonomic function in hypertensive patients',
+    venue: 'Integrative Medicine (Encinitas) 16(5):32–37',
+    pmid: '30936803',
+  },
+  'sharpe-2021': {
+    kind: 'study',
+    authors: 'Sharpe E et al.',
+    year: '2021',
+    title: 'Investigating components of pranayama for effects on heart rate variability',
+    venue: 'Journal of Psychosomatic Research 148:110569',
+    doi: '10.1016/j.jpsychores.2021.110569',
+    pmid: '34271528',
+  },
+  'lehrer-gevirtz-2014': {
+    kind: 'study',
+    authors: 'Lehrer PM, Gevirtz R',
+    year: '2014',
+    title: 'Heart rate variability biofeedback: how and why does it work?',
+    venue: 'Frontiers in Psychology 5:756',
+    doi: '10.3389/fpsyg.2014.00756',
+    pmid: '25101026',
+  },
+  'fincham-2023': {
+    kind: 'study',
+    authors: 'Fincham GW, Strauss C, Cavanagh K',
+    year: '2023',
+    title: 'Effect of coherent breathing on mental health and wellbeing: a randomised placebo-controlled trial',
+    venue: 'Scientific Reports 13:22141',
+    doi: '10.1038/s41598-023-49279-8',
+    pmid: '38092805',
+  },
+  'vierra-2022': {
+    kind: 'study',
+    authors: 'Vierra J et al.',
+    year: '2022',
+    title:
+      'Effects of sleep deprivation and 4-7-8 breathing control on heart rate variability, blood pressure, blood glucose, and endothelial function in healthy young adults',
+    venue: 'Physiological Reports 10(13):e15389',
+    doi: '10.14814/phy2.15389',
+    pmid: '35822447',
+  },
+  'aktas-2023': {
+    kind: 'study',
+    authors: 'Aktaş GK, İlgin VE',
+    year: '2023',
+    title:
+      'The effect of deep breathing exercise and 4-7-8 breathing techniques applied to patients after bariatric surgery on anxiety and quality of life',
+    venue: 'Obesity Surgery 33(3):920–929',
+    doi: '10.1007/s11695-022-06405-1',
+    pmid: '36480101',
+  },
+  'marchant-2025': {
+    kind: 'study',
+    authors: 'Marchant J et al.',
+    year: '2025',
+    title: 'Comparing the effects of square, 4-7-8, and 6 breaths-per-minute breathing conditions on heart rate variability, CO2 levels, and mood',
+    venue: 'Applied Psychophysiology and Biofeedback 50(2):261–276',
+    doi: '10.1007/s10484-025-09688-z',
+    pmid: '39864026',
+  },
+} as const satisfies Record<string, Source>;
+
+export type SourceId = keyof typeof SOURCES;

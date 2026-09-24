@@ -1,0 +1,70 @@
+/**
+ * Technique content contract (PRD section 05). Library data lives in
+ * library.ts; scripts/check-content.mjs enforces the rules types can't express.
+ */
+import type { Phase } from '../engine/types';
+import type { SourceId } from './sources';
+
+export interface Step {
+  kind: Phase;
+  /** Inhale and exhale 1–20 s; hold and rest 0–20 s (0 = Off). Halves only when the increment is 0.5. */
+  seconds: number;
+  side?: 'left' | 'right';
+  /** Omitted means through the nose. The route is spoken on the first round only. */
+  route?: 'mouth';
+  /** Shown and spoken instead of the kind word. */
+  cue?: 'hum';
+  /** One line under the step name during practice. */
+  caption: string;
+}
+
+export type Target = { minutes: 1 | 3 | 5 | 10 } | { rounds: number };
+
+export interface Review {
+  reviewer: string;
+  credential: string;
+  /** ISO date the review was recorded. */
+  date: string;
+  /** Must equal the technique's contentVersion or the line is not shown. */
+  contentVersion: number;
+}
+
+export interface Technique {
+  /** Stable; share links and history refer to it. */
+  id: string;
+  contentVersion: number;
+  /** v1.x ships gentle techniques only. */
+  riskTier: 'gentle';
+  shareable: boolean;
+  family: 'classical' | 'modern';
+  name: string;
+  subtitle: string;
+  /** Present for Sanskrit names. Common romanization only; the fonts lack IAST underdots. */
+  pronunciation?: {
+    devanagari: string;
+    respelling: string;
+    clip: string;
+  };
+  practice: {
+    steps: Step[];
+    increment: 1 | 0.5;
+    target: Target;
+    posture: 'seated' | 'seated-or-lying';
+  };
+  guidance: {
+    /** Opening paragraph of the guide, below the rhythm card and Take care. */
+    lead: string;
+    /** Above the fold, before Begin. */
+    takeCareShort: string;
+    howTo: string[];
+    /** Headed “Traditionally” (classical) or “Where it comes from” (modern). */
+    context: string;
+    takeCare: string[];
+    research: string;
+    basedOn: SourceId[];
+    /** Spoken before settling; each line is also a caption. */
+    introduction: { clip: string; lines: string[] };
+  };
+  /** “Reviewed by” renders only from this field. */
+  review: Review | null;
+}

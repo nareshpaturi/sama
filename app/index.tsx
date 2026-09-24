@@ -48,7 +48,7 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.greeting}>{greeting()}</Text>
-        <Text style={styles.brand}>Sama Breath</Text>
+        <Text style={styles.brand}>Viram</Text>
         <Text style={styles.tagline}>Steady breath. Steady mind.</Text>
 
         <View style={styles.statsRow}>

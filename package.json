@@ -1,5 +1,5 @@
 {
-  "name": "sama",
+  "name": "viram",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
@@ -40,6 +40,8 @@
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "check:theme": "node scripts/check-theme-contrast.mjs",
+    "check:content": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-content.mjs",
+    "content:preview": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/render-content-preview.mjs",
     "postinstall": "patch-package",
     "brand:assets": "node scripts/render-brand-assets.mjs"
   },

@@ -1,4 +1,4 @@
-# Sama Breath launch implementation plan
+# Viram launch implementation plan
 
 Status: proposed · v3 scope (2026-09-22) with the user-needs update (2026-09-23); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
 Target: public iOS and Android v1.0 (the wedge), then the v1.1 track (reasons to return)  
@@ -16,7 +16,7 @@ What changed:
 - **v1.0 adds** flexible rhythms (inhale and exhale 1–20 s; holds 0–20 s, where 0 is skipped and shown “Off”; library half-second steps and left/right side labels), the eight-technique practice library, bundled AI voice cues, My rhythms (up to 20), share links with a static web fallback, app-icon quick actions, one-screen first use, and four-tab navigation: Breathe · Practices · History · Settings.
 - **Moved to v1.1:** Apple Health / Health Connect writing (CP5). New in v1.1: curated programs (added 2026-09-23), routines, gentle progression, practice calendar (no streaks), daily reminder, fuller voice guidance. Teacher programs are planned for v1.2, pending teacher interviews.
 - **Not building:** wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, streaks, scores, badges. The Progress/Insights route is removed, not deferred.
-- **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
+- **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at its 4-round default = 1:16.
 - **Checkpoints.** CP0 adopts the step bounds; CP2 becomes one-screen first use, four tabs, and the cue chip; new CP2b covers the library, voice, My rhythms, sharing, and quick actions; CP3 and CP4 extend to the new surfaces; CP5 moves to the [v1.1 track](#v11-track--reasons-to-return); CP6 and CP7 add the voice licence, link-verification files, technique-name store copy, and the Play closed-testing requirement.
 
 ## User-needs update · 2026-09-23
@@ -50,7 +50,7 @@ The public v1.0 (the wedge) includes:
 - A minutes or rounds target (1–108 rounds; 11, 21, 27 shortcuts).
 - Data safety: device backup, tested forward-only migrations, and export and import of My rhythms, history, and preferences.
 - The free-core promise in About and on the store page; no ads, account, or rating prompts.
-- My rhythms (up to 20), share links (`https://samabreath.app/r/…`) with an in-app preview and a static web fallback, and app-icon quick actions.
+- My rhythms (up to 20), share links (`https://viram.app/r/…`) with an in-app preview and a static web fallback, and app-icon quick actions.
 - One-screen first use and four-tab navigation: Breathe · Practices · History · Settings.
 - Store disclosures, crash monitoring, and production builds.
 
@@ -158,7 +158,7 @@ Target: Week 1
 - [ ] Apply the v3 step contract in code and tests: inhale and exhale `1–20 s`; holds `0–20 s`, where 0 skips the step and displays “Off”; the custom builder has four steps in whole seconds; library techniques may use half-second steps, more than four steps, and left/right side labels.
 - Withdrawn in v3 (not a checkpoint item): wearable comparison windows. Wearable reads and comparisons are not being built.
 - [ ] Remove or disable HealthKit/Health Connect modules, entitlements, and purpose strings in the v1.0 release configuration; they return with the v1.1 Health track.
-- [ ] Confirm ownership and static hosting for samabreath.app (share links, link-verification files, web fallback, privacy policy).
+- [ ] Confirm ownership and static hosting for viram.app (share links, link-verification files, web fallback, privacy policy).
 - [ ] Verify the quick-actions library (candidate: `expo-quick-actions`) against the installed Expo SDK 57, or choose an alternative, and record the decision.
 - [ ] Define supported iOS and Android versions. Set Android min SDK to at least 26 and set an explicit iOS deployment target compatible with the selected Expo/React Native/Hermes versions; record both decisions in the PRD.
 - [ ] Provision and select a supported Xcode version locally and in CI, accept required licenses, install the selected iOS Simulator runtimes, and record the toolchain versions.
@@ -286,15 +286,16 @@ Target: Weeks 4–7 (flexible engine and library about 1.5 weeks, voice about 0.
 Engine and library
 
 - [ ] Generalize the engine to an ordered step list: kind (inhale, hold, exhale, rest), seconds, optional side (left or right). Skip 0-second steps without cues; support half-second steps; derive round length, planned rounds, and guided breaths per minute (inhale steps per minute).
-- [ ] Define the technique content schema (PRD section 05) and bundle the eight techniques as versioned data with a CI schema test.
-- [ ] Ship the library defaults from the PRD table (Sama Vritti 4 · 4 · 4 · 4, Visama Vritti in 4 · out 6, Nadi Shodhana in 4 · out 6 each side, Bhramari in 4 · hum 8, Ujjayi 5 · 5, Sheetali in 4 · out 6 at 3 min, coherent 5.5 · 5.5, 4-7-8 at 1 min).
+- [x] Define the technique content schema (PRD section 05) and bundle the eight techniques as versioned data: `src/content/`, content v1, drafted September 23, 2026 ([content research](content/technique-research.md)).
+- [ ] Run `npm run check:content` in CI alongside the typecheck.
+- [ ] Ship the library defaults from the PRD table (Sama Vritti 4 · 4 · 4 · 4, Visama Vritti in 4 · out 6, Nadi Shodhana in 4 · out 6 each side, Bhramari in 4 · hum 8, Ujjayi 5 · 5, Sheetali in 4 · out 6 at 3 min, coherent 5.5 · 5.5, 4-7-8 at 4 rounds).
 - [ ] Implement Practices (library, then My rhythms) and technique detail: names, pronunciation respelling and clip, how-to steps, traditional context, “Take care,” “What research says,” “Based on,” and “Reviewed by” only from a recorded review.
 - [ ] Extend Adjust rhythm to library techniques: step structure and sides preserved; half-second increments only where the technique defines them.
 - [ ] Show the guide and a progress ring instead of a countdown numeral for half-second steps; show Left / Right side cues and Hum for Bhramari.
 
 Voice
 
-- [ ] Bundle AI-generated clips—cue words (Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch), optional technique introductions, and pronunciation clips—with a build-time manifest of measured clip lengths. No runtime API, key, or network call.
+- [ ] Bundle AI-generated clips—cue words (Inhale, Hold, Exhale, Rest, Hum), side phrases, route phrases, optional technique introductions, and pronunciation clips (scripts in `src/content/voice.ts` and `library.ts`; lexicon in `docs/content/viram-lexicon.pls`)—with a build-time manifest of measured clip lengths. No runtime API, key, or network call.
 - [ ] Implement the cue scheduler: Voice replaces tones; a step shorter than its cue plus 0.2 s plays its tone; a missing clip falls back to its tone; haptics stay independent; audio follows the CP1 locked decision.
 - [ ] Add the voice-introductions setting and the Settings → About disclosure that voice guidance is AI-generated.
 
@@ -304,11 +305,11 @@ My rhythms
 
 Share links
 
-- [ ] Encode and decode `https://samabreath.app/r/…` carrying only a display name, step list (kind, seconds, optional side), target (1, 3, 5, or 10 minutes, or 1–108 rounds), and optional library technique ID.
+- [ ] Encode and decode `https://viram.app/r/…` carrying only a display name, step list (kind, seconds, optional side), target (1, 3, 5, or 10 minutes, or 1–108 rounds), and optional library technique ID.
 - [ ] Validate every field and reject the whole link on any failure; without a technique ID the steps must fit the custom builder, with one they must match the installed technique. Unknown technique IDs are invalid; vigorous techniques are not shareable.
 - [ ] Never render link content as HTML; safety and instruction text comes only from app content.
 - [ ] Implement the share preview, the incoming preview (Save, Begin), and the invalid-link state; first use comes first when incomplete.
-- [ ] Configure iOS Associated Domains and Android App Links; host `apple-app-site-association` and `assetlinks.json` on samabreath.app.
+- [ ] Configure iOS Associated Domains and Android App Links; host `apple-app-site-association` and `assetlinks.json` on viram.app.
 - [ ] Publish the static web fallback page: rhythm as plain text, App Store and Google Play links with fixed campaign identifiers, no trackers or cookies.
 
 Quick actions
@@ -319,7 +320,7 @@ Quick actions
 
 - [ ] Step-engine tests pass for 0-second holds (skipped, silent, shown “Off”), side labels in order, half-second steps, and planned rounds for every library default (for example 19 rounds / 5:04 box, 15 rounds / 5:00 Nadi Shodhana, 28 rounds / 5:08 coherent, 4 rounds / 1:16 4-7-8).
 - [ ] All eight techniques pass the schema test with sourced content (“Based on,” “Take care,” “What research says”); holds are at most 20 s; no “Reviewed by” appears without a review record.
-- [ ] Voice clips are bundled; every cue word measures at most 0.8 s; tone fallback is verified for short steps; a listener who knows Sanskrit or Hindi has approved every clip, with the approval recorded.
+- [ ] Voice clips are bundled; every cue clip measures within its limit (words 0.8 s, side phrases 1.2 s, route phrases 1.6 s); tone fallback is verified for short steps; a listener who knows Sanskrit or Hindi has approved every clip, with the approval recorded.
 - [ ] My rhythms save, rename, delete, and limit tests pass; history snapshots survive rename and delete.
 - [ ] Share-link encode/decode, per-field validation, and fuzz tests pass (malformed, truncated, oversized, out-of-bounds, unknown ID, HTML or script in the name).
 - [ ] Universal Links (iOS) and App Links (Android) open the in-app preview on physical devices from cold and warm start; without the app, the web fallback page is live and shows the rhythm and store links.
@@ -377,7 +378,7 @@ Target: gate closes in Week 7; core records land with CP1, and new record fields
 - [ ] Ensure deletion removes local sessions without touching preferences or My rhythms.
 - [ ] Make migrations forward-only with tests from every released schema; a failed migration keeps the existing data and shows a recoverable error (FR-21).
 - [ ] Add Export my data (versioned JSON: My rhythms, history, preferences) through the share sheet, and Import from a file with the share-link validation rules, a summary, and duplicate-free merging.
-- [ ] Add the free-core promise and “Rate Sama” to About; add no in-app rating prompt (FR-22).
+- [ ] Add the free-core promise and “Rate Viram” to About; add no in-app rating prompt (FR-22).
 - [ ] Do not implement streaks, scores, or badges (not building); the calendar, reminder, and progression belong to the v1.1 track.
 
 ### Exit evidence
@@ -430,9 +431,9 @@ Target: after CP6
 - [ ] Publish the privacy policy and support contact. The policy explains share links (what a link contains, that anyone with it can read it) and that the web page keeps only aggregate host logs.
 - [ ] Reconcile Apple privacy labels, Google Play Data Safety answers, permission copy, SDK behavior, and the privacy policy.
 - [ ] Verify the archived iOS binary does not declare microphone, local-network discovery, HealthKit, or other unused capabilities; background audio is declared and justified by locked-screen guidance in the review notes.
-- [ ] Serve `apple-app-site-association` and `assetlinks.json` over HTTPS from samabreath.app with the production app IDs and the Play app-signing certificate; confirm Play Console deep-link verification passes.
+- [ ] Serve `apple-app-site-association` and `assetlinks.json` over HTTPS from viram.app with the production app IDs and the Play app-signing certificate; confirm Play Console deep-link verification passes.
 - [ ] Prepare app name, subtitle, descriptions, wellness disclaimer, review notes, icon, and required screenshots. Store copy and keywords name the shipped techniques (for example Nadi Shodhana, Bhramari, Ujjayi, 4-7-8) and nothing unshipped, and state the free-core promise, no ads, no account, and locked-screen guidance.
-- [ ] Complete name and cultural-language clearance, including the brand name’s pronunciation guidance.
+- [ ] Complete trademark clearance for Viram (US, India, EU) and register viram.app before any link is shared.
 - [ ] Verify production signing, versioning, crash reporting, and symbol/mapping uploads.
 - [ ] Submit iOS and Android builds with review notes that explain share links, quick actions, background audio, and the `mediaPlayback` foreground service.
 - [ ] Prepare a rollback/hotfix owner, decision path, and tested patch build procedure.
@@ -585,7 +586,7 @@ Exit evidence
 - [ ] Add Dirgha, Udgeeth, Chandra Bhedana, and cyclic sighing as bundled content meeting the FR-09 standard (steps, Take care, research, sources), with draft rhythms confirmed by the research pass.
 - [ ] Add “Anulom Vilom” as a search name and guide alias for Nadi Shodhana.
 - [ ] Generate and approve the “Om” and “Top up” cue words and the four pronunciation clips through the voice gate.
-- [ ] Show and speak “through the mouth” once per practice for mouth steps.
+- [ ] Reuse the v1.0 route phrase “Out through the mouth” for cyclic sighing's exhale.
 
 Exit evidence
 
@@ -605,7 +606,7 @@ Each needs its own go decision after v1.1 metrics: **vigorous techniques** (Kapa
 4. Step-sequence engine extensions (0-second holds, sides, half seconds), bundled technique content and schema, Practices, and technique detail.
 5. `src/audio/`: voice clip manifest, cue scheduler, tone fallback, introductions, and the About disclosure.
 5b. Native audio timeline, locked-screen guidance, lock-screen controls, sound controls, and the rounds target (CP1b).
-6. My rhythms, link encode/decode and validation, share and incoming previews, Universal Links and App Links, and the static samabreath.app site.
+6. My rhythms, link encode/decode and validation, share and incoming previews, Universal Links and App Links, and the static viram.app site.
 7. App-icon quick actions.
 8. Theme and shared controls: accessibility, contrast, reduced motion, and interaction states across every new surface.
 9. SQLite schema, History, Summary, and Settings: correct records, snapshots, user control, backups, migrations, and export and import.

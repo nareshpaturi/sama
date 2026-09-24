@@ -1,0 +1,431 @@
+# Technique content research · v1.0
+
+Research date: September 23, 2026. Status: **drafted, content version 1 for all eight techniques.** Studies source-checked; book page references still to confirm against print copies; no instructor review recorded; voice clips not yet generated.
+
+This is the research record behind the v1.0 library: why each default is what it is, where each claim comes from, and what still needs a human check. The app copy itself lives in one place so it can't drift:
+
+| What | Where |
+|---|---|
+| App copy and practice data (single source) | [`src/content/library.ts`](../../src/content/library.ts), schema in [`types.ts`](../../src/content/types.ts) |
+| Sources shown under “Based on” and in About | [`src/content/sources.ts`](../../src/content/sources.ts) |
+| Voice cue scripts and the rule that picks each step's cue | [`src/content/voice.ts`](../../src/content/voice.ts) |
+| Readable preview for review (generated, don't edit) | [library-preview.html](library-preview.html) · `npm run content:preview` |
+| Content rules check (bounds, sources, claims, review records) | `npm run check:content` |
+| Pronunciation lexicon for voice generation | [viram-lexicon.pls](viram-lexicon.pls) |
+
+## Decisions
+
+| Technique | Default | Outcome | Why |
+|---|---|---|---|
+| **Sama Vritti** · box | 4 · 4 · 4 · 4 · 5 min | Confirmed | The standard box count in training and in every box-breathing study found. Iyengar adds holds gradually, so the guide teaches shortening a hold or setting it to Off. |
+| **Visama Vritti** · extended exhale | in 4 · out 6, holds Off · 5 min | Confirmed; **framing changed** | Iyengar's visama vrtti always includes long holds and needs a teacher. Viram teaches a gentle, hold-free form and says so. |
+| **Nadi Shodhana** · alternate nostril | in 4 · out 6, each side · 5 min | Confirmed | Sits between Satyananda's 1:1 and 1:2 stages. Starting on the left follows HYP, Satyananda, and the AYUSH protocol. Equal counts are offered for beginners. |
+| **Bhramari** · humming bee | in 4 · hum 8 · 5 min | Confirmed | Trivedi 2023 found 4 : 8 among the best humming lengths tested. Seated only (Satyananda). |
+| **Ujjayi** · ocean breath | in 5 · out 5 · 5 min | Confirmed | Exactly the pattern Mason 2013 tested. The throat sound stays light. |
+| **Sheetali** · cooling breath | in 4 · out 6 · 3 min | Confirmed; **claims changed** | “Cooling” is framed as tradition: the only temperature study found body temperature *rose*. |
+| **Coherent breathing** | 5.5 · 5.5 · 5 min | Confirmed; **name flagged** | Vaschillo's average resonance pace. “Coherent Breathing” is a registered trademark of COHERENCE LLC (open question 1). |
+| **4-7-8** | 4 · 7 · 8 · rest Off · **4 rounds** | **Target changed** from 1 min | Andrew Weil teaches four breaths to start. A “1 min” target actually ran 1:16. |
+
+Planned rounds and duration are unchanged for every technique (19 rounds / 5:04 box, 15 / 5:00 Nadi Shodhana, 28 / 5:08 coherent, 4 / 1:16 for 4-7-8).
+
+**Voice decisions**
+
+- **Side cues are recorded as whole phrases** (“Inhale left”, “Exhale right”, …), up to 1.2 s each, so they sound like one calm instruction instead of two stitched words. Standalone “Left”, “Right”, and “Switch” are dropped: “Switch” had no step to play on, and the side phrase already says where to breathe.
+- **Two route phrases join v1.0:** “In through the mouth” (Sheetali) and “Out through the mouth” (4-7-8), spoken on the first round in place of the step word. Later rounds use “Inhale” or “Exhale”. The screen shows the route on every round.
+- **Pronunciation uses alias rules**, which work on every ElevenLabs model; phoneme rules are limited to two models.
+
+## Method
+
+- **Classical texts** were read in public-domain translations: *Hatha Yoga Pradipika* (HYP; Pancham Sinh, 1914; standard four-chapter numbering, checked against the Sanskrit), *Gheranda Samhita* (GS; Srisa Chandra Vasu; numbering varies between editions, so cite “Vasu numbering”), and the *Yoga Sutras* with Vyasa's commentary (J.H. Woods, 1914).
+- **Teaching books:** B.K.S. Iyengar, *Light on Pranayama* (1981); Swami Satyananda Saraswati, *Asana Pranayama Mudra Bandha* (APMB, 4th revised edition, 2008); T.K.V. Desikachar, *The Heart of Yoga* (1995). These are under copyright: the app paraphrases and never quotes them, and page references below are approximate.
+- **Public guides:** Ministry of AYUSH *Common Yoga Protocol* (4th revised edition, 2019), the Andrew Weil Center for Integrative Medicine, NHS, and the British Heart Foundation.
+- **Studies:** every study cited in the app was checked against its PubMed record through the Europe PMC API on September 23, 2026 (authors, year, title, journal, DOI). All 22 matched, as did four uncited trials checked the same way. Other studies noted below as “also reviewed” were checked by the research pass but aren't cited in the app.
+- **Copy rules applied:** original writing; tradition framed as tradition; evidence stated plainly, including null results; no treatment, diagnosis, or outcome claims (enforced by `check:content`); common romanization without diacritics; gentle defaults; holds of 20 s or less. Every “What research says” ends with “It is not a treatment.”
+
+---
+
+## Sama Vritti · box breathing
+
+**Classical and teaching sources**
+- *Sama vrtti* (“even movement”) is B.K.S. Iyengar's name for breathing with equal step lengths (*Light on Pranayama*, ch. 18, “Vrtti Pranayama”). He builds it gradually: an even inhale and exhale first; then a hold after the inhale, starting shorter than the inhale and working up to 1 : 1 : 1; only then a hold after the exhale, up to 1 : 1 : 1 : 1. At first, single held breaths are spaced between normal breaths.
+- Yoga Sutra 2.50 describes breath regulation “by place, time, and number,” and Vyasa's commentary explains time and number as counts that lengthen gradually. **Fair link:** even counting is one way of regulating by time and count. **Overstated:** “sama vritti comes from the Yoga Sutras.” The named technique is 20th-century teaching (Iyengar; Desikachar uses the same terms).
+- **Box breathing:** Mark Divine named it and describes 4-4-4-4 through the nose for about five minutes, with holds that feel open rather than tense (TIME, 2016). Police training traces the same four-count through “combat” or “tactical” breathing seminars of the 1980s–90s.
+- HYP 2.15–2.17: tame the breath slowly, as wild animals are tamed; forcing it causes harm. This is classical support for “never force.”
+
+**Rhythm.** 4 · 4 · 4 · 4 is a 16 s round (3.8 guided breaths/min), the count used by Divine, Harvard Health, Cleveland Clinic, and the McAllister 2026 and Ibrahim 2024 trials. Balban 2023 set counts of 3–10 s by CO₂ tolerance, and 4 s was at the easy end. By Iyengar's standard, starting with both holds is advanced, so holds can be shortened or set to Off, and the hold after the exhale is the first to drop.
+
+**Take care basis.**
+- Iyengar: no holds with heart or chest problems or when unwell; the hold after the inhale is not advisable with high blood pressure; avoid long holds in pregnancy.
+- No medical source found rules out 4 s holds; Harvard Health presents box breathing to people with high blood pressure. The app's “set the holds to Off or check with your clinician” wording is conservative, not mandated.
+- Maximal breath holds can trigger panic in people with panic disorder (Nardi 2006, PMID 16635529). Those holds are much longer than 4 s, but this supports “turn the holds off if they make you uneasy.”
+- Holding against a closed throat while bearing down is a Valsalva maneuver, hence “don't clamp or bear down.”
+- Never practise holds in or near water (CDC MMWR 2015;64(19)).
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Balban 2023, *Cell Rep Med* · PMID 36630953 | Remote RCT, 28 days, 5 min/day, 108 randomized (box arm 19) | Box breathing improved mood and anxiety within a day, but was **not significantly different from mindfulness**; no heart rate or HRV change in any arm. Only cyclic sighing beat mindfulness. |
+| McAllister 2026, *Compr Psychoneuroendocrinol* · PMID 42388906 | RCT, 66 students, around a virtual social-stress test | Box and prolonged exhale both blunted rises in heart rate, anxiety, and salivary alpha-amylase vs normal breathing; no effect on HRV or cortisol. |
+
+Also reviewed:
+- Riedl 2026 (PMID 42002307): pilot, 1-minute box breathing lowered anxiety vs a passive control.
+- Röttger 2021 (PMID 32757097): tactical breathing gave lower physiological arousal, but a prolonged exhale gave better task performance.
+- Ibrahim 2024 (PMID 37733483): better first shot in a simulator for 100 student officers.
+- Dujawara 2026 (PMID 42768274): review of box-breathing RCTs reporting short-term, uneven benefits.
+
+**Summary:** small, short-term studies, mostly in healthy young adults. Box breathing eases anxiety within a session. In the largest head-to-head trial it did no better than mindfulness and didn't change HRV. There are no long-term data.
+
+## Visama Vritti · extended exhale
+
+**Classical and teaching sources**
+- Iyengar's *visamavrtti* varies step lengths and **always includes holds**. He works from 1 : 2 : 1 through 1 : 4 : 2 to an ideal of 1 : 4 : 2 : 1 (for example 5 s in, 20 s hold, 10 s out, 5 s hold). He warns that it taxes the lungs, heart, and nerves, and should be learned only under an experienced teacher (*Light on Pranayama*, ch. 18).
+- GS 5.39–40 (Vasu) counts 16 : 64 : 32 (1 : 4 : 2) for nadi purification. The 1 : 2 inhale-to-exhale ratio is classical *within* hold-based practice.
+- Desikachar (*The Heart of Yoga*, ch. 6) describes varied lengths and gives an exhale twice the inhale as an example. That is closer to Viram's version.
+
+**What Viram does, and says:** only the lengthened exhale, with holds Off. The context copy calls it “a gentle, hold-free form closer to modern teaching,” and Take care says the classical form belongs with a teacher. Holds stay as Off steps so the v1.1 progression (out 7, then out 8, moving toward 1 : 2) and Adjust rhythm keep the step structure.
+
+**Rhythm.** in 4 · out 6 is 10 s a breath, six a minute, the most-studied slow-breathing rate. Komori 2018 used exactly 4 : 6, and Magnon 2021 built from 4 : 4 to 4 : 6 over five minutes. With no holds, the hold cautions don't apply.
+
+**Take care basis.** Keep breaths soft rather than big, to avoid lightheadedness from overbreathing. The NHS says not to force the breath, and that some people can't reach a count of 5 at first. Iyengar notes gasping when the ratio is too long, hence “if the next inhale feels rushed, shorten the exhale.”
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Van Diest 2014, *Appl Psychophysiol Biofeedback* · PMID 25156003 | Within-subject, 30 | A longer exhale felt more relaxing; higher HRV only at 6 breaths/min. |
+| Magnon 2021, *Sci Rep* · PMID 34588511 | 47 young and older adults, 4 : 4 → 4 : 6 | HRV up and anxiety down, more in older adults. **No control group.** |
+| Meehan &amp; Shaffer 2024, *Appl Psychophysiol Biofeedback* · PMID 38507210 | 26 plus a replication of 16 | **Null:** a 1 : 2 ratio didn't change HRV vs 1 : 1 at 6/min. Reviews a mixed literature. |
+| Laborde 2022, *Neurosci Biobehav Rev* · PMID 35623448 | Meta-analysis, 223 studies | Slow breathing raises vagally mediated HRV during, right after, and across sessions. |
+
+Also reviewed:
+- Bae 2021 (PMID 34289128): a 2 : 1 exhale-to-inhale ratio raised HRV.
+- Komori 2018 (PMID 30046408): 10 men at 4 : 6, more parasympathetic HRV, no control.
+- Laborde 2021 (*Sustainability*, doi 10.3390/su13147775): a longer exhale raised RMSSD in athletes.
+- Fincham 2023 meta-analysis (PMID 36624160): small-to-medium benefits of breathwork on stress, at moderate risk of bias.
+
+**Summary:** slow breathing near six a minute reliably raises HRV in the short term. Whether the longer exhale adds anything beyond slowing down is genuinely mixed.
+
+## Nadi Shodhana · alternate nostril breathing
+
+**Classical sources**
+- HYP 2.7–2.10: in through the left, hold as long as is comfortable, out through the right; then in through the right, hold, out through the left. Breathe out slowly, never forcibly (2.9). The nadis are said to be cleansed in three months (2.10).
+- Later verses describe four sittings a day with up to 80 holds (2.11) and the signs of clean nadis (2.19–20).
+- HYP describes the practice only *with* retention. Pancham Sinh's edition includes an appended passage that uses “anuloma” and “viloma” for the left-then-right sequence.
+- GS 5.36–55 (Vasu): 16 : 64 : 32 counts with seed mantras, in three versions. GS 5.53 closes the nostrils with the thumb and the ring and little fingers, never the index and middle.
+
+**Teaching sources**
+- **Satyananda (APMB):** fingers in Nasagra mudra (index and middle on the eyebrow centre); breathing without holds at 1 : 1, then 1 : 2 from 5 : 10. Holds come only in later techniques, over years and with a teacher. The breath is silent and never forced.
+- **Iyengar (*Light on Pranayama*, ch. 22–23):** index and middle fingers folded into the palm, and he argues against resting them on the forehead. Fingertips should be sensitive, not strong, with short nails. Start with Ujjayi first. His stage without holds starts on the **right**, unlike HYP, Satyananda, and the AYUSH protocol.
+- **AYUSH Common Yoga Protocol:** starts on the left; its definition of one round matches Viram's four steps; beginners use equal counts, then move toward 1 : 2; breathing is slow and never forced.
+- **Viram's how-to offers both hand positions** (fold the two fingers, or rest them between the eyebrows) and starts on the left.
+- **Anulom Vilom:** research papers and Indian practitioners use it for alternate nostril breathing. In Iyengar's system *anuloma* and *viloma* are separate practices, so the alias is popular and regional rather than universal. The context copy says “many practitioners in India know it as Anulom Vilom.”
+
+**Rhythm.** in 4 · out 6 each side is a 20 s round (15 rounds in 5 min, 6 guided breaths/min). That is gentler than Satyananda's first 1 : 2 count of 5 : 10 and matches slow-breathing studies. Both teachers start complete beginners on equal counts, so Take care offers “make the exhale equal to the inhale.”
+
+**Take care basis.** Skip it with a cold or blocked nose, and don't force air through a nostril (APMB). Use a light touch (Iyengar). Stop if the rhythm can't be kept (HYP 2.9, 2.15–17). No holds with heart problems or in pregnancy (Iyengar; APMB); Viram's version has none.
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Nam 2024, *Complement Med Res* · PMID 39008954 | Meta-analysis, 6 RCTs, 525 people | Systolic −7.2, diastolic −5.2 mmHg vs control, with **very high heterogeneity** (I² 87–93%); mostly unblinded. |
+| Ghiya &amp; Lee 2012, *Int J Yoga* · PMID 22346069 | Crossover, 20 beginners | HRV changes **matched plain paced breathing** at the same 5 breaths/min. |
+| Kamath 2017, *Biomed Res Int* · PMID 29159176 | Pilot RCT, 30 | **No significant difference** in anxiety during a public-speaking test (a trend only). |
+
+Also reviewed:
+- Telles 2013 (PMID 23334063): blood pressure fell after one session in 90 people with hypertension; breath awareness also lowered systolic.
+- Telles 2019 (PMID 31006767): anxiety didn't fall.
+- Jahan 2021 (PMID 34213471): no between-group difference.
+- Mittal 2025 (PMID 40242728): lower blood pressure at 6 weeks, with 25% dropout.
+- Many of these trials come from one research group.
+
+**Summary:** small, mostly single-session trials suggest a modest short-term drop in blood pressure, with results that vary widely. Anxiety and HRV findings are mixed. The only comparison with plain slow breathing at the same pace found similar effects.
+
+## Bhramari · humming bee breath
+
+**Classical sources**
+- HYP 2.44 lists it among eight kumbhakas.
+- HYP 2.68 pairs a fast inhale with the sound of a male bee and a very slow exhale with the sound of a female bee: **sound on both breaths**. Pancham Sinh's translation drops the male/female distinction.
+- GS 5.78–82 (Vasu): inhale, hold, ears closed; listen in the right ear for inner sounds, from crickets to bells, ending in the *anahata* sound. **No humming instruction.**
+- The app's silent inhale, humming exhale, and no hold follow modern teaching.
+
+**Teaching sources**
+- **Satyananda (APMB):** lips closed, teeth slightly apart; ears closed with a finger or by pressing the flaps, without inserting the fingers; a soft, steady hum; 5–10 rounds to start. Retention appears only in a later technique, and not for heart disease.
+- **Iyengar:** holds are not advisable in Bhramari. The optional Shanmukhi mudra presses the tragus instead of putting thumbs in the ears.
+- **AYUSH protocol:** Type I is a hands-free hum on the exhale.
+
+**Rhythm.** in 4 · hum 8 is a 12 s round (25 rounds in 5 min, 5 guided breaths/min). Trivedi 2023 compared four humming lengths, and 4 : 8 and 5 : 9 gave the highest HRV. An exhale twice the inhale is natural because the hum narrows the airflow. Five minutes is longer than Satyananda's opening 5–10 rounds but matches most study sessions. People can pick 3 min.
+
+**Take care basis.**
+- Skip it with an ear or nose infection (APMB; AYUSH).
+- Press the ear flaps gently and never put fingers in the canal (Iyengar).
+- Practise seated: Satyananda says not lying down, though Iyengar includes a lying stage.
+- Pregnancy: Iyengar allows pranayama without long holds; no clinical data exist.
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Weitzberg &amp; Lundberg 2002, *Am J Respir Crit Care Med* · PMID 12119224 | Lab study, 10 adults | Nasal nitric oxide about 15× higher while humming. Maniscalco 2003 (PMID 12952268) found the rise **fades with repeated hums**. No health outcome. |
+| Ghati 2021, *Explore* · PMID 32620379 | RCT, 70 people with hypertension | **No blood-pressure difference vs placebo slow breathing**; HRV improved during recovery. |
+| Trivedi 2023, *Int J Yoga* · PMID 38204770 | Crossover, 118 | 4 : 8 and 5 : 9 gave the highest HRV of the four lengths. Short readings, no silent control. |
+| Kuppusamy 2018, *J Tradit Complement Med* · PMID 29321984 | Systematic review, 6 studies | Leans calming, but quality “very low,” with no RCTs. |
+
+Also reviewed:
+- Nivethitha 2017 (PMID 28546681): heart rate rose and HRV shifted toward stress *during* practice.
+- Kuppusamy 2020 (PMID 32025489): 520 adolescents over 6 months showed a parasympathetic shift, with no active control.
+- Woo &amp; Kim 2025 (PMID 40482984): humming was no different from paced breathing.
+- Kim 2026 (PMID 41686399): the HRV effect was tied to slow breathing, not to the sound.
+- Abishek 2019 (PMID 31143019): sinusitis symptoms improved, unblinded.
+- One researcher co-authors several of these studies, so the evidence is less independent than the count suggests.
+
+**Summary:** Bhramari seems about as calming as other slow breathing. The hum may simply make slow breathing easier.
+
+## Ujjayi · ocean breath
+
+**Classical sources**
+- HYP 2.51–53: close the mouth, draw the breath through both nostrils with a sound felt from throat to chest, hold, and breathe out through the left nostril. It is said to clear phlegm and strengthen digestion, and can be done walking or standing.
+- GS 5.69–72 adds jalandhara bandha and a forceful hold.
+- Viram: no hold, out through both nostrils, a gentle sound both ways.
+
+**Teaching sources**
+- **Satyananda (APMB):** a slight glottal contraction makes a soft snoring sound, “like a sleeping baby,” audible only to the practitioner. Keep the face relaxed. Sitting, standing, or lying all work. Start with 10 breaths and build to 5 minutes.
+- **Iyengar:** early stages lying down; don't constrict the throat. Without holds and lying down, he describes it as suited to people with high blood pressure or heart trouble.
+
+**Rhythm.** in 5 · out 5 is the exact equal 6-breaths-a-minute pattern Mason 2013 tested. Keep the throat narrowing very light.
+
+**Take care basis.** Don't contract the throat strongly; the sound is soft and heard only by you (APMB; Iyengar). If the throat tires, drop the sound (from Satyananda's “slight, steady” guidance).
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Mason 2013, *eCAM* · PMID 23710236 | Within-person, 17 beginners, lying down | Slow breathing raised baroreflex sensitivity and lowered BP. The Ujjayi sound added a little oxygen saturation but **raised heart rate and blunted the BP drop**; Ujjayi in and out gave no significant baroreflex gain. |
+| Laborde 2022 · PMID 35623448 | Meta-analysis | Slow breathing raises HRV (the likely source of what people feel). |
+
+Also reviewed: Mazur 2024 (PMID 38507692, 12 people with spinal cord injury, oxygen saturation up) and Wooten 2020 (PMID 30142133, no effect on muscle power). Brown &amp; Gerbarg 2005 (PMID 15750381) proposes a vagal mechanism; it is theory, not evidence.
+
+**Summary:** direct research is thin. The throat sound adds effort without a clear cardiovascular benefit over plain slow breathing in beginners; its value is as a focus aid.
+
+## Sheetali · cooling breath (Sheetkari alternative)
+
+**Classical sources**
+- HYP 2.57–58 (Sitali): draw air in over the tongue, protruded a little past the lips; hold; exhale slowly through both nostrils. **The verse doesn't say to curl the tongue**; that comes from modern teaching. Traditional claims: eases gulma, spleen, fever, bile, hunger, and thirst, and counteracts poison. The app mentions only heat, thirst, and hunger, as tradition.
+- HYP 2.54–56 (Sitkari): a hissing inhale through the mouth, exhale through the nose.
+- GS 5.73–74 (Vasu) gives Sitali with a brief hold. The app's version has no hold.
+
+**Teaching sources**
+- **Satyananda (APMB):** roll the tongue into a tube; 9–15 rounds, up to 60 in hot weather. About a third of people can't roll the tongue; Sheetkari (teeth lightly together, lips apart) gives similar effects.
+- **Iyengar:** hot weather, before sunrise or after sunset.
+- **AYUSH protocol:** tongue-tube inhale, exhale through both nostrils; avoid with a severe cold, cough, or tonsillitis.
+- Tongue rolling: 65–81% of people can, according to studies summarized by J.H. McDonald (University of Delaware). It isn't a simple genetic trait. Hence “Many people can't,” not a precise share.
+
+**Rhythm.** in 4 · out 6 at 3 min is 18 rounds, close to Satyananda's 9–15 and at the slow-breathing rate of 6/min.
+
+**Take care basis.**
+- Skip it in cold weather or polluted air; mouth breathing skips the nose's warming and filtering (APMB).
+- Skip it with asthma, bronchitis, or excess mucus (APMB), or a severe cold, cough, or tonsillitis (AYUSH).
+- Skip it with low blood pressure (APMB).
+- With sensitive teeth, use the tongue version rather than Sheetkari (APMB).
+- APMB's chronic-constipation caution is traditional reasoning with no evidence behind it, so it is left out.
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Telles 2020, *Med Sci Monit Basic Res* · PMID 31907342 | Crossover, 17 young men, 18 min | **Body temperature rose** during both Sheetali and Sitkari; oxygen use rose. The authors say the results don't support calling them cooling. |
+| Shetty 2017, *Integr Med* · PMID 30936803 | RCT, 60 people with hypertension vs wait-list | Systolic −16 mmHg and heart rate −7 after the program. Unblinded; no active control. |
+| Sharpe 2021, *J Psychosom Res* · PMID 34271528 | Crossover, 25 analysed | HRV rose in all conditions; Sheetali/Sheetkari wasn't significantly better than deep breathing. |
+
+Also reviewed: Thanalakshmi 2020 (PMID 32379673; 3 months, BP fell, no active control) and Rohini 2021 (PMID 33962510; one session, heart rate and BP fell). No Sheetali-specific systematic review exists.
+
+**Summary:** thin evidence. Small, unblinded trials report lower blood pressure without an active comparison, and the only temperature study found warming, not cooling. The coolness is air over a wet tongue.
+
+## Coherent breathing
+
+**Origins**
+- Stephen Elliott introduced **Coherent Breathing** in 2005 (*The New Science of Breath*) at a nominal 5 breaths/min. “COHERENCE and COHERENT BREATHING are registered trademarks of COHERENCE LLC” (coherentbreathing.com).
+- Richard Brown and Patricia Gerbarg adopted it and taught it widely (*The Healing Power of the Breath*, 2012).
+- The research term is resonance-frequency breathing (Lehrer and Vaschillo). Heart-rate swings with the breath peak near 0.1 Hz, and Vaschillo's refinement is about 5.5 breaths/min on average, with individual values from about 4.5 to 6.5.
+- The 5.5 s × 5.5 s rhythm was popularized by James Nestor's *Breath* (2020), and it matches the Sussex trial's protocol.
+
+**Rhythm.** 5.5 · 5.5 as a population default, followed rather than counted (half-second steps show a progress ring). It isn't personalized, so the how-to offers shortening both steps. Keep breaths gentle: Marchant 2025 found mild overbreathing at 6/min.
+
+**Take care basis.** Lightheadedness or tingling in the hands or lips means overbreathing, which lowers CO₂ (Cleveland Clinic): take smaller breaths or stop.
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Fincham 2023, *Sci Rep* · PMID 38092805 (University of Sussex) | Blinded RCT, 400 UK adults, 10 min/day for 4 weeks, 5.5/min vs placebo 12/min breathing | Stress, anxiety, depression, and wellbeing improved **equally in both arms**; expectations were matched. HRV wasn't measured. |
+| Laborde 2022 · PMID 35623448 | Meta-analysis, 223 studies | Slow breathing raises HRV during, right after, and across sessions. |
+| Lehrer &amp; Gevirtz 2014, *Front Psychol* · PMID 25101026 | Review | Baroreflex mechanism; few applications have extensive controlled support. |
+
+Also reviewed:
+- Zaccaro 2018 (PMID 30245619): systematic review, 15 small studies.
+- Goessl 2017 (PMID 28478782): coached HRV biofeedback reduced stress and anxiety with a large effect, but that is equipment and coaching, not unguided pacing.
+- Streeter 2017 (PMID 28296480): yoga plus coherent breathing for depression, with no non-yoga control.
+
+**Summary:** the short-term physiology is well established, but the pace hasn't been shown to beat a simple slow-breathing routine for how people feel.
+
+## 4-7-8 breathing
+
+**Origin.** Andrew Weil, via the University of Arizona Andrew Weil Center page, “4-7-8 Breath”:
+- Tongue tip on the ridge behind the upper front teeth throughout.
+- In quietly through the nose for 4, hold for 7, whoosh out through the mouth for 8 (pursed lips are fine).
+- The ratio matters, not the absolute time: speed up if the hold is hard.
+- Four breaths, at least twice a day; no more than four at a time for the first month, later up to eight.
+- Early lightheadedness passes.
+
+Cleveland Clinic notes its roots in pranayama. Weil's own wording on that couldn't be fetched (drweil.com blocks automated access).
+
+**Rhythm.** Four rounds with rest Off matches Weil. At 1 s per count, a round is 19 s, so the old “1 min” target really took 1:16. The default target is now **4 rounds** (1:16), which says what happens. Weil's opening full exhale isn't modelled.
+
+**Take care basis.**
+- Mild lightheadedness is common at first; stop and breathe normally (Weil; BHF, which also suggests limiting it to four rounds).
+- Shorten all three counts rather than straining the hold (Weil).
+- Breath holds and heart or lung conditions: check first (BHF).
+- Never practise holds in or near water (CDC).
+
+**Evidence**
+
+| Study | Design | Finding |
+|---|---|---|
+| Vierra 2022, *Physiol Rep* · PMID 35822447 | Before and after, 43 young adults | Heart rate and systolic BP fell; no comparison breathing condition. |
+| Aktaş &amp; İlgin 2023, *Obes Surg* · PMID 36480101 | RCT, 90 after bariatric surgery | Lower state anxiety with 4-7-8 vs routine care; unblinded, no sham. |
+| Marchant 2025, *Appl Psychophysiol Biofeedback* · PMID 39864026 | Within-subject, 84 students | **6 breaths/min raised HRV more than 4-7-8** or square breathing; no condition changed mood or BP. |
+
+Also reviewed:
+- Avcık 2026 (PMID 42771122): no HRV change.
+- Kirazli 2026 (PMID 41676854): tinnitus, vs an information session.
+- Parlak 2026 (PMID 42715135): before endoscopy.
+
+No rigorous trial tests 4-7-8 for falling asleep in the general population.
+
+**Summary:** thin evidence. It is a structured, easy-to-remember routine with plausible short-term effects, and unproven as a sleep aid.
+
+---
+
+## General Take care · proposed for first use and Settings → Safety & wellbeing
+
+These apply to every practice, so technique pages keep only the specific points.
+
+| Guidance | Basis |
+|---|---|
+| Stop and breathe normally if you feel dizzy, tingly, short of breath, or anxious. | Overbreathing lowers CO₂ and causes lightheadedness and tingling ([Cleveland Clinic](https://my.clevelandclinic.org/health/diseases/hyperventilation)). |
+| Chest pain, fainting, or a pounding heart with dizziness: stop and get medical help. | [British Heart Foundation](https://www.bhf.org.uk/informationsupport/heart-matters-magazine/wellbeing/breathing-exercises) |
+| Don't practise while driving or operating machinery. | [Torbay and South Devon NHS Foundation Trust](https://www.torbayandsouthdevon.nhs.uk/services/pain-service/reconnect2life/creating-skills-for-the-future/learning-relaxation-skills/) |
+| Never practise breath holds in or near water, including the bath. | Hyperventilation and breath-holding blackouts ([CDC MMWR 2015;64(19)](https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6419a3.htm)) |
+| Living with a heart or lung condition, or pregnant? Check with your clinician first, especially before holds. | BHF; teacher sources advise against retention in pregnancy. |
+| If focusing on your breath makes you more anxious, stop. That happens to some people and is normal. | Relaxation-induced anxiety (Heide &amp; Borkovec 1983, PMID 6341426) |
+| Breathing practice is not a treatment and doesn't replace medical care. | Mütze 2025 (PMID 40896223); PRD framing rules |
+
+A 2024 review of 73 supervised RCTs in serious respiratory illness reported no adverse events from breathing techniques (Burge 2024, PMID 39477355). Safety reporting in breathwork trials is sparse overall, though: only 4 of 26 RCTs in Fincham's meta-analysis actively reported it.
+
+---
+
+## Voice
+
+### Cue inventory
+
+Generated once, measured, and bundled. A step shorter than its cue plus 0.2 s plays its tone instead (FR-03).
+
+| Clip | Script | Longest | Plays on |
+|---|---|---|---|
+| `cue.inhale` | Inhale | 0.8 s | Inhale steps without a side (and mouth inhales after round 1) |
+| `cue.hold` | Hold | 0.8 s | Hold steps |
+| `cue.exhale` | Exhale | 0.8 s | Exhale steps without a side (and mouth exhales after round 1) |
+| `cue.rest` | Rest | 0.8 s | Rest steps (the pause after exhaling) |
+| `cue.hum` | Hum | 0.8 s | Bhramari exhale |
+| `cue.inhale-left` / `-right` | Inhale left / Inhale right | 1.2 s | Nadi Shodhana (Chandra Bhedana in v1.1) |
+| `cue.exhale-left` / `-right` | Exhale left / Exhale right | 1.2 s | Nadi Shodhana |
+| `cue.inhale-mouth` | In through the mouth | 1.6 s | Sheetali, round 1 |
+| `cue.exhale-mouth` | Out through the mouth | 1.6 s | 4-7-8, round 1 (cyclic sighing in v1.1) |
+
+Plus one `name.<id>` clip per Sanskrit name (six) and one `intro.<id>` clip per technique (eight). The introduction scripts are the `introduction.lines` in `library.ts`, 44–61 words each, about 20–30 seconds at a calm pace, well under the brand's 40-second limit. Each line is also its caption.
+
+### Production direction (proposed)
+
+- **One voice** throughout: calm, warm, unhurried, neutral English. No music bed, no whisper, no performance.
+- **Cue words:** spoken plainly with falling intonation, as instructions rather than questions. Generate 3–5 takes and choose by ear.
+- **Timing:**
+  - Trim leading silence to about 30 ms so each cue lands on the step boundary.
+  - Keep trailing silence short.
+  - Record each clip's measured length in the build manifest, and fail the build if a clip exceeds its limit.
+- **Levels:** normalize every clip to the same loudness (about −16 LUFS integrated for speech on phones) so cues, names, and introductions match the cue-volume setting.
+- **Format:** mono AAC or M4A at 64–96 kbps. Keep the lossless masters with the release evidence.
+- **Keep with the release evidence:** the generation settings (model, voice ID, stability and similarity values), the lexicon version, and the listener approvals.
+
+### Pronunciation
+
+| Term | Devanagari | Respelling (shown in app) | IPA target | Lexicon alias | Listener note |
+|---|---|---|---|---|---|
+| Viram | विराम | vee-RAHM | ʋɪˈraːm | Vee-rahm | |
+| Sama Vritti | सम वृत्ति | SUH-muh VRIT-tee | ˈsəmə ˈʋrɪt̪ːiː | Summuh Vrit-tee | Hindi speech often shortens *sama* to “sum”; *vritti* is “vrutti” in Marathi and South Indian speech. Choose one. |
+| Visama Vritti | विषम वृत्ति | VISH-uh-muh VRIT-tee | ˈʋɪʂəmə ˈʋrɪt̪ːiː | Vish-uh-muh Vrit-tee | ṣ is usually said as “sh.” |
+| Nadi Shodhana | नाडी शोधन | NAH-dee SHOH-duh-nuh | ˈnaːɖiː ˈʃoːd̪ʱənə | Nah-dee Show-duh-nuh | Retroflex ḍ; breathy dh. |
+| Bhramari | भ्रामरी | BRAH-muh-ree | ˈbʱraːməriː | Brah-muh-ree | Breathy bh; the respelling simplifies it to B. |
+| Ujjayi | उज्जायी | ooj-JAH-yee | ʊd͡ʒˈd͡ʒaːjiː | Ooj-jah-yee | Many studios say “oo-JAI-ee.” Viram follows the Sanskrit. |
+| Sheetali | शीतली | SHEE-tuh-lee | ˈʃiːt̪əliː | Shee-tuh-lee | Dental t. |
+| Sheetkari | शीत्कारी | sheet-KAH-ree | ʃiːt̪ˈkaːriː | Sheet-kah-ree | Appears in the Sheetali how-to text only; no clip. |
+| pranayama | प्राणायाम | prah-nah-YAH-muh | praːɳaːˈjaːmə | prah-nah-yah-muh | For future scripts. |
+
+Stress follows the usual Sanskrit rule: the second-to-last syllable if it is heavy, otherwise the one before it. The respellings avoid diacritics because the bundled fonts lack the IAST underdot letters.
+
+### ElevenLabs notes (checked September 2026)
+
+- **Lexicons:**
+  - Dictionaries are W3C PLS files.
+  - **Alias** rules work on every model. **Phoneme** (IPA or CMU) rules work only on `eleven_flash_v2` and `eleven_v3`; other models, including `eleven_multilingual_v2`, ignore them.
+  - Up to three dictionaries per request, applied in order.
+  - Matching is case-sensitive.
+  - Inline SSML `<phoneme>` works only on `eleven_flash_v2`; `eleven_v3` reads inline IPA between slashes, less consistently.
+  - Sources: [pronunciation dictionaries](https://elevenlabs.io/docs/eleven-api/guides/how-to/text-to-speech/pronunciation-dictionaries), [text-to-speech API](https://elevenlabs.io/docs/api-reference/text-to-speech/convert), [best practices](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices).
+- **Licence:**
+  - The free plan is non-commercial. All paid plans include a commercial licence, except output from Beta features.
+  - Rights to audio generated while subscribed continue after cancelling.
+  - Nothing found forbids bundling pre-generated clips in a free app, but the terms don't address it explicitly, so confirm when buying.
+  - Sources: [help centre](https://elevenlabs.io/docs/help-center/legal/can-i-publish-the-content-i-generate-on-the-platform), [terms](https://elevenlabs.io/terms-of-use).
+- **Voice choice:** Voice Library voices can be withdrawn by their creators after a notice period ([addendum](https://elevenlabs.io/vla)). Keep the generated masters, and prefer a default or owned voice so a regeneration is possible.
+
+### Listener checklist (every clip, before release)
+
+1. Each Sanskrit name matches the chosen pronunciation; record the listener's choice for each open note above.
+2. Cue words are calm, clear, and consistent in tone and loudness. No clip sounds rushed or robotic.
+3. Side phrases are unmistakable: “left” and “right” can't be confused at low volume or through phone speakers.
+4. Introductions follow their captions word for word.
+5. Record approval (listener, language background, date, lexicon version, clip manifest hash) with the release evidence. Voice gate: at least 8 listeners, median 4/5 or better for calm and pace (PRD).
+
+---
+
+## Source check
+
+The PRD requires each draft to be checked against its listed sources before release, with the check recorded with the content version.
+
+| Source | Check | Result for content v1 |
+|---|---|---|
+| 22 cited studies | Europe PMC API, September 23, 2026: authors, year, title, journal, DOI | All match `sources.ts` |
+| HYP (Pancham Sinh 1914, archive.org scan) | Verses 2.7–2.12, 2.15–2.17, 2.19–20, 2.44, 2.51–58, 2.68 read; numbering checked against the Sanskrit | Matches the copy |
+| GS (Vasu) | 5.36–55, 5.69–74, 5.78–82 read | Matches; numbering differs between editions |
+| Yoga Sutras 2.50 (Woods 1914) | Sutra and Vyasa commentary read | Supports the “time and count” link only |
+| *Light on Pranayama*, APMB, *The Heart of Yoga* | Read in copies during research; chapters and approximate pages noted | **Pending:** confirm the paraphrased points against print copies before release |
+| AYUSH Common Yoga Protocol (2019) | Nadi Shodhana, Sheetali, and Bhramari sections read | Matches the copy |
+| Weil Center, NHS, BHF pages | Pages load (HTTP 200); titles and dates recorded | Matches |
+| TIME (Divine 2016) | Blocks automated requests (HTTP 406) | **Pending:** open once in a browser |
+
+## Open questions for the owner
+
+1. **Coherent breathing name.** COHERENCE LLC states that “Coherent Breathing” is its registered trademark. Using it as a practice name, and as a store keyword, carries risk. Options:
+   - Keep it and ask the trademark attorney during the Viram clearance.
+   - **Rename to “Resonance breathing” (recommended)**, the research term, and mention Elliott's Coherent Breathing in the context text, as it does now.
+   - Choose another descriptive name, such as “Slow, even breathing.”
+
+   Renaming touches the id (`coherent`), the PRD, the plan, the UX mocks, and the store keywords.
+2. **Book check:** confirm the Iyengar and Satyananda points against print copies (about an hour with the page references above).
+3. **Instructor review (optional):** a named review isn't required for gentle techniques. If one happens, the most useful focus is Nadi Shodhana hand positions, Bhramari ear closure, and the Sheetali cautions. Record it in `review` to show “Reviewed by.”
+4. **Pronunciation choices** for the listener (Sama, Vritti, Ujjayi; see the table).
+5. **v1.1 progression paths still fit the research:**
+   - Visama Vritti and Nadi Shodhana move toward the classical 1 : 2 exhale.
+   - Ujjayi goes to 6 · 6.
+   - Sama Vritti goes to 6 · 6 · 6 · 6. Iyengar would build the holds last, so the path should lengthen inhale and exhale before the holds.

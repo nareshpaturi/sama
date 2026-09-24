@@ -156,7 +156,7 @@ export default function ProgressScreen() {
         <View style={styles.card}>
           {!isHealthSupported() ? (
             <Text style={styles.empty}>
-              Health data isn't available on this device. Sama works fully without it.
+              Health data isn't available on this device. Viram works fully without it.
             </Text>
           ) : healthRows.length > 0 ? (
             healthRows.map((r) => (

@@ -10,7 +10,8 @@ The product is now **Viram** (विराम, “a pause, a place to rest,” s
 
 - Store name “Viram: Pranayama & Breath”; subtitle “Steady breath. Steady mind.”; bundle ID and package `app.viram`; URL scheme `viram`; share links at `viram.app/r/…`.
 - Unchanged: the two-breaths mark, the lead line, Pine & Paper, and all product decisions. Earlier sections below were written under the former name; the current sections have been updated.
-- **Before launch:** register viram.app (the owner's action), run a trademark clearance in the US, India, and EU, and re-run the store checks. The existing samabreath.app can redirect or lapse. The local database keeps its internal file name.
+- **Before launch:** register viram.app (the owner's action), run a trademark clearance in the US, India, and EU, and re-run the store checks. The existing samabreath.app can redirect or lapse.
+- Code and repo use Viram too (September 24): package `viram`, database file `viram.db` (the prototype never shipped, so no data migrates), the `viram-implementation-standards` agent skill, and the GitHub repo and local folder `viram`.
 
 ### Why v3
 
@@ -174,7 +175,7 @@ Replaces “pause on background or lock.”
 
 **Not in the MVP:** programs, routines, gentle progression, calendar, reminders, Apple Health / Health Connect, night practice, gradual slowing, half-second builder steps, Watch, Hindi, teacher programs, and a full dark theme.
 
-**Estimate and cut line:** v1.0 grows to about **8–9 weeks** for one full-time engineer. Most of the increase is the locked-screen audio engine (about 1–1.5 weeks), plus sound controls (about 0.5), rounds (about 0.25), and data safety and export (about 0.5). If the schedule slips, defer the export and import screens to v1.1 (keeping backup and migration safety) and ship one tone set. v1.1 grows to about **6.5–7.5 weeks** with the four library additions.
+**Estimate and cut line:** v1.0 grows to about **8–9 weeks** for one full-time engineer. Most of the increase is the locked-screen audio engine (about 1–1.5 weeks), plus sound controls (about 0.5), rounds (about 0.25), and data safety and export (about 0.5). If the schedule slips, defer the export and import screens to v1.1 (keeping backup and migration safety) and ship one tone set. v1.1 grows to about **6.5–7.5 weeks** with the four library additions. The [delivery plan](delivery-plan.md) breaks both releases into small deliverables, each with a demo. Its bottom-up v1.0 total is about 10 weeks, because it counts the audio spike, CI setup, and final accessibility audit explicitly. It builds locked-screen audio first.
 
 ### Library roadmap · decided September 23, 2026
 

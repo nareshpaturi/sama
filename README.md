@@ -25,8 +25,8 @@ session history, streaks, and permission-gated health trends from Apple HealthKi
 ### Setup
 
 ```bash
-git clone <your-repo-url> sama
-cd sama
+git clone <your-repo-url> viram
+cd viram
 npm install
 ```
 
@@ -82,7 +82,7 @@ the QR code, or press `a` / `i` in the terminal.
 Create a **private** repo on GitHub (don't initialize it with a README), then:
 
 ```bash
-cd sama
+cd viram
 git remote add origin git@github.com:<your-username>/<repo>.git
 git add -A
 git commit -m "Viram — MVP (tones + haptics)"
@@ -129,7 +129,7 @@ eas submit --platform android # needs Play Console app, package app.viram
 ## 4. Project structure
 
 ```
-sama/
+viram/
   app/                    # expo-router screens
     _layout.tsx           # stack nav + DB/audio init
     index.tsx             # Home — streak, quick start, recent sessions

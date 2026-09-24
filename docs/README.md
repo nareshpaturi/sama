@@ -11,6 +11,7 @@ The direction is **“Steady breath. Steady mind.” · Pranayama, guided at you
 | [Brand exploration](brand-exploration.html) | Logo, tagline, and style options with the reasoning behind the chosen direction |
 | [UX mocks](ux-design.html) | Feature map linked to 81 screen specimens across v1.0, v1.1, and later concepts; journeys; state contract; guidance and accessibility handoff |
 | [Product requirements](product-requirements.html) | v2.0 scope and testable behavior for v1.0 and v1.1 |
+| [Delivery plan](delivery-plan.md) | Build order: 25 small v1.0 deliverables and 12 for v1.1, each with a demo, scope, dependencies, size, and the gate it closes |
 | [Launch implementation plan](mvp-launch-implementation-plan.md) | Gated checkpoints for v1.0, the v1.1 track, and historical implementation evidence |
 | [Market research](market-research.html) | Research snapshot and opportunity hypotheses |
 | [Research notes](research/market-fit-report.md) | Supporting research and unverified items behind the market brief |
@@ -19,7 +20,7 @@ The direction is **“Steady breath. Steady mind.” · Pranayama, guided at you
 | [Content research](content/technique-research.md) | Sources, rhythm decisions, evidence, voice script, pronunciation, and source check for the eight v1.0 techniques |
 | [Library preview](content/library-preview.html) | The v1.0 technique content exactly as bundled, generated from `src/content/` by `npm run content:preview` |
 
-The brand guide owns identity, color roles, typography, component geometry, and voice. The UX guide owns screen hierarchy, navigation, interaction, and state treatment. The design review records the decisions both must follow. Product requirements describe the resulting scope and behavior.
+The brand guide owns identity, color roles, typography, component geometry, and voice. The UX guide owns screen hierarchy, navigation, interaction, and state treatment. The design review records the decisions both must follow. Product requirements describe the resulting scope and behavior. For building, start with the [delivery plan](delivery-plan.md).
 
 The HTML files contain their own styles and mockup markup. Open them directly in a browser; no app build is needed. Google Fonts improves the presentation when available; local serif and system sans fallbacks work offline. The UX viewer needs JavaScript for scene changes. Its controls only change documentation specimens: no timer, audio, voice, haptics, links, quick actions, notifications, storage, Health access, or native permissions run. The mocks' Nadi Shodhana guide follows the sourced v1.0 content; other technique copy in them is illustrative.
 

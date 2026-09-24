@@ -1,11 +1,11 @@
 ---
-name: sama-implementation-standards
-description: Implement or review Sama app features using established React Native, Expo, TypeScript, accessibility, testing, and mobile-platform practices. Use for changes under app/, src/, native configuration, tests, or implementation planning. Enforces small reusable modules, design-system reuse, simple composition, and concise code instead of duplicated or verbose implementations.
+name: viram-implementation-standards
+description: Implement or review Viram app features using established React Native, Expo, TypeScript, accessibility, testing, and mobile-platform practices. Use for changes under app/, src/, native configuration, tests, or implementation planning. Enforces small reusable modules, design-system reuse, simple composition, and concise code instead of duplicated or verbose implementations.
 ---
 
-# Sama implementation standards
+# Viram implementation standards
 
-Use these rules whenever implementing or reviewing production code for Sama.
+Use these rules whenever implementing or reviewing production code for Viram.
 
 ## Start with repository evidence
 

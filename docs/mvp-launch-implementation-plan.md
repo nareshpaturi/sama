@@ -2,7 +2,8 @@
 
 Status: proposed · v3 scope (2026-09-22) with the user-needs update (2026-09-23); supersedes the lean scope (2026-09-17) and v2 design alignment (2026-09-18)  
 Target: public iOS and Android v1.0 (the wedge), then the v1.1 track (reasons to return)  
-Expected delivery: v1.0 about 8–9 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 6.5–7.5 weeks including curated programs and four library additions. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.
+Expected delivery: v1.0 about 8–9 weeks with one experienced full-time cross-platform engineer plus part-time product/design/QA, with content drafted in parallel; v1.1 about 6.5–7.5 weeks including curated programs and four library additions. Store review, the Google Play closed-testing requirement for new personal developer accounts, and physical-device testing add calendar time.  
+Build order: the [delivery plan](delivery-plan.md) (2026-09-24) breaks this plan into small deliverables with a demo each. The gates and exit evidence below still apply; the week targets below are superseded by the deliverable order, which moves locked-screen audio to weeks 1–3. Its bottom-up total is about 49 engineering days (about 10 weeks) before the beta.
 
 This plan converts the product requirements and UX design into gated implementation checkpoints. A checkpoint is complete only when its exit evidence exists; completing code without passing the gate does not advance the release.
 
@@ -226,7 +227,7 @@ Gate: timer drift, stale active UI, unsafe ending, or incorrect duration/round a
 
 ## CP1b · Locked-screen audio engine and sound controls
 
-Target: Weeks 7–8 (about 1.5–2 weeks); the audio-clock design is agreed during CP1 so the engine is not rebuilt
+Target: the audio spike in Week 1 (D02), the locked-screen engine by Week 3 (D05), and sound controls in Week 7 (D15); see the [delivery plan](delivery-plan.md). The audio-clock design is decided before the session runner is built, so the engine is not rebuilt
 
 ### Implementation checklist
 
@@ -598,20 +599,9 @@ Exit evidence
 
 Each needs its own go decision after v1.1 metrics: **vigorous techniques** (Kapalabhati, Bhastrika, and Bahya, each after a named instructor review, with the rapid-rhythm mode and the safety check), **teacher programs** (after 6–8 teacher interviews), an **Apple Watch companion** that keeps running with the wrist down, with per-step haptics (the most-requested platform feature), and **Hindi voice cues** (the listener gate applies).
 
-## Recommended implementation order by code area
+## Build order
 
-1. `app.json`, package scripts, and CI: restore buildability and repeatable evidence; remove Health from the v1.0 configuration; record the domain and quick-actions decisions.
-2. `src/engine/` and `app/session.tsx`: timing, lifecycle, pause/resume, and active-duration correctness on an ordered step list; core-surface records and accessibility foundations land alongside.
-3. Routing, first use, Breathe, the cue chip, Adjust rhythm, and four-tab navigation.
-4. Step-sequence engine extensions (0-second holds, sides, half seconds), bundled technique content and schema, Practices, and technique detail.
-5. `src/audio/`: voice clip manifest, cue scheduler, tone fallback, introductions, and the About disclosure.
-5b. Native audio timeline, locked-screen guidance, lock-screen controls, sound controls, and the rounds target (CP1b).
-6. My rhythms, link encode/decode and validation, share and incoming previews, Universal Links and App Links, and the static viram.app site.
-7. App-icon quick actions.
-8. Theme and shared controls: accessibility, contrast, reduced motion, and interaction states across every new surface.
-9. SQLite schema, History, Summary, and Settings: correct records, snapshots, user control, backups, migrations, and export and import.
-10. Closed-beta hardening, the Play closed-testing requirement, store assets and technique-name keywords, release candidate, and staged rollout.
-11. v1.1 track: routines, gentle progression, practice calendar, daily reminder, curated programs (after routines, progression, and the reminder), night practice, gradual slowing, `src/health/` session writing, and fuller voice guidance.
+The build order lives in the [delivery plan](delivery-plan.md): 25 small v1.0 deliverables (D01–D25) and 12 for v1.1 (E01–E12). Each has a demo (“You can…”), a scope, the deliverables it needs, a size, and the checkpoint and FRs it covers. The locked-screen audio spike comes first (D02, week 1), and the engine is built by week 3 (D05). The delivery plan also maps each checkpoint gate to the deliverables that close it.
 
 ## Definition of done for every task
 

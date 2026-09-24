@@ -41,12 +41,12 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 
 - **Flexible rhythms.** Inhale and exhale are 1–20 s. Holds are 0–20 s; 0 means the step is skipped and displays as “Off.” Library techniques may define half-second steps (coherent breathing 5.5 · 5.5) and more than four steps with left/right side labels (Nadi Shodhana). The custom builder stays four rows in whole seconds.
 - **Practice library (8 gentle techniques).** Sama Vritti (box), Visama Vritti (extended exhale), Nadi Shodhana (alternate nostril, no retention), Bhramari (humming bee), Ujjayi (ocean breath), Sheetali (cooling; Sheetkari alternative), coherent breathing (5.5 · 5.5), and 4-7-8. Each technique has a romanized name and English name, pronunciation respelling and audio, how-to steps, traditional context, “Take care” guidance, “What research says,” and sources.
-- **Voice guidance.** AI-generated clips bundled in the app: cue words (Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch), optional technique introductions before practice, and pronunciation clips. Cue mode is Voice, Tones, or Silent; haptics are independent. Defaults: Voice on, haptics on, motion follows the system.
+- **Voice guidance.** AI-generated clips bundled in the app: cue words (Inhale, Hold, Exhale, Rest, Hum), side phrases (“Inhale left”, “Exhale right”, …), route phrases for mouth steps (“In through the mouth”, “Out through the mouth”), optional technique introductions before practice, and pronunciation clips. Cue mode is Voice, Tones, or Silent; haptics are independent. Defaults: Voice on, haptics on, motion follows the system.
 - **My rhythms.** Save up to 20 named rhythms (custom or received through a link). Rename and delete are local.
 - **Share links.** Share a library technique's current settings or a saved rhythm as `https://viram.app/r/…`. Opening the link shows an in-app preview (Save, Begin). Without the app, a small web page shows the rhythm and store links.
 - **Quick start.** App-icon quick actions: “Begin last practice,” “1-minute box breathing,” and the most recent *other* practice (omitted until history has two distinct practices). They open the settle countdown with Cancel. Before first use is complete, they open first use.
 - **First use.** One screen: welcome, comfort guidance, wellness disclaimer, and **Continue** to Breathe (“Begin” is reserved for starting a practice). When a quick action or link opened first use, Continue proceeds to it. Cue choices move to a cue chip on Breathe and to Settings.
-- **Vocabulary.** “Round” replaces “cycle” (one pass through a practice's steps; a Nadi Shodhana round covers both sides). Planned rounds = round up (target seconds ÷ round seconds). Guided pace is shown in **guided breaths per minute** (inhale steps per minute), never as a measured rate. Examples: box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
+- **Vocabulary.** “Round” replaces “cycle” (one pass through a practice's steps; a Nadi Shodhana round covers both sides). Planned rounds = round up (target seconds ÷ round seconds). Guided pace is shown in **guided breaths per minute** (inhale steps per minute), never as a measured rate. Examples: box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at its 4-round default = 1:16.
 - **Half-second steps** show the guide and a progress ring instead of a countdown numeral; coherent breathing is followed, not counted.
 
 | Library default | Rhythm | Default target | Planned | Progression path (v1.1) |
@@ -58,7 +58,7 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 | Ujjayi · ocean breath | in 5 · out 5 | 5 min | 30 rounds · 5:00 | in 6 · out 6 |
 | Sheetali · cooling breath | in 4 · out 6 | 3 min | 18 rounds · 3:00 | — |
 | Coherent breathing | in 5.5 · out 5.5 | 5 min | 28 rounds · 5:08 | — |
-| 4-7-8 | 4 · 7 · 8 · rest off | 1 min | 4 rounds · 1:16 | — |
+| 4-7-8 | 4 · 7 · 8 · rest off | 4 rounds | 4 rounds · 1:16 | — |
 
 ### v1.1 feature decisions
 
@@ -87,7 +87,7 @@ The v2 lean MVP was a well-crafted four-phase timer. A product review found it h
 ### AI voice
 
 - Generate once (ElevenLabs or equivalent) under a commercial licence, then bundle the clips. No runtime API, key, or network dependency.
-- One calm, consistent voice. Cue words are at most 0.8 s. When a step is shorter than its cue plus 0.2 s, play that step's tone instead.
+- One calm, consistent voice. Cue words are at most 0.8 s, side phrases 1.2 s, and route phrases 1.6 s. When a step is shorter than its cue plus 0.2 s, play that step's tone instead.
 - Voice replaces tones when on; haptics stay independent. Platform audio conventions follow the CP1 locked decision.
 - Sanskrit names use a pronunciation dictionary. A listener who knows Sanskrit or Hindi approves every clip before release; text review alone cannot validate pronunciation.
 - Settings → About discloses that voice guidance is AI-generated.
@@ -178,7 +178,7 @@ Replaces “pause on background or lock.”
 
 ### Library roadmap · decided September 23, 2026
 
-Viram grows a small library deliberately instead of matching Prana Breath's 80+ practices. Only 12 of those are free, and users ask for simplicity far more than for volume. Target: **about 15 practices by v1.2, all free, each explained and sourced.** Rhythms below v1.0 are drafts until the technique research pass.
+Viram grows a small library deliberately instead of matching Prana Breath's 80+ practices. Only 12 of those are free, and users ask for simplicity far more than for volume. Target: **about 15 practices by v1.2, all free, each explained and sourced.** The v1.0 rhythms were confirmed by the [content research](content/technique-research.md); v1.1 rhythms stay drafts until their own research pass.
 
 | Release | Practices | Count |
 |---|---|---|
@@ -193,9 +193,18 @@ Viram grows a small library deliberately instead of matching Prana Breath's 80+ 
 - **Not planned:** other breathing traditions (Sufi, Tibetan, Taoist), applied collections (singers, divers, runners), habit collections (cravings, smoking), and self-measured health metrics. They are off-position, or they invite health claims.
 - **Cost:** gentle additions are data plus content, about half a day to a day of engineering each, with content and voice work in parallel. Vigorous additions depend on the rapid-rhythm mode (about 4–6 days) and the review.
 
+### Content research · decided September 23, 2026
+
+The eight v1.0 guides are drafted from classical texts, teaching books, public guides, and 22 source-checked studies. See the [research record](content/technique-research.md); the copy is in `src/content/library.ts`, with a generated [preview](content/library-preview.html).
+
+- **Rhythms confirmed**, with two changes. **4-7-8 defaults to 4 rounds** (Andrew Weil's four breaths; the old 1-minute target ran 1:16). **Visama Vritti** is framed as a gentle, hold-free form, because Iyengar's version always includes long holds.
+- **Honest claims.** Sheetali's “cooling” is framed as tradition: the only temperature study found warming. Bhramari and Ujjayi are presented as slow breathing with a sound, because controlled comparisons found no advantage over plain slow breathing. Coherent breathing states the Sussex placebo result.
+- **Voice.** Side cues are whole phrases (“Inhale left”, up to 1.2 s); standalone “Left”, “Right”, and “Switch” are dropped. “In through the mouth” (Sheetali) and “Out through the mouth” (4-7-8) play on the first round. The pronunciation lexicon uses alias rules, which work on every ElevenLabs model.
+- **Open.** “Coherent Breathing” is a registered trademark of COHERENCE LLC, so the practice name needs a decision (recommendation: “Resonance breathing”). Book page references need a print check. Clips and listener approval remain.
+
 ### Design validation boundary
 
-The v3 UX mocks are documentation specimens. No timer, audio, voice, haptics, deep links, quick actions, notifications, storage, or Health access run in them. Technique copy in the mocks is illustrative until the sourced content pass is complete.
+The v3 UX mocks are documentation specimens. No timer, audio, voice, haptics, deep links, quick actions, notifications, storage, or Health access run in them. The sourced v1.0 technique copy lives in `src/content/library.ts` ([content research](content/technique-research.md)); the mocks' Nadi Shodhana guide matches it, and other technique copy in the mocks is illustrative.
 
 ---
 

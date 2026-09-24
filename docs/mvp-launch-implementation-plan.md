@@ -16,7 +16,7 @@ What changed:
 - **v1.0 adds** flexible rhythms (inhale and exhale 1–20 s; holds 0–20 s, where 0 is skipped and shown “Off”; library half-second steps and left/right side labels), the eight-technique practice library, bundled AI voice cues, My rhythms (up to 20), share links with a static web fallback, app-icon quick actions, one-screen first use, and four-tab navigation: Breathe · Practices · History · Settings.
 - **Moved to v1.1:** Apple Health / Health Connect writing (CP5). New in v1.1: curated programs (added 2026-09-23), routines, gentle progression, practice calendar (no streaks), daily reminder, fuller voice guidance. Teacher programs are planned for v1.2, pending teacher interviews.
 - **Not building:** wearable reads, heart-rate/HRV comparisons, trend charts, accounts and cloud sync, large content or music libraries, streaks, scores, badges. The Progress/Insights route is removed, not deferred.
-- **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at 1 min = 4 rounds / 1:16.
+- **Vocabulary.** “Round” replaces “cycle.” Planned rounds = round up (target seconds ÷ round seconds). Guided pace is guided breaths per minute (inhale steps per minute), never a measured rate. Box 4 · 4 · 4 · 4 at 5 min = 19 rounds / 5:04, 3.8 breaths/min; Nadi Shodhana in 4 · out 6 each side at 5 min = 15 rounds / 5:00, 6 breaths/min; 4-7-8 at its 4-round default = 1:16.
 - **Checkpoints.** CP0 adopts the step bounds; CP2 becomes one-screen first use, four tabs, and the cue chip; new CP2b covers the library, voice, My rhythms, sharing, and quick actions; CP3 and CP4 extend to the new surfaces; CP5 moves to the [v1.1 track](#v11-track--reasons-to-return); CP6 and CP7 add the voice licence, link-verification files, technique-name store copy, and the Play closed-testing requirement.
 
 ## User-needs update · 2026-09-23
@@ -286,15 +286,16 @@ Target: Weeks 4–7 (flexible engine and library about 1.5 weeks, voice about 0.
 Engine and library
 
 - [ ] Generalize the engine to an ordered step list: kind (inhale, hold, exhale, rest), seconds, optional side (left or right). Skip 0-second steps without cues; support half-second steps; derive round length, planned rounds, and guided breaths per minute (inhale steps per minute).
-- [ ] Define the technique content schema (PRD section 05) and bundle the eight techniques as versioned data with a CI schema test.
-- [ ] Ship the library defaults from the PRD table (Sama Vritti 4 · 4 · 4 · 4, Visama Vritti in 4 · out 6, Nadi Shodhana in 4 · out 6 each side, Bhramari in 4 · hum 8, Ujjayi 5 · 5, Sheetali in 4 · out 6 at 3 min, coherent 5.5 · 5.5, 4-7-8 at 1 min).
+- [x] Define the technique content schema (PRD section 05) and bundle the eight techniques as versioned data: `src/content/`, content v1, drafted September 23, 2026 ([content research](content/technique-research.md)).
+- [ ] Run `npm run check:content` in CI alongside the typecheck.
+- [ ] Ship the library defaults from the PRD table (Sama Vritti 4 · 4 · 4 · 4, Visama Vritti in 4 · out 6, Nadi Shodhana in 4 · out 6 each side, Bhramari in 4 · hum 8, Ujjayi 5 · 5, Sheetali in 4 · out 6 at 3 min, coherent 5.5 · 5.5, 4-7-8 at 4 rounds).
 - [ ] Implement Practices (library, then My rhythms) and technique detail: names, pronunciation respelling and clip, how-to steps, traditional context, “Take care,” “What research says,” “Based on,” and “Reviewed by” only from a recorded review.
 - [ ] Extend Adjust rhythm to library techniques: step structure and sides preserved; half-second increments only where the technique defines them.
 - [ ] Show the guide and a progress ring instead of a countdown numeral for half-second steps; show Left / Right side cues and Hum for Bhramari.
 
 Voice
 
-- [ ] Bundle AI-generated clips—cue words (Inhale, Hold, Exhale, Rest, Hum, Left, Right, Switch), optional technique introductions, and pronunciation clips—with a build-time manifest of measured clip lengths. No runtime API, key, or network call.
+- [ ] Bundle AI-generated clips—cue words (Inhale, Hold, Exhale, Rest, Hum), side phrases, route phrases, optional technique introductions, and pronunciation clips (scripts in `src/content/voice.ts` and `library.ts`; lexicon in `docs/content/viram-lexicon.pls`)—with a build-time manifest of measured clip lengths. No runtime API, key, or network call.
 - [ ] Implement the cue scheduler: Voice replaces tones; a step shorter than its cue plus 0.2 s plays its tone; a missing clip falls back to its tone; haptics stay independent; audio follows the CP1 locked decision.
 - [ ] Add the voice-introductions setting and the Settings → About disclosure that voice guidance is AI-generated.
 
@@ -319,7 +320,7 @@ Quick actions
 
 - [ ] Step-engine tests pass for 0-second holds (skipped, silent, shown “Off”), side labels in order, half-second steps, and planned rounds for every library default (for example 19 rounds / 5:04 box, 15 rounds / 5:00 Nadi Shodhana, 28 rounds / 5:08 coherent, 4 rounds / 1:16 4-7-8).
 - [ ] All eight techniques pass the schema test with sourced content (“Based on,” “Take care,” “What research says”); holds are at most 20 s; no “Reviewed by” appears without a review record.
-- [ ] Voice clips are bundled; every cue word measures at most 0.8 s; tone fallback is verified for short steps; a listener who knows Sanskrit or Hindi has approved every clip, with the approval recorded.
+- [ ] Voice clips are bundled; every cue clip measures within its limit (words 0.8 s, side phrases 1.2 s, route phrases 1.6 s); tone fallback is verified for short steps; a listener who knows Sanskrit or Hindi has approved every clip, with the approval recorded.
 - [ ] My rhythms save, rename, delete, and limit tests pass; history snapshots survive rename and delete.
 - [ ] Share-link encode/decode, per-field validation, and fuzz tests pass (malformed, truncated, oversized, out-of-bounds, unknown ID, HTML or script in the name).
 - [ ] Universal Links (iOS) and App Links (Android) open the in-app preview on physical devices from cold and warm start; without the app, the web fallback page is live and shows the rhythm and store links.
@@ -585,7 +586,7 @@ Exit evidence
 - [ ] Add Dirgha, Udgeeth, Chandra Bhedana, and cyclic sighing as bundled content meeting the FR-09 standard (steps, Take care, research, sources), with draft rhythms confirmed by the research pass.
 - [ ] Add “Anulom Vilom” as a search name and guide alias for Nadi Shodhana.
 - [ ] Generate and approve the “Om” and “Top up” cue words and the four pronunciation clips through the voice gate.
-- [ ] Show and speak “through the mouth” once per practice for mouth steps.
+- [ ] Reuse the v1.0 route phrase “Out through the mouth” for cyclic sighing's exhale.
 
 Exit evidence
 
